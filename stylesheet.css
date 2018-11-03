@@ -11,13 +11,12 @@
 	    z-index: 2;
 	    cursor: pointer;
 	}
-        /* Always set the map height explicitly to define the size of the div
-               * element that contains the map. */
+        
         * {
             box-sizing: border-box;
         }
 
-        /* Create two equal columns that floats next to each other */
+        
         .column1 {
             float: left;
             width: 100%;
@@ -35,7 +34,7 @@
             overflow-y: scroll;
         }
 
-        /* Clear floats after the columns */
+        
         .row:after {
             content: "";
             display: table;
@@ -511,7 +510,7 @@
         width: 100px;
         display: block;
 	}
-	.customMapControl {
+.customMapControl {
         background-color: #fff;
         border: 2px solid #fff;
         border-radius: 3px;
@@ -529,9 +528,9 @@
         width: 100px;
         display: none;
 	}
-	.customMapControl:hover {
+.customMapControl:hover {
 	background-color: #e6e6e6;
-    border: 2px solid #e6e6e6;
+    	border: 2px solid #e6e6e6;
     }
     
     .customMapControlwrapper {
@@ -598,7 +597,13 @@
 select::-ms-expand {
     display: none;
    
-}     
+}    
+select {
+    -moz-appearance: none;
+    appearance: none;
+
+    text-overflow: ''; /* this is important! */
+}
 
 ::selection, select:focus::-ms-value {
             background-color: inherit;
