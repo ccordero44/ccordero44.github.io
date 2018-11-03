@@ -103,7 +103,6 @@ window.onload = Window_onLoad;
             
             var mapOptions = {
                 mapTypeControl: false,
-               // mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR, position: google.maps.ControlPosition.TOP_LEFT },
                 zoomControl: true,
                 zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
                 fullscreenControl: false,
@@ -241,7 +240,7 @@ window.onload = Window_onLoad;
             }
             new AutocompleteDirectionsHandler(map);
            
-            //polygons start
+     
  Mycounties.infoWindow = new google.maps.InfoWindow();         
  for (i = 0; i < countyCoords.length; i++) {           
 Mycounties = new google.maps.Polygon({
@@ -288,9 +287,6 @@ function attachPolygonInfoWindow(Mycounties, html)
 	this.setOptions({fillOpacity:0.1});
 	myWindow.style.display = "inherit";
 	}
-
-	
-	//document.getElementById("infoDivWrapper").style.display = "inherit";
 	
 	clickCo = this;
 	document.getElementById("origin-input").focus();
@@ -331,9 +327,6 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                 });
             this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
 
-            // map.controls[google.maps.ControlPosition.TOP_CENTER].push(originInput);
-            //  map.controls[google.maps.ControlPosition.TOP_CENTER].push(btnClickme);
-            // map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearMap);
         }
 
         AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
@@ -520,7 +513,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
 
 
                     } else {
-                        //window.alert("Please enter a location and select an option from the dropdown list.");
+                       
                         window.alert("Error: line 1102" + status);
                     }
 
@@ -570,7 +563,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                             }
                         }
                     } else {
-                        //window.alert("Please enter a location and select an option from the dropdown list.");
+                       
                         window.alert("Error: line 1152" + status);
                     }
                 });
@@ -612,7 +605,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                         document.getElementById('clientAddress').value =
                             "Directions cannot be computed at this time.";
                         window.alert("Please enter a location and select an option from the dropdown list.");
-                        //window.alert("Error: line 1192" + status);
+                     
 
                     }
 
@@ -703,12 +696,12 @@ function resetSelectCounty(selectElement) {
             }, function (results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     var str3 = results[0].geometry.location
-                    //window.alert(str3);
+                
                     service.textSearch({
                         'location:': str3
                     }, function callback(results, status) {
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            // document.getElementById("clickMe").disabled = false;
+                       
 
                         } else { document.getElementById("clickMe").disabled = true; }
                     });
@@ -726,20 +719,16 @@ function GenerateTable() {
 
 	clearDir()
 	document.getElementById("dvTable").style.display = "inherit";
-	//document.getElementById("wholetable").style.display = "none";
 	directionsDisplay.set('directions', null);
     
     var shoplist = new Array();
     shoplist.push(["Shop Name", "Street", "City/State/Zip", "Phone", "Fax", "Email"]);
  
-    //Create a HTML Table element.
+
     var table = document.createElement("TABLE");
-       
- 
-    //Get the count of columns.
+
     var columnCount = shoplist[0].length;
- 
-    //Add the header row.
+
     var row = table.insertRow(-1);
     for (var i = 0; i < columnCount; i++) {
         var headerCell = document.createElement("TH");
@@ -747,15 +736,12 @@ function GenerateTable() {
         row.appendChild(headerCell);
        
     }
- 
-    //Add the data rows.
+
     for (var i = 0; i < shops.length; i++) {
         row = table.insertRow(-1);
         for (var j = 0; j < columnCount; j++) {
             var cell = row.insertCell(-1);
-            //if (shops[i][8] !=="") {
-           // cell.innerHTML = "*" + shops[i][j];
-            //}else
+
             cell.innerHTML = shops[i][j]
           }
  
@@ -800,7 +786,7 @@ showPoly();
         var point = new google.maps.LatLng(39.739182,-89.451439); 
          bounds.extend(point);
          map.fitBounds(bounds); 
-        // map.setZoom(6);
+
         for (i = 0; i < shopmarkers.length; i++) {
                 shopmarkers[i].setMap(null);
             }
