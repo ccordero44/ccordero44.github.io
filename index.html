@@ -13,8 +13,8 @@
     <script src="jQuery Migrate.js"></script>
 	<script src="counties.js"></script>
     <script src="sorttable.js"></script>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"
-            type="text/javascript"></script>
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCf_qNCCV9-lr7vlV1zpPhlx-BVDb91gqw"></script>
+
 
     <script type="text/javascript" src="list.js"></script>
 </head>
@@ -1046,8 +1046,9 @@ showPoly();
     <input id="orig" type="text" style="display: none;" readonly class="originput">
     <button id="clear" onClick="clearDir();" / class="button1">CLEAR</button>
     <p id="markerPos" style="display: none;"</p>
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCf_qNCCV9-lr7vlV1zpPhlx-BVDb91gqw"></script>
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf_qNCCV9-lr7vlV1zpPhlx-BVDb91gqw&callback=initMap"
+    async defer></script>
+  </body>
 <div id="infoDivWrapper" style="display: none; width: 250px; position: fixed; bottom: 50%; right: 0; border: 1px solid red; background: rgb(255, 255, 255); padding: 2px; font: 12px arial;">
 <div style="padding:2px;font: normal 10px verdana; background: #990000;">
 <div id="infoDiv" style="font: bold 12px verdana;margin:3px;padding:3px;color:#ffffff">
