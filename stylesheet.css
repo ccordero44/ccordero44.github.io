@@ -1,0 +1,606 @@
+#overlay {
+	    position: fixed;
+	    display: none;
+	    width: 100%;
+	    height: 100%;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    background-color: rgba(0,0,0,0.5);
+	    z-index: 2;
+	    cursor: pointer;
+	}
+        /* Always set the map height explicitly to define the size of the div
+               * element that contains the map. */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column1 {
+            float: left;
+            width: 100%;
+            padding: 10px;
+            height: 100%;
+            display: table-cell;
+        }
+
+        .column2 {
+            float: left;
+            width: 45%;
+            padding: 10px;
+            display: table-cell;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        #map {
+            height: 100%;
+            [
+          {
+            "featureType": "administrative.land_parcel",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.neighborhood",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.business",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          }
+        ]
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 9px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .disabledButton {
+            color: silver;
+        }
+
+        #origin-input,
+        #destination-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 11px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 50%;
+        }
+
+            #origin-input:focus,
+            #destination-input:focus {
+                border-color: #4d90fe;
+            }
+
+        #mode-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            margin-left: 12px;
+            padding: 5px 11px 0px 11px;
+        }
+
+            #mode-selector label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+        .button1:enabled {
+            color: white;
+            background-color: #4d90fe;
+            border: 1px solid transparent;
+            padding: 5px 11px 5px 11px;
+            margin-left: 3px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 2px;
+            box-shadow: 0 9px 12px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: bold;
+            outline: none;
+            enabled: true;
+        }
+
+        .button1:disabled {
+            color: white;
+            background-color: #dddddd;
+            border: 1px solid transparent;
+            padding: 5px 11px 5px 11px;
+            margin-left: 3px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 2px;
+            box-shadow: 0 9px 12px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: bold;
+            outline: none;
+            enabled: true;
+        }
+
+        .button2 {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+		table, th, td {
+		    border: 1px solid black;
+		}
+		#directionsPanel table {
+			border: 0px;
+		}
+		#directionsPanel th {
+			border: 0px;
+		}
+		#directionsPanel td {
+			border: 0px;
+		}
+		#infoDiv table {
+			border: 0px;
+		}
+		#infoDiv th {
+			border: 0px;
+		}
+		#infoDiv td {
+			border: 0px;
+		}
+		table ::selection {
+		background-color: #1a75ff;
+		}
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            style ="table-layout:fixed; overflow-y:scroll;
+            
+        }
+
+        th {
+            text-align: center;
+            padding: 9px;
+        }
+
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4d90fe;
+            color: black;
+        }
+
+        table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after {
+            content: " \25B4\25BE"
+        }
+
+
+        .button3 {
+            background: none !important;
+            color: blue;
+            border: none;
+            padding: 0 !important;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .block {
+            display: block;
+            width: 50%;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+            .block:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+        .btn {
+            background-color: #f2f2f2;
+            color: black;
+            padding: 10px;
+            font-size: 12px;
+            border: none;
+            outline: none;
+        }
+
+        .btn2 {
+            height: 36px;
+            padding: 5px 11px 5px 36px;
+            border: none;
+            background: #4d90fe url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 10px center;
+            cursor: pointer;
+            color: white;
+            position: right;
+        }
+
+        .fax {
+            line-height: 1.6;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACKklEQVQ4jZ2SPUsjcRCHn9n9K8uKaLGKjVYGBUGrVL6gWwhB/QKKGDsRbPIN/AIWNhZCLlUQtRXyASwSlyCkCsTCiIgRNKBRkF2cKzz3LurBcT8YBoaZZ5gXUdVhYApAValWq+TzeT5rYmKCxcVFHMdBVRGRU+DCAFOq+kNEEBGOjo4oFAq4rtsGODk5odVqsbKygjEGYB24QFXT+ofW1tb08PBQPyuRSGhPT48eHBxoFEX6qw6r1WpRq9U4Pz/n7u4u7qiqsQHMzMwwODjI3t4ej4+PcdxkMhlKpRKNRoNUKsXz83MMEZEYsru7S61WY3NzkzAMEZF3wP7+flwQBAF9fX2cnZ19zNmm+/t7qtUqx8fHbGxsYFkWAGlAAR0bG9PZ2Vnt7OxU13W/mOM4Cuj09LTW6/W0qvK1DeA4DsvLy9TrdUZHRwmCAN/3yeVyXF1d8fLyQrPZZGhoCOs7gOu6zM3NMT4+zvz8PCMjIywtLeF5XtuSge8BYRjSaDR4eHjg9vaWZrPJ9fU1r6+vbQv+K8CyLEQE27YREYwxcexL7ncAEcHzPLq7u+nv78d1XQYGBujo6Pg3QBiGVCoVLi8vKZfL3NzcUCwWeXp6AsC27d+vnkwm0729vQqo7/u6tbWltm2rbdtqWZYaY1REYt/V1aXb29sahuH7GTOZzOnOzs56uVxmcnKShYUFstls/JFvb28ARFGEiJBIJFhdXcUYcwogH+f4X/0Ekuofu31Rv0kAAAAASUVORK5CYII=) no-repeat 0px center;
+            padding: 10px;
+        }
+
+        .faxTxt {
+            font-family: Roboto;
+            color: black;
+        }
+
+        .phone {
+            line-height: 1.6;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB7UlEQVQ4jZ1TsYrqQBQ9GRcSyIuCWKSQNGlki4gg2SYW2tja2AgBS7v8iLUoWgr5AT9BBV9hKWKjtoKCQUEI5rxiX1yzbvF4F4Y7DDPnnnvuGYnkr9Pp9D4ejzGdTjEajZBOp/EPsQJwebter+/r9Xoxn8+x3W6xXq9h2zZIQpKkR/4hPgD8Rq/Xs1utFoUQFELQdV0GQUCSjKLoJcd7kjZJwDRNO5fLEQABUNd1+r6fuPz06AXg7XA4IAzDBLfL5QKSEEK88H5pq9Fo2JZlEQAVReFgMHi08FM8MbNJQnieh2q1CgBIpVKoVCrQNO2lMskHg4SoYRjak8mEhmFQCMF2u/3CIK76rMVDRJJ2EAT0PI+yLDObzbLb7SZAoiji/X7/LuoXQBRF3Gw2rNVqBEDDMBIgQRBwOBzS9/1n4C+A+GS5XLJQKBAAs9ks2+02V6sVB4MBdV2nrut0XZeLxYLn8znJIF7L5ZK1Wo2yLFMIQVVVqSjKwydCCJbLZTabzc8pxMrGuVQqod/vo9PpIJ/P43q94na7JSZimiYcx3mMx/5u0yiKGAQBJ5MJPc+jZVlUFIW5XI6tVouz2YzH4/HTiX9/1cfzbCVJgqZpqNfrUFUV+/0eu90OmUwGjuOgWCxCVdUVAEixQf43/gCSo/R76vieFwAAAABJRU5ErkJggg==) no-repeat 0px center;
+            padding: 10px;
+        }
+
+        .email {
+            line-height: 1.6;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABiElEQVQ4jcVTvatBcRh+zrm/0RF/gBIGHGJhUuqWxXQHWQyOP8AfIIsMynAmdhsG1LWquxmQuhmkE4MyGAwyKJLnDrof3U9luE+9w/v2vs/zfvRKJHEL5JuqAYhGo+HWdf1+PB5fpyjLyOfzKBaLTwBmCAQCmqIoBHC1RSIRDgYDjSTkUCgEq9V6dcuSJMFms8Fut18Cq9VKa7fbdLlcfyoLIZhMJjmfz7nZbDSSuKvVasHT6fRQKBRgMplgGAYOh8MXZb/fj1KpBJ/Ph0qlArPZ/OjxeJ4BQJMkiU6nk7qus9lsMhgMUghBALRYLMxkMux2u0yn01QUhaqqstVqaSQhAIAkFosFcrkcotEoyuUy+v0+JpMJEokE9vs9stkslsslXvNfIT62eTwe0ev1MBqNEI/HoaoqqtUqhsMhzufzt0sV3wW32y3q9fqvl3gjiMViMAwDu93ux4LPcDgc8Hq9F7L1eu3udDr30+kUwPt8H1VIvvmyLCOVSiEcDj8BmEn//kw3E7wAG1S4cQ50+1oAAAAASUVORK5CYII=) no-repeat 0px center;
+            padding: 10px;
+        }
+
+        a:empty {
+            display: none;
+        }
+
+        .phoneTxt {
+            font-family: Roboto;
+            color: black;
+        }
+
+        .arrows {
+            padding: 10px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABCElEQVQ4T53T3SoFYRSH8d8+4jpIuQM5dyBKavsshdyEONvFbchXJBK2j0vgCpw4cRccKC29b01j3t0wR9OstZ6Z9fzf6Shfw7jGFxbw0dTaKczn4elUf0C3CVICXGCxBj/Hav2FJcAsJrGbBnp4xmNbQPSN4zUNjOFtkIPY+QiHuE+NJcA8lrGBz1ihKmwPJwkwUoGFzPf0fB3bqdYNQOyVbQ9ItbHUD0AfIe0/101e4QozCNvHiTSKp3Q/VVlhEzu4i6hzjOHhIInMUZUkzmEJW1li6dP/FGMdElFNJNtR28cLbtsepDOs1JpPsdYWMIQQm9P5ERY7twVEX0Au0+8cJ+/XcDR9A8xvNYIfLMr3AAAAAElFTkSuQmCC) no-repeat 0px center;
+        }
+
+        .titleTxt {
+            line-height: 1.6;
+            font-size: 15px;
+            font-family: Roboto;
+            font-weight: bold;
+            color: black;
+        }
+
+        .sortIcon {
+            line-height: 2;
+        }
+
+        .dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: #4d90fe;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn2:hover, .dropdown:hover .btn {
+            background-color: #ddd;
+        }
+
+        .originput {
+            width: 50%;
+        }
+
+        .txt {
+            color: silver;
+        }
+
+        .sortTxt {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #main {
+            margin: auto;
+            width: 100%;
+            BACKGROUND: #4d90fe;
+            
+        }
+
+        #sidebar {
+            width: 30%;
+            float: left;
+        }
+
+        #page-wrap {
+            height: auto;
+            padding: 5px 0px 5px 0px;
+            width: 55%;
+            float: left;
+            
+        }
+
+        .clear:after {
+            clear: both;
+            display: table;
+            content: "";
+        }
+
+        .windowTxt {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .scrollFix {
+            width: 230px;
+            line-height: 1.35;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: blue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 150px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px;
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+                top: -5px;
+                left: 105%;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+    .customMapControl-content a {
+        background-color: #fff;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0px rgba(0,0,0,.1);
+        cursor: pointer;
+        text-align: center;
+        margin: 10px 1px 0 1px;
+        color: rgb(25,25,25);
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 18px;
+        line-height: 35px;
+        padding-left: 12px;
+        padding-right: 12px;
+        weight: bold;
+        width: 100px;
+        display: block;
+	}
+	.customMapControl {
+        background-color: #fff;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0px rgba(0,0,0,.1);
+        cursor: pointer;
+        text-align: center;
+        margin: 10px 1px 0 1px;
+        color: rgb(25,25,25);
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 18px;
+        line-height: 35px;
+        padding-left: 12px;
+        padding-right: 12px;
+        weight: bold;
+        width: 100px;
+        display: none;
+	}
+	.customMapControl:hover {
+	background-color: #e6e6e6;
+    border: 2px solid #e6e6e6;
+    }
+    
+    .customMapControlwrapper {
+        background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 95px center;
+        border: none;
+        border-radius: 3px;
+        box-shadow: 0 1px 0px rgba(0,0,0,.1);
+        cursor: pointer;
+        text-align: center;
+        margin: 10px 1px 0 10px;
+        color: rgb(25,25,25);
+        font-family: Roboto,Arial,sans-serif;
+        font-size: 18px;
+        line-height: 35px;
+        padding-left: 15px;
+        padding-right: 15px;
+        weight: bold;
+        width: 115px;
+        height: 36px;
+        
+	}
+
+    
+    .customMapControl-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            z-index: 1;
+        }
+		.customMapControldropdown {
+            display: inline-block;
+        }
+
+        .customMapControldropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+            .customMapControldropdown-content a {
+                color: rgb(25,25,25);
+                padding-left: 12px;
+        		padding-right: 12px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .customMapControldropdown-content a:hover {
+                    background-color: #e6e6e6;
+                }
+
+        .customMapControldropdown:hover .customMapControldropdown-content {
+            display: block;
+        }
+
+        .customMapControlwrapper:hover, .customMapControldropdown:hover {
+            background-color: #e6e6e6;
+    		
+        }
+
+select::-ms-expand {
+    display: none;
+   
+}     
+
+::selection, select:focus::-ms-value {
+            background-color: inherit;
+            color: black;
+        }
