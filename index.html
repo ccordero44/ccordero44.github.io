@@ -49,7 +49,7 @@ window.onload = Window_onLoad;
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-    <script type="text/javascript">
+   <script type="text/javascript">
 
 
 
@@ -109,6 +109,7 @@ window.onload = Window_onLoad;
             
             var mapOptions = {
                 mapTypeControl: false,
+               // mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR, position: google.maps.ControlPosition.TOP_LEFT },
                 zoomControl: true,
                 zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
                 fullscreenControl: false,
@@ -246,7 +247,7 @@ window.onload = Window_onLoad;
             }
             new AutocompleteDirectionsHandler(map);
            
-     
+            //polygons start
  Mycounties.infoWindow = new google.maps.InfoWindow();         
  for (i = 0; i < countyCoords.length; i++) {           
 Mycounties = new google.maps.Polygon({
@@ -293,6 +294,9 @@ function attachPolygonInfoWindow(Mycounties, html)
 	this.setOptions({fillOpacity:0.1});
 	myWindow.style.display = "inherit";
 	}
+
+	
+	//document.getElementById("infoDivWrapper").style.display = "inherit";
 	
 	clickCo = this;
 	document.getElementById("origin-input").focus();
@@ -333,6 +337,9 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                 });
             this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
 
+            // map.controls[google.maps.ControlPosition.TOP_CENTER].push(originInput);
+            //  map.controls[google.maps.ControlPosition.TOP_CENTER].push(btnClickme);
+            // map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearMap);
         }
 
         AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function (autocomplete, mode) {
@@ -519,7 +526,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
 
 
                     } else {
-                       
+                        //window.alert("Please enter a location and select an option from the dropdown list.");
                         window.alert("Error: line 1102" + status);
                     }
 
@@ -569,7 +576,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                             }
                         }
                     } else {
-                       
+                        //window.alert("Please enter a location and select an option from the dropdown list.");
                         window.alert("Error: line 1152" + status);
                     }
                 });
@@ -611,7 +618,7 @@ attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'));
                         document.getElementById('clientAddress').value =
                             "Directions cannot be computed at this time.";
                         window.alert("Please enter a location and select an option from the dropdown list.");
-                     
+                        //window.alert("Error: line 1192" + status);
 
                     }
 
@@ -643,7 +650,7 @@ function resetSelectCounty(selectElement) {
     	selectElement.selectedIndex = 1;  // first option is selected, or
                                      // -1 for no option selected
 		}
-  function clearDir() {
+function clearDir() {
  	 
   	var marker;
   			if (clickCo == null) {
@@ -652,7 +659,11 @@ function resetSelectCounty(selectElement) {
 				clickCo.setOptions({fillOpacity:0.2});
 				myWindow.style.display = "none";
 			}
-			
+
+			document.getElementById("centerControlDiv").style.display = "inherit";
+			document.getElementById("mapControlDiv").style.display = "none";
+			document.getElementById("satControlDiv").style.display = "inherit";
+			document.getElementById("mapButton").innerHTML = "Map";
   			infowindow.close();
   			document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
@@ -702,12 +713,12 @@ function resetSelectCounty(selectElement) {
             }, function (results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
                     var str3 = results[0].geometry.location
-                
+                    //window.alert(str3);
                     service.textSearch({
                         'location:': str3
                     }, function callback(results, status) {
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
-                       
+                            // document.getElementById("clickMe").disabled = false;
 
                         } else { document.getElementById("clickMe").disabled = true; }
                     });
@@ -725,16 +736,20 @@ function GenerateTable() {
 
 	clearDir()
 	document.getElementById("dvTable").style.display = "inherit";
+	//document.getElementById("wholetable").style.display = "none";
 	directionsDisplay.set('directions', null);
     
     var shoplist = new Array();
     shoplist.push(["Shop Name", "Street", "City/State/Zip", "Phone", "Fax", "Email"]);
  
-
+    //Create a HTML Table element.
     var table = document.createElement("TABLE");
-
+       
+ 
+    //Get the count of columns.
     var columnCount = shoplist[0].length;
-
+ 
+    //Add the header row.
     var row = table.insertRow(-1);
     for (var i = 0; i < columnCount; i++) {
         var headerCell = document.createElement("TH");
@@ -742,12 +757,15 @@ function GenerateTable() {
         row.appendChild(headerCell);
        
     }
-
+ 
+    //Add the data rows.
     for (var i = 0; i < shops.length; i++) {
         row = table.insertRow(-1);
         for (var j = 0; j < columnCount; j++) {
             var cell = row.insertCell(-1);
-
+            //if (shops[i][8] !=="") {
+           // cell.innerHTML = "*" + shops[i][j];
+            //}else
             cell.innerHTML = shops[i][j]
           }
  
@@ -792,20 +810,34 @@ showPoly();
         var point = new google.maps.LatLng(39.739182,-89.451439); 
          bounds.extend(point);
          map.fitBounds(bounds); 
-
+        // map.setZoom(6);
         for (i = 0; i < shopmarkers.length; i++) {
                 shopmarkers[i].setMap(null);
             }
+			document.getElementById("mapButton").innerHTML = "Counties";
+			document.getElementById("centerControlDiv").style.display = "none";
+			document.getElementById("mapControlDiv").style.display = "inherit";
+			document.getElementById("satControlDiv").style.display = "inherit";
+ }
+ 
+ function satMap() {
+	 map.setMapTypeId('satellite');
+	 document.getElementById("mapButton").innerHTML = "Satellite";
+	 document.getElementById("centerControlDiv").style.display = "inherit";
+	document.getElementById("mapControlDiv").style.display = "inherit";
+	document.getElementById("satControlDiv").style.display = "none";
  }
 
     </script>
-    <div class="customMapControldropdown">
-	<select id="testDiv" class="customMapControlwrapper">
-	<option id="mapControlDiv" class="customMapControl" href=# onclick="clearDir();" />Map</option>
-	<option id="centerControlDiv" class="customMapControl" href=# onclick="countiesDiv();" />Counties</option>
-	<option id="satControlDiv" class="customMapControl" href=# onclick="map.setMapTypeId('satellite');" />Satellite</option>
-    </select>
-    </div>
+                <div id="testDiv" class="customMapControldropdown">
+                    <button id="mapButton" class="customMapControlwrapper" disabled>Map</button>
+                    <div class="customMapControldropdown-content">
+                        <a class="customMapControl" id="mapControlDiv" href=# onclick="clearDir();" style="display: none;" />Map</a>
+                        <a class="customMapControl" id="centerControlDiv" href=# onclick="countiesDiv();" />Counties</a>
+                        <a class="customMapControl" id="satControlDiv" href=# onclick="satMap();" />Satellite</a>
+                    </div>
+                </div>
+                
     <input id="origin-input" class="controls" type="text"
            placeholder="Enter an origin location">
 
@@ -813,7 +845,6 @@ showPoly();
 	<div class="column2" id="wholetable">
 	
 
-        <input class="button1" id="clickMe" type="button" value="SEARCH" onclick="clicky();" / disabled>
         <div id="main" class="clear">
             <div id="sidebar">
                 <div class="dropdown">
@@ -1042,7 +1073,7 @@ showPoly();
         </form>
     </div>
     <div id="directionsPanel"></div>
-<input type="button" value="LIST" onclick="GenerateTable()" class="button1" id="listShops"/>
+
 
 <div id="dvPopup" style="display: none; width: 310px; position: fixed; bottom: 95%; left: 0%; border: 1px solid red; background: rgb(250, 255, 165); padding: 2px; font: 12px arial; font-weight: bold;">Shops with towing capability marked with asterisk (*)</div>
 <div id="dvTable"></div>
@@ -1051,10 +1082,13 @@ showPoly();
     <label for "orig" style="display: none;">Origin:</label>
     <input id="orig" type="text" style="display: none;" readonly class="originput">
     <button id="clear" onClick="clearDir();" / class="button1">CLEAR</button>
+    <button id="listShops" onclick="GenerateTable();" / class="button1">LIST</button>
+    <button id="clickMe" onclick="clicky();" / class="button1" disabled>SEARCH</button>
+
     <p id="markerPos" style="display: none;"</p>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf_qNCCV9-lr7vlV1zpPhlx-BVDb91gqw&libraries=places&callback=initMap"
-        async defer></script>
-  </body>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRZn_UmJKVoBZEsDc6UwFPAGRPf04OEWQ&libraries=places&callback=initMap"
+            async defer></script>
+    
 <div id="infoDivWrapper" style="display: none; width: 250px; position: fixed; bottom: 50%; right: 0; border: 1px solid red; background: rgb(255, 255, 255); padding: 2px; font: 12px arial;">
 <div style="padding:2px;font: normal 10px verdana; background: #990000;">
 <div id="infoDiv" style="font: bold 12px verdana;margin:3px;padding:3px;color:#ffffff">
