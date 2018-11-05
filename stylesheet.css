@@ -11,12 +11,13 @@
 	    z-index: 2;
 	    cursor: pointer;
 	}
-        
+        /* Always set the map height explicitly to define the size of the div
+               * element that contains the map. */
         * {
             box-sizing: border-box;
         }
 
-        
+        /* Create two equal columns that floats next to each other */
         .column1 {
             float: left;
             width: 100%;
@@ -34,7 +35,7 @@
             overflow-y: scroll;
         }
 
-        
+        /* Clear floats after the columns */
         .row:after {
             content: "";
             display: table;
@@ -395,6 +396,9 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .dropdown:active {
+        	display: block;
+        }
 
         .btn2:hover, .dropdown:hover .btn {
             background-color: #ddd;
@@ -492,14 +496,13 @@
             .tooltip:hover .tooltiptext {
                 visibility: visible;
             }
-    .customMapControl-content a {
+    
+	.customMapControl {
         background-color: #fff;
-        border: 2px solid #fff;
-        border-radius: 3px;
-        box-shadow: 0 1px 0px rgba(0,0,0,.1);
+  
         cursor: pointer;
         text-align: center;
-        margin: 10px 1px 0 1px;
+        margin: 0px 1px 0 10px;
         color: rgb(25,25,25);
         font-family: Roboto,Arial,sans-serif;
         font-size: 18px;
@@ -507,30 +510,12 @@
         padding-left: 12px;
         padding-right: 12px;
         weight: bold;
-        width: 100px;
-        display: block;
-	}
-.customMapControl {
-        background-color: #fff;
-        border: 2px solid #fff;
-        border-radius: 3px;
-        box-shadow: 0 1px 0px rgba(0,0,0,.1);
-        cursor: pointer;
-        text-align: center;
-        margin: 10px 1px 0 1px;
-        color: rgb(25,25,25);
-        font-family: Roboto,Arial,sans-serif;
-        font-size: 18px;
-        line-height: 35px;
-        padding-left: 12px;
-        padding-right: 12px;
-        weight: bold;
-        width: 100px;
+ 		width: 115px;
         display: none;
 	}
-.customMapControl:hover {
+	.customMapControl:hover {
 	background-color: #e6e6e6;
-    	border: 2px solid #e6e6e6;
+  
     }
     
     .customMapControlwrapper {
@@ -562,48 +547,44 @@
             z-index: 1;
         }
 		.customMapControldropdown {
-            display: inline-block;
+            display: block;
+            border-radius: 3px 3px 0px 0px; 
         }
 
         .customMapControldropdown-content {
             display: none;
-            position: absolute;
-            background-color: #fff;
-            min-width: 160px;
+       		position: absolute;
             z-index: 1;
+ 
         }
 
             .customMapControldropdown-content a {
                 color: rgb(25,25,25);
-                padding-left: 12px;
-        		padding-right: 12px;
                 text-decoration: none;
                 display: block;
+				
+                
             }
 
-                .customMapControldropdown-content a:hover {
-                    background-color: #e6e6e6;
-                }
 
         .customMapControldropdown:hover .customMapControldropdown-content {
             display: block;
+            border-radius: 3px 3px 0px 0px; 
         }
-
-        .customMapControlwrapper:hover, .customMapControldropdown:hover {
+		.customMapControldropdown:active {
+			display: block;
+            border-radius: 3px 3px 0px 0px; 
+		}
+        .customMapControlwrapper:hover {
             background-color: #e6e6e6;
+            border-radius: 3px 3px 0px 0px; 
     		
         }
 
 select::-ms-expand {
     display: none;
    
-}    
-select {
-    -moz-appearance: none;
-    appearance: none;
-
-    text-overflow: ''; /* this is important! */
-}
+}     
 
 ::selection, select:focus::-ms-value {
             background-color: inherit;
