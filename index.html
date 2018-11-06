@@ -841,6 +841,12 @@ showPoly();
     <input id="origin-input" class="controls" type="text"
            placeholder="Enter an origin location">
 
+	 <label for "orig" style="display: none;">Origin:</label>
+    <input id="orig" type="text" style="display: none;" readonly class="originput">
+    <button id="clear" onClick="clearDir();" / class="button1">CLEAR</button>
+    <button id="listShops" onclick="GenerateTable();" / class="button1">LIST</button>
+    <button id="clickMe" onclick="clicky();" / class="button1" disabled>SEARCH</button>
+	
 	<div class="column1" id="map"></div>
 	<div class="column2" id="wholetable">
 	
@@ -1079,11 +1085,7 @@ showPoly();
 <div id="dvTable"></div>
 
 	
-    <label for "orig" style="display: none;">Origin:</label>
-    <input id="orig" type="text" style="display: none;" readonly class="originput">
-    <button id="clear" onClick="clearDir();" / class="button1">CLEAR</button>
-    <button id="listShops" onclick="GenerateTable();" / class="button1">LIST</button>
-    <button id="clickMe" onclick="clicky();" / class="button1" disabled>SEARCH</button>
+   
 
     <p id="markerPos" style="display: none;"</p>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRZn_UmJKVoBZEsDc6UwFPAGRPf04OEWQ&libraries=places&callback=initMap"
