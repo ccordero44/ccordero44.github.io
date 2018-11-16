@@ -590,3 +590,6 @@ select::-ms-expand {
             background-color: inherit;
             color: black;
         }
+#divTD {
+	color: white;
+	}
