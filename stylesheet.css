@@ -453,7 +453,7 @@
         }
 
         .scrollFix {
-            width: 230px;
+            width: auto;
             line-height: 1.35;
             overflow: hidden;
             white-space: nowrap;
