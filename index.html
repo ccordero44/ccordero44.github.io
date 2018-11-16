@@ -275,9 +275,6 @@
     <button id="clickMe" onclick="clicky();" / class="button1" disabled>SEARCH</button>
 	
 	<div class="column1" id="map"></div>
-	<div id="directionsPanel"></div>
-	<div id="dvTable"></div>
-	<div id="output"></div>
 	<div class="column2" id="wholetable">
 	
 
@@ -304,8 +301,10 @@
             </table>
         </form>
     </div>
-
-<div id="dvPopup" style="display: none; width: 310px; position: fixed; bottom: 95%; left: 0%; border: 1px solid red; background: rgb(250, 255, 165); padding: 2px; font: 12px arial; font-weight: bold;">Shops with towing capability marked with asterisk (*)</div>
+	<div id="directionsPanel"></div>
+	<div id="dvTable"></div>
+	<div id="output"></div>
+	<div id="dvPopup" style="display: none; width: 310px; position: fixed; bottom: 95%; left: 0%; border: 1px solid red; background: rgb(250, 255, 165); padding: 2px; font: 12px arial; font-weight: bold;">Shops with towing capability marked with asterisk (*)</div>
 
     <p id="markerPos" style="display: none;"</p>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRZn_UmJKVoBZEsDc6UwFPAGRPf04OEWQ&libraries=places&callback=initMap"
@@ -328,10 +327,6 @@
 </div>
 </div>
 
-
-
-//<input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
-          accept=".csv">
 
 </body>
 
