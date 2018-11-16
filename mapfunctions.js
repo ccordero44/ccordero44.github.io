@@ -668,3 +668,7 @@ showPoly();
 	document.getElementById("mapControlDiv").style.display = "inherit";
 	document.getElementById("satControlDiv").style.display = "none";
  }
+
+function OpenPDF() {
+	window.open("Inspection Assignment & Payment Authorization.pdf");
+}
