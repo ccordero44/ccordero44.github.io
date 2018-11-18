@@ -151,8 +151,8 @@
                         infowindow.open(map, marker);
                         activeInfoWindow = infowindow;
 						var inputAddress = document.getElementById("clientAddress");
-						if (shops[i][5] == ""){
-						document.getElementById("email").style.display = "none";
+						if (shops[i][5] !== ""){
+						document.getElementById("email").style.display = "inherit";
 						}
 						if (inputAddress == null){
 						map.setZoom(10);
