@@ -1,6 +1,6 @@
 var shops = [
-    ["Auto Art", "9356 Franklin Ave", "Franklin Park, IL 60131", " 847-455-5522", " 847-455-5533", " info@autoartinc.com", 41.9341569, -87.86069169999999, " Email Tow Request to Wes's"],
-    ["Procision Auto Body", "2701 SW Adams St", "Peoria, IL 61602", " 309-637-1946", " 309-637-1397", " procision@sbcglobal.net", 40.672276, -89.61940799999999, " Email Tow Request to shop"],
+    	["Auto Art", "9356 Franklin Ave", "Franklin Park, IL 60131", " 847-455-5522", " 847-455-5533", " info@autoartinc.com", 41.9341569, -87.86069169999999, " Email Tow Request to Wes's"],
+   	["Procision Auto Body", "2701 SW Adams St", "Peoria, IL 61602", " 309-637-1946", " 309-637-1397", " procision@sbcglobal.net", 40.672276, -89.61940799999999, " Email Tow Request to shop"],
 	["United Collision & Customs", "3003 S State St", "Lockport, IL 60441", " 815-774-3223", " 779-205-3381", " UnitedCollision3003@yahoo.com", 41.563804, -88.06929919999999, " Email Tow Request to shop (repairable only)"],
 	["Durans Body Shop", "2610 W Chicago Ave", "Chicago, IL 60622", " 773-486-3333", " 773-486-3247", " duransbodyshop@aol.com", 41.8960018, -87.6923845, " Email Tow Request to Wes's"],
 	["Orlando Glass", "641 N Ashland Ave", "Chicago, IL 60622", " 312-243-0776", " 312-243-8234", " orlando.auto@att.net", 41.89361299999999, -87.666804, " Glass & Upholstery"],
