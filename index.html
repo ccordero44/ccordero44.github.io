@@ -152,7 +152,7 @@
 						}else
                         document.getElementById("markerPos").innerHTML = marker.getPosition();
                         infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b><br/>" + "</b><br/>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<i class='arrows'> </i><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' class='button3'>" +
-                            "</b><br/>" + "<div style='text-align: right; font-weight: bold; color: red'>" + shops[i][8] + "</div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
+                            "</b><br/>" + "<span class='tow'> </span>" + "<span class='towTxt'>" + shops[i][8] + "</span>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
 
                         infowindow.open(map, marker);
                         activeInfoWindow = infowindow;
