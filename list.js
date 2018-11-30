@@ -6,6 +6,6 @@ var shops = [
 	["Classic Collision Center", "8583 S South Chicago Ave", "Chicago, IL 60617", " 773-731-9191", " 708-828-5319", " cautorebui@aol.com", 41.7390034, -87.5678942, " Email Tow Request to Wes's"],
 	["Tony's Collision Care Center", "8219 Christiana Ave", "Skokie, IL 60076", " 847-673-9630", " 847-673-9631", " tonyscollision@aol.com", 42.0306338, -87.7121477, " Email Tow Request to Wes's"],
 	["Autodome", "2729 Belvidere Rd", "Waukegan, IL 60085", " 847-406-3040", " 847-406-3045", " autodome@gmail.com", 42.3491794, -87.8696149, " Email Tow Request to shop (repairable only)"],
-	["Auto Crafters", "2617 IL-47", "Woodstock, IL 60098", " 847-669-0339", " 630-871-1462", " autocrafters47@gmail.com", 42.2898579, -88.43376259999999, " Call A to Z Towing"],
+	["Auto Lodge", "2617 IL-47", "Woodstock, IL 60098", " 847-669-0339", " 630-871-1462", " autocrafters47@gmail.com", 42.2898579, -88.43376259999999, " Call A to Z Towing"],
 	["Super Sports Automotive", "1530 Hubbard Ave, Unit #E2", "Batavia, IL 60510", " 630-326-9443", " 855-564-2101", " info@supersportsautomotive.com", 41.8594884, -88.27520299999999, " Email Tow Request to shop"]
 ];
