@@ -642,7 +642,6 @@ function GenerateTable() {
 }
 
 function countiesDiv() {
-circle.setMap(null);
 clearDir();
 resetSelectCounty(document.getElementById("testDiv"));
 showPoly();
