@@ -78,7 +78,7 @@
 			var tempDiv;
 			var clickCo;
 			var myWindow;
-	   		var bobCircle;
+	   		var Myappraisers = [];
 		
         function initMap() {
             
@@ -261,19 +261,21 @@
        }
 		
 	var convertMiles = 1609.344;
-bobCircle = new google.maps.Circle({
+for (i = 0; i < appraisers.length; i++) {       
+Myappraisers = new google.maps.Circle({
       strokeColor: '#FF0000',
       strokeOpacity: 0.2,
       strokeWeight: 1,
       fillColor: '#FF0000',
       fillOpacity: 0.15,
       map: map,
-      center: Bob.center,
-      radius: Math.round(Bob.radius) * convertMiles
+      center: appraisers[i].coord,
+      radius: Math.round(appraisers[i].circle) * convertMiles
     });	
 			google.maps.event.addListener(bobCircle, 'mouseover', function(e) {
 				 
-			});		
+			});	
+}
 }
    
 
