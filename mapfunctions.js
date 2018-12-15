@@ -81,13 +81,6 @@ function AutocompleteDirectionsHandler(map) {
       
             }
         }
-        function hidePoly() {
-
-            for (i = 0; i < tempcounties.length; i++) {
-                tempcounties[i].setMap(null);
-                
-            }
-        }
          function showPoly() {
 		map.setMapTypeId(google.maps.MapTypeId["TERRAIN"]);
             for (i = 0; i < tempcounties.length; i++) {
@@ -507,7 +500,10 @@ function resetSelectCounty(selectElement) {
                                      // -1 for no option selected
 		}
 function clearDir() {
- 	 
+var dropdown = document.getElementById("dropdownContent");
+
+dropdown.style.display = "none";
+
   	var marker;
   			if (clickCo == null) {
 				}else
@@ -519,8 +515,10 @@ function clearDir() {
 			document.getElementById("centerControlDiv").style.display = "inherit";
 			document.getElementById("mapControlDiv").style.display = "none";
 			document.getElementById("satControlDiv").style.display = "inherit";
+
 			document.getElementById("mapButton").innerHTML = "Map";
 			document.getElementById("myTable").innerHTML = "";
+
   			infowindow.close();
   			document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
@@ -632,16 +630,36 @@ function GenerateTable() {
 	        var e = document.getElementById("dvTable");
 	        
         	var dvPopup = document.getElementById("dvPopup");
+		if (dvPopup) {
 		e.onmouseover = function() {
   				dvPopup.style.display = "inherit";
 			}
 		e.onmouseout = function() {
   				dvPopup.style.display = "none";
 			}
-			
+		}	
 }
 
+function showAppraisers() {
+resetSelectCounty(document.getElementById("testDiv"));
+var checkbox = document.getElementById("checkbox");
+if (checkbox.checked) {
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
+dropdown.style.display = "none";
+}
+Myappraisers.setMap(map);
+
+
+}else
+Myappraisers.setMap(null);
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
+dropdown.style.display = "none";
+}
+}
 function countiesDiv() {
+
 clearDir();
 resetSelectCounty(document.getElementById("testDiv"));
 showPoly();
@@ -658,16 +676,25 @@ showPoly();
 			document.getElementById("centerControlDiv").style.display = "none";
 			document.getElementById("mapControlDiv").style.display = "inherit";
 			document.getElementById("satControlDiv").style.display = "inherit";
+
  }
  
  function satMap() {
+ var dropdown = document.getElementById("dropdownContent");
+dropdown.style.display = "none";
+
 	 map.setMapTypeId('satellite');
 	 document.getElementById("mapButton").innerHTML = "Satellite";
 	 document.getElementById("centerControlDiv").style.display = "inherit";
 	document.getElementById("mapControlDiv").style.display = "inherit";
+
 	document.getElementById("satControlDiv").style.display = "none";
  }
-
 function OpenPDF() {
 	window.open("Inspection Assignment & Payment Authorization.pdf");
+}
+function dropdown(){
+var dropdown = document.getElementById("dropdownContent");
+
+dropdown.style.display = "block";
 }
