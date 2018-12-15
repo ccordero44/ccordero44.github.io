@@ -115,7 +115,7 @@
             map.addListener('tilesloaded', function () {
                 document.getElementById("origin-input").innerHTML = 'Tilesloaded Event';
                 window.setTimeout(function () {
-                    document.getElementById("origin-input").focus();
+                    //document.getElementById("origin-input").focus();
                 }, 100);
             });
 
@@ -268,25 +268,32 @@ Myappraisers = new google.maps.Circle({
       strokeWeight: 1,
       fillColor: '#FF0000',
       fillOpacity: 0.15,
-      map: map,
       center: appraisers[i].coord,
       radius: Math.round(appraisers[i].circle) * convertMiles
     });	
+
 			google.maps.event.addListener(bobCircle, 'mouseover', function(e) {
 				 
 			});	
 }
+
 }
    
 
         
     </script>
                 <div id="testDiv" class="customMapControldropdown">
-                    <button id="mapButton" class="customMapControlwrapper" disabled>Map</button>
-                    <div class="customMapControldropdown-content">
-                        <a class="customMapControl" id="mapControlDiv" href=# onclick="clearDir();" style="display: none;" />Map</a>
-                        <a class="customMapControl" id="centerControlDiv" href=# onclick="countiesDiv();" />Counties</a>
+                    <button id="mapButton" class="customMapControlwrapper" onclick="dropdown();">Map</button>
+                    <div class="customMapControldropdown-content" id="dropdownContent">
+                    <label class="container" id="container">Appraisers
+ 						 <input type="checkbox" id="checkbox" onclick="showAppraisers();">
+  							<span class="checkmark"></span>
+						</label>
+                    	<a class="customMapControl" id="centerControlDiv" href=# onclick="countiesDiv();" />Counties</a>
                         <a class="customMapControl" id="satControlDiv" href=# onclick="satMap();" />Satellite</a>
+                        <a class="customMapControl" id="mapControlDiv" href=# onclick="clearDir();" style="display: none;" />Map</a>
+                   
+                        
                     </div>
                 </div>
                 
