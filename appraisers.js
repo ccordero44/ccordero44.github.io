@@ -1,8 +1,8 @@
 var Bob = {
-center: {lat: 42.0346532, lng: -87.94219969999999},
-radius: 50
+center: {lat: 42.0346082, lng: -87.9426643},
+radius: 35
 };
 
 var appraisers = [
-  {name: "Bob", coord: Bob.center, circle: Bob.radius}
+  {name: "Bob", coord: Bob.center, circle: Bob.radius, desc: "Bob's inspection area"}
   ];
