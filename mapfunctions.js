@@ -73,9 +73,12 @@ function AutocompleteDirectionsHandler(map) {
                         var inputtest = document.getElementById("origin-input");
                         inputtest.addEventListener('click', function () {
                             removeMarkers();
+                            document.getElementById("origin-input").value = null;
+                            map.setCenter(resetBounds.getCenter());
+            map.fitBounds(resetBounds);
                         });
-  			
-				
+
+
                         document.getElementById("clickMe").disabled = false;
 
                     }
@@ -93,13 +96,12 @@ function AutocompleteDirectionsHandler(map) {
             }
         }
          function showPoly() {
-		//map.setMapTypeId(google.maps.MapTypeId["TERRAIN"]);
+	
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(map);
             }
         }
         function hidePoly() {
-        //map.setMapTypeId(google.maps.MapTypeId["ROADMAP"]);
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(null);
             }
@@ -511,9 +513,7 @@ function resetSelectCounty(selectElement) {
                                      // -1 for no option selected
 		}
 function clearDir() {
-var dropdown = document.getElementById("dropdownContent");
 
-//dropdown.style.display = "none";
 
   	var marker;
   			if (clickCo == null) {
@@ -523,11 +523,6 @@ var dropdown = document.getElementById("dropdownContent");
 				myWindow.style.display = "none";
 			}
 
-//			document.getElementById("centerControlDiv").style.display = "inherit";
-		//	document.getElementById("mapControlDiv").style.display = "none";
-		//	document.getElementById("satControlDiv").style.display = "inherit";
-
-		//	document.getElementById("mapButton").innerHTML = "Map";
 			document.getElementById("myTable").innerHTML = "";
 
   			infowindow.close();
@@ -552,7 +547,7 @@ var dropdown = document.getElementById("dropdownContent");
             if (!!activeInfoWindow) {
                 activeInfoWindow.close();
             }
-            document.getElementById("origin-input").value = null
+            document.getElementById("origin-input").value = null;
             var sizeMap = document.getElementById("map");
             document.getElementById("myForm").style.visibility = "hidden";
             document.getElementById("wholetable").style.display = "none";
@@ -660,13 +655,9 @@ function GenerateTable() {
 }
 
 function showAppraisers() {
-//resetSelectCounty(document.getElementById("testDiv"));
 var checkbox = document.getElementById("checkbox1");
 if (checkbox.checked) {
-var dropdown = document.getElementById("dropdownContent");
-if (dropdown) {
-//dropdown.style.display = "none";
-}
+
 Myappraisers.setMap(map);
 		map.fitBounds(Myappraisers.getBounds());
 
