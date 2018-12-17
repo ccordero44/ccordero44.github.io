@@ -39,22 +39,33 @@ function AutocompleteDirectionsHandler(map) {
                     'address': isEmpty.value
                 }, function (results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
-
+						
                         var str3 = results[0].geometry.location;
-
+                      input = str3;
+						displayCoordinates(str3);
                         marker = new google.maps.Marker({
                             position: str3,
                             title: 'Origin Location',
                             animation: google.maps.Animation.DROP,
                             map: map
                         });
+                       
+                        
                         quickDist();
                         map.setZoom(10);
                         map.setCenter(marker.getPosition());
                         tempmarker.push(marker);
+                        
                         google.maps.event.addListener(marker, 'click', function () {
-                            infowindow.setContent('<div><strong>' + me.originName + '</strong><br></div>');
-
+                        var terr;
+                        
+                        if (parseInt(dist, 10) < 50) {
+                        	 terr = "Bob's territory (" + dist + ")";
+                        }else
+                        	terr = "Out of area";
+                        
+                            infowindow.setContent('<div><b>' + me.originName + '</b></br></br>' + terr + '<br></div>');
+								
                             infowindow.open(map, this);
                             map.setZoom(20);
                             map.setCenter(marker.getPosition());
@@ -64,9 +75,7 @@ function AutocompleteDirectionsHandler(map) {
                             removeMarkers();
                         });
 
-                        google.maps.event.addListener(map, "click", function (event) {
-                            removeMarkers();
-                        });
+
                         document.getElementById("clickMe").disabled = false;
 
                     }
@@ -75,20 +84,22 @@ function AutocompleteDirectionsHandler(map) {
         }
 
         function removeMarkers() {
-
+			for (i=0; i < custommarker.length; i++) {
+			custommarker[i].setMap(null);
+			}
             for (i = 0; i < tempmarker.length; i++) {
                 tempmarker[i].setMap(null);
       
             }
         }
          function showPoly() {
-		map.setMapTypeId(google.maps.MapTypeId["TERRAIN"]);
+		//map.setMapTypeId(google.maps.MapTypeId["TERRAIN"]);
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(map);
             }
         }
         function hidePoly() {
-        map.setMapTypeId(google.maps.MapTypeId["ROADMAP"]);
+        //map.setMapTypeId(google.maps.MapTypeId["ROADMAP"]);
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(null);
             }
@@ -502,7 +513,7 @@ function resetSelectCounty(selectElement) {
 function clearDir() {
 var dropdown = document.getElementById("dropdownContent");
 
-dropdown.style.display = "none";
+//dropdown.style.display = "none";
 
   	var marker;
   			if (clickCo == null) {
@@ -512,11 +523,11 @@ dropdown.style.display = "none";
 				myWindow.style.display = "none";
 			}
 
-			document.getElementById("centerControlDiv").style.display = "inherit";
-			document.getElementById("mapControlDiv").style.display = "none";
-			document.getElementById("satControlDiv").style.display = "inherit";
+//			document.getElementById("centerControlDiv").style.display = "inherit";
+		//	document.getElementById("mapControlDiv").style.display = "none";
+		//	document.getElementById("satControlDiv").style.display = "inherit";
 
-			document.getElementById("mapButton").innerHTML = "Map";
+		//	document.getElementById("mapButton").innerHTML = "Map";
 			document.getElementById("myTable").innerHTML = "";
 
   			infowindow.close();
@@ -524,10 +535,18 @@ dropdown.style.display = "none";
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
         	hidePoly();
+        	
+        
+        	Myappraisers.setMap(null);
             removeMarkers();
             for (i = 0; i < shopmarkers.length; i++) {
                 shopmarkers[i].setMap(map);
             }
+            document.getElementById("checkbox0").checked = true;
+            document.getElementById("checkbox1").checked = false;
+            document.getElementById("checkbox2").checked = false;
+            document.getElementById("checkbox3").checked = false;
+            map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
             document.getElementById("testDiv").style.display = "inherit";
             if (!!activeInfoWindow) {
@@ -641,27 +660,33 @@ function GenerateTable() {
 }
 
 function showAppraisers() {
-resetSelectCounty(document.getElementById("testDiv"));
-var checkbox = document.getElementById("checkbox");
+//resetSelectCounty(document.getElementById("testDiv"));
+var checkbox = document.getElementById("checkbox1");
 if (checkbox.checked) {
 var dropdown = document.getElementById("dropdownContent");
 if (dropdown) {
-dropdown.style.display = "none";
+//dropdown.style.display = "none";
 }
 Myappraisers.setMap(map);
-
+		map.fitBounds(Myappraisers.getBounds());
 
 }else
 Myappraisers.setMap(null);
 var dropdown = document.getElementById("dropdownContent");
 if (dropdown) {
-dropdown.style.display = "none";
+
 }
 }
+
 function countiesDiv() {
 
-clearDir();
-resetSelectCounty(document.getElementById("testDiv"));
+var checkbox = document.getElementById("checkbox2");
+if (checkbox.checked) {
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
+
+
+}
 showPoly();
         var southWest = new google.maps.LatLng(37.067177, -89.285886);
         var northEast = new google.maps.LatLng(42.482513, -87.048794);
@@ -669,27 +694,52 @@ showPoly();
         var point = new google.maps.LatLng(39.739182,-89.451439); 
          bounds.extend(point);
          map.fitBounds(bounds); 
-        for (i = 0; i < shopmarkers.length; i++) {
-                shopmarkers[i].setMap(null);
-            }
-			document.getElementById("mapButton").innerHTML = "Counties";
-			document.getElementById("centerControlDiv").style.display = "none";
-			document.getElementById("mapControlDiv").style.display = "inherit";
-			document.getElementById("satControlDiv").style.display = "inherit";
 
+}else
+hidePoly();
+if (clickCo == null) {
+				}else
+			if (clickCo.fillOpacity == .1){
+				clickCo.setOptions({fillOpacity:0.2});
+				myWindow.style.display = "none";
+			}
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
+
+}
  }
  
  function satMap() {
- var dropdown = document.getElementById("dropdownContent");
-dropdown.style.display = "none";
+var checkbox = document.getElementById("checkbox3");
+if (checkbox.checked) {
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
 
-	 map.setMapTypeId('satellite');
-	 document.getElementById("mapButton").innerHTML = "Satellite";
-	 document.getElementById("centerControlDiv").style.display = "inherit";
-	document.getElementById("mapControlDiv").style.display = "inherit";
+}
+map.setMapTypeId('satellite');
 
-	document.getElementById("satControlDiv").style.display = "none";
+	}else
+map.setMapTypeId('roadmap');
+var dropdown = document.getElementById("dropdownContent");
+if (dropdown) {
+
+}
  }
+ 
+function setMarkers() {
+ var checkbox = document.getElementById("checkbox0");
+	if (checkbox.checked) {
+ 			for (i = 0; i < shopmarkers.length; i++) {
+                shopmarkers[i].setMap(map);
+            }
+            map.fitBounds(resetBounds);
+    }else
+    		for (i = 0; i < shopmarkers.length; i++) {
+                shopmarkers[i].setMap(null);
+            }
+  		
+ }
+ 
 function OpenPDF() {
 	window.open("Inspection Assignment & Payment Authorization.pdf");
 }
@@ -698,3 +748,67 @@ var dropdown = document.getElementById("dropdownContent");
 
 dropdown.style.display = "block";
 }
+
+function changeCSS() {
+var wrapper = document.getElementById("mapButton");
+var wrapper2 = document.getElementById("container3");
+var wrapper3 = document.getElementById("container0");
+wrapper3.style.borderRadius = "0px 3px 0px 0px";
+wrapper2.style.borderRadius = "0px 0px 3px 3px";
+wrapper.style.borderRadius = "3px 3px 0px 3px";
+}
+function changeCSSback() {
+var wrapper = document.getElementById("mapButton");
+var wrapper2 = document.getElementById("container3");
+wrapper2.style.borderRadius = "0px";
+wrapper.style.borderRadius = "3px";
+}
+
+function displayCoordinates(pnt) {
+
+          lat = pnt.lat();
+          lat = lat.toFixed(4);
+          lng = pnt.lng();
+          lng = lng.toFixed(4);
+   
+            input = lat + "," + lng;
+     
+          
+           var latlngStr = input.split(',', 2);
+           var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              
+              tempAddress = results[0].formatted_address;
+
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        
+        var destination = "";
+              var origin1 = "1699 Wall St Suite 600, Mt Prospect, IL 60056";
+			  var service = new google.maps.DistanceMatrixService();
+			service.getDistanceMatrix(
+			  {
+			    origins: [origin1],
+			    destinations: [input],
+			    unitSystem: google.maps.UnitSystem.IMPERIAL,
+                travelMode: google.maps.TravelMode.DRIVING,
+                avoidHighways: false,
+                avoidTolls: false
+			  }, callback);
+			  function callback(response, status) {
+			  if (status == "OK") {
+
+               dist =  response.rows[0].elements[0].distance.text;  
+              }}         
+         
+               
+      }
+      
+      
