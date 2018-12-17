@@ -8,6 +8,6 @@ center: {lat: 41.878114, lng: -87.629798},
 };
 
 var appraisers = [
-  [{name: "Bob", coord: Bob.center, circle: Bob.radius, desc: "Bob's inspection area"}],
-  [{name: "Jose", coord: Jose.center, circle: Jose.radius, desc: "Jose's inspection area"}]
+  {name: "Bob", coord: Bob.center, circle: Bob.radius, desc: "Bob's inspection area"},
+  {name: "Jose", coord: Jose.center, circle: Jose.radius, desc: "Jose's inspection area"}
   ];
