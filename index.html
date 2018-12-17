@@ -31,7 +31,7 @@
     <script type="text/javascript" src="appraisers.js"></script>
 </head>
 
-<body>
+<body>                                  
 
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
    <script type="text/javascript">
@@ -79,6 +79,13 @@
 			var clickCo;
 			var myWindow;
 	   		var Myappraisers = [];
+	   		var tempappraisers = [];
+	   		var lat;
+	   		var lng;
+	   		var tempAddress;
+	   		var custommarker = [];
+	   		var dist;
+	   		var input;
 		
         function initMap() {
             
@@ -112,10 +119,11 @@
                 map.fitBounds(bounds);
                 google.maps.event.removeListener(listener);
             });
+            
             map.addListener('tilesloaded', function () {
                 document.getElementById("origin-input").innerHTML = 'Tilesloaded Event';
                 window.setTimeout(function () {
-                    //document.getElementById("origin-input").focus();
+            
                 }, 100);
             });
 
@@ -185,8 +193,7 @@
 
                 google.maps.event.addListener(map, "click", function (event) {
                     infowindow.close();
-                    map.setCenter(latlngbounds.getCenter());
-                    map.fitBounds(latlngbounds);
+
 
                 });
 
@@ -194,10 +201,6 @@
                 inputtest.addEventListener('click', function () {
                     infowindow.close();
 
-                    var bounds = new google.maps.LatLngBounds();
-                    map.setCenter(latlngbounds.getCenter());
-                    map.fitBounds(latlngbounds);
-                    clearDir();
                 });
 
             }
@@ -271,27 +274,48 @@ Myappraisers = new google.maps.Circle({
       center: appraisers[i].coord,
       radius: Math.round(appraisers[i].circle) * convertMiles
     });	
-
-			google.maps.event.addListener(bobCircle, 'mouseover', function(e) {
-				 
+tempappraisers.push(Myappraisers);
+if (Myappraisers){
+			google.maps.event.addListener(Myappraisers, 'mouseover', function() {
+			for (i = 0; i < appraisers.length; i++) {
+				 this.getMap().getDiv().setAttribute('title', appraisers[i].desc);
+				 }
+			
 			});	
+			google.maps.event.addListener(Myappraisers,'mouseout',function(){
+             this.getMap().getDiv().removeAttribute('title');});
+	}
+		
 }
+
+
 
 }
    
 
         
     </script>
-                <div id="testDiv" class="customMapControldropdown">
-                    <button id="mapButton" class="customMapControlwrapper" onclick="dropdown();">Map</button>
-                    <div class="customMapControldropdown-content" id="dropdownContent">
-                    <label class="container" id="container">Appraisers
- 						 <input type="checkbox" id="checkbox" onclick="showAppraisers();">
+
+                <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();">
+                    <button id="mapButton" class="customMapControlwrapper" disabled>Map</button>
+                    <div class="customMapControldropdown-content" id="dropdownContent" >
+                    <label class="container" id="container0" title="Show/Hide body shop markers">Shops
+ 						 <input type="checkbox" id="checkbox0" onclick="setMarkers();" checked>
   							<span class="checkmark"></span>
 						</label>
-                    	<a class="customMapControl" id="centerControlDiv" href=# onclick="countiesDiv();" />Counties</a>
-                        <a class="customMapControl" id="satControlDiv" href=# onclick="satMap();" />Satellite</a>
-                        <a class="customMapControl" id="mapControlDiv" href=# onclick="clearDir();" style="display: none;" />Map</a>
+                    <label class="container" id="container1" title="Show/Hide appraiser overlay">Appraisers
+ 						 <input type="checkbox" id="checkbox1" onclick="showAppraisers();">
+  							<span class="checkmark"></span>
+						</label>
+                    <label class="container" id="container2" title="Show/Hide Illinois counties overlay">Counties
+ 						 <input type="checkbox" id="checkbox2" onclick="countiesDiv();">
+  							<span class="checkmark"></span>
+						</label>
+					<label class="container" id="container3" title="Show/Hide satellite imagery">Satellite
+ 						 <input type="checkbox" id="checkbox3" onclick="satMap();">
+  							<span class="checkmark"></span>
+						</label>	
+                    	                       
                    
                         
                     </div>
