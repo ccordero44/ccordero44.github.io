@@ -72,7 +72,7 @@ function AutocompleteDirectionsHandler(map) {
                         });
                         var inputtest = document.getElementById("origin-input");
                         inputtest.addEventListener('click', function () {
-                          //  removeMarkers();
+                            removeMarkers();
                         });
   			
 				
