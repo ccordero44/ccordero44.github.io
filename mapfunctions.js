@@ -62,7 +62,7 @@ function AutocompleteDirectionsHandler(map) {
                         if (parseInt(dist, 10) < 50) {
                         	 terr = "Staff appraiser territory (" + dist + ")";
                         }else
-                        	terr = "Out of area";
+                        	terr = "Out of area (" + dist + ")";
                         
                             infowindow.setContent('<div><b>' + me.originName + '</b></br></br>' + terr + '<br></div>');
 								
