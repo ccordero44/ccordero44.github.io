@@ -60,7 +60,7 @@ function AutocompleteDirectionsHandler(map) {
                         var terr;
                         
                         if (parseInt(dist, 10) < 50) {
-                        	 terr = "Bob's territory (" + dist + ")";
+                        	 terr = "Staff appraiser territory (" + dist + ")";
                         }else
                         	terr = "Out of area";
                         
