@@ -805,3 +805,16 @@ function displayCoordinates(pnt) {
       }
       
       
+function setPODS() {
+ var checkbox = document.getElementById("checkbox4");
+	if (checkbox.checked) {
+ 			for (i = 0; i < PODmarkers.length; i++) {
+                PODmarkers[i].setMap(map);
+            }
+            map.fitBounds(resetBounds);
+    }else
+    		for (i = 0; i < PODmarkers.length; i++) {
+                PODmarkers[i].setMap(null);
+            }
+  		
+ }
