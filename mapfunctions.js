@@ -546,6 +546,8 @@ function clearDir() {
             document.getElementById("checkbox1").checked = false;
             document.getElementById("checkbox2").checked = false;
             document.getElementById("checkbox3").checked = false;
+	    document.getElementById("checkbox4").checked = false;
+	
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
             document.getElementById("testDiv").style.display = "inherit";
