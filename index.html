@@ -202,7 +202,30 @@
                     infowindow.close();
 
                 });
-
+var script = document.createElement('script');
+        script.src = 'geojson.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+         window.eqfeed_callback = function(results) {
+        for (var i = 0; i < results.features.length; i++) {
+        let contentstring = 'Camera Number: <br />' + results.features[i].properties.camera_number + '<p>Address: <br />' + results.features[i].properties.address + '<br />' + results.features[i].properties.city + ', ' + results.features[i].properties.state + ' ' + results.features[i].properties.zip + '</p>' ;
+        infowindow = new google.maps.InfoWindow({
+   			 content: contentstring
+  			});
+          var coords = results.features[i].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
+          
+          var PODmarker = new google.maps.Marker({
+            position: latLng,
+            //map: map
+          });
+          PODmarkers.push(PODmarker);
+          PODmarker.addListener('click', function() {
+          infowindow.setContent(contentstring)
+    		infowindow.open(map, this);
+  			});
+  			
+        }
+        }
             }
             new AutocompleteDirectionsHandler(map);
            
