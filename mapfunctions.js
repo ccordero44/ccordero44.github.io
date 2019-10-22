@@ -539,6 +539,9 @@ function clearDir() {
             for (i = 0; i < shopmarkers.length; i++) {
                 shopmarkers[i].setMap(map);
             }
+	for (i = 0; i < PODmarkers.length; i++) {
+                PODmarkers[i].setMap(null);
+            }
             document.getElementById("checkbox0").checked = true;
             document.getElementById("checkbox1").checked = false;
             document.getElementById("checkbox2").checked = false;
