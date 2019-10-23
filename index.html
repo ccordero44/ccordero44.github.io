@@ -216,7 +216,7 @@ var script = document.createElement('script');
  	var latlngPODbounds = new google.maps.LatLngBounds();
  	var PODmarker;
         for (var i = 0; i < results.features.length; i++) {
-        let contentstring = '<b>Camera Number:</b> <br />' + results.features[i].properties.camera_number + '<p><b>Address:</b> <br />' + results.features[i].properties.address + '<br />' + results.features[i].properties.city + ', ' + results.features[i].properties.state + ' ' + results.features[i].properties.zip + '</p><a href="https://oemc-chicagops.govqa.us/WEBAPP/_rs/SupportHome.aspx?lp=7" target="_blank">FOIA Request</a>' ;
+        let contentstring = '<b>Camera Number:</b> <br />' + results.features[i].properties.camera_number + '<p><b>Address:</b> <br />' + results.features[i].properties.address + '<br />' + results.features[i].properties.city + ', ' + results.features[i].properties.state + ' ' + results.features[i].properties.zip + '</p><a href="https://oemc-chicagops.govqa.us/WEBAPP/_rs/SupportHome.aspx?lp=7" target="_blank" title="12 - 15 day retention period">FOIA Request</a>' ;
 
           var coords = results.features[i].geometry.coordinates;
           var latLng = new google.maps.LatLng(coords[1],coords[0]);
