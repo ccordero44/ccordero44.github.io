@@ -612,7 +612,7 @@ background-color: #fff;
         border-color: #fff;
 	display: block;
   height: 25px;      
-
+white-space: nowrap;
   position: relative;
   padding-left: 25px;
   padding-right: 5px;
