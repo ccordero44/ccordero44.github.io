@@ -816,7 +816,7 @@ function setPODS() {
  			for (i = 0; i < PODmarkers.length; i++) {
                 PODmarkers[i].setMap(map);
             }
-            
+            map.fitBounds(PODbounds);
     }else
     		for (i = 0; i < PODmarkers.length; i++) {
                 PODmarkers[i].setMap(null);
