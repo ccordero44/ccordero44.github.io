@@ -519,21 +519,21 @@
     }
     
     .customMapControlwrapper {
-        background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 85px center;
+        background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 65px center;
         border: none;
         border-radius: 3px;
         box-shadow: 0 1px 0px rgba(0,0,0,.1);
         cursor: pointer;
         text-align: center;
-        margin: 10px 1px 0 10px;
+        margin: 10px 1px 0px 10px;
         color: rgb(25,25,25);
         font-family: Roboto,Arial,sans-serif;
         font-size: 18px;
         line-height: 35px;
         padding-left: 0px;
-        padding-right: 30px;
+        padding-right: 15px;
         weight: bold;
-        width: 120px;
+        width: 90px;
         height: 36px;
         
 	}
@@ -680,4 +680,3 @@ white-space: nowrap;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
