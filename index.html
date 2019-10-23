@@ -91,6 +91,7 @@
 	   		var input;
 			var PODmarkers = [];
 	   		var PODbounds;
+	   		var infoPODwindow;
 		
         function initMap() {
             
@@ -212,30 +213,54 @@ var script = document.createElement('script');
         document.getElementsByTagName('head')[0].appendChild(script);
          window.eqfeed_callback = function(results) {
  	var latlngPODbounds = new google.maps.LatLngBounds();
+ 	var PODmarker;
         for (var i = 0; i < results.features.length; i++) {
         let contentstring = '<b>Camera Number:</b> <br />' + results.features[i].properties.camera_number + '<p><b>Address:</b> <br />' + results.features[i].properties.address + '<br />' + results.features[i].properties.city + ', ' + results.features[i].properties.state + ' ' + results.features[i].properties.zip + '</p><a href="https://oemc-chicagops.govqa.us/WEBAPP/_rs/SupportHome.aspx?lp=7" target="_blank">FOIA Request</a>' ;
-        infowindow = new google.maps.InfoWindow({
-   			 content: contentstring
-  			});
+
           var coords = results.features[i].geometry.coordinates;
           var latLng = new google.maps.LatLng(coords[1],coords[0]);
           
-          var PODmarker = new google.maps.Marker({
-            position: latLng,
+          PODmarker = new google.maps.Marker({
+          	position: latLng,
+          	clickable: true,
+            title: 'POD Camera # ' + results.features[i].properties.camera_number,
             icon: podCam
           });
-          PODmarkers.push(PODmarker);
-	latlngPODbounds.extend(PODmarker.position);
+          infoPODwindow = new google.maps.InfoWindow();
+  			PODmarkers.push(PODmarker);
+  			google.maps.event.addListener(PODmarker, 'click', (function(PODmarker, i) {
+                    return function() {
+                        map.setZoom(18);
+                        map.setCenter(PODmarkers[i].getPosition());  
+                        infoPODwindow.setContent(contentstring)
+    	  				infoPODwindow.open(map, PODmarker);
+    	  				activeInfoWindow = infoPODwindow;
+	       var circle = new google.maps.Circle({
+        center: PODmarker.getPosition(),
+        radius: 100.584,
+        fillColor: "#0000FF",
+        fillOpacity: 0.1,
+        map: map,
+        strokeColor: "#FFFFFF",
+        strokeOpacity: 0.1,
+        title: 'POD camera viewable boundary highlighted in blue',
+        strokeWeight: 2
+      });        
+      
+      google.maps.event.addListener(circle,'mouseover',function(){
+             this.getMap().getDiv().setAttribute('title',this.get('title'));});
+
+        google.maps.event.addListener(circle,'mouseout',function(){
+             this.getMap().getDiv().removeAttribute('title');});  
+                    }
+                    })(PODmarker, i));
+		latlngPODbounds.extend(PODmarker.position);
           PODbounds = latlngPODbounds;
-          PODmarker.addListener('click', function() {
-          infowindow.setContent(contentstring)
-    		infowindow.open(map, this);
-		  map.setZoom(10);
-                  map.setCenter(PODmarker.getPosition());
-  			});
-  			
         }
         }
+        	google.maps.event.addListener(map, "click", function (event) {
+                    infoPODwindow.close();
+                });
             }
             new AutocompleteDirectionsHandler(map);
            

@@ -89,6 +89,12 @@ function AutocompleteDirectionsHandler(map) {
         }
 
         function removeMarkers() {
+        	for (i = 0; i < shopmarkers.length; i++) {
+                shopmarkers[i].setMap(map);
+            }
+			for (i = 0; i < PODmarkers.length; i++) {
+                PODmarkers[i].setMap(null);
+            }
 			for (i=0; i < custommarker.length; i++) {
 			custommarker[i].setMap(null);
 			}
@@ -528,6 +534,7 @@ function clearDir() {
 			document.getElementById("myTable").innerHTML = "";
 
   			infowindow.close();
+  			infoPODwindow.close();
   			document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
@@ -536,12 +543,7 @@ function clearDir() {
         
         	Myappraisers.setMap(null);
             removeMarkers();
-            for (i = 0; i < shopmarkers.length; i++) {
-                shopmarkers[i].setMap(map);
-            }
-	for (i = 0; i < PODmarkers.length; i++) {
-                PODmarkers[i].setMap(null);
-            }
+            
             document.getElementById("checkbox0").checked = true;
             document.getElementById("checkbox1").checked = false;
             document.getElementById("checkbox2").checked = false;
