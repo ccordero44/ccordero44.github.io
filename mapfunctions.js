@@ -92,6 +92,7 @@ function AutocompleteDirectionsHandler(map) {
         	for (i = 0; i < shopmarkers.length; i++) {
                 shopmarkers[i].setMap(map);
             }
+
 			for (i = 0; i < PODmarkers.length; i++) {
                 PODmarkers[i].setMap(null);
             }
@@ -112,6 +113,9 @@ function AutocompleteDirectionsHandler(map) {
         function hidePoly() {
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(null);
+            }
+            for (i = 0; i < circles.length; i++) {
+                circles[i].setMap(null);
             }
         }
      function clicky() {

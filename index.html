@@ -92,7 +92,8 @@
 			var PODmarkers = [];
 	   		var PODbounds;
 	   		var infoPODwindow;
-		
+			var circle;
+			var circles = [];
         function initMap() {
             
             var mapOptions = {
@@ -235,7 +236,10 @@ var script = document.createElement('script');
                         infoPODwindow.setContent(contentstring)
     	  				infoPODwindow.open(map, PODmarker);
     	  				activeInfoWindow = infoPODwindow;
-	       var circle = new google.maps.Circle({
+    	  	if (!!circle) {
+                circle.setMap(null);
+            }
+	  circle = new google.maps.Circle({
         center: PODmarker.getPosition(),
         radius: 100.584,
         fillColor: "#0000FF",
@@ -246,6 +250,7 @@ var script = document.createElement('script');
         title: 'POD camera viewable boundary highlighted in blue',
         strokeWeight: 2
       });        
+      circles.push(circle);
       
       google.maps.event.addListener(circle,'mouseover',function(){
              this.getMap().getDiv().setAttribute('title',this.get('title'));});
