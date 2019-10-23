@@ -226,6 +226,8 @@ var script = document.createElement('script');
           PODmarker.addListener('click', function() {
           infowindow.setContent(contentstring)
     		infowindow.open(map, this);
+		  map.setZoom(10);
+                  map.setCenter(PODmarker.getPosition());
   			});
   			
         }
