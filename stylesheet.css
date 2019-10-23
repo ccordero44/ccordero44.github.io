@@ -519,7 +519,7 @@
     }
     
     .customMapControlwrapper {
-        background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 65px center;
+        background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeUlEQVQ4T2NkoBAwUqifYRga8BQYJlIEwgWkRgamBj0MvIASm4CYGYchf4DivkC8A5cBIPEMIJ6Ow4A0oPhsZDlcsdAFVFSKZkg7kF+FbjAuA0DiK4A4DKphOZCOBuL/xBoAUscBxNuAGObvn9i8NQwTEsl5i+IwAACs/w8REHqVPAAAAABJRU5ErkJggg==) no-repeat 85px center;
         border: none;
         border-radius: 3px;
         box-shadow: 0 1px 0px rgba(0,0,0,.1);
@@ -533,7 +533,7 @@
         padding-left: 0px;
         padding-right: 15px;
         weight: bold;
-        width: 90px;
+        width: 120px;
         height: 36px;
         
 	}
