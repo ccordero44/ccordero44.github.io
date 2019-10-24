@@ -251,6 +251,13 @@ var script = document.createElement('script');
         strokeWeight: 2
       });        
       circles.push(circle);
+
+google.maps.event.addListener(map, "click", function (event) {
+                   circle.setMap(null);
+
+
+                });
+
       
       google.maps.event.addListener(circle,'mouseover',function(){
              this.getMap().getDiv().setAttribute('title',this.get('title'));});
