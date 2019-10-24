@@ -43,7 +43,7 @@ function AutocompleteDirectionsHandler(map) {
                         var str3 = results[0].geometry.location;
                       input = str3;
 						displayCoordinates(str3);
-			    var icon = "http://maps.google.com/mapfiles/ms/icons/rangerstation.png";
+			    var icon = "https://mt.googleapis.com/vt/icon/name=icons/onion/1037-biz-house.png";
                         marker = new google.maps.Marker({
                             position: str3,
                             title: 'Origin Location',
