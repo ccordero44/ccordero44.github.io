@@ -4,5 +4,5 @@ radius: 35
 };
 
 var appraisers = [
-  {name: "All", coord: all.center, circle: all.radius, desc: "Staff appraiser inspection area"}
+  {name: "All", coord: all.center, circle: all.radius, desc: "Staff appraiser inspection area (35 mile radius of AFIC)"}
   ];
