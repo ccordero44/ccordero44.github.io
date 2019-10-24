@@ -252,12 +252,6 @@ var script = document.createElement('script');
       });        
       circles.push(circle);
 
-google.maps.event.addListener(map, "click", function (event) {
-                   circle.setMap(null);
-
-
-                });
-
       
       google.maps.event.addListener(circle,'mouseover',function(){
              this.getMap().getDiv().setAttribute('title',this.get('title'));});
@@ -272,6 +266,7 @@ google.maps.event.addListener(map, "click", function (event) {
         }
         	google.maps.event.addListener(map, "click", function (event) {
                     infoPODwindow.close();
+                     circle.setMap(null);
                 });
             }
             new AutocompleteDirectionsHandler(map);
