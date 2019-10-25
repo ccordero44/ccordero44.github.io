@@ -273,7 +273,7 @@ var script = document.createElement('script');
         }
         	google.maps.event.addListener(map, "click", function (event) {
                     infoPODwindow.close();
-                     circle.setMap(null);
+			if (circle){circle.setMap(null);}
                 });
             }
             new AutocompleteDirectionsHandler(map);
