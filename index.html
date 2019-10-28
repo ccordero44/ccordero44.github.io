@@ -38,6 +38,21 @@
    <script type="text/javascript">
 
 		window.onload = Window_onLoad;
+		
+		var icons = {
+          shops: {
+            name: 'DRP Body Shops',
+            icon: 'https://mt.googleapis.com/vt/icon/name=icons/onion/999-biz-car-repair.png'
+          },
+          pods: {
+            name: 'CPD POD Cameras',
+            icon: 'podBig.png'
+          },
+          cameras: {
+            name: 'Red Light Cameras',
+            icon: 'redCamBig.png'
+          }
+        };
 
 	        var image = {
 	            url: 'https://mt.googleapis.com/vt/icon/name=icons/onion/999-biz-car-repair.png'
@@ -46,13 +61,9 @@
 	        var image2 = {
 	            url: 'data:image/png;base64,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'
 	        };
-		var podCam = {
-		    url: 'pod.png'
-		};
+		
 	   
-	  	 var redCam = {
-			url: 'redCam.png'
-		}
+	  	 
 
 	        var locations = [];
 				for (i = 0; i < shops.length; i++) {        
@@ -227,7 +238,10 @@ var script = document.createElement('script');
 
           var coords = results.features[i].geometry.coordinates;
           var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          
+          var podCam = {
+		    url: 'podBig.png',
+			scaledSize: new google.maps.Size(22, 22)
+		};
           PODmarker = new google.maps.Marker({
           	position: latLng,
           	clickable: true,
@@ -361,7 +375,17 @@ if (Myappraisers){
 }
 
 
+var legend = document.getElementById('legend');
+        for (var key in icons) {
+          var type = icons[key];
+          var name = type.name;
+          var icon = type.icon;
+          var div = document.createElement('div');
+          div.innerHTML = '<img src="' + icon + '"> ' + name;
+          legend.appendChild(div);
+        }
 
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 }
    
 
@@ -457,7 +481,7 @@ if (Myappraisers){
 </div>
 </div>
 
-
+<div id="legend"><h3>MAP LEGEND</h3><hr></div>
 </body>
 
 </html>

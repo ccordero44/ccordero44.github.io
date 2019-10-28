@@ -680,3 +680,36 @@ white-space: nowrap;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+#legend {
+        font-family: Roboto;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid transparent;
+		border-radius: 4px;
+		white-space: nowrap;
+		box-sizing: border-box;
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+		font-size: 15px;
+      }
+      #legend h3 {
+        margin-top: 0;
+		text-align: center;
+		margin-bottom: 0;
+		font-size: 20px;
+		background-color: DodgerBlue;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		padding: 5px;
+		color: white;
+      }
+      #legend img {
+        vertical-align: middle;
+		width: 28px;
+		height: 28px;
+		padding: 3px;
+		border: 1px solid #ddd;
+		border-radius: 1px;
+      }
+	  
+

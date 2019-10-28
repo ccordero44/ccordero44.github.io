@@ -1,3 +1,4 @@
+
 $.ajax({
     url: "https://data.cityofchicago.org/resource/spqx-js37.json",
     type: "GET",
@@ -8,6 +9,10 @@ $.ajax({
 }).done(function(data) {
 //  alert("Retrieved " + data.length + " records from the dataset!");
 //  console.log(data);
+var redCam = {
+			url: 'redCamBig.png',
+			scaledSize: new google.maps.Size(22, 22)
+		}
 for (i = 0; i < data.length; i++) {
 
                 redCamMarker = new google.maps.Marker({
