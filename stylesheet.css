@@ -683,33 +683,50 @@ white-space: nowrap;
 #legend {
         font-family: Roboto;
         background: #fff;
-        padding: 10px;
+        padding: 5px;
         margin: 10px;
         border: 1px solid transparent;
 		border-radius: 4px;
 		white-space: nowrap;
 		box-sizing: border-box;
 		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-		font-size: 15px;
+		font-size: 1.25vw;
+		width: 15vw;
+		height: auto;
       }
       #legend h3 {
         margin-top: 0;
 		text-align: center;
 		margin-bottom: 0;
-		font-size: 20px;
+		font-size: 1.5vw;
 		background-color: DodgerBlue;
 		border: 1px solid transparent;
 		border-radius: 4px;
-		padding: 5px;
+		padding: 4px;
 		color: white;
+		letter-spacing: 2px;
       }
       #legend img {
         vertical-align: middle;
-		width: 28px;
-		height: 28px;
+		width: 20%;
+		height: 20%;
 		padding: 3px;
 		border: 1px solid #ddd;
 		border-radius: 1px;
       }
-	  
 
+
+@media screen and (min-width: 1200px) {
+  #legend {
+     font-size: 15px;
+     width: 178.35px;
+  }
+  #legend h3 {
+  	font-size: 20px;
+  }
+  #legend img {
+  	width: 33.5px;
+	height: 33.5px;
+  }
+
+}

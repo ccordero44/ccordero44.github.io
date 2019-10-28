@@ -43,7 +43,7 @@
 		var icons = {
           shops: {
             name: 'DRP Body Shops',
-            icon: 'https://mt.googleapis.com/vt/icon/name=icons/onion/999-biz-car-repair.png'
+            icon: 'shop.png'
           },
           pods: {
             name: 'CPD POD Cameras',
@@ -56,7 +56,7 @@
         };
 
 	        var image = {
-	            url: 'https://mt.googleapis.com/vt/icon/name=icons/onion/999-biz-car-repair.png'
+	            url: 'shop.png'
 	        };
 	
 	        var image2 = {
@@ -389,7 +389,21 @@ var legend = document.getElementById('legend');
         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 }
    
+$(window).resize(function() {
 
+  if ($(this).width() < 800) {
+
+    $('#testDiv').hide();
+    $('#legend').hide();
+
+  } else {
+if ($('#myForm').is(':hidden')) {
+    $('#testDiv').show();
+    }
+	$('#legend').show();
+    }
+
+});
         
     </script>
 

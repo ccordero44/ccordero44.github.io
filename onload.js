@@ -1,5 +1,5 @@
     function Window_onLoad() {
-        window.resizeTo(screen.availWidth / 1.5, screen.availHeight / 2);
+        window.resizeTo(screen.availWidth / 1.5, screen.availHeight / 1.5);
         window.moveTo(screen.availWidth / 6, screen.availHeight / 5);
         document.getElementById("myForm").style.visibility = "hidden";
         document.getElementById("wholetable").style.display = "none";
