@@ -734,4 +734,6 @@ white-space: nowrap;
 #shopImage {
 	width: 90%;
 	height: auto;
+margin-left: auto;
+margin-right: auto;
 }
