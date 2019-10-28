@@ -67,9 +67,10 @@
 	  	 
 
 	        var locations = [];
-				for (i = 0; i < shops.length; i++) {        
+				for (i = 0; i < shops.length; i++) {    
+			var shopImage = '<img id="shopImage" title="Click to open Street View" onclick="openStreetView(' + shops[i][6] + ',' + shops[i][7] + ')" style="vertical-align: middle;cursor:pointer;padding: 3px;border-radius:10px; horizontal-align: middle;" src="https://maps.googleapis.com/maps/api/streetview?size=900x300&location=' + shops[i][6] + ',' + shops[i][7] + '&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"></img>';
 	        var temp = [
-	        	["<b style='font-weight:bold' class='titleTxt'>" + shops[i][0] + "</b>" + "<br/>" + shops[i][1] + "</b><br/>" + shops[i][2] + "<br/>" + "<br/>" + "<span class='phone'> </span><span class='phoneTxt'>" + shops[i][3] + "</span></b><br/>" + "<span class='fax'> </span><span class='faxTxt'>" + shops[i][4] + "</span></b><br/>" + "<a id='email'> <i class='email'></i> <a href='mailto:" + shops[i][5] + "'>" + shops[i][5] + "</a></a>"],
+	        	["<b style='font-weight:bold' class='titleTxt'>" + shops[i][0] + "</b>" + "<br/>" + shops[i][1] + "</b><br/>" + shops[i][2] + "<br/>" + "<br/>" + "<span class='phone'> </span><span class='phoneTxt'>" + shops[i][3] + "</span></b><br/>" + "<span class='fax'> </span><span class='faxTxt'>" + shops[i][4] + "</span></b><br/>" + "<a id='email'> <i class='email'></i> <a href='mailto:" + shops[i][5] + "'>" + shops[i][5] + "</a></a><br />" + shopImage],
 	        			];
 			if (shops[i][5] !== ""){
 				var email = document.getElementById("email");
@@ -187,9 +188,9 @@
 							shopDist = [];
 						}else
                         document.getElementById("markerPos").innerHTML = marker.getPosition();
-                        infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b><br/>" + "</b><br/>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<i class='arrows'> </i><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' class='button3'>" +
+                        infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b><br/>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<i class='arrows'> </i><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' class='button3'>" +
                             "</b><br/>" + "<span class='tow'> </span>" + "<span class='towTxt'>" + shops[i][8] + "</span>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
-
+						infowindow.setOptions({maxWidth:250});
                         infowindow.open(map, marker);
                         activeInfoWindow = infowindow;
 						var inputAddress = document.getElementById("clientAddress");

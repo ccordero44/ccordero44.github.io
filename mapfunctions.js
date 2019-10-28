@@ -73,10 +73,10 @@ function AutocompleteDirectionsHandler(map) {
 					//streetViewDiv.style.height = '200px';
 					//streetViewDiv.setAttribute("id", "pano");
 
-                            infowindow.setContent('<div style="text-align: center; width:100%;"><b>' + me.originName + '</b></br>Location Type: ' + place.types[0].toUpperCase() + '<br /><img title="Click to open Street View" onclick="openStreetView()" style="cursor:pointer;padding: 3px;border-radius:10px; horizontal-align: middle;" src="https://maps.googleapis.com/maps/api/streetview?size=200x100&location=' + this.getPosition().lat() + ',' + this.getPosition().lng() + '&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"></img></br>' + terr + '</div>');
+                            infowindow.setContent('<div style="text-align: center; width:100%;"><b>' + me.originName + '</b></br>Location Type: ' + place.types[0].toUpperCase() + '<br /><img title="Click to open Street View" onclick="openStreetView(' + this.getPosition().lat() + ',' + this.getPosition().lng() + ')" style="cursor:pointer;padding: 3px;border-radius:10px; horizontal-align: middle;" src="https://maps.googleapis.com/maps/api/streetview?size=200x100&location=' + this.getPosition().lat() + ',' + this.getPosition().lng() + '&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"></img></br>' + terr + '</div>');
 					        // infowindow.setContent(streetViewDiv);
 							 infowindow.open(map, this);
-							 console.log(infowindow.width);
+							
 							 //var panorama = new google.maps.StreetViewPanorama(
 						 // streetViewDiv, {
 						//	position: infowindow.getPosition()
@@ -845,13 +845,15 @@ function setPODS() {
   		
  }
 function openStreetView() {
+			var thisMarker = new google.maps.LatLng(arguments[0],arguments[1]);
+	
 			var streetViewDiv = document.getElementById('map');
 //					streetViewDiv.style.width = '100%';
 //					streetViewDiv.style.height = '100%';
 //					streetViewDiv.setAttribute("id", "pano");
 				var panorama = new google.maps.StreetViewPanorama(
 						  streetViewDiv, {
-							position: marker.getPosition(),
+							position: thisMarker,
 							enableCloseButton: true,
 							addressControl: false
 						  });

@@ -730,3 +730,8 @@ white-space: nowrap;
   }
 
 }
+
+#shopImage {
+	width: 100%;
+	height: auto;
+}
