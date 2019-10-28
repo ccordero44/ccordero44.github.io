@@ -391,7 +391,7 @@ var legend = document.getElementById('legend');
 }
    
 $(window).resize(function() {
-
+map.fitBounds(resetBounds);
   if ($(this).width() < 800) {
 
     $('#testDiv').hide();
