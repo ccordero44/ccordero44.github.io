@@ -13,7 +13,7 @@ function AutocompleteDirectionsHandler(map) {
 
             var originAutocomplete = new google.maps.places.Autocomplete(
                 originInput, {
-                    placeIdOnly: true
+                    fields: ['place_id', 'name', 'types', 'photos']
                 });
             this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
 
@@ -43,7 +43,10 @@ function AutocompleteDirectionsHandler(map) {
                         var str3 = results[0].geometry.location;
                       input = str3;
 						displayCoordinates(str3);
-			    var icon = "https://mt.googleapis.com/vt/icon/name=icons/onion/1037-biz-house.png";
+			   var icon = "https://mt.googleapis.com/vt/icon/name=icons/onion/1037-biz-house.png";
+			   var photos = place.photos;
+				 
+				//var icon = photos[0].getUrl({maxWidth: 35, maxHeight: 35});
                         marker = new google.maps.Marker({
                             position: str3,
                             title: 'Origin Location',
@@ -65,10 +68,21 @@ function AutocompleteDirectionsHandler(map) {
                         	 terr = "Staff appraiser territory (" + dist + ")";
                         }else
                         	terr = "Out of area (" + dist + ")";
-                        
-                            infowindow.setContent('<div><b>' + me.originName + '</b></br></br>' + terr + '<br></div>');
-								
-                            infowindow.open(map, this);
+                      //  var streetViewDiv = document.createElement('div');
+					//streetViewDiv.style.width = '300px';
+					//streetViewDiv.style.height = '200px';
+					//streetViewDiv.setAttribute("id", "pano");
+
+                            infowindow.setContent('<div><b>' + me.originName + '</b></br>Location Type: ' + place.types[0].toUpperCase() + '</br>' + terr + '<br /><img style="padding: 3px;border-radius:10px;" src="https://maps.googleapis.com/maps/api/streetview?size=200x100&location=' + this.getPosition().lat() + ',' + this.getPosition().lng() + '&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"></img></div>');
+					        // infowindow.setContent(streetViewDiv);
+							 infowindow.open(map, this);
+							 //var panorama = new google.maps.StreetViewPanorama(
+						 // streetViewDiv, {
+						//	position: infowindow.getPosition()
+						 // });
+						//google.maps.event.addListener(infowindow, 'domready', function() {
+							//google.maps.event.trigger(panorama, 'resize');
+						//});
                             map.setZoom(20);
                             map.setCenter(marker.getPosition());
                         });
@@ -536,10 +550,10 @@ function clearDir() {
 			}
 
 			document.getElementById("myTable").innerHTML = "";
-
+			redcamInfoWindow.close();
   			infowindow.close();
   			infoPODwindow.close();
-  			document.getElementById("origin-input").focus();
+  			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
         	hidePoly();
