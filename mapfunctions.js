@@ -857,4 +857,5 @@ function openStreetView() {
 							enableCloseButton: true,
 							addressControl: false
 						  });
+					
 }
