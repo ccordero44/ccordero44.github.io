@@ -89,7 +89,7 @@ function AutocompleteDirectionsHandler(map) {
                         });
                         var inputtest = document.getElementById("origin-input");
                         inputtest.addEventListener('click', function () {
-                            removeMarkers();
+                            //removeMarkers();
                             document.getElementById("origin-input").value = null;
                             map.setCenter(resetBounds.getCenter());
             map.fitBounds(resetBounds);
