@@ -408,8 +408,8 @@ if ($('#myForm').is(':hidden')) {
         
 jQuery(document).bind("keyup keydown", function(e){
     if(e.ctrlKey && e.keyCode == 80){
-        return false;
         printAnyMaps();
+	return false;
     }
 });
     </script>
