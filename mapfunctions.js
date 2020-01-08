@@ -859,3 +859,41 @@ function openStreetView() {
 						  });
 					
 }
+function printAnyMaps() {
+  const $body = $('body');
+  const $mapContainer = $('#map');
+  const $mapContainerParent = $mapContainer.parent();
+  const $printContainer = $('<div style="position:relative;">');
+
+  $printContainer
+    .height($mapContainer.height())
+    .append($mapContainer)
+    .prependTo($body);
+
+  const $content = $body
+    .children()
+    .not($printContainer)
+    .not('script')
+    .detach();
+
+  /**
+   * Needed for those who use Bootstrap 3.x, because some of
+   * its `@media print` styles ain't play nicely when printing.
+   */
+  const $patchedStyle = $('<style media="print">')
+    .text(`
+      .gm-style div > img {position: absolute;}
+       img {max-width: auto !important;}
+       #legend {display: none;}
+      a[href]:after { content: ""; }
+    `)
+    .appendTo('head');
+
+  window.print();
+
+  $body.prepend($content);
+  $mapContainerParent.prepend($mapContainer);
+
+  $printContainer.remove();
+  $patchedStyle.remove();
+}
