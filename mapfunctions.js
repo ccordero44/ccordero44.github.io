@@ -885,6 +885,10 @@ function printAnyMaps() {
       .gm-style div > img {position: absolute;}
        img {max-width: auto !important;}
        #legend {display: none;}
+       #clear {display: none;}
+       #listShops {display: none;}
+       #clickMe {display: none;}
+       #origin-input {display: none;}
       a[href]:after { content: ""; }
     `)
     .appendTo('head');
