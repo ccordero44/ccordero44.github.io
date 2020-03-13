@@ -266,16 +266,7 @@ End Function
 		
 		shopmarkers.push(marker);
                 infowindow = new google.maps.InfoWindow();
-if (shops[i][8] == " Email Tow Request to Wes's") {
 
-var tow = '<a href="vbscript:openTowPDF()" title="Tow Request">' + shops[i][8] + "</a>";
-}else if (shops[i][8].indexOf("Copy Jessica Banuelos") !== -1)  {
-var tow = "<a href='mailto:" + shops[i][5] + "?cc=jbanuelos@americanfreedomins.com' title='Tow Request'>" + shops[i][8] + "</a>";
-} else if (shops[i][8].indexOf(" Email Tow Request to shop") !== -1) {
-var tow = "<a href='mailto:" + shops[i][5] + "' title='Tow Request'>" + shops[i][8] + "</a>";
-}else{
-var tow = "<a href='#' title='Tow Request'>" + shops[i][8] + "</a>";
-}
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
 
                     return function () {
@@ -294,6 +285,16 @@ var tow = "<a href='#' title='Tow Request'>" + shops[i][8] + "</a>";
 							shopDist = [];
 						}else
                         document.getElementById("markerPos").innerHTML = marker.getPosition();
+			 if (shops[i][8] == " Email Tow Request to Wes's") {
+
+var tow = '<a href="vbscript:openTowPDF()" title="Tow Request">' + shops[i][8] + "</a>";
+}else if (shops[i][8].indexOf("Copy Jessica Banuelos") !== -1)  {
+var tow = "<a href='mailto:" + shops[i][5] + "?cc=jbanuelos@americanfreedomins.com' title='Tow Request'>" + shops[i][8] + "</a>";
+} else if (shops[i][8].indexOf(" Email Tow Request to shop") !== -1) {
+var tow = "<a href='mailto:" + shops[i][5] + "' title='Tow Request'>" + shops[i][8] + "</a>";
+}else{
+var tow = "<a href='#' title='Tow Request'>" + shops[i][8] + "</a>";
+}   
                         infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<div><span class='dir'></span><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' title='Click to get directions from origin address to body shop.' class='button3'></div>" + "<div><span class='tow' title='" + shops[i][8] + "'></span>" + "<span class='towTxt' title='" + shops[i][8] + "'>" + tow + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
 						infowindow.setOptions({maxWidth:250});
                         infowindow.open(map, marker);
