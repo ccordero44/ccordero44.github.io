@@ -31,6 +31,102 @@
     <script type="text/javascript" src="list.js"></script>
     <script type="text/javascript" src="appraisers.js"></script>
     <script type="text/javascript" src="redLightCams.js"></script>
+	    
+	    <script language=vbscript>
+Function openTowPDF()
+
+Dim srcPath
+Dim installPath
+srcPath = "\\afic-public\Departments\Claims\Carlos Toolkits\Claims Toolkit\files\"
+SourceFile = srcPath & "username.js"
+Set WshShell = CreateObject("WScript.Shell")
+Set fso = CreateObject("Scripting.FileSystemObject")
+If Is32BitOS = True Then
+installPath = "C:\Program Files\Adobe\Acrobat DC\Acrobat\Javascripts\"
+installPath2 = "C:\Program Files\Adobe\Acrobat Reader DC\Reader\Javascripts\"
+End If
+If Is64BitOS = True Then
+installPath = "C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Javascripts\"
+installPath2 = "C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\Javascripts\"
+End If
+
+If fso.FolderExists(installPath) Then 
+DestinationFile = installPath & "username.js"
+    'Check to see if the file already exists in the destination folder
+    If fso.FileExists(DestinationFile) Then
+        'Check to see if the file is read-only
+        If Not fso.GetFile(DestinationFile).Attributes And 1 Then 
+            'The file exists and is not read-only.  Safe to replace the file.
+            fso.CopyFile SourceFile, installPath, True
+        Else 
+            'The file exists and is read-only.
+            'Remove the read-only attribute
+            fso.GetFile(DestinationFile).Attributes = fso.GetFile(DestinationFile).Attributes - 1
+            'Replace the file
+            fso.CopyFile SourceFile, installPath, True
+            'Reapply the read-only attribute
+            fso.GetFile(DestinationFile).Attributes = fso.GetFile(DestinationFile).Attributes + 1
+        End If
+    Else
+        'The file does not exist in the destination folder.  Safe to copy file to this folder.
+        'MsgBox SourceFile & vbNewLine & vbNewLine & installPath
+        fso.CopyFile SourceFile, installPath, True
+    End If
+Set fso = Nothing
+
+scriptdir = "\\afic-public\Departments\Claims\Carlos Toolkits\Claims Toolkit\files\Wes Tow Request.pdf"
+
+
+WshShell.Run Chr(34) & scriptdir & Chr(34)
+ElseIf fso.FolderExists(installPath2) Then 
+DestinationFile = installPath2 & "username.js"
+    'Check to see if the file already exists in the destination folder
+    If fso.FileExists(DestinationFile) Then
+        'Check to see if the file is read-only
+        If Not fso.GetFile(DestinationFile).Attributes And 1 Then 
+            'The file exists and is not read-only.  Safe to replace the file.
+            fso.CopyFile SourceFile, installPath2, True
+        Else 
+            'The file exists and is read-only.
+            'Remove the read-only attribute
+            fso.GetFile(DestinationFile).Attributes = fso.GetFile(DestinationFile).Attributes - 1
+            'Replace the file
+            fso.CopyFile SourceFile, installPath2, True
+            'Reapply the read-only attribute
+            fso.GetFile(DestinationFile).Attributes = fso.GetFile(DestinationFile).Attributes + 1
+        End If
+    Else
+        'The file does not exist in the destination folder.  Safe to copy file to this folder.
+        MsgBox SourceFile & vbNewLine & vbNewLine & installPath2
+        fso.CopyFile SourceFile, installPath2, True
+    End If
+Set fso = Nothing
+
+scriptdir = "\\afic-public\Departments\Claims\Carlos Toolkits\Claims Toolkit\files\Wes Tow Request.pdf"
+
+
+WshShell.Run Chr(34) & scriptdir & Chr(34)
+Else 
+
+result = MsgBox("Adobe Reader DC is not installed on this computer. Would you like to install it now?", vbYesNo+vbQuestion, "Adobe Reader DC Required")
+Select Case result
+Case vbNo
+WScript.Quit
+Case vbYes
+OpenWithChrome chr(34) & "https://get.adobe.com/reader/download/?installer=Reader_DC_2019.012.20034_English_for_Windows&os=Windows%2010&browser_type=KHTML&browser_dist=Chrome&dualoffer=false&mdualoffer=true&cr=false&stype=7639&d=McAfee_Security_Scan_Plus&d=McAfee_Safe_Connect" & chr(34)
+End Select
+End If 
+End Function
+Function Is32BitOS()
+    Const Path = "winmgmts:root\cimv2:Win32_Processor='cpu0'"
+    Is32BitOS = (GetObject(Path).AddressWidth = 32)
+End Function
+
+Function Is64BitOS()
+    Const Path = "winmgmts:root\cimv2:Win32_Processor='cpu0'"
+    Is64BitOS = (GetObject(Path).AddressWidth = 64)
+End Function
+</script>
 </head>
 
 <body>                                  
@@ -168,9 +264,18 @@
 
                 });
 		
-				shopmarkers.push(marker);
+		shopmarkers.push(marker);
                 infowindow = new google.maps.InfoWindow();
+if (shops[i][8] == " Email Tow Request to Wes's") {
 
+var tow = '<a href="vbscript:openTowPDF()" title="Tow Request">' + shops[i][8] + "</a>";
+}else if (shops[i][8].indexOf("Copy Jessica Banuelos") !== -1)  {
+var tow = "<a href='mailto:" + shops[i][5] + "?cc=jbanuelos@americanfreedomins.com' title='Tow Request'>" + shops[i][8] + "</a>";
+} else if (shops[i][8].indexOf(" Email Tow Request to shop") !== -1) {
+var tow = "<a href='mailto:" + shops[i][5] + "' title='Tow Request'>" + shops[i][8] + "</a>";
+}else{
+var tow = "<a href='#' title='Tow Request'>" + shops[i][8] + "</a>";
+}
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
 
                     return function () {
@@ -189,7 +294,7 @@
 							shopDist = [];
 						}else
                         document.getElementById("markerPos").innerHTML = marker.getPosition();
-                        infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<div><span class='dir'></span><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' title='Click to get directions from origin address to body shop.' class='button3'></div>" + "<div><span class='tow' title='" + shops[i][8] + "'></span>" + "<span class='towTxt' title='" + shops[i][8] + "'>" + shops[i][8] + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
+                        infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<div><span class='dir'></span><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' title='Click to get directions from origin address to body shop.' class='button3'></div>" + "<div><span class='tow' title='" + shops[i][8] + "'></span>" + "<span class='towTxt' title='" + shops[i][8] + "'>" + tow + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
 						infowindow.setOptions({maxWidth:250});
                         infowindow.open(map, marker);
                         activeInfoWindow = infowindow;
