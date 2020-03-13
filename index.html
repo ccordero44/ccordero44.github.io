@@ -32,28 +32,7 @@
     <script type="text/javascript" src="appraisers.js"></script>
     <script type="text/javascript" src="redLightCams.js"></script>
 	    
-	    <script language=vbscript>
-Function openTowPDF()
-
-Dim srcPath
-Dim installPath
-scriptdir = "\\afic-public\Departments\Claims\Carlos Toolkits\Claims Toolkit\files\Wes Tow Request.pdf"
-
-
-WshShell.Run Chr(34) & scriptdir & Chr(34)
-
-End Function
-Function Is32BitOS()
-    Const Path = "winmgmts:root\cimv2:Win32_Processor='cpu0'"
-    Is32BitOS = (GetObject(Path).AddressWidth = 32)
-End Function
-
-Function Is64BitOS()
-    Const Path = "winmgmts:root\cimv2:Win32_Processor='cpu0'"
-    Is64BitOS = (GetObject(Path).AddressWidth = 64)
-End Function
-</script>
-</head>
+	    </head>
 
 <body>                                  
 
@@ -215,7 +194,7 @@ End Function
 
 var tow = '<a href="vbscript:openTowPDF()" title="Tow Request">' + shops[i][8] + "</a>";
 }else if (shops[i][8].indexOf("Copy Jessica Banuelos") !== -1)  {
-var tow = "<a href='mailto:" + shops[i][5] + "?cc=jbanuelos@americanfreedomins.com' title='Tow Request'>" + shops[i][8] + "</a>";
+var tow = "<a href='mailto:insurancetowrequest@wessservice.com' title='Tow Request'>" + shops[i][8] + "</a>";
 } else if (shops[i][8].indexOf(" Email Tow Request to shop") !== -1) {
 var tow = "<a href='mailto:" + shops[i][5] + "' title='Tow Request'>" + shops[i][8] + "</a>";
 }else{
