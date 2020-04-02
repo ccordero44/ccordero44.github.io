@@ -73,7 +73,7 @@ function AutocompleteDirectionsHandler(map) {
 					//streetViewDiv.style.height = '200px';
 					//streetViewDiv.setAttribute("id", "pano");
 
-                            infowindow.setContent('<div style="text-align: center; width:100%;"><b>' + me.originName + '</b></br>Location Type: ' + place.types[0].toUpperCase() + '<br /><img title="Click to open Street View" onclick="openStreetView(' + this.getPosition().lat() + ',' + this.getPosition().lng() + ')" style="cursor:pointer;padding: 3px;border-radius:10px; horizontal-align: middle;" src="https://maps.googleapis.com/maps/api/streetview?size=200x100&location=' + this.getPosition().lat() + ',' + this.getPosition().lng() + '&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"></img></br>' + terr + '</div>');
+                            infowindow.setContent('<div style="text-align: center; width:100%;"><b>' + me.originName + '</b></br>Location Type: ' + place.types[0].toUpperCase() + '<br /><img title="Click to open Street View" onclick="openStreetView(' + this.getPosition().lat() + ',' + this.getPosition().lng() + ')" style="cursor:pointer;padding: 3px;border-radius:10px; horizontal-align: middle;" src="https://maps.googleapis.com/maps/api/streetview?size=200x100&location=' + this.getPosition().lat() + ',' + this.getPosition().lng() + '&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I"></img></br>' + terr + '</div>');
 					        // infowindow.setContent(streetViewDiv);
 							 infowindow.open(map, this);
 							
