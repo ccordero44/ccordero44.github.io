@@ -54,7 +54,7 @@ function addressToCoords() {
 var myCoords = document.getElementById("address").value;
 if (myCoords !== '') {
 window.resizeTo(400,250);
-var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
+var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc";
 
 var getJSON = function(url, successHandler, errorHandler) {
 	var xhr = typeof XMLHttpRequest != 'undefined'
@@ -102,7 +102,7 @@ function timezone (lat, lng) {
 //window.alert(lat + ", " + lng)
 var timestamp = Date.now();
 var newTime = timestamp / 1000;
-var url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lng + "&timestamp=" + newTime + "&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I"
+var url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lng + "&timestamp=" + newTime + "&key=AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc"
 
 
 var getJSON = function(url, successHandler, errorHandler) {
