@@ -1,0 +1,173 @@
+<html>
+<head> 
+<title>Get Current Time By Location Tool</title>
+<meta http-equiv="x-ua-compatible" content="ie=edge"/>
+</head>
+<style>
+body {
+text-align: center;
+}
+div {
+  text-align: center;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+}
+.btn {
+	width: auto;
+  background-color: dodgerblue;
+  color: white;
+  padding: 10px 16px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+input, button {
+text-align: center;
+}
+
+input {
+  width: auto;
+  padding: 12px 20px;
+  margin: 20px 0px 8px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){document.getElementById("address").onkeypress = function(event){
+                if (event.keyCode == 13 || event.which == 13){
+                    addressToCoords();
+                }
+            };};
+
+		window.resizeTo(400,170); 
+       window.moveTo((screen.width - 300) / 2, (screen.height - 125) / 2);
+var cityState;
+function addressToCoords() {
+
+var myCoords = document.getElementById("address").value;
+if (myCoords !== '') {
+window.resizeTo(400,250);
+var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
+
+var getJSON = function(url, successHandler, errorHandler) {
+	var xhr = typeof XMLHttpRequest != 'undefined'
+		? new XMLHttpRequest()
+		: new ActiveXObject('Microsoft.XMLHTTP');
+	xhr.open('get', url, true);
+	xhr.onreadystatechange = function() {
+		var status;
+		var data;
+		if (xhr.readyState == 4) { // `DONE`
+			status = xhr.status;
+			
+			if (status == 200) {
+				data = JSON.parse(xhr.responseText);
+			
+				successHandler && successHandler(data);
+			} else {
+				errorHandler && errorHandler(status);
+			}
+		}
+	};
+	xhr.send();
+};
+
+
+
+
+getJSON(url, function(data) {
+if (data.status === 'OK') {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    cityState = data.results[0].formatted_address;
+    timezone(lat, lng);
+    
+}else{window.alert(data.status + " " + url);}	
+	
+	
+}, function(status) {
+	alert('error ' + url);
+});
+}
+}
+
+function timezone (lat, lng) {
+//window.alert(lat + ", " + lng)
+var timestamp = Date.now();
+var newTime = timestamp / 1000;
+var url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + lat + "," + lng + "&timestamp=" + newTime + "&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I"
+
+
+var getJSON = function(url, successHandler, errorHandler) {
+	var xhr = typeof XMLHttpRequest != 'undefined'
+		? new XMLHttpRequest()
+		: new ActiveXObject('Microsoft.XMLHTTP');
+	xhr.open('get', url, true);
+	xhr.onreadystatechange = function() {
+		var status;
+		var data;
+		if (xhr.readyState == 4) { // `DONE`
+			status = xhr.status;
+			
+			if (status == 200) {
+				data = JSON.parse(xhr.responseText);
+			
+				successHandler && successHandler(data);
+			} else {
+				errorHandler && errorHandler(status);
+			}
+		}
+	};
+	xhr.send();
+};
+
+
+
+
+getJSON(url, function(data) {
+if (data.status === 'OK') {
+	var targetDate = new Date() 
+	var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60
+    var offset = data.dstOffset;
+    var rawoffset = data.rawOffset;
+   	var offsets = rawoffset * 1000 + offset * 1000;
+    var localdate = new Date(timestamp * 1000 + offsets)
+    var time = localdate.getTime();
+    var date = new Date(time);
+    //window.alert("The current time in " + cityState + " is " + formatAMPM(date) + " (" + data.timeZoneName + ")");
+     document.getElementById("result").innerHTML = "The current time in " + cityState + " is " + formatAMPM(date) + " (" + data.timeZoneName + ")"; 
+}else{window.alert(data.status + " " + url);}	
+	
+	
+}, function(status) {
+	alert('error ' + url);
+});
+}
+function formatAMPM(date) {
+
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+</script>
+
+<body>
+<input id="address" placeholder="State, City, or Zip Code" onkeyup="this.value = this.value.toUpperCase();" />
+<button onclick="addressToCoords();" class="btn">Enter</button>
+<button onclick="javascript:location.reload();" class="btn">Clear</button>
+<br />
+<div id="result"></div>
+</body>
+</html>
