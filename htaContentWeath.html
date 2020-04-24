@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="skycons.js"></script>
-  <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key="+ipKey+"&libraries=places"></script>
+  <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
 
   
 <style>
@@ -307,12 +307,12 @@ function run() {
 
 if (document.getElementById("address").value === ""){
 var myCoords = document.getElementById("lat").value + "," + document.getElementById("lon").value;
-var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
+var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+myCoords+"&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
 
 }else{
 var addy = document.getElementById("address").value;
 var myCoords = addy.replace(/ /gi, "+");
-var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
+var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
 }
 console.log("api url: " + url);
 var getJSON = function(url, successHandler, errorHandler) {
