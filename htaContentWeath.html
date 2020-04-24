@@ -2,7 +2,7 @@
 <head> 
 <title>Weather Reports</title>
 </head>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css" />
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I&libraries=places"></script>
@@ -228,7 +228,7 @@ width: auto;
     bottom: 0;
     left: 0;
     right: 0;
-    background: url(images/seasons.jpg) center center;
+    background: url(seasons.jpg) center center;
     background-size:cover;
     opacity: .4;
     width: 100%;
@@ -304,12 +304,12 @@ document.getElementById("backimg").style.display = "none";
 
 if (document.getElementById("address").value === ""){
 var myCoords = document.getElementById("lat").value + "," + document.getElementById("lon").value;
-var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+myCoords+"&key=AIzaSyDLYDsT6-Nq2EJs6rp-vc_MYMptZscjvX8";
+var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
 
 }else{
 var addy = document.getElementById("address").value;
 var myCoords = addy.replace(/ /gi, "+");
-var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyDLYDsT6-Nq2EJs6rp-vc_MYMptZscjvX8";
+var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
 }
 
 var getJSON = function(url, successHandler, errorHandler) {
@@ -498,7 +498,7 @@ document.getElementById("run").disabled = false;
 if (result.code !== 400) {
  var weath = result.daily.data[0].icon;
 
- document.body.style.backgroundImage = "url('images/" + weath + ".jpg')";
+ document.body.style.backgroundImage = "url(weath + '.jpg')";
  document.body.style.backgroundSize = "cover";
 myLat = result.latitude;
 myLng = result.longitude;
