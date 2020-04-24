@@ -365,7 +365,7 @@ if (data.status === 'OK') {
     myLng = data.results[0].geometry.location.lng;
       }
    
-    }
+    }else{console.log(data.status)}
 
 window.resizeTo(650,430);   
    window.moveTo((screen.width - 650) / 2, (screen.height - 430) / 2);
