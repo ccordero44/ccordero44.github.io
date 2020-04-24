@@ -311,7 +311,7 @@ var addy = document.getElementById("address").value;
 var myCoords = addy.replace(/ /gi, "+");
 var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
 }
-
+console.log("api url: " + url);
 var getJSON = function(url, successHandler, errorHandler) {
 	var xhr = typeof XMLHttpRequest != 'undefined'
 		? new XMLHttpRequest()
