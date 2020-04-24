@@ -300,7 +300,7 @@ var unixTime;
 
 
 function run() {
-document.getElementById("backimg").style.display = "none";
+
 
 if (document.getElementById("address").value === ""){
 var myCoords = document.getElementById("lat").value + "," + document.getElementById("lon").value;
@@ -339,6 +339,7 @@ var getJSON = function(url, successHandler, errorHandler) {
 
 getJSON(url, function(data) {
 if (data.status === 'OK') {
+	document.getElementById("backimg").style.display = "none";
 	//document.getElementById("foot").style.display = "block";
     if (document.getElementById("address").value === ""){
     document.getElementById("head").innerHTML = "<h2>WEATHER RESULTS FOR:</h2>";
