@@ -1,4 +1,3 @@
-<?php
 $query = $_GET['query'];
 
 // These values may have been gotten from a database.
@@ -26,4 +25,3 @@ if ($query) {
 }
 
 echo json_encode(array_values($values));
-?>
