@@ -44,16 +44,6 @@ $(document).ready(function () {
 		}, 1);
 		
 	});
-$('#save').click(function () {
-	var els = document.forms.RSgeneral.elements;
-	for (var i=els.length;i--;){
-		setCookie(els[i].name, els[i].value);
-		console.log($(els).prev().prop('nodeName'));
-		 if(els[i].name = getCookie(els[i].name)) document.myForm.els[i].name.value = els[i].value;
-	}
-	
-	alert('cookies set')
-  });
  
 	$('#continue').click(function () {
 		printOption();
