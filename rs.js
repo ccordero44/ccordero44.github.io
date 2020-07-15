@@ -101,7 +101,7 @@ $('#save').click(function () {
 	});
 	//$('.selectThis').keypress(function(e){ return e.which != 13; });
 	$("input:radio").change(function () {
-		
+	setCookie($(this).attr('name'), $(this).val());	
 		if ($("input[name^=TERRITORY]").prop("checked") == true) {
 			$('#checkbox9').prop("checked",true);
 			$('#checkbox9').attr("disabled",true);
