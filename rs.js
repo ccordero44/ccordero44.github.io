@@ -1569,7 +1569,7 @@ function loadFunctions() {
 		}
 	});
 	$('input:Required').change(function () {
-		
+	setCookie($(this).attr('name'), $(this).val());	
 	if ( $( this ).hasClass( "banners" ) ) {
 		var el = document.querySelectorAll(":required");
 		$(el).each(function () {
