@@ -96,10 +96,11 @@
         .customMapControldropdown-content {
             display: none;
        		position: absolute;
-            z-index: 1;
+            z-index: -1;
 			border-radius: 3px;
 			margin-left: 20px;
 			background-color: #f3f3f3;
+			padding-top: 5px;
         }
 
             .customMapControldropdown-content a {
@@ -115,6 +116,30 @@ hr {
 	background-color: #f3f3f3;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+	font-size: 10px;
+	white-space: nowrap;
+	position: relative;
+	background-color: #f3f3f3;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: gray;
+	padding-bottom: 5px;
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid gray;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
 }
 
         .customMapControldropdown:hover .customMapControldropdown-content {
@@ -284,27 +309,52 @@ white-space: nowrap;
 	
 }
 
+#FUQwrapper {
+	width: auto;
+	
+	padding-left: 25px;
+	padding-right: 25px;
+}
+#FUQtxtArea {
+	width: 100%;
+	font-size: 17px;
+	display: table-row;
+	page-break-inside: auto;
+}
 #VOPtable2 tr td:nth-child(2) {
 	background-color: #CCD7FF;
 	overflow: hidden;
 	white-space: nowrap;
 	color: blue;
 }
-
+#EDVOPtable2 tr td:nth-child(2) {
+	background-color: #CCD7FF;
+	overflow: hidden;
+	white-space: nowrap;
+	color: blue;
+}
 #VOPtable tr td:nth-child(2) {
 	background-color: #CCD7FF;
 	overflow: hidden;
 	white-space: nowrap;
 }
-
+#EDVOPtable tr td:nth-child(2) {
+	background-color: #CCD7FF;
+	overflow: hidden;
+	white-space: nowrap;
+}
 #VOPtable tr td:nth-child(2) input {
 	text-overflow: ellipsis;
 }
-
+#EDVOPtable tr td:nth-child(2) input {
+	text-overflow: ellipsis;
+}
 #VOPtable2 {
 	table-layout: fixed;
 }
-
+#EDVOPtable2 {
+	table-layout: fixed;
+}
 #VOPtable1 {
 	table-layout: fixed;
 }
@@ -727,6 +777,7 @@ input.currency {
 #rightbutton {
 	position: fixed;
 	left: 115px;
+	z-index: 999;
 }
 
 #reset {
@@ -734,7 +785,11 @@ input.currency {
 	left: 165px;
 	z-index: 9999;
 }
-
+#save {
+	position: fixed;
+	left: 215px;
+	z-index: 9999;
+}
 .scroll-down-button {
 	right: 51%;
 }
@@ -862,7 +917,63 @@ button {
 	cursor: pointer;
 	border-radius: 10px;
 }
-
+#cancel {
+	background-color: #dadada;
+	border: 1px solid gray;
+	color: #989898;
+	padding: 3px 6px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 10px;
+	margin: auto;
+}
+#cancel:hover {
+	color: dodgerblue;
+	background-color: #e6e6e6;
+}
+#continue {
+	background-color: #dadada;
+	border: 1px solid gray;
+	color: #989898;
+	padding: 3px 6px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18px;
+	cursor: pointer;
+	border-radius: 10px;
+	margin: auto;
+}
+#continue:hover {
+	color: dodgerblue;
+	background-color: #e6e6e6;
+}
+#centerbuttonWrapper{
+	margin: auto;
+	display: block;
+	text-align: center;
+}
+#addC1WitnessTable {
+	cursor: pointer;
+}
+#minusC1WitnessTable {
+	cursor: pointer;
+}
+#addCVWitnessDetailsTable {
+	cursor: pointer;
+}
+#minusCVWitnessDetailsTable {
+	cursor: pointer;
+}
+#addCVWitnessDamagesTable {
+	cursor: pointer;
+}
+#minusCVWitnessDamagesTable {
+	cursor: pointer;
+}
 #PopupOverlay {
 	display: none;
 	position: fixed;
