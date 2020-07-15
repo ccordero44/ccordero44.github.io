@@ -12,20 +12,13 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-$('#save').click(function () {
-	var els = document.forms.RSgeneral.elements;
-	for (var i=els.length;i--;){
-		setCookie(els[i].name, els[i].value);
-		//console.log(els[i].name + " " + els[i].value);
-	}
-	console.log(getCookie("Claim_Number"));
-	alert('cookies set')
-  });
+
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
 		$(document).attr('title','Please wait...');
 		$('input[type="text"]').each(function (index, value) {
-				$(value).val('');
+			
+			$(value).val('');
 		});
 		$('input').each(function (index, value) {
 				$(value).removeClass('banners');
@@ -51,6 +44,38 @@ $('#save').click(function () {
 		}, 1);
 		
 	});
+	$('#save').click(function () {
+	var els = document.forms.RSgeneral.elements;
+	for (var i=els.length;i--;){
+		setCookie(els[i].name, els[i].value);
+		console.log($(els).prev().prop('nodeName'));
+		 if(els[i].name = getCookie(els[i].name)) document.myForm.els[i].name.value = els[i].value;
+	}
+	
+	alert('cookies set')
+  });
+  var today = new Date();
+  var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
+
+  function setCookie(name, value)
+  {
+    document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+  }
+  
+ 
+  function getCookie(name)
+  {
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value != null) ? unescape(value[1]) : null;
+  }
+  
+  var expired = new Date(today.getTime() - 24 * 3600 * 1000); // less 24 hours
+
+  function deleteCookie(name)
+  {
+    document.cookie=name + "=null; path=/; expires=" + expired.toGMTString();
+  }
 	$('#continue').click(function () {
 		printOption();
 		ClosePopup();
@@ -101,8 +126,8 @@ $('#save').click(function () {
 	});
 	//$('.selectThis').keypress(function(e){ return e.which != 13; });
 	$("input:radio").change(function () {
-	setCookie($(this).attr('name'), $(this).val());	
-	console.log($(this).attr('name') + " " + $(this).val())
+		setCookie($(this).attr('name'), $(this).val());	
+		
 		if ($("input[name^=TERRITORY]").prop("checked") == true) {
 			$('#checkbox9').prop("checked",true);
 			$('#checkbox9').attr("disabled",true);
@@ -1569,7 +1594,8 @@ function loadFunctions() {
 		}
 	});
 	$('input:Required').change(function () {
-	setCookie($(this).attr('name'), $(this).val());	
+	setCookie($(this).attr('name'), $(this).val());
+	console.log($(this).attr('name') + " " + $(this).val())	
 	if ( $( this ).hasClass( "banners" ) ) {
 		var el = document.querySelectorAll(":required");
 		$(el).each(function () {
