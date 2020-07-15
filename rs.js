@@ -44,7 +44,7 @@ $(document).ready(function () {
 		}, 1);
 		
 	});
-	$('#save').click(function () {
+$('#save').click(function () {
 	var els = document.forms.RSgeneral.elements;
 	for (var i=els.length;i--;){
 		setCookie(els[i].name, els[i].value);
@@ -54,28 +54,7 @@ $(document).ready(function () {
 	
 	alert('cookies set')
   });
-  var today = new Date();
-  var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
-
-  function setCookie(name, value)
-  {
-    document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
-  }
-  
  
-  function getCookie(name)
-  {
-    var re = new RegExp(name + "=([^;]+)");
-    var value = re.exec(document.cookie);
-    return (value != null) ? unescape(value[1]) : null;
-  }
-  
-  var expired = new Date(today.getTime() - 24 * 3600 * 1000); // less 24 hours
-
-  function deleteCookie(name)
-  {
-    document.cookie=name + "=null; path=/; expires=" + expired.toGMTString();
-  }
 	$('#continue').click(function () {
 		printOption();
 		ClosePopup();
@@ -2515,4 +2494,25 @@ function resetReset() {
 			cloneTable('EDVOPtable', 'EDVOPtable2');
 	console.timeEnd('Reset Function Time');
 }
+ var today = new Date();
+  var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
 
+  function setCookie(name, value)
+  {
+    document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+  }
+  
+ 
+  function getCookie(name)
+  {
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value != null) ? unescape(value[1]) : null;
+  }
+  
+  var expired = new Date(today.getTime() - 24 * 3600 * 1000); // less 24 hours
+
+  function deleteCookie(name)
+  {
+    document.cookie=name + "=null; path=/; expires=" + expired.toGMTString();
+  }
