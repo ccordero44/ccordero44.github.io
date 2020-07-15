@@ -3,16 +3,16 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Recorded Statement General</title>
-<link rel="stylesheet" type="text/css" href="rs.css">
+<link rel="stylesheet" type="text/css" href="files\rs.css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
 <script src="https://use.fontawesome.com/ef0a3db2e4.js"></script>
-<script src="inputmask.js"></script>
+<script src="files\inputmask.js"></script>
 <link rel="icon" 
    type="image/png" 
    href="images\record.png">
-<script src="rs.js"></script>
+<script src="files\rs.js"></script>
 
 </head>
 <body>
@@ -35,6 +35,7 @@
   <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();" style="z-index: 0; position: absolute; left: 0px; top: 0px;">
                     <button id="mapButton" class="customMapControlwrapper" disabled="" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
                     <div class="customMapControldropdown-content" id="dropdownContent">
+					<div class="separator">Coverage Issues</div>
                     <label class="container2" id="container0" title="MVS RS" style="border-radius: 0px 3px 0px 0px;">MVS
  						 <input type="checkbox" id="checkbox0">
   							<span class="checkmark2"></span>
@@ -54,16 +55,12 @@
 					<label class="container2" id="container13" title="MED CONDITION" >MED COND.
  						 <input type="checkbox" id="checkbox13">
   							<span class="checkmark2"></span>
-						</label>
-					<label class="container2 comingsoon" id="container16" title="OUT OF STATE RS" >OUT OF STATE
- 						 <input type="checkbox" id="checkbox16">
-  							<span class="checkmark2"></span>
 						</label>	
 					<label class="container2" id="container6" title="AGENT QUESTIONS" >AGENT Q'S
  						 <input type="checkbox" id="checkbox6">
   							<span class="checkmark2"></span>
 						</label>
-						<hr>
+						<div class="separator">BI Related</div>
 						<label class="container2" id="container11" title="FLOOD RS" >INJURY
  						 <input type="checkbox" id="checkbox11">
   							<span class="checkmark2"></span>
@@ -72,7 +69,7 @@
  						 <input type="checkbox" id="checkbox12">
   							<span class="checkmark2"></span>
 						</label>
-						<hr>
+						<div class="separator">Comp & Other</div>
 						<label class="container2" id="container10" title="THEFT RS" >THEFT
  						 <input type="checkbox" id="checkbox10">
   							<span class="checkmark2"></span>
@@ -85,15 +82,23 @@
  						 <input type="checkbox" id="checkbox5">
   							<span class="checkmark2"></span>
 						</label>
-						<label class="container2 comingsoon" id="container14" title="TOW STATEMENT RS" >TOW STMNT
+						<label class="container2" id="container14" title="TOW STATEMENT RS" >TOW STMNT
  						 <input type="checkbox" id="checkbox14">
   							<span class="checkmark2"></span>
 						</label>
-						<label class="container2 comingsoon" id="container15" title="WITNESS RS" >WITNESS
+						<label class="container2" id="container15" title="WITNESS RS" >WITNESS
  						 <input type="checkbox" id="checkbox15">
   							<span class="checkmark2"></span>
 						</label>
-						<hr>
+						<label class="container2" id="container16" title="OUT OF STATE RS" >OUT OF STATE
+ 						 <input type="checkbox" id="checkbox16">
+  							<span class="checkmark2"></span>
+						</label>
+						<label class="container2" id="container18" title="BIZ USE RS" >FOLLOW-UP
+ 						 <input type="checkbox" id="checkbox18">
+  							<span class="checkmark2"></span>
+						</label>
+						<div class="separator">Built-In</div>
                     <label class="container2" id="container7" title="NON-OWNER RS" >NON-OWNER
  						 <input type="checkbox" id="checkbox7">
   							<span class="checkmark2"></span>
@@ -101,6 +106,10 @@
 						
 					<label class="container2" id="container8" title="BIZ USE RS" >BIZ USE
  						 <input type="checkbox" id="checkbox8">
+  							<span class="checkmark2"></span>
+						</label>
+					<label class="container2" id="container17" title="BIZ USE RS" >UD
+ 						 <input type="checkbox" id="checkbox17">
   							<span class="checkmark2"></span>
 						</label>
 					<label class="container2" id="container9" title="BIZ USE RS" >TERRITORY
@@ -126,13 +135,13 @@
    <table class="section2 full">
       <tr>
          <td class="block">Claim #</td>
-         <td><input Required type="text" id="ClaimNo" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td><input Required type="text" id="ClaimNo" name="Claim Number" class="fillIn" style="width: 100%" title="Claim Number"/></td>
          <td style="width: 25px;"></td>
          <td>Date </td>
-         <td><input Required title="Today's Date" type="text" class="fillIn date" style="width: 100%"/></td>
+         <td><input Required title="Today's Date" type="text" name="Date of RS" class="fillIn date" style="width: 100%"/></td>
          <td style="width: 25px;"></td>
          <td>Adjuster </td>
-         <td><input Required title="Adjuster Initials" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
+         <td><input Required title="Adjuster Initials" name="Adjuster" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
       </tr>
    </table>
    <span id="docTitle" class="title1">GENERAL</span>
@@ -142,12 +151,12 @@
       </tr>
       <tr>
          <td><label class="container">Yes
-            <input required title="Permission to Record" type="radio" name="perm" />
+            <input required title="Permission to Record" type="radio" name="perm" value="Yes"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td><label class="container">No
-            <input type="radio" name="perm" />
+            <input type="radio" name="perm" value="No"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -160,7 +169,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="lang" />
+            <input required title="Language of RS" type="radio" name="lang" value="English" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -168,14 +177,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="lang" />
+            <input type="radio" name="lang" value="Spanish"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="lang" />
+            <input type="radio" name="lang" value="Polish"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -183,9 +192,9 @@
       <tr>
          <td>
             <label class="container ">Other:
-            <input type="radio" name="lang" />
+            <input type="radio" name="lang" value="Other"/>
             <span class="checkmark"></span>
-            </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
+            </label><input type="text" class="fillIn" name="other_lang" style="font-size: 17px; width: 100px"/>
          </td>
       </tr>
    </table>
@@ -196,46 +205,46 @@
       </tr>
       <tr>
          <td><label class="container ">1st
-            <input required title="RS Number" type="radio" name="RSNo" />
+            <input required title="RS Number" type="radio" name="RSNo" value="1st"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">5th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="5th"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">2nd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="2nd"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container yes">6th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="6th"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">3rd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="3rd"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="Other"/>
             <span class="checkmark"></span>
-            </label><input id="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
+            </label><input id="RSNumother" name="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">4th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="RSNo" value="4th"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -266,11 +275,11 @@
       <table class="section half">
          <tr>
             <td>RS taken with</td>
-            <td><input Required title="RS Taken With" type="text" class="fillIn " style="width:100%;" /></td>
+            <td><input Required title="RS Taken With" type="text" class="fillIn " style="width:100%;" name="RStakenWith"/></td>
          </tr>
          <tr>
             <td>Address</td>
-            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;"/></td>
+            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;" name="Address"/></td>
          </tr>
          <tr>
             <td></td>
@@ -278,7 +287,7 @@
          </tr>
          <tr>
             <td>Phone #</td>
-            <td><input Required title="Phone Number" type="text"  class="fillIn phone" style="width:100%;"/></td>
+            <td><input Required title="Phone Number" type="text"  class="fillIn phone" style="width:100%;" name="Phone"/></td>
          </tr>
          <tr>
             <td colspan="2" class="block">Address different than policy?<span class="indent"></span>
@@ -1374,6 +1383,232 @@
    </table>
  </div>  
    <!---END OF GENERAL-->
+   <!--START OF FOLLOW UP-->
+  <div id="FOLLOWUP" class="hidden">
+  <div style="width:100%">
+      <table id="header">
+         <tr>
+            <th >RECORDED STATEMENT</th>
+         </tr>
+      </table>
+   </div>
+   <table class="section2 full">
+      <tr>
+         <td class="block">Claim #</td>
+         <td><input Required type="text" id="ClaimNo" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td style="width: 25px;"></td>
+         <td>Date </td>
+         <td><input Required title="Today's Date" type="text" class="fillIn date" style="width: 100%"/></td>
+         <td style="width: 25px;"></td>
+         <td>Adjuster </td>
+         <td><input Required title="Adjuster Initials" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
+      </tr>
+   </table>
+   <span id="docTitle" class="title1">GENERAL</span>
+   <table class="section2" >
+      <tr>
+         <th colspan="2" class="title2">Permission to Record:</th>
+      </tr>
+      <tr>
+         <td><label class="container">Yes
+            <input required title="Permission to Record" type="radio" name="perm" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td><label class="container">No
+            <input type="radio" name="perm" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <table class="section-mid"></table>
+   <table class="section" >
+      <tr>
+         <th class="title2">Language of RS:</th>
+      </tr>
+      <tr>
+         <td><label class="container ">English
+            <input required title="Language of RS" type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <label class="container ">Spanish
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container ">Polish
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <label class="container ">Other:
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
+         </td>
+      </tr>
+   </table>
+   <table class="section-mid"></table>
+   <table class="section" >
+      <tr>
+         <th colspan="3" class="title2">RS #:</th>
+      </tr>
+      <tr>
+         <td><label class="container ">1st
+            <input required title="RS Number" type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">5th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">2nd
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container yes">6th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">3rd
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label><input id="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">4th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <table class="section2 tight " style="margin-top:-30px">
+      <tr>
+         <td colspan="2"><label class="container ">DOP
+            <input Required title="Relationship between driver and insured" type="radio" id="DOP" name="UD" value="DOP"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">UD
+            <input type="radio" name="UD" value="UD"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">Excluded
+            <input type="radio" name="UD" value="ED"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <div>
+      <table class="section half">
+         <tr>
+            <td>RS taken with</td>
+            <td><input Required title="RS Taken With" type="text" class="fillIn " style="width:100%;" /></td>
+         </tr>
+         <tr>
+            <td>Address</td>
+            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;"/></td>
+         </tr>
+         <tr>
+            <td></td>
+            <td><input type="text"  class="fillIn address2" style="width:100%;"/></td>
+         </tr>
+         <tr>
+            <td>Phone #</td>
+            <td><input Required title="Phone Number" type="text"  class="fillIn phone" style="width:100%;"/></td>
+         </tr>
+         
+      </table>
+   </div>
+   <table class="section tight half">
+      <tr>
+         <td class="block">RS taken with:</td>
+         <td class="block"><label class="container">Translator
+            <input type="radio" name="RSother" value="Translator"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="block"><label class="container">Attorney
+            <input type="radio" name="RSother" value="Attorney"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <table class="section tight half" style="padding-right:0">
+      <tr>
+         <td>Name</td>
+         <td><input type="text" class="fillIn " style="width:100%;" /></td>
+      </tr>
+      <tr>
+         <td>Address</td>
+         <td><input type="text" class="fillIn address1" style="width:100%;" /></td>
+      </tr>
+      <tr>
+         <td>Phone #</td>
+         <td><input  type="text" class="fillIn phone" style="width:100%;" /></td>
+      </tr>
+      <tr>
+         <td class="block">Relationship to A:</td>
+         <td><input type="text" class="fillIn" style="width:100%;" /></td>
+      </tr>
+   </table>
+
+   <table class="section2 tight full">
+      <tr>
+         <td class="block">Date of loss:</td>
+         <td><input Required title="Date of Loss" type="text" class="fillIn date" style="width:100%;"/></td>
+         <td class="indent block">Time of loss:</td>
+         <td><input Required title="Time of Loss" type="text" class="fillIn time" style="width:100%;"/></td>
+      </tr>
+   </table>
+   <table class="section2 tight full" style="padding-bottom: 25px;">
+      <tr>
+         <td class="block">Location of loss (be specific):</td>
+         <td><input Required title="Location of Loss" type="text" class="fillIn addressNorm" style="width:100%"/></td>
+      </tr>
+      <tr>
+         <td colspan="2"><input type="text" class="fillIn FOL" style="width:100%"/></td>
+      </tr>
+   </table>
+   
+	<div id="FUQwrapper">
+		<textarea id="FUQtxtArea" rows="5" wrap="soft"></textarea>
+	</div>
+  </div> 
+   <!--END OF FOLLOW UP-->
    <!--START OF THEFT-->
    <div id="THEFT" style="float:left;" class="hidden">
    <table class="section2 tight full" >
@@ -4288,6 +4523,149 @@
    </table>
   </div>
    <!--END OF FIRE-->
+   <!--START OF OUT OF STATE-->
+   <div id="OUT OF STATE" style="float:left;padding-top:25px;" class="hidden">
+   <span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
+   <table class="tight section2 full" style="padding-top:25px;">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What is the reason you were in</td>
+				<td><input Required type="text" id="OutOfState" class="fillIn" style="width: 100%"/></td>
+				<td class="block">(out of state location) at the time of loss?</td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="3"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">When did you leave your home address to go there?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">When did you return to your home address?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">If still there - when are you returning?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How many days per week do you and the vehcile travel to</td>
+				<td class="theState">?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How many days per month do you and the vehicle travel to</td>
+				<td class="theState">?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent">How many times since policy inception/term (look up date) have you and the vehicle traveled</td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">to</td>
+				<td class="theState block">?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How long have you and the vehicle stayed in</td>
+				<td class="theState block"></td>
+				<td class="">each time since policy inception/term?</td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Number of days:</td>
+				<td class=""><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="block">weeks:</td>
+				<td class=""><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="block">months:</td>
+				<td class=""><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What was the purpose of the out of state travel/stay each time?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What is the address where you and the vehicle stayed each time?</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Who resides at that address?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Relationship to A?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Have they driven A's vehicle?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="OOSUD" value="Yes"/>
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="OOSUD" value="No"/>
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent">(If yes, take RS - UD)</td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">(If A and vehicle have stayed and/or regularly traveled out of state take RS - Territory)</td>
+			</tr>
+		</table>
+   
+   </div>
+   <!--END OF OUT OF STATE-->
    <!---START OF UD-->
    <div id="UD" style="float:left;padding-top:25px;" class="hidden">
       <span class="title1" style="padding-left:25px;">UD - Undisclosed Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
@@ -4727,12 +5105,12 @@
             <td class="number"></td>
             <td class="indent block">Did UD ask the insured for permission to use the vehicle <u>on DOL?</u></td>
             <td class="indent block"> <label class="container">Yes
-               <input Required type="radio" name="UDpermission" value="Yes"/>
+               <input Required type="radio" name="UDpermission1" value="Yes"/>
                <span class="checkmark"></span>
                </label>
             </td>
             <td class="indent"> <label class="container">No
-               <input Required type="radio" name="UDpermission" value="No"/>
+               <input Required type="radio" name="UDpermission1" value="No"/>
                <span class="checkmark"></span>
                </label>
             </td>
@@ -4743,12 +5121,12 @@
             <td class="number"></td>
             <td class="indent block">Did insured give UD permission to use the vehicle on DOL?</td>
             <td class="indent block"> <label class="container">Yes
-               <input Required type="radio" name="UDpermission" value="Yes"/>
+               <input Required type="radio" name="UDpermission2" value="Yes"/>
                <span class="checkmark"></span>
                </label>
             </td>
             <td class="indent"> <label class="container">No
-               <input Required type="radio" name="UDpermission" value="No"/>
+               <input Required type="radio" name="UDpermission2" value="No"/>
                <span class="checkmark"></span>
                </label>
             </td>
@@ -4766,12 +5144,12 @@
             <td class="number"></td>
             <td class="indent block">Did UD ask the Insured for permission <u>every time he/she used the vehicle</u>?</td>
             <td class="indent "> <label class="container">Yes
-               <input Required type="radio" name="UDpermission" value="Yes"/>
+               <input Required type="radio" name="UDpermission3" value="Yes"/>
                <span class="checkmark"></span>
                </label>
             </td>
             <td class=""> <label class="container">No
-               <input Required type="radio" name="UDpermission" value="No"/>
+               <input Required type="radio" name="UDpermission3" value="No"/>
                <span class="checkmark"></span>
                </label>
             </td>
@@ -5028,12 +5406,758 @@
       <table class="section2 full tight">
          <tr>
             <td class="indent2"></td>
-            <td colspan="2" class="indent block">Were they aware that the vehicle was being driven by and excluded driver?</td>
+            <td colspan="2" class="indent block">Were they aware that the vehicle was being driven by an excluded driver?</td>
             <td class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
          </tr>
       </table>
    </div>
    <!--END OF UD-->
+   <!---START OF ED-->
+   <div id="ED" style="float:left;padding-top:25px;" class="hidden">
+      <span class="title1" style="padding-left:25px;">ED - Excluded Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
+      <table class="section2 full" style="padding-bottom:0px;">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Name of driver:</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td class="indent block"><label class="container ">DOP
+               <input type="radio" name="EDdriver" value="DOP"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="spacer"></td>
+            <td class="block"><label class="container ">UD
+               <input type="radio" name="EDdriver" value="UD"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="spacer"></td>
+            <td class="block"><label class="container ">Excluded
+               <input checked type="radio" name="EDdriver" value="ED"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent">ED Information</td>
+         </tr>
+      </table>
+      <div style="width:70%; float:left;">
+         <table class="section2 tight full">
+            <tr>
+               <td class="indent2"></td>
+               <td class="indent block">Name:</td>
+               <td colspan="1" ><input Required type="text" class="fillIn " style="width:100%" /></td>
+            </tr>
+            <tr>
+               <td class="indent2"></td>
+               <td class="indent">Address:</td>
+               <td colspan="1"><input Required type="text" class="fillIn address1" style="width:100%" /></td>
+            </tr>
+            <tr>
+               <td class="indent2"></td>
+               <td class=" "></td>
+               <td colspan="1"><input type="text" class="fillIn address2" style="width:100%" /></td>
+            </tr>
+            <tr>
+               <td class="indent2"></td>
+               <td class="indent block">Phone #:</td>
+               <td colspan="1"><input Required type="text" class="fillIn phone" style="width:100%" /></td>
+            </tr>
+         </table>
+         <table class="section2 tight full">
+            <tr>
+               <td class="indent2"></td>
+               <td colspan="1" class="indent block">Relationship to Insured:</td>
+               <td colspan="1" ><input Required type="text" class="fillIn" style="width:100%" /></td>
+            </tr>
+         </table>
+      </div>
+      <div style="width:30%; float:left;">
+         <table class="section tight full" style="padding-left:0px;margin-left:0px">
+            <tr>
+               <td class="block">Age:</td>
+               <td colspan="1"><input Required type="number" class="fillIn " style="width:100%" /></td>
+            </tr>
+            <tr>
+               <td class=" ">DOB:</td>
+               <td colspan="1" ><input Required type="text" class="fillIn date" style="width:100%" /></td>
+            </tr>
+            <tr>
+               <td class=" ">DL#:</td>
+               <td colspan="1" ><input Required type="text" class="fillIn" style="width:100%" /></td>
+            </tr>
+         </table>
+         <table class="section tight full" style="padding-left:0px;margin-left:0px">
+            <tr>
+               <td class="block">DL Status: </td>
+               <td class="block"> <label class="container">Valid
+                  <input Required type="radio" name="EDDLstatus" />
+                  <span class="checkmark"></span>
+                  </label>
+               </td>
+               <td class="block"><label class="container">No DL
+                  <input Required type="radio" name="EDDLstatus" />
+                  <span class="checkmark"></span>
+                  </label>
+               </td>
+            </tr>
+         </table>
+         <table class="section tight full" style="padding-left:0px;margin-left:0px">
+            <tr>
+               <td class="block"> <label class="container">Suspended/Revoked
+                  <input Required type="radio" name="EDDLstatus" />
+                  <span class="checkmark"></span>
+                  </label>
+               </td>
+            </tr>
+            <tr>
+               <td><strong>(Request MVR)</strong></td>
+            </tr>
+         </table>
+      </div>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Does ED reside with insured?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDresident" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDresident" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Do the insured and ED live in:</td>
+            <td class="indent block"> <label class="container">the same unit
+               <input Required type="radio" name="EDunit" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">separate units
+               <input Required type="radio" name="EDunit" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="indent block">If separate units, Unit #(s): for A</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td class="block">for ED</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="indent">If insured states ED lives in a basement apartment or other unit:</td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="UDsubnumber indent"></td>
+            <td class="">Number of mailboxes for the building?</td>
+            <td><input Required type="number" class="fillIn " style="width:25%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="UDsubnumber indent"></td>
+            <td class="block">Does ED have their own:</td>
+            <td class="indent"> <label class="container">mailbox
+               <input Required type="radio" name="EDmailbox" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="block"> <label class="container">private entrance
+               <input Required type="radio" name="EDentrance" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class=""> <label class="container">kitchen
+               <input Required type="radio" name="EDkitchen" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+         <tr>
+            <td class="tdTab"></td>
+            <td class="indent2 indent"></td>
+            <td class=""></td>
+            <td class="indent"> <label class="container">bathroom
+               <input Required type="radio" name="EDbathroom" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class=""> <label class="container">phone line
+               <input Required type="radio" name="EDphoneLine" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="block"> <label class="container">electric bill
+               <input Required type="radio" name="EDelectricBill" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="UDsubnumber indent"></td>
+            <td class="">Does ED have a lease?</td>
+            <td class="indent"> <label class="container">Yes
+               <input Required type="radio" name="EDlease" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDlease" />
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="tdTab"></td>
+            <td class="indent2"></td>
+            <td class="indent block">If yes, who does ED pay rent to?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Since when has ED lived with insured? (Be specific)</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent ">If different address from insured:</td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent">Is vehicle on policy kept/garaged at ED's address?</td>
+            <td class="indent"> <label class="container">Yes
+               <input Required type="radio" name="EDterritory2" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDterritory2" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">How did ED get possession of A's vehicle?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">When?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent">Did ED drive/walk/other to get to A's residence?</td>
+            <td class="indent"> <label class="container">Yes
+               <input Required type="radio" name="EDdrivewalk" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDdrivewalk" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Did A deliver VOP to ED?</td>
+            <td class="indent"> <label class="container">Yes
+               <input Required type="radio" name="AdeliveredVOPtoED" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="AdeliveredVOPtoED" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent block">(If yes, when?)</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full" style="padding-bottom:0px;">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block" colspan="1">When did ED begin driving the vehicle(s) on the policy? (<i>be specific</i>)</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent" colspan="2"><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full" style="padding-bottom:0px;">
+         <tr>
+            <td class="number"></td>
+            <td class="indent" colspan="1">How often does ED <strong>drive</strong> the insured's vehicle(s) and for what purpose? (<i>be specific</i>)</td>
+         </tr>
+      </table>
+      <table class="section border2 tableProper tablenobreak VOPtable" border="1" id="EDVOPtable">
+         <thead>
+            <tr>
+               <th style="width:.25%;cursor:pointer" title="Click to Add another Vehicle row."><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="EDaddVOPtable"></i></th>
+               <th class="" style="width:10%">Vehicle</th>
+               <th class="block">#days/week</th>
+               <th class="block"># days/month</th>
+               <th class="block"># hours/day</th>
+               <th class="block">Purpose of Use</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td class="EDVOPnums" style="text-align:right;table-layout:fixed">1.</td>
+               <td>
+                 <input type="text" class="noborder VOP1first" style="width:100%;"></input>
+               </td>
+               <td><input type="number" class="noborder center" style="width:100%"></input></td>
+               <td><input type="number" class="noborder center" style="width:100%"></input></td>
+               <td><input type="number" class="noborder center" style="width:100%"></input></td>
+               <td><input type="text" class="noborder" style="width:100%"></input></td>
+            </tr>
+         </tbody>
+      </table>
+      <table class="section2 full" style="padding-bottom:0px;">
+         <tr>
+            <td class="number"></td>
+            <td class="indent" colspan="1">How often does ED <strong>have possession</strong> of the insured's vehicle(s) while the vehicle is <strong>not being driven</strong> and for what purpose? (for example: while the vehicle is parked but the ED still has care, custody or control of the vehicle)</td>
+         </tr>
+      </table>
+      <div id="EDVOPtable2">
+         <table class="section border2 tableProper tablenobreak VOPtable" border="1" id="EDVOPtable2">
+            <thead>
+               <tr>
+                  <th style="width:.25%;"></th>
+                  <th class="" style="width:10% !important;max-width:10% !important;">Vehicle</th>
+                  <th class="block">#days/week</th>
+                  <th class="block"># days/month</th>
+                  <th class="block"># hours/day</th>
+                  <th class="block">Purpose of Use</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td class="EDVOPnums" style="text-align:right;">1.</td>
+                  <td>
+                     <input disabled type="text" class="noborder VOP2first" style="width:100%"></input>
+                  </td>
+                  <td><input type="number" class="noborder" style="width:100%"></input></td>
+                  <td><input type="number" class="noborder" style="width:100%"></input></td>
+                  <td><input type="number" class="noborder" style="width:100%"></input></td>
+                  <td><input type="text" class="noborder" style="width:100%"></input></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      <table class="section2 full " style="padding-bottom:0px;">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">How many times has ED driven the vehicle(s) on the policy since the policy term inception?</td>
+            <td></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">(<i>be specific</i>)</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Who owns the vehicle(s) driven by ED?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent ">(If not on policy, take RS - Non-Owners)</td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">How many sets of keys are there?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Who keeps the keys?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Does ED have their own set of keys?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Who has access to the keys?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did ED ask the insured for permission to use the vehicle <u>on DOL?</u></td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDpermission1" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDpermission1" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did insured give ED permission to use the vehicle on DOL?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDpermission2" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDpermission2" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">For what purpose was ED using the vehicle on DOL?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did ED ask the Insured for permission <u>every time he/she used the vehicle</u>?</td>
+            <td class="indent "> <label class="container">Yes
+               <input Required type="radio" name="EDpermission3" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class=""> <label class="container">No
+               <input Required type="radio" name="EDpermission3" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">If no permission:</td>
+            <td></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">How did driver obtain the keys to the vehicle?</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Is the insured going to press charges against the ED?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDtheftCharge" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDtheftCharge" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">If no, why not?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Did the insured <u>ever</u> specifically advise ED <u><i>NOT</i></u> to use the vehicle?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDprohibited" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDprohibited" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">If yes, when?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Did ED use the insured's vehicle <u>ever</u> prior to the loss?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDpriorUse" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDpriorUse" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">If yes, when, how many times, for what purpose?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Does the ED have their own vehicle?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDownVeh" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDownVeh" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">What is ED's regular form of transportation?</td>
+            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">If ED works or goes to school, how does ED get there? (#days per week)</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Does the ED have car insurance?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDins" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDins" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">If yes, insurance company name?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Policy number?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did A notify agent of DNOP?</td>
+            <td class="indent block"> <label class="container">Yes
+               <input Required type="radio" name="EDagentnotify" value="Yes"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+            <td class="indent"> <label class="container">No
+               <input Required type="radio" name="EDagentnotify" value="No"/>
+               <span class="checkmark"></span>
+               </label>
+            </td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">If yes, when?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Who else drives vehicle(s) on the policy?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Anyone else in household?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent">If any ED's, ask all ED questions.</td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did Insured read the application?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td class="indent block">Did Insured sign the application?</td>
+            <td><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent block">If no & the application has a signature, the ask:</td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Who signed the application?</td>
+            <td colspan="2" class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="number"></td>
+            <td colspan="2" class="indent block">If there is a signed exclusion, then ask:</td>
+         </tr>
+         <tr>
+            <td class="indent2"></td>
+            <td class="indent block">Who signed the exclusion form?</td>
+            <td class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent block">Why did they exclude this person?</td>
+            <td class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent block">What is the relationship between the excluded driver and the Insured?</td>
+            <td class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+      <table class="section2 full tight">
+         <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent block">Were they aware that the vehicle was being driven by an excluded driver?</td>
+            <td class=""><input Required type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+      </table>
+   </div>
+   <!--END OF ED-->	 
    <!--START OF MCTD-->
   <div id="MCTD" style="float:left;padding-top:25px;" class="hidden">
 	<span class="title1" style="padding-left:25px;">MCTD - More Cars Than Drivers<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
@@ -7677,7 +8801,7 @@
 	</tr>
 	<tr>
 		<td class="indent block"></td>
-        <td><input Required type="text" class="fillIn address2" style="width: 100%"/></td>
+        <td><input type="text" class="fillIn address2" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent block">Phone:</td>
@@ -7691,25 +8815,25 @@
 <table class="tight section2 full" style="padding-top:25px;">
 	<tr>
 		<td class="indent block">If married, name of spouse:</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent block">If a minor, name of parent/guardian:</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>	
 	<tr>
 		<td class="indent block"><span class="space"></span>Street of parent/guardian:</td>
-        <td><input Required type="text" class="fillIn address1" style="width: 100%"/></td>
+        <td><input type="text" class="fillIn address1" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent block"><span class="space"></span>City / State of parent/guardian:</td>
-        <td><input Required type="text" class="fillIn address2" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn address2" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent block"><span class="space"></span>Phone # of parent/guardian:</td>
-        <td><input Required type="text" class="fillIn phone" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn phone" style="width: 100%"/></td>
 	</tr>
 </table>	
 <table class="tight section2 full" style="padding-top:25px;">
@@ -7742,11 +8866,11 @@
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td class="indent" colspan="2"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td class="indent" colspan="2"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7769,21 +8893,21 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes: What was the nature of the injury?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>When?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>How?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7806,35 +8930,35 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes: What was the nature of the medical/health condition?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>When diagnosed?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>What kind of treatment was received?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>When did treatment begin?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>When did treatment end?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7857,7 +8981,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>Estimated date of completing treatment?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7880,7 +9004,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, how much time off was taken?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7903,7 +9027,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, name of medication(s):</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -7927,7 +9051,7 @@
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, was medication taken on the date of the incident/accident?</td>
 		<td class="indent block"><label class="container">Yes
-            <input required type="radio" name="medsTakenDOL" />
+            <input  type="radio" name="medsTakenDOL" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -7965,14 +9089,14 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, name of medication(s):</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>For what?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8027,14 +9151,14 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, name of Hospital:</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>Phone # of Hospital:</td>
-		<td><input Required type="text" class="fillIn phone" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn phone" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8057,14 +9181,14 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, name of doctor/facility:</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>Phone # of doctor/facility:</td>
-		<td><input Required type="text" class="fillIn phone" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn phone" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8087,7 +9211,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, how and by whom?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8110,14 +9234,14 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, on what body part(s)?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>How many?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8140,7 +9264,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block"><span class="space"></span>If yes, what was fractured?</td>
-		<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8273,22 +9397,22 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes, what kind of treatment have you received and/or plan to receive?</td>
-		<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+		<td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td class="indent" colspan="2"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td class="indent" colspan="2"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td class="indent" colspan="2"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td class="indent" colspan="2"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent">When did it begin?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8311,59 +9435,59 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent">If no, when did treatment end?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">Frequency of treatment(s)? # of days per week?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 		<td class="block"># of days per month?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">Where and by whom performed?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">Who prescribed treatment?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">Estimated date of completing treatment(s)?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">Name, address and telephone number of prescribing physician(s):</td>
-        <td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">If not prescribed by a physician, why taken?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8386,11 +9510,11 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes, how much time off? # of days?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 		<td class="block"># of weeks?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 		<td class="block"># of hours?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8413,22 +9537,22 @@
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">If yes, Name, address and telephone number of prescribing physician(s):</td>
-        <td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="number"></td>
 		<td class="indent block">If not prescribed by a physician, why taken?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8451,20 +9575,20 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">How much?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table><table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">For what?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">Who paid and how (cash, check, credit)?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8493,7 +9617,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes, where?</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8523,11 +9647,11 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If yes, describe improvement:</td>
-        <td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8550,11 +9674,11 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">If not, what is the impairment?</td>
-        <td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 	<tr>
 		<td class="indent2"></td>
-        <td colspan="2" class="indent"><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+        <td colspan="2" class="indent"><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8580,7 +9704,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent">If yes, what?</td>
-        <td><input Required type="text" class="fillIn center" style="width: 100%" /></td>
+        <td><input  type="text" class="fillIn center" style="width: 100%" /></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8596,7 +9720,7 @@
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">HICN (Health Insurance Claim Number):</td>
-        <td><input Required type="text" class="fillIn center" style="width: 100%" /></td>
+        <td><input  type="text" class="fillIn center" style="width: 100%" /></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -8630,16 +9754,16 @@
             </label>
          </td>
 		 <td class="block">Carrier:</td>
-         <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+         <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
 	<tr>
 		<td class="indent2"></td>
 		<td class="indent block">Group #</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 		<td class="indent block">Policy #</td>
-        <td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+        <td><input  type="text" class="fillIn" style="width: 100%"/></td>
 	</tr>
 </table>
 <table class="tight section2 full">
@@ -9413,22 +10537,899 @@
    
    </div>
    <!--END OF MED CONDITION-->
-   <!--START OF OUT OF STATE-->
-   <div id="OOS" style="float:left;padding-top:25px;" class="hidden">
-   <span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
-   </div>
-   <!--END OF OUT OF STATE-->
    <!--START OF TOW-->
    <div id="TOW" style="float:left;padding-top:25px;" class="hidden">
    <span class="title1" style="padding-left:25px;">Tow Statement<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
-   
+   <table class="tight section2 full" style="padding-top:25px;">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Who ordered the tow?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How was the tow company referred to A?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How long did it take the tow truck to arrive?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td colspan="2" class="indent block">Name, Address & phone # of the tow company and the tow truck driver?</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="indent"></td>
+				<td class="indent" colspan="3"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent"></td>
+				<td class="indent" colspan="3"><input Required type="text" class="fillIn addressNorm" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent"></td>
+				<td class="indent" colspan="3"><input Required type="text" class="fillIn phone" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Did A speak with the tow truck driver prior to tow?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="speakwithTowDriver" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="speakwithTowDriver" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Was A informed of the tow fees prior to the tow?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="informedofTowFees" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="informedofTowFees" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What fees was A informed of?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What was the amount of the fees that A saw on the tow receipt?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		  <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Did A receive a copy of the tow receipt?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="copyofTowReceipt" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="copyofTowReceipt" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Did A authorize the tow?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="authorizeTow" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="authorizeTow" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Did A sign the tow authorization?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="signedTowAuth" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class=""><label class="container">No
+					<input type="radio" name="signedTowAuth" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="block">(Request a copy of tow authorization form)</td>
+			</tr>
+		 </table>
    
    </div>
    <!--END OF TOW-->
    <!--START OF WITNESS-->
-   <div id="WITNESS" style="float:left;padding-top:25px;" class="hidden">
-   <span class="title1" style="padding-left:25px;">Witness Statement<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
-   
+   <div id="WITNESS" style="float:left;" class="hidden">
+   <!--<span class="title1" style="padding-left:25px;">Witness Statement<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>-->
+   <div style="width:100%">
+      <table id="header">
+         <tr>
+            <th >RECORDED STATEMENT</th>
+         </tr>
+      </table>
+   </div>
+   <table class="section2 full">
+      <tr>
+         <td class="block">Claim #</td>
+         <td><input Required type="text" id="ClaimNo2" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td style="width: 25px;"></td>
+         <td>Date </td>
+         <td><input Required title="Today's Date" type="text" class="fillIn date" style="width: 100%"/></td>
+         <td style="width: 25px;"></td>
+         <td>Adjuster </td>
+         <td><input Required title="Adjuster Initials" type="text" id="adj2" class="fillIn" style="width: 100%"/></td>
+      </tr>
+   </table>
+   <span id="docTitle" class="title1">WITNESS</span>
+   <table class="section2" >
+      <tr>
+         <th colspan="2" class="title2">Permission to Record:</th>
+      </tr>
+      <tr>
+         <td><label class="container">Yes
+            <input required title="Permission to Record" type="radio" name="perm" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td><label class="container">No
+            <input type="radio" name="perm" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <table class="section-mid"></table>
+   <table class="section" >
+      <tr>
+         <th class="title2">Language of RS:</th>
+      </tr>
+      <tr>
+         <td><label class="container ">English
+            <input required title="Language of RS" type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <label class="container ">Spanish
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container ">Polish
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <label class="container ">Other:
+            <input type="radio" name="lang" />
+            <span class="checkmark"></span>
+            </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
+         </td>
+      </tr>
+   </table>
+   <table class="section-mid"></table>
+   <table class="section" >
+      <tr>
+         <th colspan="3" class="title2">RS #:</th>
+      </tr>
+      <tr>
+         <td><label class="container ">1st
+            <input required title="RS Number" type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">5th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">2nd
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container yes">6th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">3rd
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td class="spacer"></td>
+         <td><label class="container ">
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label><input id="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
+         </td>
+      </tr>
+      <tr>
+         <td><label class="container yes">4th
+            <input type="radio" name="RSNo" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+      </tr>
+   </table>
+   <div>
+      <table class="section half" style="padding-top:0px;">
+         <tr>
+            <td>RS taken with</td>
+            <td><input Required title="RS Taken With" type="text" class="fillIn " style="width:100%;" /></td>
+         </tr>
+         <tr>
+            <td>Address</td>
+            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;"/></td>
+         </tr>
+         <tr>
+            <td></td>
+            <td><input type="text"  class="fillIn address2" style="width:100%;"/></td>
+         </tr>
+         <tr>
+            <td>Phone #</td>
+            <td><input Required title="Phone Number" type="text"  class="fillIn phone" style="width:100%;"/></td>
+         </tr>
+         
+      </table>
+   </div>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">When did the accident happen?</td>
+				<td class="indent block">Date</td>
+				<td><input Required type="text" class="fillIn date" style="width: 100%"/></td>
+				<td class="indent block">Time</td>
+				<td><input Required type="text" class="fillIn time" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Where did the accident happen (<i>be specific</i>)?</td>
+				<td><input Required type="text" class="fillIn addressNorm" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Number of persons in each vehicle?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>		 
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Who was at fault for the accident?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Why?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>			
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Is witness related to/acquanted with A or C?</td>
+				<td class="indent block">A:</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="relatedtoA" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="relatedtoA" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+			<tr>
+				<td colspan="2" class="indent2"></td>
+				<td class="indent block">C:</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="relatedtoC" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="relatedtoC" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What is the witness' relation to A</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="block">to C</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="block">?</td>
+			</tr>
+		</table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Where was the witness when the loss occurred?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What was witness doing at the time of the accident?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How far from the loss scene?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">On which side of the road/street/sidewalk was the witness when the loss occurred?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Did witness see the accident?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Was the witness' view obstructed in any way?</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Insured's vehicle</td>
+				<td class="indent block">Year</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Make</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Model</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="indent2"></td>
+				<td class="indent block">Color</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Body Style</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full" id="C1WitnessTable">
+			<tr>
+				<td class="indent2"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="addC1WitnessTable" title="Click to add more vehicles"></i> <i class="fa fa-minus-circle noprint" style="padding-top:2px;color:red;" id="minusC1WitnessTable" title="Click to remove all vehicles"></i></td>
+				<td class="indent block">Claimant's vehicle:</td>
+				<td>(C1)</td>
+				<td class="indent block">Year</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Make</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Model</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="indent2"></td>
+				<td class="indent block">Color</td>
+				<td><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Body Style</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<div id="moreCVWitnessTable"></div>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">How did the accident happen?</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			 <tr>
+				<td class="number"></td>
+				<td class="indent block" style="width:160px;">Insured's vehicle:</td>
+				<td class="indent block">Direction:</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Speed:</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Stop Sign?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="witnessIVSS" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessIVSS" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Traffic Light Color:</td>
+				<td><label class="container">Green
+					<input required type="radio" name="witnessIVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Green Arrow
+					<input type="radio" name="witnessIVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Yellow
+					<input type="radio" name="witnessIVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Red
+					<input type="radio" name="witnessIVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Did Insured fail to observe stop sign or traffic light?</td>
+				<td class="block"><label class="container">Yes
+					<input required type="radio" name="WitnessIVrunControl" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="WitnessIVrunControl" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="addCVWitnessDetailsTable" title="Click to add more vehicles"></i> <i class="fa fa-minus-circle noprint" style="padding-top:2px;color:red;" id="minusCVWitnessDetailsTable" title="Click to remove all vehicles"></i></td>
+				<td class="indent block" style="width:160px;">Claimant's vehicle:</td>
+				<td class="indent block">(C1) Direction:</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+				<td class="indent block">Speed:</td>
+				<td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Stop Sign?</td>
+				<td class="indent block"><label class="container">Yes
+					<input required type="radio" name="witnessCVSS" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessCVSS" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Traffic Light Color:</td>
+				<td><label class="container">Green
+					<input required type="radio" name="witnessCVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Green Arrow
+					<input type="radio" name="witnessCVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Yellow
+					<input type="radio" name="witnessCVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td><label class="container">Red
+					<input type="radio" name="witnessCVlightColor" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table>
+		<table class="tight section2 full">
+			 <tr>
+				<td class="indent2"></td>
+				<td class="indent block" style="width:160px !important;"></td>
+				<td class="indent block">Did Claimant fail to observe stop sign or traffic light?</td>
+				<td class="block"><label class="container">Yes
+					<input required type="radio" name="WitnessCVrunControl" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class=""><label class="container">No
+					<input type="radio" name="WitnessCVrunControl" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			 </tr>
+		</table> 
+		<div id="CVWitnessDetailsTable"></div>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent">Damages: (<i>be specific</i>)</td>
+			</tr>		 
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Insured's vehicle:</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">Was there any damage to the vehicle prior to the loss?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessIVUPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessIVUPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>		 
+		 </table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">If yes: What was previously damaged?</td>
+				<td><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full" style="padding-top:15px;">
+			<tr>
+				<td class="indent2"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="addCVWitnessDamagesTable" title="Click to add more vehicles"></i> <i class="fa fa-minus-circle noprint" style="padding-top:2px;color:red;" id="minusCVWitnessDamagesTable" title="Click to remove all vehicles"></i></td>
+				<td class="indent block">Claimant's vehicle: (C1)</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">Was there any damage to the vehicle prior to the loss?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessCV1UPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessCV1UPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>		 
+		 </table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">If yes: What was previously damaged?</td>
+				<td><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <div id="CVWitnessDamagesTable"></div>
+		 <table class="tight section2 full" style="padding-top:15px;">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Other Property Damage:</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">Was there any damage to the property prior to the loss?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessPD" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>		 
+		 </table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">If yes: What was previously damaged?</td>
+				<td><input  type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full" style="padding-top:15px;">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Was anybody injured?</td>
+				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What were the injuries?</td>
+				<td><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent">Who was at the scene of the accident?</td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">Police</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessPoliceonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessPoliceonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent">Ambulance</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessEMSonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessEMSonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>	
+
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent">Fire Department</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessFDonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessFDonScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent">Other</td>
+				<td colspan="2"><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent">Was anyone taken from accident scene by ambulance?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnesstakenFromScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnesstakenFromScene" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Who?</td>
+				<td><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent">Did witness speak to anyone at the scene of the accident?</td>
+				<td class="indent"><label class="container">Yes
+					<input required type="radio" name="witnessSpeakto" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+				 <td class="indent"><label class="container">No
+					<input type="radio" name="witnessSpeakto" />
+					<span class="checkmark"></span>
+					</label>
+				 </td>
+			</tr>	
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">Who?</td>
+				<td><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>	
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent block">What was said?</td>
+				<td><input type="text" class="fillIn" style="width: 100%"/></td>
+			</tr>
+		 </table>
+		 <table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">What statements did witness hear Parties make?</td>
+				<td><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		</table>
+		<table class="tight section2 full">
+			<tr>
+				<td class="number"></td>
+				<td class="indent block">Name, telephone numbers and addresses of other witnesses?</td>
+				<td><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
+		</table>
    
    </div>
    <!--END OF WITNESS-->
@@ -9582,6 +11583,7 @@
    <div id="PopupWindow">
       <h3><strong class="highlight">Popup</strong> Window!</h3>
       <p>This is the text inside my <strong class="highlight">popup</strong> window!</p>
+	  <div id="centerbuttonWrapper"><span id="continue" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i></span> <span id="cancel" type="button" class="center" value="Cancel" title="Abort printing"><i class="fa fa-ban" aria-hidden="true"></i></span></div>
       <a href="#" onclick="ClosePopup();">x</a>
    </div>
    
