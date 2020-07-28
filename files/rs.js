@@ -15,7 +15,7 @@ $(window).bind('resolutionchange', function () {
 $(document).ready(function () {
 	
 	if ( window.history.length > 1 ) {
-		$.when(window.history.back()).done(function () {
+		//$.when(window.history.back()).done(function () {
 			//$('#reset').trigger('click');
 		});
 	}		
