@@ -17,7 +17,7 @@ $(document).ready(function () {
 	if ( window.history.length > 1 ) {
 		//$.when(window.history.back()).done(function () {
 			//$('#reset').trigger('click');
-		});
+		//});
 	}		
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
