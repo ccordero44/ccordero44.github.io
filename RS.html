@@ -3,38 +3,45 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Recorded Statement General</title>
-<link rel="stylesheet" type="text/css" href="rs.css">
+<link rel="stylesheet" type="text/css" href="files\rs.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
 <script src="https://use.fontawesome.com/ef0a3db2e4.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-<script src="inputmask.js"></script>
+
+<script src="files\inputmask.js"></script>
+<script src="files\jquery.popupoverlay.min.js"></script>
 <link rel="icon" 
    type="image/png" 
-   href="record.png">
-<script src="rs.js"></script>
+   href="images\record.png">
+<script src="files\rs.js"></script>
 
 </head>
 <body>
+<button class="scroll-up-button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
+<button class="scroll-down-button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+
+<form id="RSgeneral" name="RSgeneral">
 <div id="toolbar">
    <button id="leftbutton" onclick="clearAll();" title="Reload Form
       (Use this if the form isn't responding or reacting properly)"><i class="fa fa-repeat" aria-hidden="true"></i></button>
    <div class="divider1"></div>
    <div class="divider2"></div>
-   <button id="rightbutton" onclick="printFunction();" title="Print the Form"><i class="fa fa-print" aria-hidden="true"></i></button>
-   <button class="scroll-down-button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+   <button id="rightbutton" onclick="printFunction();" title="Print the Form" class=""><i class="fa fa-print" aria-hidden="true"></i></button>
    <div class="divider3"></div>
-   <button class="scroll-up-button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
-   <button class="scroll-bottom" title ="Scroll to Bottom" onclick="javascript:window.scrollTo(0,document.body.scrollHeight);"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
+   <button id="scrollBottom" class="scroll-bottom" title ="Scroll to Bottom"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
    <div class="divider"></div>
+   <div class="divider5"></div>
+   <div class="divider6"></div>
+   <button id="undo" title="Undo the last CheckBox"><i class="fa fa-undo" aria-hidden="true"></i></button>
    <div class="divider7"></div>
-   <button class="scroll-top" title="Scroll to Top" onclick="javascript:window.scrollTo(0,0);"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
+   <button id="scrollTop" class="scroll-top" title="Scroll to Top"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
   <div class="divider4"></div>
 	<button id="oaisys" title="OAISYS Desktop" onclick="" class="mybutton"><i class="fa fa-microphone" aria-hidden="true"></i></button>
   <div class="divider8"></div>
+  <div class="divider9"></div>
   <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();" style="z-index: 0; position: absolute; left: 0px; top: 0px;">
-                    <button id="mapButton" class="customMapControlwrapper" disabled="" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                    <button id="mapButton" class="customMapControlwrapper" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
                     <div class="customMapControldropdown-content" id="dropdownContent">
 					<div class="separator">Coverage Issues</div>
                     <label class="container2" id="container0" title="MVS RS" style="border-radius: 0px 3px 0px 0px;">MVS
@@ -122,9 +129,11 @@
 	<button type="button" class="btn-circle btn-lg" id="bugbutton" title="Report a bug">
             <i class="fa fa-bug" aria-hidden="true"></i>
     </button>
-</div>
-<form id="RSgeneral" name="RSgeneral">
+	<button type="button" id="save" title="Save Form Data" ><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+   <button type="button" id="get" title="Load Saved Data" ><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
    <button type="reset" id="reset" title="Clear All Form Fields" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
+</div>
+   
  <div id="firstPart">  
    <div style="width:100%">
       <table id="header">
@@ -133,13 +142,14 @@
          </tr>
       </table>
    </div>
+   <div class="alert"></div>
    <table class="section2 full">
       <tr>
          <td class="block">Claim #</td>
-         <td><input Required type="text" id="ClaimNo" name="Claim Number" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td><input Required type="text" id="ClaimNo" name="ClaimNumber" class="fillIn" style="width: 100%" title="Claim Number"/></td>
          <td style="width: 25px;"></td>
          <td>Date </td>
-         <td><input Required title="Today's Date" type="text" name="Date of RS" class="fillIn date" style="width: 100%"/></td>
+         <td><input Required title="Today's Date" type="text" name="Date_of_RS" class="fillIn date" style="width: 100%"/></td>
          <td style="width: 25px;"></td>
          <td>Adjuster </td>
          <td><input Required title="Adjuster Initials" name="Adjuster" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
@@ -254,7 +264,7 @@
    <table class="section2 tight " style="margin-top:-30px">
       <tr>
          <td colspan="2"><label class="container ">DOP
-            <input Required title="Relationship between driver and insured" type="radio" id="DOP" name="UD" value="DOP"/>
+            <input Required title="Relationship between driver and insured" type="radio" name="UD" value="DOP"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -270,21 +280,27 @@
             <span class="checkmark"></span>
             </label>
          </td>
+		 <td class="spacer"></td>
+         <td style="display:none;"><label class="container ">Other
+            <input disabled type="radio" name="UD" value="Other"/>
+            <span class="checkmark"></span>
+            </label>
+         </td>
       </tr>
    </table>
    <div>
-      <table class="section half">
+      <table class="section half" >
          <tr>
             <td>RS taken with</td>
             <td><input Required title="RS Taken With" type="text" class="fillIn " style="width:100%;" name="RStakenWith"/></td>
          </tr>
          <tr>
             <td>Address</td>
-            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;" name="Address"/></td>
+            <td><input Required title="Address" type="text"  class="fillIn address1" style="width:100%;" name="Address1"/></td>
          </tr>
          <tr>
             <td></td>
-            <td><input type="text"  class="fillIn address2" style="width:100%;"/></td>
+            <td><input type="text"  class="fillIn address2" style="width:100%;" name="Address2"/></td>
          </tr>
          <tr>
             <td>Phone #</td>
@@ -366,7 +382,17 @@
          <td class="block">Date of loss:</td>
          <td><input Required title="Date of Loss" type="text" class="fillIn date" style="width:100%;"/></td>
          <td class="indent block">Time of loss:</td>
-         <td><input Required title="Time of Loss" type="text" class="fillIn time" style="width:100%;"/></td>
+         <td><input Required title="Time of Loss" type="text" class="fillIn" style="width:100%;"/></td>
+		 <td><label class="container">AM
+            <input required type="radio" name="timeofLoss" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td><label class="container">PM
+            <input type="radio" name="timeofLoss" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
       </tr>
    </table>
    <table class="section2 tight full" >
@@ -1152,6 +1178,10 @@
          <td class="numspacer"></td>
          <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
       </tr>
+	  <tr>
+         <td class="numspacer"></td>
+         <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
+      </tr>
    </table>
    <table class="section2 tight full" >
       <tr>
@@ -1396,13 +1426,13 @@
    <table class="section2 full">
       <tr>
          <td class="block">Claim #</td>
-         <td><input Required type="text" id="ClaimNo" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td><input Required type="text" id="FUQClaimNo" class="fillIn" style="width: 100%" title="Claim Number"/></td>
          <td style="width: 25px;"></td>
          <td>Date </td>
          <td><input Required title="Today's Date" type="text" class="fillIn date" style="width: 100%"/></td>
          <td style="width: 25px;"></td>
          <td>Adjuster </td>
-         <td><input Required title="Adjuster Initials" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
+         <td><input Required title="Adjuster Initials" type="text" id="adj3" class="fillIn" style="width: 100%"/></td>
       </tr>
    </table>
    <span id="docTitle" class="title1">GENERAL</span>
@@ -1412,12 +1442,12 @@
       </tr>
       <tr>
          <td><label class="container">Yes
-            <input required title="Permission to Record" type="radio" name="perm" />
+            <input required title="Permission to Record" type="radio" name="FUQperm" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td><label class="container">No
-            <input type="radio" name="perm" />
+            <input type="radio" name="FUQperm" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1430,7 +1460,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="lang" />
+            <input required title="Language of RS" type="radio" name="FUQlang" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1438,14 +1468,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="lang" />
+            <input type="radio" name="FUQlang" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="lang" />
+            <input type="radio" name="FUQlang" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1453,7 +1483,7 @@
       <tr>
          <td>
             <label class="container ">Other:
-            <input type="radio" name="lang" />
+            <input type="radio" name="FUQlang" />
             <span class="checkmark"></span>
             </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
          </td>
@@ -1466,46 +1496,46 @@
       </tr>
       <tr>
          <td><label class="container ">1st
-            <input required title="RS Number" type="radio" name="RSNo" />
+            <input required title="RS Number" type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">5th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">2nd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container yes">6th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">3rd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
-            </label><input id="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
+            </label><input id="FUQRSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">4th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="FUQRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1514,19 +1544,19 @@
    <table class="section2 tight " style="margin-top:-30px">
       <tr>
          <td colspan="2"><label class="container ">DOP
-            <input Required title="Relationship between driver and insured" type="radio" id="DOP" name="UD" value="DOP"/>
+            <input Required title="Relationship between driver and insured" type="radio" id="FUQUD" name="FUQUD" value="DOP"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">UD
-            <input type="radio" name="UD" value="UD"/>
+            <input type="radio" name="FUQUD" value="UD"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">Excluded
-            <input type="radio" name="UD" value="ED"/>
+            <input type="radio" name="FUQUD" value="ED"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1592,7 +1622,17 @@
          <td class="block">Date of loss:</td>
          <td><input Required title="Date of Loss" type="text" class="fillIn date" style="width:100%;"/></td>
          <td class="indent block">Time of loss:</td>
-         <td><input Required title="Time of Loss" type="text" class="fillIn time" style="width:100%;"/></td>
+         <td><input Required title="Time of Loss" type="text" class="fillIn" style="width:100%;"/></td>
+		 <td><label class="container">AM
+            <input required type="radio" name="FUQtimeofLoss" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
+         <td><label class="container">PM
+            <input type="radio" name="FUQtimeofLoss" />
+            <span class="checkmark"></span>
+            </label>
+         </td>
       </tr>
    </table>
    <table class="section2 tight full" style="padding-bottom: 25px;">
@@ -1620,7 +1660,7 @@
       <tr>
          <td class="indent2"></td>
          <td class="indent block"><label class="container">Yes
-            <input required type="radio" name="PR" />
+            <input required type="radio" name="THEFTPR" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1636,7 +1676,7 @@
       <tr>
          <td class="indent2"></td>
          <td class="indent block"><label class="container">No
-            <input type="radio" name="PR" />
+            <input type="radio" name="THEFTPR" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1767,29 +1807,33 @@
          <td class="numspacer"></td>
          <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
       </tr>
+	  <tr>
+         <td class="numspacer"></td>
+         <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
+      </tr>
    </table>
    <table class="section2 tight full" >
       <tr>
          <td class="indent2"></td>
          <td class="indent block">Airbags deployed?</td>
          <td class="indent" ><label class="container">Yes
-            <input required type="radio" name="IVab" />
+            <input type="radio" name="THEFTIVab" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class=""><label class="container">No
-            <input type="radio" name="IVab" />
+            <input type="radio" name="THEFTIVab" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="indent block">Vehicle Drivable?</td>
          <td class="indent" ><label class="container">Yes
-            <input required type="radio" name="IVdrivable" />
+            <input required type="radio" name="THEFTIVdrivable" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class=""><label class="container">No
-            <input type="radio" name="IVdrivable" />
+            <input type="radio" name="THEFTIVdrivable" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1800,12 +1844,12 @@
          <td class="indent2"></td>
          <td class="indent block">Vehicle Towed?</td>
          <td class="indent" ><label class="container">Yes
-            <input required type="radio" name="IVtowed" />
+            <input required type="radio" name="THEFTIVtowed" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class=""><label class="container">No
-            <input type="radio" name="IVtowed" />
+            <input type="radio" name="THEFTIVtowed" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1818,23 +1862,23 @@
          <td class="indent2"></td>
          <td class="indent block">Were pictures taken of (</td>
          <td class="" ><label class="container">Yes
-            <input required type="radio" name="IVPics" />
+            <input required type="radio" name="THEFTIVPics" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="block"><label class="container">No
-            <input type="radio" name="IVPics" />
+            <input type="radio" name="THEFTIVPics" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="block">) accident scene and/or (</td>
          <td class="" ><label class="container">Yes
-            <input required type="radio" name="IVaccidentphotos" />
+            <input required type="radio" name="THEFTIVaccidentphotos" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="block"><label class="container">No
-            <input type="radio" name="IVaccidentphotos" />
+            <input type="radio" name="THEFTIVaccidentphotos" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1851,12 +1895,12 @@
          <td class="indent2"></td>
          <td class="indent">Was there any damage to the vehicle prior to the loss?</td>
          <td class="indent " ><label class="container">Yes
-            <input required type="radio" name="IVupd" />
+            <input required type="radio" name="THEFTIVupd" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class=""><label class="container">No
-            <input type="radio" name="IVupd" />
+            <input type="radio" name="THEFTIVupd" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -2012,9 +2056,9 @@
          <td class="indent2"></td>
          <td colspan="2" class="indent block">delivery service? (Carpooling for IL policies?)</td>
          <td colspan="2" class="indent"><label class="container">Yes
-            <input required type="radio" name="rideshare" value="Yes"/>
+            <input required type="radio" name="THEFTrideshare" value="Yes"/>
             <span class="checkmark"></span></label><span class="indent"><label class="container">No
-            <input type="radio" name="rideshare" value="No"/>
+            <input type="radio" name="THEFTrideshare" value="No"/>
             <span class="checkmark"></span>
             </label></span>
          </td>
@@ -2025,12 +2069,12 @@
          <td colspan="1" class="indent2"></td>
          <td class="indent block"><strong>Is vehicle used for work/business/delivery?</strong></td>
          <td class="indent block"><label class="container">Yes
-            <input required type="radio" name="BIZ" value="Yes"/>
+            <input required type="radio" name="THEFTBIZ" value="Yes"/>
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="indent"><label class="container">No
-            <input type="radio" name="BIZ" value="No"/>
+            <input type="radio" name="THEFTBIZ" value="No"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -3280,6 +3324,10 @@
          <td class="numspacer"></td>
          <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
       </tr>
+	  <tr>
+         <td class="numspacer"></td>
+         <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
+      </tr>
    </table>
    <table class="section2 tight full" >
       <tr>
@@ -3866,6 +3914,10 @@
          <td></td>
       </tr>
       <tr>
+         <td class="numspacer"></td>
+         <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
+      </tr>
+	  <tr>
          <td class="numspacer"></td>
          <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%;"></input></td>
       </tr>
@@ -4682,7 +4734,7 @@
             </td>
             <td class="spacer"></td>
             <td class="block"><label class="container ">UD
-               <input checked type="radio" name="UDdriver" value="UD"/>
+               <input type="radio" name="UDdriver" value="UD"/>
                <span class="checkmark"></span>
                </label>
             </td>
@@ -10708,12 +10760,12 @@
       </tr>
       <tr>
          <td><label class="container">Yes
-            <input required title="Permission to Record" type="radio" name="perm" />
+            <input required title="Permission to Record" type="radio" name="WITperm" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td><label class="container">No
-            <input type="radio" name="perm" />
+            <input type="radio" name="WITperm" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -10726,7 +10778,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="lang" />
+            <input required title="Language of RS" type="radio" name="WITlang" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -10734,14 +10786,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="lang" />
+            <input type="radio" name="WITlang" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="lang" />
+            <input type="radio" name="WITlang" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -10749,7 +10801,7 @@
       <tr>
          <td>
             <label class="container ">Other:
-            <input type="radio" name="lang" />
+            <input type="radio" name="WITlang" />
             <span class="checkmark"></span>
             </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
          </td>
@@ -10762,46 +10814,46 @@
       </tr>
       <tr>
          <td><label class="container ">1st
-            <input required title="RS Number" type="radio" name="RSNo" />
+            <input required title="RS Number" type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">5th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">2nd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container yes">6th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">3rd
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
          <td class="spacer"></td>
          <td><label class="container ">
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
-            </label><input id="RSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
+            </label><input id="WITRSNumother" type="number" class="fillIn" style="font-size: 17px;width:45px"/>
          </td>
       </tr>
       <tr>
          <td><label class="container yes">4th
-            <input type="radio" name="RSNo" />
+            <input type="radio" name="WITRSNo" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -11183,6 +11235,10 @@
 				<td class="indent block">Insured's vehicle:</td>
 				<td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td>
 			</tr>	
+			<tr>
+				<td class="indent2"></td>
+				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
+			</tr>
 			<tr>
 				<td class="indent2"></td>
 				<td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td>
@@ -11584,10 +11640,18 @@
    <div id="PopupWindow">
       <h3><strong class="highlight">Popup</strong> Window!</h3>
       <p>This is the text inside my <strong class="highlight">popup</strong> window!</p>
-	  <div id="centerbuttonWrapper"><span id="continue" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i></span> <span id="cancel" type="button" class="center" value="Cancel" title="Abort printing"><i class="fa fa-ban" aria-hidden="true"></i></span></div>
-      <a href="#" onclick="ClosePopup();">x</a>
+	  <div id="centerbuttonWrapper"><span id="continue1" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i> Print</span> </div>
+      <a href="#" onclick="ClosePopup();"><i class="fa fa-times" aria-hidden="true"></i></a>
    </div>
-   
+
+	<section id="popup1">
+	  <h2></h2>
+	  <p></p>
+	  <div id="centerbuttonWrapper"><span id="continue" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i> Print</span> </div>
+	  <a href="#" onclick="ClosePopup();"><i class="fa fa-times" aria-hidden="true"></i></a>
+	</section>
+	
+	
 </form>
 </body>
 <footer id="footer">Recorded Statement General</footer>
