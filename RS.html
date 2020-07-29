@@ -8,7 +8,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
 <script src="https://use.fontawesome.com/ef0a3db2e4.js"></script>
-
 <script src="files\inputmask.js"></script>
 <script src="files\jquery.popupoverlay.min.js"></script>
 <link rel="icon" 
@@ -21,7 +20,7 @@
 <button class="scroll-up-button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
 <button class="scroll-down-button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
 
-<form id="RSgeneral" name="RSgeneral">
+<form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
 <div id="toolbar">
    <button id="leftbutton" onclick="clearAll();" title="Reload Form
       (Use this if the form isn't responding or reacting properly)"><i class="fa fa-repeat" aria-hidden="true"></i></button>
@@ -353,6 +352,7 @@
       </tr>
    </table>
 </div>
+ <hr class="style-seven">
  <div id="secondPart">  
    <table class="section2 tight full" style="padding-top:25px">
       <tr>
@@ -1414,6 +1414,7 @@
    </table>
  </div>  
    <!---END OF GENERAL-->
+   
    <!--START OF FOLLOW UP-->
   <div id="FOLLOWUP" class="hidden">
   <div style="width:100%">
@@ -1651,7 +1652,9 @@
   </div> 
    <!--END OF FOLLOW UP-->
    <!--START OF THEFT-->
+    
    <div id="THEFT" style="float:left;" class="hidden">
+   
    <table class="section2 tight full" >
       <tr>
          <td class="number"></td>
@@ -2080,6 +2083,7 @@
          </td>
       </tr>
    </table>
+   <hr class="style-seven">
    <span class="title1" style="padding-left:25px;">Theft<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
    <table class="tight section2 full" style="padding-top:25px;">
 			<tr>
@@ -4578,8 +4582,9 @@
    <!--END OF FIRE-->
    <!--START OF OUT OF STATE-->
    <div id="OUT OF STATE" style="float:left;padding-top:25px;" class="hidden">
-   <span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
-   <table class="tight section2 full" style="padding-top:25px;">
+   <hr class="style-seven">
+		<span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
+		<table class="tight section2 full" style="padding-top:25px;">
 			<tr>
 				<td class="number"></td>
 				<td class="indent block">What is the reason you were in</td>
@@ -4721,6 +4726,7 @@
    <!--END OF OUT OF STATE-->
    <!---START OF UD-->
    <div id="UD" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
       <span class="title1" style="padding-left:25px;">UD - Undisclosed Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2 full" style="padding-bottom:0px;">
          <tr>
@@ -5467,6 +5473,7 @@
    <!--END OF UD-->
    <!---START OF ED-->
    <div id="ED" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
       <span class="title1" style="padding-left:25px;">ED - Excluded Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2 full" style="padding-bottom:0px;">
          <tr>
@@ -6213,6 +6220,7 @@
    <!--END OF ED-->	 
    <!--START OF MCTD-->
   <div id="MCTD" style="float:left;padding-top:25px;" class="hidden">
+  <hr class="style-seven">
 	<span class="title1" style="padding-left:25px;">MCTD - More Cars Than Drivers<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 	<table class="section2 VNOPrental tight full" style="padding-top:25px;">
          <tr>
@@ -6332,6 +6340,7 @@
    <!--END OF MCTD-->
    <!--START OF TERRITORY-->
    <div id="TERRITORY" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
       <span class="title1" style="padding-left:25px;">Territory<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2" style="padding-right:0px;padding-bottom:0px;width: 52% !important;display: inline !important;margin: auto;float: left;">
          <tr>
@@ -6647,6 +6656,7 @@
    <!--END OF TERRITORY-->
    <!--START OF VNOP-->
    <div id="VNOP" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
       <span class="title1" style="padding-left:25px;">VNOP - Vehicle Not On Policy<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2 VNOP full" style="padding-bottom:0px;">
          <tr>
@@ -6900,6 +6910,7 @@
   
    <!--START OF BIZ USE-->
    <div id="BIZ" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
       <span class="title1" style="padding-left:25px;">Business Use<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2 tight  full" style="padding-top:25px;">
          <tr>
@@ -7433,6 +7444,7 @@
    <!--END OF BIZ-->
    <!--START OF MVS-->
   <div id="MVS" style="float:left;padding-top:25px;" class="hidden">
+  <hr class="style-seven">
 	<span class="title1" style="padding-left:25px;">MVS - Marries vs. Single<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 	  <table class="section2 VNOPrental tight full" style="padding-top:25px;">
          <tr>
@@ -7714,6 +7726,7 @@
    
    <!--START OF POINTS-->
   <div id="POINTS" style="float:left;padding-top:25px;" class="hidden">
+  <hr class="style-seven">
 	<span class="title1" style="padding-left:25px;">Points<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 	 <table class="section2 full" style="padding-bottom:0px;">
       <tr>
@@ -7848,6 +7861,7 @@
    <!--END OF POINTS-->
    <!--START OF REBUILT-->
   <div id="REBUILT" style="float:left;padding-top:25px;" class="hidden">
+  <hr class="style-seven">
 	<span class="title1" style="padding-left:25px;">Rebuilt<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 		 <table class="section2 tight full" style="padding-top:25px;">
 			  <tr>
@@ -8087,6 +8101,7 @@
    <!--END OF REBUILT-->
    <!--START OF NON-OWNERS-->
   <div id="NON-OWNERS" style="float:left;padding-top:25px;" class="hidden">
+  <hr class="style-seven">
 	<span class="title1" style="padding-left:25px;">Non-Owners<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 	<table class="tight section2 full" style="padding-top:25px;">
       <tr>
@@ -8116,24 +8131,38 @@
       </tr>
  </table>
  <table class="tight section2 full">
+	 <tr>
+		<td class="number"></td>
+		<td class="block indent">What is the Vehicle Identification Number (VIN)?</td>
+		<td><input required type="text" class="fillIn" style="width:100%"></td>
+	</tr>
+</table>
+<table class="tight section2 full">
+	<tr>
+		<td class="indent2"></td>
+		<td class="block indent">What is the license plate number?</td>
+		<td><input required type="text" class="fillIn" style="width:100%"></td>
+	 </tr>
+ </table>
+ <table class="tight section2 full">
       <tr>
          <td class="number"></td>
          <td class="block indent">Whose name is on the vehicle</td>
 		 <td class="block">Title:</td>
-         <td ><input type="text" class="fillIn" style="width:100%"></td>
+         <td><input required type="text" class="fillIn" style="width:100%"></td>
 		
       </tr>
       <tr>
          <td colspan="2" class="indent"></td>
          <td class="block">BOS:</td>
-         <td ><input type="text" class="fillIn" style="width:100%" placeholder=""></td>
+         <td ><input required type="text" class="fillIn" style="width:100%" placeholder=""></td>
 		 
       </tr>
       <tr>
 		<td class="indent2"></td>
          <td class="indent "></td>
          <td class="block">Registration:</td>
-         <td><input type="text" class="fillIn" style="width:100%" placeholder=""></td>
+         <td><input required type="text" class="fillIn" style="width:100%" placeholder=""></td>
       </tr>
  </table>
  <table class="section2 tight full">
@@ -8812,6 +8841,7 @@
    
    <!--START OF INJURY-->
    <div id="INJURY" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
    <span class="title1" style="padding-left:25px;">Injuries<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
    <table class="tight section2 full" style="padding-top:25px;">
 	<tr>
@@ -9831,7 +9861,8 @@
    <!--END OF INJURY-->
    <!--START OF HIT PEDESTRIAN-->
    <div id="HIT PEDESTRIAN" style="float:left;padding-top:25px;" class="hidden">
-   <span class="title1" style="padding-left:25px;">Hit Pedestrian<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
+   <hr class="style-seven">
+   <span class="title1" style="padding-left:25px;">Hit Pedestrian<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
 		<table class="tight section2 full" style="padding-top:25px;">
 		 <tr>
 			<td class="number"></td>
@@ -10271,7 +10302,8 @@
    <!--END OF HIT PEDESTRIAN-->
    <!--START OF MED CONDITION-->
    <div id="MED CONDITION" style="float:left;padding-top:25px;" class="hidden">
-   <span class="title1" style="padding-left:25px;">Medical Condition<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
+   <hr class="style-seven">
+   <span class="title1" style="padding-left:25px;">Medical Condition<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
    <table class="tight section2 full" style="padding-top:25px;">
 	<tr>
 		<td class="number"></td>
@@ -10592,6 +10624,7 @@
    <!--END OF MED CONDITION-->
    <!--START OF TOW-->
    <div id="TOW" style="float:left;padding-top:25px;" class="hidden">
+   <hr class="style-seven">
    <span class="title1" style="padding-left:25px;">Tow Statement<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
    <table class="tight section2 full" style="padding-top:25px;">
 			<tr>
@@ -11550,6 +11583,7 @@
   </div>
   
    <div id="AgentQuestions" class="hidden">
+  
       <table class="section2  full">
          <tr>
             <td><strong>Contact Agent:</strong></td>
