@@ -13,12 +13,17 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-	
-	if ( window.history.length > 1 ) {
-		//$.when(window.history.back()).done(function () {
+$("form").keypress(function(e) {
+  //Enter key
+  if (e.which == 13) {
+    return false;
+  }
+});
+	/*if ( window.history.length > 1 ) {
+		$.when(window.history.back()).done(function () {
 			//$('#reset').trigger('click');
-		//});
-	}		
+		});
+	}	*/	
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
 		$(':button').prop('disabled', true);
@@ -260,7 +265,7 @@ $(document).ready(function () {
 			$('#checkbox9').prop("checked",false);
 			$('#checkbox9').attr("disabled",false);
 		};
-		if ($(this).attr('name') == $("input[name^=rideshare]").attr('name') || $(this).attr('name') == $("input[name^=business]").attr('name') || $(this).attr('name') == $("input[name^=BIZ]").attr('name')) {
+		/*if ($(this).attr('name') == $("input[name^=rideshare]").attr('name') || $(this).attr('name') == $("input[name^=business]").attr('name') || $(this).attr('name') == $("input[name^=BIZ]").attr('name')) {
 			if ($("input[name^=rideshare]").prop("checked") == true || $("input[name^=business]").prop("checked") == true || $("input[name^=BIZ]").prop("checked") == true) {
 				$('#checkbox8').prop("checked",true);
 				$('#checkbox8').attr("disabled",true);
@@ -268,7 +273,7 @@ $(document).ready(function () {
 				$('#checkbox8').prop("checked",false);
 				$('#checkbox8').attr("disabled",false);
 			};
-		};
+		};*/
 		if ($(this).attr('name') == $("input[name^=UD]").attr('name') || $(this).attr('name') == $("input[name^=driver2]").attr('name') || $(this).attr('name') == $("input[name^=UDdriver]").attr('name')) {
 			//if ($("input[name^=UD]").prop("checked") == true || $("input[name^=driver2]").prop("checked") == true || $("input[name^=UDdriver]").prop("checked") == true) {
 			if ($(this).val() == 'UD') {
@@ -310,7 +315,6 @@ $( window ).resize( function(){
 	$('.printdiv').each(function (index, value) {
 		$(value).attr('title','Print this section only');
 		$(value).click(function () {
-		console.log($(this).closest('div').attr('id'));
 		PrintElem($(this).closest('div').attr('id'));
 		});
 	});
@@ -352,18 +356,7 @@ $( window ).resize( function(){
 		$("#" + $(this).attr('id') + " i").addClass("rotate");
 	});
 
-	$('.time').each(function (index, value) {
-		$(value).focus(function () {
-			$(value).val('');
-			$(value).attr('type', 'time');
-		});
-		$(value).blur(function () {
-			if ($(this).val() === '') {
-				$(value).attr('type', 'text');
-			}
-		});
 
-	});
 	$('.date').each(function (index, value) {
 		$(value).focus(function () {
 			$(value).attr('type', 'date');
@@ -612,7 +605,7 @@ $( window ).resize( function(){
 	$('#checkbox18').change(function () {
 		if (this.checked) {
 		if ($('[id^=checkbox]:checked').length <= 1) {
-			$('[id^=checkbox]').attr('disabled',true);
+			//$('[id^=checkbox]').attr('disabled',true);
 			$(this).attr('disabled',false);
 			loadFunctions();
 			coverageCheck("notOk", 'FOLLOWUP');	
@@ -627,7 +620,7 @@ $( window ).resize( function(){
 			$(this).prop('checked',false);
 		};
 		} else {
-			$('[id^=checkbox]').attr('disabled',false);
+			//$('[id^=checkbox]').attr('disabled',false);
 			coverageCheck("Ok", 'FOLLOWUP');
 			$('#firstPart').show();
 			$('#secondPart').show();
@@ -694,12 +687,13 @@ $( window ).resize( function(){
 	$("input[name^=BIZ]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'rideshare' );
 		var val2 = getRadioVal( document.getElementById('RSgeneral'), 'business' );
+		
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", $(this).attr('name'));
 			numberCols();
-		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes') {
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
 			coverageCheck("Ok", $(this).attr('name'));
-			$('#checkbox8').prop("checked",false);
+			//$('#checkbox8').prop("checked",false);
 			numberCols();
 		};
 	});
@@ -709,9 +703,9 @@ $( window ).resize( function(){
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", 'BIZ');
 			numberCols();
-		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes') {
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
 			coverageCheck("Ok", "BIZ");
-			$('#checkbox8').prop("checked",false);
+			//$('#checkbox8').prop("checked",false);
 			numberCols();
 		};
 	});
@@ -721,13 +715,14 @@ $( window ).resize( function(){
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", 'BIZ');
 			numberCols();
-		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes') {
-			$('#checkbox8').prop("checked",false);
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			//$('#checkbox8').prop("checked",false);
 			coverageCheck("Ok", "BIZ");
 			numberCols();
 		};
 	});
 	$('input[name="UD"]').change(function () {
+		console.log($(this).val())
 		var val = getRadioVal( document.getElementById('RSgeneral'), 'driver2' );
 		if ($(this).val() === 'UD') {
 			coverageCheck("notOk", 'UD');
@@ -1823,6 +1818,13 @@ function loadFunctions() {
 		});
 	});*/
 	$('#ClaimNo').inputmask("A[A]-999999");
+	$('.time').inputmask("[hh:mm]", {
+        placeholder: "HH:MM", 
+        insertMode: false, 
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+   );
 	$('#FUQClaimNo').inputmask("A[A]-999999");
 	$('#ClaimNo2').inputmask("A[A]-999999");
 	$('.phone').inputmask("(999) 999-9999");
@@ -1980,15 +1982,14 @@ function fillInAddress(input, autocomplete) {
 }
 
 function titleCase(str) {
-
-	str = str.toLowerCase().split(' ');
+	/*str = str.toLowerCase().split(' ');
 	for (var i = 0; i < str.length; i++) {
 		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
 	}
 	var newStrng = str.join(' ');
 	//return str.join(' ');
-	return charCase1(newStrng);
-
+	return charCase1(newStrng);*/
+	return str.toUpperCase();
 }
 
 function charCase1(str) {
@@ -2006,9 +2007,96 @@ function charCase2(str) {
 		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
 	}
 
-	return str.join('.');
+	return charCase3(str.join('.'));
 }
+function charCase3(str) {
+	str = str.split('Afic');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
 
+	return charCase4(str.join('AFIC'));
+}
+function charCase4(str) {
+	str = str.split('Iv');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase5(str.join('IV'));
+}
+function charCase5(str) {
+	str = str.split('Cv');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase6(str.join('CV'));
+}
+function charCase6(str) {
+	str = str.split('Fol');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase7(str.join('FOL'));
+}
+function charCase7(str) {
+	str = str.split('Dol');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase8(str.join('DOL'));
+}
+function charCase8(str) {
+	str = str.split('Lh');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase9(str.join('LH'));
+}
+function charCase9(str) {
+	str = str.split('Vnop');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase10(str.join('VNOP'));
+}
+function charCase10(str) {
+	str = str.split('Ud');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase11(str.join('UD'));
+}
+function charCase11(str) {
+	str = str.split('Ed');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase12(str.join('ED'));
+}
+function charCase12(str) {
+	str = str.split('Dop');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return charCase13(str.join('DOP'));
+}
+function charCase13(str) {
+	str = str.split('Tcr');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+
+	return str.join('TCR');
+}
 function isOverflown(el) {
 	var s = $('<span >' + el.val() + '</span>');
 	s.css({
@@ -2617,7 +2705,7 @@ wrapper.style.borderRadius = "4px";
 }
 function PrintElem(elem)
 {
-	console.log(elem);
+
 	if (elem !== undefined) {
     var mywindow = window.open('', 'PRINT', 'height='+h+',width='+w);
 	

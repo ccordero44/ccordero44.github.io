@@ -96,13 +96,46 @@
                 display: block;
                 
             }
-hr {
-	display: block;
-    white-space: nowrap;
+
+hr.section1 {
+	float: left;
+	width: 100%;
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.section1:after {
+    content: ' \00A7';
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+hr.style-seven {
+	float: left;
+	width: 100%;
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
 	position: relative;
-	background-color: #f3f3f3;
-	margin-left: 5px;
-	margin-right: 5px;
+}
+hr.style-seven:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: gray;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
 }
 .separator {
     display: flex;
@@ -666,7 +699,9 @@ textarea {
 	overflow: auto;
 	box-sizing: border-box;
 }
-
+textarea.fillIn {
+	font-size: 14px;
+}
 .phoneTD {
 	width: 1.8%;
 }
@@ -694,7 +729,7 @@ input {
 	margin-left: 50px;
 	margin-right: 25px;
 }
-
+	
 #jobSitesDaily {
 	margin-left: 50px;
 	margin-right: 25px;
@@ -1227,5 +1262,9 @@ span.banners {
 	padding-bottom: 0px;
 	position: absolute;
 }
+	}
+	hr {
+		display: none;
+
 	}
 }
