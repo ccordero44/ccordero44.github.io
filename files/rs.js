@@ -2098,7 +2098,7 @@ function charCase13(str) {
 	return str.join('TCR');
 }
 function isOverflown(el) {
-	var s = $('<span >' + el.val() + '</span>');
+	var s = $('<span >' + el.val().toUpperCase() + '</span>');
 	s.css({
 		position: 'absolute',
 		left: -9999,
