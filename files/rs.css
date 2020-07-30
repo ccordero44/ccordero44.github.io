@@ -698,6 +698,7 @@ textarea {
 	background-color: #CCD7FF;
 	overflow: auto;
 	box-sizing: border-box;
+	text-transform: uppercase;
 }
 textarea.fillIn {
 	font-size: 14px;
@@ -719,6 +720,7 @@ input {
 	background-color: #CCD7FF;
 	font-family: Arial;
 	box-sizing: border-box;
+	text-transform: uppercase;
 }
 
 .addressTD td {
