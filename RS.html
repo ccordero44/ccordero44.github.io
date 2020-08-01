@@ -22,7 +22,7 @@
 
 <form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
 <div id="toolbar">
-   <button id="leftbutton" onclick="clearAll();" title="Reload Form
+   <button id="leftbutton" onclick="" title="Reload Form
       (Use this if the form isn't responding or reacting properly)"><i class="fa fa-repeat" aria-hidden="true"></i></button>
    <div class="divider1"></div>
    <div class="divider2"></div>
@@ -32,12 +32,14 @@
    <div class="divider"></div>
    <div class="divider5"></div>
    <div class="divider6"></div>
+   <div class="divider10"></div>
    <button id="undo" title="Undo the last CheckBox"><i class="fa fa-undo" aria-hidden="true"></i></button>
    <div class="divider7"></div>
    <button id="scrollTop" class="scroll-top" title="Scroll to Top"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
   <div class="divider4"></div>
 	<button id="oaisys" title="OAISYS Desktop" onclick="" class="mybutton"><i class="fa fa-microphone" aria-hidden="true"></i></button>
   <div class="divider8"></div>
+   <button title="Toggle RS General hide/show" class="collapsible"><i class="fa fa-minus"></i></button>
   <div class="divider9"></div>
   <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();" style="z-index: 0; position: absolute; left: 0px; top: 0px;">
                     <button id="mapButton" class="customMapControlwrapper" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
@@ -351,9 +353,11 @@
          <td><input type="text" class="fillIn" style="width:100%;" /></td>
       </tr>
    </table>
+  
 </div>
- <hr class="style-seven">
+ 
  <div id="secondPart">  
+ <hr class="style-seven">
    <table class="section2 tight full" style="padding-top:0px">
       <tr>
          <td class="block">Vehicle:</td>
@@ -416,7 +420,7 @@
       <tr>
          <td class="block">POP info:</td>
          <td class="block">Company name:</td>
-         <td><input type="text" class="fillIn" /></td>
+         <td><input type="text" class="fillIn" style="width:100%"/></td>
          <td class="block">Policy #:</td>
          <td><input type="text" class="fillIn" style="width:100%"/></td>
       </tr>
@@ -433,11 +437,11 @@
    <table class="section2 tight full" >
       <tr>
          <td class="block">If no POP, why?</td>
-         <td><input type="text" class="fillIn" style="width:100%"/></td>
+         <td><input type="text" class="fillIn FOL" style="width:100%"/></td>
       </tr>
       <tr>
          <td></td>
-         <td><input type="text" class="fillIn" style="width:100%"/></td>
+         <td><input type="text" class="fillIn FOL" style="width:100%"/></td>
       </tr>
    </table>
    <table class="section2 full tight" style="padding-top:25px;">
@@ -4581,9 +4585,9 @@
   </div>
    <!--END OF FIRE-->
    <!--START OF OUT OF STATE-->
-   <div id="OUT OF STATE" style="float:left;padding-top:25px;" class="hidden">
+   <div id="OUT_OF_STATE" style="float:left;padding-top:25px;" class="hidden">
    <hr class="style-seven">
-		<span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
+		<span class="title1" style="padding-left:25px;">Out of State<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 		<table class="tight section2 full" style="padding-top:25px;">
 			<tr>
 				<td class="number"></td>
@@ -4727,7 +4731,7 @@
    <!---START OF UD-->
    <div id="UD" style="float:left;padding-top:25px;" class="hidden">
    <hr class="style-seven">
-      <span class="title1" style="padding-left:25px;">UD - Undisclosed Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
+      <span class="title1" style="padding-left:25px;"><i class="fa fa-plus-circle noprint" style="padding-top:2px;padding-right:5px;color:dodgerblue;display:none;" id="addUDSec"></i>UD - Undisclosed Driver<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
       <table class="section2 full" style="padding-bottom:0px;">
          <tr>
             <td class="number"></td>
@@ -5470,6 +5474,7 @@
          </tr>
       </table>
    </div>
+   <div id="moreUD"></div>
    <!--END OF UD-->
    <!---START OF ED-->
    <div id="ED" style="float:left;padding-top:25px;" class="hidden">
@@ -7134,7 +7139,7 @@
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="indent ">to <strong>PER DAY</strong>:</td>
-            <td colspan="1"><input Required type="number" class="fillIn rowNumbers4" style="width:25%" value="1" min="1"/></td>
+            <td colspan="1"><input Required type="number" class="fillIn" style="width:25%" value="1" min="1"/></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7146,7 +7151,7 @@
       <table class="section border tableProper tablenobreak" border="1" id="jobSitesDaily" style="margin-top:5px">
          <thead>
             <tr>
-               <th class="tablefirst"></th>
+               <th class="tablefirst" title="Click to Add another Vehicle row." style="cursor:pointer;"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="addVOPtable17"></i></th>
                <th style="width:5%;" class="block">Name of Location<br/>(job site/client home<br/>office/other-specify)</th>
                <th style="width:15%;" class="block addressTD">Address</th>
                <th style="width:1%;" class="block phoneTD">How far (# of miles) from<br/>A's residence</th>
@@ -7154,7 +7159,7 @@
          </thead>
          <tbody>
             <tr>
-               <td class="tablefirst">1.</td>
+               <td class="VOPnums17" style="text-align:right;">1.</td>
                <td><textarea type="text" class="fillIn" style="width:100%"></textarea></td>
                <td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td>
                <td><textarea type="text" class="fillIn" style="width:100%"></textarea></td>
@@ -7171,7 +7176,7 @@
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="indent ">to <strong>PER WEEK</strong>:</td>
-            <td colspan="1"><input Required type="number" class="fillIn rowNumbers5" style="width:25%" value="1" min="1"/></td>
+            <td colspan="1"><input Required type="number" class="fillIn" style="width:25%" value="1" min="1"/></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7183,7 +7188,7 @@
       <table class="section border tableProper tablenobreak" border="1" id="jobSitesWeekly" style="margin-top:5px">
          <thead>
             <tr>
-               <th class="tablefirst"></th>
+               <th class="tablefirst" title="Click to Add another Vehicle row." style="cursor:pointer;"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;" id="addVOPtable18"></i></th>
                <th style="width:5%;" class="block">Name of Location<br/>(job site/client home<br/>office/other-specify)</th>
                <th style="width:15%;" class="block addressTD">Address</th>
                <th style="width:1%;" class="block phoneTD">How far (# of miles) from<br/>A's residence</th>
@@ -7191,7 +7196,7 @@
          </thead>
          <tbody>
             <tr>
-               <td class="tablefirst">1.</td>
+               <td class="VOPnums18" style="text-align:right;">1.</td>
                <td><textarea type="text" class="fillIn" style="width:100%"></textarea></td>
                <td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td>
                <td><textarea type="text" class="fillIn" style="width:100%"></textarea></td>
@@ -7407,12 +7412,12 @@
             <td colspan="1" class="number"></td>
             <td class="indent block">Did A read the application?</td>
             <td class="indent block"><label class="container">Yes
-               <input Required type="radio" name="AreadApp" />
+               <input Required type="radio" name="BIZAreadApp" />
                <span class="checkmark"></span>
                </label>
             </td>
             <td class="indent"><label class="container">No
-               <input type="radio" name="AreadApp" />
+               <input type="radio" name="BIZAreadApp" />
                <span class="checkmark"></span>
                </label>
             </td>
@@ -7423,12 +7428,12 @@
             <td colspan="1" class="number"></td>
             <td class="indent block">Did A sign the application?</td>
             <td class="indent block"><label class="container">Yes
-               <input Required type="radio" name="AreadApp" />
+               <input Required type="radio" name="BIZAsignApp" />
                <span class="checkmark"></span>
                </label>
             </td>
             <td class="indent"><label class="container">No
-               <input type="radio" name="AreadApp" />
+               <input type="radio" name="BIZAsignApp" />
                <span class="checkmark"></span>
                </label>
             </td>
@@ -9860,9 +9865,9 @@
    </div>
    <!--END OF INJURY-->
    <!--START OF HIT PEDESTRIAN-->
-   <div id="HIT PEDESTRIAN" style="float:left;padding-top:25px;" class="hidden">
+   <div id="HIT_PEDESTRIAN" style="float:left;padding-top:25px;" class="hidden">
    <hr class="style-seven">
-   <span class="title1" style="padding-left:25px;">Hit Pedestrian<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
+   <span class="title1" style="padding-left:25px;">Hit Pedestrian<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
 		<table class="tight section2 full" style="padding-top:25px;">
 		 <tr>
 			<td class="number"></td>
@@ -10301,9 +10306,9 @@
    </div>
    <!--END OF HIT PEDESTRIAN-->
    <!--START OF MED CONDITION-->
-   <div id="MED CONDITION" style="float:left;padding-top:25px;" class="hidden">
+   <div id="MED_CONDITION" style="float:left;padding-top:25px;" class="hidden">
    <hr class="style-seven">
-   <span class="title1" style="padding-left:25px;">Medical Condition<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;display:none;"></i></span>
+   <span class="title1" style="padding-left:25px;">Medical Condition<i class="fa fa-print noprint printdiv" aria-hidden="true" style="float:right;padding-right:25px;"></i></span>
    <table class="tight section2 full" style="padding-top:25px;">
 	<tr>
 		<td class="number"></td>
@@ -11581,15 +11586,27 @@
       </tr>
    </table>
   </div>
-  
-   <div id="AgentQuestions" class="hidden">
-  
-      <table class="section2  full">
+  <!--START OF AGENT QUESTIONS-->
+   <div id="AgentQuestions" style="padding-top:25px;" class="hidden">
+   <table class="section2 full hidden" id="agentQfirstPart">
+      <tr>
+         <td class="block">Claim #</td>
+         <td><input Required type="text" id="AgentClaimNo" name="AgentClaimNo" class="fillIn" style="width: 100%" title="Claim Number"/></td>
+         <td style="width: 25px;"></td>
+         <td>Date </td>
+         <td><input Required title="Today's Date" type="text" name="AgentDate_of_RS" class="fillIn date" style="width: 100%"/></td>
+         <td style="width: 25px;"></td>
+         <td>Adjuster </td>
+         <td><input Required title="Adjuster Initials" name="AgentAdjuster" type="text" id="adj" class="fillIn" style="width: 100%"/></td>
+      </tr>
+   </table>
+	<span class="title1" style="padding-left:25px;">Agent Questions</span>
+      <!--<table class="section2  full">
          <tr>
-            <td><strong>Contact Agent:</strong></td>
+            <td><strong>Agent Questions</strong></td>
          </tr>
-      </table>
-      <table class="section2 tight full">
+      </table>-->
+      <table class="section2 tight full" style="padding-top:25px;">
          <tr>
             <td class="AgentNumber reset"></td>
             <td class="indent block">Name of person at agency who AFIC is veryfing info with:</td>
@@ -11600,14 +11617,22 @@
          <tr>
             <td class="AgentNumber"></td>
             <td class="indent block">Who at the agency talked to Insured when Insured applied for insurance?</td>
-            <td><input type="text" class="fillIn" style="width:100%;"/></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
+		 <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
          </tr>
       </table>
       <table class="section2 tight full">
          <tr>
             <td class="AgentNumber"></td>
             <td class="indent block">How was the insurance purchased?  Over phone, in person, through a dealer, etc.?</td>
-            <td><input type="text" class="fillIn" style="width:100%;"/></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
+		 <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
          </tr>
       </table>
       <table class="section2 tight full">
@@ -11619,9 +11644,13 @@
       </table>
       <table class="section2 tight full">
          <tr>
-            <td class="AgentNumber"></td>
+            <td class="indent2"></td>
             <td class="indent block">If no, why not?</td>
-            <td><input type="text" class="fillIn" style="width:100%;"/></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
+		 <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
          </tr>
       </table>
       <table class="section2 tight full">
@@ -11653,7 +11682,11 @@
          <tr>
             <td class="AgentNumber"></td>
             <td class="indent block">Did Insured sign the application or any other forms?</td>
-            <td colspan=""><input type="text" class="fillIn" style="width:100%;"/></td>
+            <td colspan=""><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
+		 <tr>
+            <td class="indent2"></td>
+            <td colspan="2" class="indent"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
          </tr>
          <tr>
             <td class="indent2"></td>
@@ -11667,7 +11700,16 @@
             <td colspan=""><input type="text" class="fillIn" style="width:100%;"/></td>
             <td class="block">(When & what changes)</td>
          </tr>
+		 <tr>
+            <td class="indent2"></td>
+            <td class="indent" colspan="3"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
+		<tr>
+            <td class="indent2"></td>
+            <td class="indent" colspan="3"><input type="text" class="fillIn FOL" style="width:100%;"/></td>
+         </tr>
       </table>
+	  
    </div>
    
    <div id="PopupOverlay"></div>
