@@ -13,7 +13,8 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-$("form").keypress(function(e) {
+
+$("input").keypress(function(e) {
   //Enter key
   if (e.which == 13) {
     return false;
@@ -203,6 +204,21 @@ $("form").keypress(function(e) {
 		populateForm();
 		
 	});
+
+	$('.collapsible').click(function (e) {
+		e.preventDefault();
+		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus') {
+			alert('Please select an RS template from the dropdown menu first, then try again.');
+		}else{
+			if ($('.collapsible i').attr("class") == 'fa fa-minus') {
+				$('.collapsible i').attr("class", 'fa fa-plus');
+				 hideMain();
+			}else{
+				$('.collapsible i').attr("class", 'fa fa-minus');
+				showMain();
+			};
+		};		
+	});
 	$('#PopupOverlay').on('mousedown', function () {
 		ClosePopup();
 	});
@@ -227,6 +243,16 @@ $("form").keypress(function(e) {
 		 alert('Missing Chrome extension detected.\n\nPlease download the Chrome extension "ClickOnce for Google Chrome" in order to run Oaisys Desktop directly from this RS template, then try again.');
 		  }
 		});			
+	});
+	$('#leftbutton').click(function (e) {
+		e.preventDefault();
+		var r = confirm("Are you sure you'd like to reload the page and lose any unsaved data?");
+		if (r == true) {
+			location.reload();
+		  } else {
+			  return;
+		  }
+
 	});
 	$(function() {
 		//  changes mouse cursor when highlighting loawer right of box
@@ -316,6 +342,7 @@ $( window ).resize( function(){
 		$(value).attr('title','Print this section only');
 		$(value).click(function () {
 		PrintElem($(this).closest('div').attr('id'));
+		
 		});
 	});
 	$('input[type=radio]').each(function (index, value) {
@@ -384,7 +411,7 @@ $( window ).resize( function(){
 			alert("Bug report cancelled.");
 			return;
 		}else{
-			document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),body)
+			document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),body);
 		};
 	});
 	$("input:radio").on('click', function () {
@@ -497,23 +524,23 @@ $( window ).resize( function(){
 	});
 	$('#checkbox12').change(function () {
 		if (this.checked) {
-			coverageCheck("notOk", 'HIT PEDESTRIAN');
+			coverageCheck("notOk", 'HIT_PEDESTRIAN');
 			//alert("HIT PEDESTRIAN RS coming soon...")
 			//$(this).prop('checked',false);
 			numberCols();
 		} else {
-			coverageCheck("Ok", 'HIT PEDESTRIAN');
+			coverageCheck("Ok", 'HIT_PEDESTRIAN');
 			numberCols();
 		};
 	});
 	$('#checkbox13').change(function () {
 		if (this.checked) {
-			coverageCheck("notOk", 'MED CONDITION');
+			coverageCheck("notOk", 'MED_CONDITION');
 			//alert("MED CONDITION RS coming soon...")
 			//$(this).prop('checked',false);
 			numberCols();
 		} else {
-			coverageCheck("Ok", 'MED CONDITION');
+			coverageCheck("Ok", 'MED_CONDITION');
 			numberCols();
 		};
 	});
@@ -562,22 +589,48 @@ $( window ).resize( function(){
 	});
 	$('#checkbox16').change(function () {
 		if (this.checked) {
-			coverageCheck("notOk", 'OUT OF STATE');
+			coverageCheck("notOk", 'OUT_OF_STATE');
 			//alert("OUT OF STATE RS coming soon...")
 			//$(this).prop('checked',false);
 			numberCols();
 		} else {
-			coverageCheck("Ok", 'OUT OF STATE');
+			coverageCheck("Ok", 'OUT_OF_STATE');
 			numberCols();
 		};
 	});
 	$('#checkbox6').change(function () {
 		if (this.checked) {
-			$('#AgentQuestions').show();
-			numberCols();
+			if ($('[id^=checkbox]:checked').length <= 1) {
+			$('[id^=checkbox]').attr('disabled',true);
+			$(this).attr('disabled',false);
+				$('#firstPart').hide();
+				$('#secondPart').hide();
+				$('#addVehicles').hide();
+				$('#folTable').hide();
+				$('#lastPart').hide();
+				$('#closingQuestions').hide();
+				$('#AgentQuestions').show();
+				if ($('.hidden:visible').length == 1) {
+					$('#agentQfirstPart').show();
+				}else{
+					$('#agentQfirstPart').hide();
+				};
+				numberCols();
+			}else{
+				alert("Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.");
+				$(this).prop('checked',false);
+			};
 		} else {
-			$('#AgentQuestions').hide();
-			numberCols();
+				$('[id^=checkbox]').attr('disabled',false);
+				$('#firstPart').show();
+				$('#secondPart').show();
+				$('#addVehicles').show();
+				$('#folTable').show();
+				$('#lastPart').show();
+				$('#closingQuestions').show();
+				$('#AgentQuestions').hide();
+				$('#agentQfirstPart').hide();
+				numberCols();
 		};
 	});
 	$('#checkbox7').change(function () {
@@ -645,12 +698,12 @@ $( window ).resize( function(){
 		if (this.checked) {
 			coverageCheck("notOk", 'UD');
 			//$("input:radio[name=UDdriver]:second").prop("checked",true);
-			$("input:radio[name=UDdriver]").attr("disabled",true);			
+			//$("input:radio[name=UDdriver]").attr("disabled",true);			
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'UD');
 			//$("input:radio[name=UDdriver]:second").prop("checked",false);
-			$("input:radio[name=UDdriver]").attr("disabled",false);
+			//$("input:radio[name=UDdriver]").attr("disabled",false);
 			numberCols();
 		};
 	});
@@ -726,9 +779,11 @@ $( window ).resize( function(){
 		var val = getRadioVal( document.getElementById('RSgeneral'), 'driver2' );
 		if ($(this).val() === 'UD') {
 			coverageCheck("notOk", 'UD');
+			$("input[name=UDdriver][value=UD]").prop('checked', true);
 			numberCols();
 		} else if ($(this).val() !== 'UD' && val !== 'UD') {
 			coverageCheck("Ok", 'UD');
+			$("input[name=UDdriver][value=UD]").prop('checked', false);
 			numberCols();
 		};
 		
@@ -744,9 +799,11 @@ $( window ).resize( function(){
 		var val = getRadioVal( document.getElementById('RSgeneral'), 'UD' );
 		if ($(this).val() === 'UD') {
 			coverageCheck("notOk", 'UD');
+			$("input[name=UDdriver][value=UD]").prop('checked', true);
 			numberCols();
 		} else if ($(this).val() !== 'UD' && val !== 'UD') {
 			coverageCheck("Ok", 'UD');
+			$("input[name=UDdriver][value=UD]").prop('checked', false);
 			numberCols();
 		};
 		if ($(this).val() === 'ED') {
@@ -1155,6 +1212,38 @@ $( window ).resize( function(){
 			$(this).click(function () {
 				$(this).closest("tr").remove();
 				numberColsOther('VOPnums16');
+			});
+		});
+	});
+	$('#addVOPtable17').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#jobSitesDaily').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows + 1;
+		var html = '<td class="VOPnums17" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('jobSitesDaily', html, 1);
+
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('VOPnums17');
+			});
+		});
+	});
+	$('#addVOPtable18').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#jobSitesWeekly').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows + 1;
+		var html = '<td class="VOPnums18" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('jobSitesWeekly', html, 1);
+
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('VOPnums18');
 			});
 		});
 	});
@@ -1582,9 +1671,25 @@ $('.rowNumbers').on('input', function(){
 			}
 			return pos;
 		};
+		
 	/*end of document ready*/
 });
+function showMain() {
 
+	$('#secondPart').show();
+	$('#addVehicles').show();
+	$('#folTable').show();
+	$('#lastPart').show();
+
+}
+function hideMain() {
+	
+	$('#secondPart').hide();
+	$('#addVehicles').hide();
+	$('#folTable').hide();
+	$('#lastPart').hide();
+
+}
 function coverageCheck(status, ele) {
 	var arr = $(".hidden");
 
@@ -1592,13 +1697,13 @@ function coverageCheck(status, ele) {
 		if (status === "Ok" && $(value).attr('id') === ele) {
 			$(value).hide();
 			
-			$('#AgentQuestions').hide();
+		//	$('#AgentQuestions').hide();
 		
 		} else if (status !== "Ok" && $(value).attr('id') === ele) {
 			$(value).show();
-			if (!(ele == 'NON-OWNERS' || ele == 'FLOOD' || ele == 'FIRE' || ele == 'THEFT' || ele == 'TOW' || ele == 'WITNESS' || ele == 'INJURY' || ele == 'HIT PEDESTRIAN' || ele == 'OUT OF STATE' || ele == 'FOLLOWUP')) {
+			/*if (!(ele == 'NON-OWNERS' || ele == 'FLOOD' || ele == 'FIRE' || ele == 'THEFT' || ele == 'TOW' || ele == 'WITNESS' || ele == 'INJURY' || ele == 'HIT PEDESTRIAN' || ele == 'OUT OF STATE' || ele == 'FOLLOWUP')) {
 				$('#AgentQuestions').show();
-			};
+			};*/
 		};
 	
 
@@ -1616,15 +1721,15 @@ function coverageCheck(status, ele) {
 				if (title2.indexOf("FLOOD")!== -1 || title2.indexOf("FIRE")!== -1) {
 					title2 = title2.replace("GENERAL, ","");
 				};
-				$('#docTitle').html(title2); 
-				$(document).attr('title', title);
+				$('#docTitle').html(title2.replace(/_/g, " ")); 
+				$(document).attr('title', title.replace(/_/g, " "));
 				$('#footer').html(title);
 			}else{
 				title = title.replace(", " + $(arr[i]).attr('id'), '');
 				title += ", " + $(arr[i]).attr('id');
 				title2 = title.replace("Recorded Statement General, ",""); //", " + $(arr[i]).attr('id');
-				$('#docTitle').html(title2);
-				$(document).attr('title', title);
+				$('#docTitle').html(title2.replace(/_/g," "));
+				$(document).attr('title', title.replace(/_/g, " "));
 				$('#footer').html(title);
 			}
 		} else if ($(arr[i]).attr('id') === ele && $(arr[i]).css('display') === 'none') {
@@ -1633,9 +1738,9 @@ function coverageCheck(status, ele) {
 			if (title2 === 'Recorded Statement General') {
 				$('#docTitle').html('GENERAL');
 			}else{
-				$('#docTitle').html(title2);
+				$('#docTitle').html(title2.replace(/_/g, " "));
 			}
-			$(document).attr('title', title);
+			$(document).attr('title', title.replace(/_/g, " "));
 			$('#footer').html(title);
 		} 
 		
@@ -1751,6 +1856,8 @@ function loadFunctions() {
     }); */
 
 	$('.FOL').on('input paste', function () {
+		var cursPosPre = $(this).getCursorPosition();
+		var valLength = $(this).val().length;
 		if (isOverflown($(this))) {
 			var $this = $(this).val();
 			var stringsplit = $this.split(' ');
@@ -1760,12 +1867,16 @@ function loadFunctions() {
 			var curTxt = $(this).closest('tr').next().find('.FOL').val();
 				if (curTxt == '') {
 					$(this).closest('tr').next().find('.FOL').val(stringsplit2+curTxt);
+					
 				}else{
 					$(this).closest('tr').next().find('.FOL').val(stringsplit2+" "+curTxt);	
+					
 				};
 				$(this).closest('tr').next().find('.FOL').trigger('input');
 				$(this).closest('tr').next().find('.FOL').focus();
 				$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition(stringsplit2.length);
+				//$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition($this.length - cursPosPre + 1);
+
 				if (cursPos < stringsplit.slice(0,stringsplit.length).join(' ').length) {
 					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
 					$(this).focus();
@@ -1773,10 +1884,29 @@ function loadFunctions() {
 				}else{
 					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
 				};
+				$(this).closest('tr').next().find('.FOL').trigger('input');
 		};
 	});
 
-
+	$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone):not(.FOL)").on('keydown', function () {
+		var fontSize = $(this).css('font-size');
+		if (isOverflown($(this)) && parseFloat(fontSize) > 9) {
+			$(this).css('font-size', parseFloat(fontSize)-1);
+		}else if (!isOverflown($(this)) && parseFloat(fontSize) < 17) {
+			$(this).css('font-size', parseFloat(fontSize)+1);
+		};
+		if ($(this).val() =='') {
+			$(this).css('font-size', 17);
+		};
+		
+	});
+	$('#addUDSec').click(function () {
+		var UDsec = $('#UD').clone();
+		UDsec.find('#addUDSec').remove();
+		UDsec.find('.printdiv').remove();
+		$('#moreUD').append(UDsec);
+	});
+	
 	$('.IVs').keydown(function () {
 
 		if (isOverflown($(this))) {
@@ -1787,7 +1917,6 @@ function loadFunctions() {
 			$(this).val(stringsplit.join(' '));
 			$(this).closest('td').next().find('.IVs').focus();
 		};
-
 
 	});
 	/*$("textarea.fillIn").change(function () {
@@ -1861,6 +1990,7 @@ function loadFunctions() {
 		});
 	});*/
 	$('#ClaimNo').inputmask("A[A]-999999");
+	$('#AgentClaimNo').inputmask("A[A]-999999");
 	$('.time').inputmask("[hh:mm]", {
         placeholder: "HH:MM", 
         insertMode: false, 
@@ -2164,8 +2294,14 @@ function isOverflown(el) {
 
 
 function clearAll() {
-	location.reload();
-	//window.scrollTo(0, 0);
+	
+	  var r = confirm("Are you sure you'd like to reload the page and lose any unsaved data?");
+	  if (r == true) {
+		location.reload();
+	  } else {
+		  return;
+	  }
+
 }
 
 
@@ -2770,13 +2906,22 @@ function PrintElem(elem)
 	mywindow.document.write(document.getElementById('closingQuestions').innerHTML);
 	mywindow.document.write('</form>');
     mywindow.document.write('</body></html>');
-	
+	$("td.number").each(function (i, v) {
+		$(v).text('');
+		$(v).text(i + 1 + ".");
+		$(this).css('width', '35px');
+
+	});
+	var num = mywindow.document.getElementsByClassName('number');
+	for (var i = 0; i < num.length; i++) {
+		num[i].innerHTML = i + 1 + ".";
+	}
     mywindow.document.close(); // necessary for IE >= 10
     mywindow.focus(); // necessary for IE >= 10*/
 
    // mywindow.print();
    // mywindow.close();
-
+	
     return true;
 	}else{
 		
@@ -2799,6 +2944,7 @@ function PrintElem(elem)
 function resetReset() {
 	console.time('Reset Function Time');
 		//	$('.rowNumbers').trigger('change');
+			$('.collapsible i').attr("class", 'fa fa-minus');
 			$('.rowNumbers').trigger('input');
 			$('.rowNumbers2').trigger('input');
 			$('.rowNumbers4').trigger('input');
@@ -2808,6 +2954,7 @@ function resetReset() {
 			$('#firstPart').show();
 			$('#secondPart').show();
 			$('#folTable').show();
+			$('#closingQuestions').show();
 			$('.minus').closest("tr").remove();
 			$('.address').trigger('input');
 			$('.address1').trigger('input');
@@ -2826,6 +2973,7 @@ function resetReset() {
 			$('#CVWitnessDamagesTable').html('');
 			$('[id^=checkbox]').attr('disabled',false);
 			$('input[name="RSother"]').trigger('change');
+			$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone)").css('font-size', 17);
 			checkedAll = [];
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
