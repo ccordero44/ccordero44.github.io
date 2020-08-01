@@ -1,3 +1,12 @@
+/*
+	This application was designed and coded by Carlos Cordero for the purpose of streamlining and improving the claims process at American Freedom Insurance Company.
+
+	Contact Information:
+	email: ccordero44@gmail.com
+	phone: 630-461-7785
+	git: https://github.com/ccordero44/ccordero44.github.io
+	linkedin: https://www.linkedin.com/in/carloscordero44/
+*/
 var title = $(document).attr('title');
 var w = 0;
 var h = 0;
@@ -520,7 +529,7 @@ $( window ).resize( function(){
 				title: 'Information',
 				type: 'blue',
 				icon: 'fa fa-info-circle',
-				content: 'Nothing to undo.',
+				content: 'No checkbox to undo.',
 				boxWidth: '30%',
 				useBootstrap: false,
 			});
