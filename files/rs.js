@@ -254,6 +254,14 @@ $("input").keypress(function(e) {
 	$('#cancel').click(function () {
 		ClosePopup();
 	});
+	$('#mapButton').hover(function () {
+	$('#overlay').show();}, function () {
+		$('#overlay').hide();
+	});
+	$('#dropdownContent').hover(function () {
+	$('#overlay').show();}, function () {
+		$('#overlay').hide();
+	});
 	$('#oaisys').click(function (e) {	
 	e.preventDefault();
 		$.ajax({
