@@ -964,7 +964,7 @@ input.currency {
 	float: left;
 	width: 100%;
 }
-form {
+#RSgeneral {
 	margin-top: 40px;
 	margin-bottom: 40px;
 	min-width: 865px;
@@ -975,26 +975,26 @@ form {
 	height: 11in;
 }
 
-button:active {
+.button:active {
 	/* box-shadow: 0px 1px 0px 0px rgba(100,121,143,0.7);
   transform: translateY(-2px);*/
 }
 
-button:hover {
+.button:hover {
 	color: dodgerblue;
 	background-color: #e6e6e6;
 }
-button:hover:disabled {
+.button:hover:disabled {
 	color: #dadada;
 	background-color: #ececec;
 	border-color: #dadada;
 }
-button:disabled {
+.button:disabled {
 	color: #dadada;
 	background-color: #ececec;
 	border-color: #dadada;
 }
-button {
+.button {
 	top: 4px;
 	float: left;
 	background-color: #dadada;
@@ -1209,7 +1209,38 @@ span.banners {
 #otherCVs {
 	font-size: 14px;
 }
-
+.form-control {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	box-sizing: border-box;
+	margin: 0;
+	font: inherit;
+	font-family: inherit;
+	display: block;
+	width: 100%;
+	height: 75px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.form-label {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	font-family: inherit;
+	box-sizing: border-box;
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: 700;
+}
 /* PRINT CSS */
 
 @media print {
@@ -1240,13 +1271,13 @@ span.banners {
 		display: none;
 		-webkit-appearance: none;
 	}
-	button {
+	.button {
 		display: none;
 	}
 	#toolbar {
 		display: none;
 	}
-	form {
+	#RSgeneral {
 		margin-top: 0px;
 	}
 

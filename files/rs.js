@@ -182,7 +182,14 @@ $("input").keypress(function(e) {
 			document.title = doctitle + " - " + message;
 			setTimeout(function(){ document.title = doctitle;$('#save').prop('disabled', false); }, 500);
 		  }else{
-			alert("No saved data found!");
+			$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'No saved data found.',
+				boxWidth: '30%',
+				useBootstrap: false,
+			});
 		  }
 		};
 	$('#save').click(function () {
@@ -208,7 +215,15 @@ $("input").keypress(function(e) {
 	$('.collapsible').click(function (e) {
 		e.preventDefault();
 		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus') {
-			alert('Please select an RS template from the dropdown menu first, then try again.');
+			//alert('Please select an RS template from the dropdown menu first, then try again.');
+			$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'Please select an RS template from the dropdown menu, then try again.',
+				boxWidth: '30%',
+				useBootstrap: false,
+			});
 		}else{
 			if ($('.collapsible i').attr("class") == 'fa fa-minus') {
 				$('.collapsible i').attr("class", 'fa fa-plus');
@@ -230,7 +245,8 @@ $("input").keypress(function(e) {
 	$('#cancel').click(function () {
 		ClosePopup();
 	});
-	$('#oaisys').click(function () {	
+	$('#oaisys').click(function (e) {	
+	e.preventDefault();
 		$.ajax({
 		  url: 'chrome-extension://kekahkplibinaibelipdcikofmedafmb/blank.gif',
 		  success: function( data ) {
@@ -240,18 +256,42 @@ $("input").keypress(function(e) {
 		  error: function( data ) {
 			console.log( "Error:");
 		 window.open('https://chrome.google.com/webstore/detail/clickonce-for-google-chro/kekahkplibinaibelipdcikofmedafmb/related');
-		 alert('Missing Chrome extension detected.\n\nPlease download the Chrome extension "ClickOnce for Google Chrome" in order to run Oaisys Desktop directly from this RS template, then try again.');
+		// alert('Missing Chrome extension detected.\n\nPlease download the Chrome extension "ClickOnce for Google Chrome" in order to run Oaisys Desktop directly from this RS template, then try again.');
+		  $.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'Missing Chrome extension detected.\n\nPlease download the Chrome extension <strong>"ClickOnce for Google Chrome"</strong> in order to run Oaisys Desktop directly from this application, then try again.',
+				boxWidth: '50%',
+				useBootstrap: false,
+			});
 		  }
 		});			
 	});
 	$('#leftbutton').click(function (e) {
 		e.preventDefault();
-		var r = confirm("Are you sure you'd like to reload the page and lose any unsaved data?");
-		if (r == true) {
-			location.reload();
-		  } else {
-			  return;
-		  }
+		$.confirm({
+			boxWidth: '30%',
+			useBootstrap: false,
+			type: 'red',
+			icon: 'fa fa-warning',
+			content: 'Are you sure you\'d like to reload the page and lose any unsaved data?',
+			title: 'Warning',
+			buttons: {
+				confirm: function () {
+					location.reload();
+				},
+				cancel: function () {
+					return;
+				}
+			}
+		});
+		//var r = confirm("Are you sure you'd like to reload the page and lose any unsaved data?");
+		//if (r == true) {
+			//location.reload();
+		 // } else {
+			//  return;
+		  //}
 
 	});
 	$(function() {
@@ -406,13 +446,60 @@ $( window ).resize( function(){
 		};
 	});
 	$('#bugbutton').click(function () {
-		var body = prompt("Please enter as much information about what you were doing prior to and after experiencing the bug.");
+		/*var body = prompt("Please enter as much information about what you were doing prior to and after experiencing the bug.");
 		if (body == null || body == "") {
 			alert("Bug report cancelled.");
 			return;
 		}else{
 			document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),body);
-		};
+		};*/
+		$.confirm({
+			title: 'Report a bug',
+			boxWidth: '50%',
+			icon: 'fa fa-bug',
+			type: 'orange',
+			useBootstrap: false,
+			content: '' +
+			'<form action="" class="formName">' +
+			'<div class="form-group">' +
+			'<label class="form-label">Please enter as much information about what you were doing prior to and after experiencing the bug.</label>' +
+			'<textarea placeholder="Enter details here" class="issue form-control"></textarea>' +
+			'</div>' +
+			'</form>',
+			buttons: {
+				formSubmit: {
+					text: 'Submit',
+					btnClass: 'btn-blue',
+					action: function () {
+						var issue = this.$content.find('.issue').val();
+						if(!issue){
+							$.alert({
+								title: 'Information',
+								type: 'blue',
+								icon: 'fa fa-info-circle',
+								content: 'Please provide valid information about the bug/issue.',
+								boxWidth: '30%',
+								useBootstrap: false,
+							});
+							return false;
+						}
+						document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue);
+					}
+				},
+				cancel: function () {
+					//close
+				},
+			},
+			onContentReady: function () {
+				// bind to events
+				var jc = this;
+				this.$content.find('form').on('submit', function (e) {
+					// if the user submits the form by pressing enter in the field.
+					e.preventDefault();
+					jc.$$formSubmit.trigger('click'); // reference the button and click it
+				});
+			}
+		});
 	});
 	$("input:radio").on('click', function () {
 		
@@ -429,7 +516,14 @@ $( window ).resize( function(){
 			$('input[name="RSother"]').parents(".section").next("table").find('.fillIn').removeClass('banners');
 		}
 		}else{
-			alert("Nothing to undo");
+			$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'Nothing to undo.',
+				boxWidth: '30%',
+				useBootstrap: false,
+			});
 		};
 	});
 	$('#checkbox0').change(function () {
@@ -572,7 +666,15 @@ $( window ).resize( function(){
 			//$(this).prop('checked',false);
 			numberCols();
 			}else{
-			alert("Please uncheck any other recorded statement templates before proceeding with the RS - Witness, then try again.");
+			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Witness, then try again.");
+			$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'Please uncheck any other recorded statement templates before proceeding with the Witness Statement, then try again.',
+				boxWidth: '40%',
+				useBootstrap: false,
+			});
 			$(this).prop('checked',false);
 		};
 		} else {
@@ -617,7 +719,15 @@ $( window ).resize( function(){
 				};
 				numberCols();
 			}else{
-				alert("Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.");
+				//alert("Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.");
+				$.alert({
+					title: 'Information',
+					type: 'blue',
+					icon: 'fa fa-info-circle',
+					content: 'Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.',
+					boxWidth: '40%',
+					useBootstrap: false,
+				});
 				$(this).prop('checked',false);
 			};
 		} else {
@@ -669,7 +779,15 @@ $( window ).resize( function(){
 			$('#lastPart').hide();			
 			numberCols();
 		}else{
-			alert("Please uncheck any other recorded statement templates before proceeding with the RS - Follow Up, then try again.");
+			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Follow Up, then try again.");
+			$.alert({
+					title: 'Information',
+					type: 'blue',
+					icon: 'fa fa-info-circle',
+					content: 'Please uncheck any other recorded statement templates before proceeding with the Follow Up, then try again.',
+					boxWidth: '40%',
+					useBootstrap: false,
+				});
 			$(this).prop('checked',false);
 		};
 		} else {
@@ -2925,7 +3043,15 @@ function PrintElem(elem)
     return true;
 	}else{
 		
-	alert("No RS found. Unable to print.");
+	//alert("No RS found. Unable to print.");
+	$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'No RS found. Unable to print.',
+				boxWidth: '30%',
+				useBootstrap: false,
+			});
 	}
 }
 
