@@ -10,6 +10,8 @@
 <script src="files\ef0a3db2e4.js"></script>
 <script src="files\inputmask.js"></script>
 <script src="files\jquery.popupoverlay.min.js"></script>
+<link rel="stylesheet" href="files\jquery-confirm.min.css">
+<script src="files\jquery-confirm.min.js"></script>
 <link rel="icon" 
    type="image/png" 
    href="images\record.png">
@@ -17,32 +19,32 @@
 
 </head>
 <body>
-<button class="scroll-up-button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
-<button class="scroll-down-button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
+<button class="scroll-up-button button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
+<button class="scroll-down-button button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
 
 <form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
 <div id="toolbar">
-   <button id="leftbutton" onclick="" title="Reload Form
+   <button id="leftbutton" class="button" title="Reload Form
       (Use this if the form isn't responding or reacting properly)"><i class="fa fa-repeat" aria-hidden="true"></i></button>
    <div class="divider1"></div>
    <div class="divider2"></div>
-   <button id="rightbutton" onclick="printFunction();" title="Print the Form" class=""><i class="fa fa-print" aria-hidden="true"></i></button>
+   <button id="rightbutton" onclick="printFunction();" title="Print the Form" class="button"><i class="fa fa-print" aria-hidden="true"></i></button>
    <div class="divider3"></div>
-   <button id="scrollBottom" class="scroll-bottom" title ="Scroll to Bottom"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
+   <button id="scrollBottom" class="scroll-bottom button" title ="Scroll to Bottom"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></button>
    <div class="divider"></div>
    <div class="divider5"></div>
    <div class="divider6"></div>
    <div class="divider10"></div>
-   <button id="undo" title="Undo the last CheckBox"><i class="fa fa-undo" aria-hidden="true"></i></button>
+   <button id="undo" title="Undo the last CheckBox" class="button"><i class="fa fa-undo" aria-hidden="true"></i></button>
    <div class="divider7"></div>
-   <button id="scrollTop" class="scroll-top" title="Scroll to Top"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
+   <button id="scrollTop" class="scroll-top button" title="Scroll to Top"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></button>
   <div class="divider4"></div>
-	<button id="oaisys" title="OAISYS Desktop" onclick="" class="mybutton"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+	<button id="oaisys" title="OAISYS Desktop" onclick="" class="mybutton button"><i class="fa fa-microphone" aria-hidden="true"></i></button>
   <div class="divider8"></div>
-   <button title="Toggle RS General hide/show" class="collapsible"><i class="fa fa-minus"></i></button>
+   <button title="Toggle RS General hide/show" class="collapsible button"><i class="fa fa-minus"></i></button>
   <div class="divider9"></div>
   <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();" style="z-index: 0; position: absolute; left: 0px; top: 0px;">
-                    <button id="mapButton" class="customMapControlwrapper" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                    <button id="mapButton" class="customMapControlwrapper button" style="border-radius: 3px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
                     <div class="customMapControldropdown-content" id="dropdownContent">
 					<div class="separator">Coverage Issues</div>
                     <label class="container2" id="container0" title="MVS RS" style="border-radius: 0px 3px 0px 0px;">MVS
@@ -127,12 +129,12 @@
 						</label>
                     </div>
  </div>  
-	<button type="button" class="btn-circle btn-lg" id="bugbutton" title="Report a bug">
+	<button type="button" class="btn-circle btn-lg button" id="bugbutton" title="Report a bug">
             <i class="fa fa-bug" aria-hidden="true"></i>
     </button>
-	<button type="button" id="save" title="Save Form Data" ><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-   <button type="button" id="get" title="Load Saved Data" ><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
-   <button type="reset" id="reset" title="Clear All Form Fields" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
+	<button type="button" id="save" title="Save Form Data" class="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+   <button type="button" id="get" title="Load Saved Data" class="button"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
+   <button type="reset" id="reset" title="Clear All Form Fields" class="button"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 </div>
    
  <div id="firstPart">  
