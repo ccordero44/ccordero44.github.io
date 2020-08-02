@@ -16,9 +16,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  background-color: rgba(68,68,68,0.2); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
+
+}
+.blur {
+	filter: blur(3px);
+	-webkit-filter: blur(3px);
 }
 .letter {
 	width: 170px;
@@ -82,7 +87,19 @@
             background-color: #fff;
             min-width: 160px;
             z-index: 1;
+
         }
+		@keyframes growDown {
+			0% {
+				transform: scaleY(0);
+			}
+			80% {
+				transform: scaleY(1.1);
+			}
+			100% {
+				transform: scaleY(1);
+			}
+		}
 		.customMapControldropdown {
             display: block;
             border-radius: 3px; 
@@ -97,6 +114,11 @@
 			margin-left: 20px;
 			background-color: #f3f3f3;
 			padding-top: 5px;
+			border-left: 1px solid grey;
+			border-right: 1px solid grey;
+			border-bottom: 1px solid grey;
+			/*animation: growDown 300ms ease-in-out forwards;
+			transform-origin: top center;*/
         }
 
             .customMapControldropdown-content a {
@@ -172,13 +194,14 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 }
 
         .customMapControldropdown:hover .customMapControldropdown-content {
-            display: block;
+          /*  display: block;
             position: relative;
 			top: 35px;
 			width: auto;
-			/*padding-left: 155px !important;*/
+			padding-left: 155px !important;*/
 			
         }
+		
 		.customMapControldropdown:active {
 			display: block;
              
@@ -192,23 +215,24 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 
    /* The container */
 .container2 {
-background-color: #f3f3f3;
-        border: solid;
-        border-color: #f3f3f3;
+	background-color: #f3f3f3;
+	border: solid;
+	border-color: #f3f3f3;
 	display: block;
-  height: 25px;      
-white-space: nowrap;
-  position: relative;
-  padding-left: 25px;
-  padding-right: 5px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  cursor: pointer;
-  font-size: 16px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	  height: 22px;      
+	  white-space: nowrap;
+	  position: relative;
+	  padding-left: 25px;
+	  padding-right: 5px;
+	  margin-bottom: 0px;
+	  margin-left: 0px;
+	  cursor: pointer;
+	  font-size: 16px;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+
 }
 
 /* Hide the browser's default checkbox */
@@ -1336,5 +1360,14 @@ span.banners {
 	hr {
 		display: none;
 
+	}
+	.jconfirm {
+		display: none;
+	}
+	.jconfirm-light {
+		display: none;
+	}
+	.jconfirm-open{
+		display: none;
 	}
 }

@@ -22,7 +22,9 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-
+$('.button').not('#reset').click(function(e){
+	e.preventDefault();
+});
 $("input").keypress(function(e) {
   //Enter key
   if (e.which == 13) {
@@ -191,6 +193,7 @@ $("input").keypress(function(e) {
 			document.title = doctitle + " - " + message;
 			setTimeout(function(){ document.title = doctitle;$('#save').prop('disabled', false); }, 500);
 		  }else{
+			$('#blurDIV').addClass('blur');
 			$.alert({
 				title: 'Information',
 				type: 'blue',
@@ -198,6 +201,11 @@ $("input").keypress(function(e) {
 				content: 'No saved data found.',
 				boxWidth: '30%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 		  }
 		};
@@ -225,6 +233,7 @@ $("input").keypress(function(e) {
 		e.preventDefault();
 		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus') {
 			//alert('Please select an RS template from the dropdown menu first, then try again.');
+			$('#blurDIV').addClass('blur');
 			$.alert({
 				title: 'Information',
 				type: 'blue',
@@ -232,6 +241,11 @@ $("input").keypress(function(e) {
 				content: 'Please select an RS template from the dropdown menu, then try again.',
 				boxWidth: '30%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 		}else{
 			if ($('.collapsible i').attr("class") == 'fa fa-minus') {
@@ -254,13 +268,23 @@ $("input").keypress(function(e) {
 	$('#cancel').click(function () {
 		ClosePopup();
 	});
-	$('#mapButton').hover(function () {
-	$('#overlay').show();}, function () {
+	$('.customMapControlwrapper').hover(function () {
+	$('#overlay').show();
+	$('#blurDIV').addClass('blur');
+	$('.customMapControldropdown-content').css({'display':'block','position':'relative','top':'35px','width':'auto'});
+	}, function () {
 		$('#overlay').hide();
+		$('#blurDIV').removeClass('blur');
+		$('.customMapControldropdown-content').hide();
 	});
 	$('#dropdownContent').hover(function () {
-	$('#overlay').show();}, function () {
+	$('#overlay').show();
+	$('#blurDIV').addClass('blur');
+	$('.customMapControldropdown-content').css({'display':'block','position':'relative','top':'35px','width':'auto'});
+	}, function () {
 		$('#overlay').hide();
+		$('#blurDIV').removeClass('blur');
+		$('.customMapControldropdown-content').hide();
 	});
 	$('#oaisys').click(function (e) {	
 	e.preventDefault();
@@ -274,6 +298,7 @@ $("input").keypress(function(e) {
 			console.log( "Error:");
 		 window.open('https://chrome.google.com/webstore/detail/clickonce-for-google-chro/kekahkplibinaibelipdcikofmedafmb/related');
 		// alert('Missing Chrome extension detected.\n\nPlease download the Chrome extension "ClickOnce for Google Chrome" in order to run Oaisys Desktop directly from this RS template, then try again.');
+		  $('#blurDIV').addClass('blur');
 		  $.alert({
 				title: 'Information',
 				type: 'blue',
@@ -281,12 +306,18 @@ $("input").keypress(function(e) {
 				content: 'Missing Chrome extension detected.\n\nPlease download the Chrome extension <strong>"ClickOnce for Google Chrome"</strong> in order to run Oaisys Desktop directly from this application, then try again.',
 				boxWidth: '50%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 		  }
 		});			
 	});
 	$('#leftbutton').click(function (e) {
 		e.preventDefault();
+		$('#blurDIV').addClass('blur');
 		$.confirm({
 			boxWidth: '30%',
 			useBootstrap: false,
@@ -296,9 +327,11 @@ $("input").keypress(function(e) {
 			title: 'Warning',
 			buttons: {
 				confirm: function () {
+					$('#blurDIV').removeClass('blur');
 					location.reload();
 				},
 				cancel: function () {
+					$('#blurDIV').removeClass('blur');
 					return;
 				}
 			}
@@ -470,6 +503,7 @@ $( window ).resize( function(){
 		}else{
 			document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),body);
 		};*/
+		$('#blurDIV').addClass('blur');
 		$.confirm({
 			title: 'Report a bug',
 			boxWidth: '50%',
@@ -500,11 +534,12 @@ $( window ).resize( function(){
 							});
 							return false;
 						}
+						$('#blurDIV').removeClass('blur');
 						document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue);
 					}
 				},
 				cancel: function () {
-					//close
+					$('#blurDIV').removeClass('blur');
 				},
 			},
 			onContentReady: function () {
@@ -533,6 +568,7 @@ $( window ).resize( function(){
 			$('input[name="RSother"]').parents(".section").next("table").find('.fillIn').removeClass('banners');
 		}
 		}else{
+			$('#blurDIV').addClass('blur');
 			$.alert({
 				title: 'Information',
 				type: 'blue',
@@ -540,6 +576,11 @@ $( window ).resize( function(){
 				content: 'No checkbox to undo.',
 				boxWidth: '30%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 		};
 	});
@@ -684,13 +725,22 @@ $( window ).resize( function(){
 			numberCols();
 			}else{
 			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Witness, then try again.");
+			
 			$.alert({
 				title: 'Information',
 				type: 'blue',
 				icon: 'fa fa-info-circle',
 				content: 'Please uncheck any other recorded statement templates before proceeding with the Witness Statement, then try again.',
+				onContentReady: function () {
+					$('#blurDIV').addClass('blur');
+				},
 				boxWidth: '40%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 			$(this).prop('checked',false);
 		};
@@ -737,13 +787,22 @@ $( window ).resize( function(){
 				numberCols();
 			}else{
 				//alert("Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.");
+				
 				$.alert({
 					title: 'Information',
 					type: 'blue',
 					icon: 'fa fa-info-circle',
 					content: 'Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.',
+					onContentReady: function () {
+						$('#blurDIV').addClass('blur');
+					},
 					boxWidth: '40%',
 					useBootstrap: false,
+					buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 				});
 				$(this).prop('checked',false);
 			};
@@ -797,13 +856,22 @@ $( window ).resize( function(){
 			numberCols();
 		}else{
 			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Follow Up, then try again.");
+			
 			$.alert({
 					title: 'Information',
 					type: 'blue',
 					icon: 'fa fa-info-circle',
 					content: 'Please uncheck any other recorded statement templates before proceeding with the Follow Up, then try again.',
+					onContentReady: function () {
+						$('#blurDIV').addClass('blur');
+					},
 					boxWidth: '40%',
 					useBootstrap: false,
+					buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 				});
 			$(this).prop('checked',false);
 		};
@@ -2441,6 +2509,7 @@ function clearAll() {
 
 
 function printFunction() {
+	
  var docTitle = document.title;
 	$.when($('.required').each(function () {
 		toggleRequired(this, true)
@@ -2451,7 +2520,7 @@ function printFunction() {
 		var heading;
 		var str;
 		var strText;
-		
+		var printConfirm;
 	
 	//	$('#PopupWindow').height(0);
 
@@ -2472,7 +2541,11 @@ function printFunction() {
 					i = i + 1;
 
 					text = 'Missing information detected. Please complete the required fields highlighted with a red border.<br /><br />You may also click the print button below to proceed without filling in the required fields.<br />';
-					heading = i + ' Invalid Input(s)';
+					if (i > 1){
+						heading = i + ' Invalid Inputs';
+					}else{
+						heading = i + ' Invalid Input';
+					}
 
 					$this.addClass('banners');
 					var arr = $("[name^='"+$this.attr('name')+"']");
@@ -2488,7 +2561,30 @@ function printFunction() {
 						//$this.css("animation-duration", "");
 					//});
 					//OpenPopup();
-					$('#popup1').popup("show");
+					 printConfirm = $.confirm({
+											title: heading,
+											content: text,
+											type: 'blue',
+											icon: 'fa fa-info-circle',
+											boxWidth: '50%',
+											useBootstrap: false,
+											lazyOpen: true,
+											buttons: {
+												print: {
+													btnClass: 'btn-blue',
+													action: function(){
+														$(':input[required]').removeClass('banners');
+														$('span').removeClass('banners');
+														$('#blurDIV').removeClass('blur');
+														window.print();
+														}
+												}, 
+												cancel: function(){$('#blurDIV').removeClass('blur');}
+											},
+											
+										});
+					//$('#popup1').popup("show");
+					
 				} else {
 					$this.removeClass('banners');
 					var arr = $('[name^='+$(this).attr('name')+']');
@@ -2502,11 +2598,16 @@ function printFunction() {
 		if (i === 0) {
 			$('#save').trigger('click');
 			$(document).attr('title', docTitle);
+			
 			$('#popup1').popup("hide");
 			window.print();
 			//$('#reset').trigger('click');
 			
-		}
+		}else{
+			$('#blurDIV').addClass('blur');
+			printConfirm.open();
+			
+		};
 	});
 }
 function printOption() {
@@ -3061,6 +3162,7 @@ function PrintElem(elem)
 	}else{
 		
 	//alert("No RS found. Unable to print.");
+	$('#blurDIV').addClass('blur');
 	$.alert({
 				title: 'Information',
 				type: 'blue',
@@ -3068,6 +3170,11 @@ function PrintElem(elem)
 				content: 'No RS found. Unable to print.',
 				boxWidth: '30%',
 				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
 			});
 	}
 }
