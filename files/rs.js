@@ -8,6 +8,7 @@
 	linkedin: https://www.linkedin.com/in/carloscordero44/
 */
 var title = $(document).attr('title');
+var timerID;
 var w = 0;
 var h = 0;
 var checkedAll = [];
@@ -22,7 +23,9 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-$('.button').not('#reset').click(function(e){
+
+	var version = $('#version').html();
+$('.button').not('#resetButton').click(function(e){
 	e.preventDefault();
 });
 $("input").keypress(function(e) {
@@ -38,6 +41,7 @@ $("input").keypress(function(e) {
 	}	*/	
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
+		$("#resetButton i").addClass("rotate");
 		$(':button').prop('disabled', true);
 		$(document).attr('title','Please wait for form to reset...');
 		$('input[type="text"]').each(function (index, value) {
@@ -60,9 +64,7 @@ $("input").keypress(function(e) {
 			$('#docTitle').html('GENERAL');
 			$(document).attr('title', title);
 			$('#footer').html(title);
-			$("#reset i").each(function () {
-				$(this).removeClass("rotate");
-			});
+			$("#resetButton i").removeClass("rotate");
 			window.scrollTo(0, 0);
 			var doctitle = document.title;
 			document.title = "Form successfully reset!";
@@ -102,6 +104,9 @@ $("input").keypress(function(e) {
 		  for (const element of formElements) {
 			  n = n + 1
 			//if ($(element).is(":visible")) { 
+			if (element.name.length == 0) {
+				$(element).attr('name', 'dynamic_'+n);
+			}
 			if (element.name.length > 0) {
 				
 				if (element.type !== 'radio') {
@@ -153,7 +158,9 @@ $("input").keypress(function(e) {
 			for (const element of formElements) {
 				
 				n = n + 1;
-			
+			if (element.name.length == 0) {
+				$(element).attr('name', 'dynamic_'+n);
+			}
 			  if (element.name in savedData) {
 			
 				  if (element.type !== 'radio') {
@@ -170,9 +177,13 @@ $("input").keypress(function(e) {
 					  $(element).val(n);
 					  if (savedData[element.name] !== "") {
 					  if (element.value == savedData[element.name]) {
+						  
 						element.checked = true;
 						$(element).trigger('change');
 					  }
+					  }else{
+						  element.checked = false;
+						  $(element).trigger('change');
 					  }
 				  }
 			  }/*else{
@@ -184,14 +195,14 @@ $("input").keypress(function(e) {
 			  }*/
 			}
 			
-			const message = "Form has been filled with saved data!";
+			const message = "Form has been filled with saved data.";
 			//displayAlert(message);
 			//alert(message);
 			$('#save').prop('disabled', true);
 			var doctitle = document.title;
 			doctitle = doctitle.replace(" - " + message, '');
-			document.title = doctitle + " - " + message;
-			setTimeout(function(){ document.title = doctitle;$('#save').prop('disabled', false); }, 500);
+			$('#footer').html(doctitle + " - " + message);
+			setTimeout(function(){ $('#footer').html(doctitle);$('#save').prop('disabled', false); }, 2000);
 		  }else{
 			$('#blurDIV').addClass('blur');
 			$.alert({
@@ -208,24 +219,82 @@ $("input").keypress(function(e) {
 				}
 			});
 		  }
+		  $('.phone').trigger('blur');
+		
 		};
 	$('#save').click(function () {
 		$('#get').prop('disabled', true);
 		event.preventDefault();
-		  data = getFormData();
-		  var doctitle = document.title;
-		  
-		  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
-		  const message = "Form data has been saved!";
-		  //displayAlert(message);
-		  doctitle = doctitle.replace(" - " + message, '');
-		  document.title = doctitle + " - " + message;
-		  setTimeout(function(){ document.title = doctitle;$('#get').prop('disabled', false); }, 3000);
+		 var doctitle = document.title; 
 		  //alert(message);
-		  
+		  $('#blurDIV').addClass('blur');
+		  $.confirm({
+			boxWidth: '40%',
+			useBootstrap: false,
+			type: 'blue',
+			icon: 'fa fa-exclamation-circle',
+			title: 'Information',
+			content: 'Would you like to enable auto save, which will save your data every 60 seconds?<br/><br/>' +
+			'<div class="checkbox"><label><input type="checkbox" checked id="enableCheckbox"> Enable autosave</label></div>',
+			buttons: {
+				save: {
+					btnClass: 'btn-blue',
+					action: function () {
+					var $checkbox = this.$content.find('#enableCheckbox');
+						if ($checkbox.prop('checked')) {
+							var count = 59, timer = setInterval(function() {
+									$("#counter").html(count--);
+									if(count < 0) clearInterval(timer);
+								}, 1000);
+								$('#autoSaveOff').hide();
+								$('#autoSaveOn').show();
+							timerID = setInterval(function() {
+								var doctitle = document.title; 
+								var count = 59, timer = setInterval(function() {
+									$("#counter").html(count--);
+									if(count < 0) clearInterval(timer);
+								}, 1000);
+								data = getFormData();
+								localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+								const message = "Form data has been saved.";
+								doctitle = doctitle.replace(" - " + message, '');
+								//document.title = doctitle + " - " + message;
+								$('#footer').html(doctitle + " - " + message);
+								setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+								console.log('Data Saved');
+								
+							}, 60 * 1000);
+							
+							$('#blurDIV').removeClass('blur');
+						}else{
+							$('#autoSaveOn').hide();
+							$('#autoSaveOff').show();
+							clearInterval(timerID);
+							$('#blurDIV').removeClass('blur');
+							setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+						};
+					  data = getFormData();
+					  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+					  const message = "Form data has been saved.";
+					  //displayAlert(message);
+					  doctitle = doctitle.replace(" - " + message, '');
+					  //document.title = doctitle + " - " + message;
+					  $('#footer').html(doctitle + " - " + message);
+					}  
+				},
+				cancel: function () {
+					$('#blurDIV').removeClass('blur');
+					setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+					return;
+				}
+			}
+		});
+		setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
 	});
 	$('#get').click(function () {
 		populateForm();
+		$('.txtAreaGrow').trigger('keyup');
+		
 		
 	});
 
@@ -326,9 +395,12 @@ $("input").keypress(function(e) {
 			content: 'Are you sure you\'d like to reload the page and lose any unsaved data?',
 			title: 'Warning',
 			buttons: {
-				confirm: function () {
+				reload: {
+					btnClass: 'btn-red',
+					action: function () {
 					$('#blurDIV').removeClass('blur');
 					location.reload();
+					}
 				},
 				cancel: function () {
 					$('#blurDIV').removeClass('blur');
@@ -344,9 +416,10 @@ $("input").keypress(function(e) {
 		  //}
 
 	});
+	
 	$(function() {
 		//  changes mouse cursor when highlighting loawer right of box
-		$("#FUQtxtArea").mousemove(function(e) {
+		$(".txtAreaGrow").mousemove(function(e) {
 			var myPos = $(this).offset();
 			myPos.bottom = $(this).offset().top + $(this).outerHeight();
 			myPos.right = $(this).offset().left + $(this).outerWidth();
@@ -361,12 +434,12 @@ $("input").keypress(function(e) {
 		//  the following simple make the textbox "Auto-Expand" as it is typed in
 		.keyup(function(e) {
 			//  this if statement checks to see if backspace or delete was pressed, if so, it resets the height of the box so it can be resized properly
-			if (e.which == 8 || e.which == 46) {
-				$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size")));
-			}
+			//if (e.which == 8 || e.which == 46) {
+				$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size"))+31);
+			//}
 			//  the following will help the text expand as typing takes place
 			while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-				$(this).height($(this).height()+1);
+				$(this).height($(this).height()+31);
 			};
 		});
 	});
@@ -469,8 +542,32 @@ $( window ).resize( function(){
 			$('#anyUDs').hide();
 		}
 	})
-	$("#reset").mousedown(function () {
-		$("#" + $(this).attr('id') + " i").addClass("rotate");
+	$("#resetButton").mousedown(function () {
+	$('#blurDIV').addClass('blur');
+		$.confirm({
+			boxWidth: '30%',
+			useBootstrap: false,
+			type: 'orange',
+			icon: 'fa fa-exclamation-circle',
+			content: 'Are you sure you\'d like to reset the form and clear all the data?',
+			title: 'Warning',
+			buttons: {
+			/*	save:  {
+					icon: 'fa fa-save',
+					btnClass: 'btn-green',
+					action: function () {$('#blurDIV').removeClass('blur');$('#save').trigger('click');}
+				},*/
+				reset: {
+					btnClass: 'btn-orange',
+					action: function () {$('#RSgeneral')[0].reset();}
+				},
+				cancel: function () {
+					$('#blurDIV').removeClass('blur');
+					return;
+					
+				}
+			}
+		});
 	});
 
 
@@ -508,7 +605,7 @@ $( window ).resize( function(){
 			title: 'Report a bug',
 			boxWidth: '50%',
 			icon: 'fa fa-bug',
-			type: 'orange',
+			type: 'dark',
 			useBootstrap: false,
 			content: '' +
 			'<form action="" class="formName">' +
@@ -1622,7 +1719,6 @@ $( window ).resize( function(){
 		allowMinus: false
 	});*/
 $('.rowNumbers2').bind('input', function(){
-	//$('.rowNumbers2').change(function () {
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1648,10 +1744,12 @@ $('.rowNumbers2').bind('input', function(){
 		var tableRef = $(table).attr('id');
 
 		numRows = document.getElementById(tableRef).rows[0].cells.length;
+		
 		if (inpNum >= numRows) {
 			newRows = inpNum - numRows;
 			rowNum = parseInt(numRows) + 1;
-			var html = '<input type="text" class="fillIn" style="width:100%;"/>'
+			var html = '<input type="text" class="fillIn"  style="width:100%;"/>';
+			
 			addColumn($(table).attr('id'), html, newRows);
 			/*$("input.noborder:not(#ClaimNo):not(#ClaimNo2):not(#adj)").change(function () {
 				var $this = $(this);
@@ -1703,7 +1801,11 @@ $('.rowNumbers').on('input', function(){
 				var $this = $(this);
 				$this.val(titleCase($this.val()));
 			});*/
-			$('.phone').inputmask("(999) 999-9999");
+			$('.phone').inputmask({
+				mask: "(999) 999-9999",
+				showMaskOnHover: false,
+				placeholder: ' ',
+			});
 			
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
@@ -1878,7 +1980,9 @@ $('.rowNumbers').on('input', function(){
 	/*end of document ready*/
 });
 function showMain() {
-
+	$('#cvTable').show();
+	$('#cvTables').show();
+	$('.rowNumbers2').trigger('input');
 	$('#secondPart').show();
 	$('#addVehicles').show();
 	$('#folTable').show();
@@ -1886,7 +1990,8 @@ function showMain() {
 
 }
 function hideMain() {
-	
+	$('#cvTable').hide();
+	$('#cvTables').hide();
 	$('#secondPart').hide();
 	$('#addVehicles').hide();
 	$('#folTable').hide();
@@ -2070,19 +2175,21 @@ function loadFunctions() {
 			var curTxt = $(this).closest('tr').next().find('.FOL').val();
 				if (curTxt == '') {
 					$(this).closest('tr').next().find('.FOL').val(stringsplit2+curTxt);
-					
+					$(this).closest('tr').next().find('.FOL').focus();
+			
 				}else{
 					$(this).closest('tr').next().find('.FOL').val(stringsplit2+" "+curTxt);	
 					
 				};
 				$(this).closest('tr').next().find('.FOL').trigger('input');
-				$(this).closest('tr').next().find('.FOL').focus();
+				//$(this).closest('tr').next().find('.FOL').focus();
 				$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition(stringsplit2.length);
 				//$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition($this.length - cursPosPre + 1);
-
+				
 				if (cursPos < stringsplit.slice(0,stringsplit.length).join(' ').length) {
 					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
 					$(this).focus();
+					
 					$(this).setCursorPosition(cursPos);
 				}else{
 					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
@@ -2203,7 +2310,11 @@ function loadFunctions() {
    );
 	$('#FUQClaimNo').inputmask("A[A]-999999");
 	$('#ClaimNo2').inputmask("A[A]-999999");
-	$('.phone').inputmask("(999) 999-9999");
+	$('.phone').inputmask({
+		mask: "(999) 999-9999",
+		showMaskOnHover: false,
+		placeholder: ' ',
+		});
 	$('.SSN').inputmask("999-99-9999");
 	var autocomplete;
 	$('.address').focus(function () {
@@ -2576,7 +2687,7 @@ function printFunction() {
 														$(':input[required]').removeClass('banners');
 														$('span').removeClass('banners');
 														$('#blurDIV').removeClass('blur');
-														window.print();
+														printForm('RSgeneral');
 														}
 												}, 
 												cancel: function(){$('#blurDIV').removeClass('blur');}
@@ -2596,11 +2707,11 @@ function printFunction() {
 			}
 		});
 		if (i === 0) {
-			$('#save').trigger('click');
+			
 			$(document).attr('title', docTitle);
 			
 			$('#popup1').popup("hide");
-			window.print();
+			printForm('RSgeneral');
 			//$('#reset').trigger('click');
 			
 		}else{
@@ -2750,13 +2861,14 @@ function addColumn(tblId, myHtmlContent, num) {
 			tblHeadObj.rows[h].appendChild(newTH);
 			newTH.innerHTML = '<u>C' + (tblHeadObj.rows[h].cells.length - 1) + ":</u>"
 			cloneDiv($('#cvTable').attr('id'), $('#cvTables').attr('id'), (tblHeadObj.rows[h].cells.length - 3))
+			
 		}
 
 		var tblBodyObj = document.getElementById(tblId).tBodies[0];
 		for (var i = 0; i < tblBodyObj.rows.length; i++) {
 			var newCell = tblBodyObj.rows[i].insertCell(-1);
 			newCell.innerHTML = myHtmlContent //'[td] row:' + i + ', cell: ' + (tblBodyObj.rows[i].cells.length - 1)
-
+			
 		}
 	}
 
@@ -2834,7 +2946,7 @@ function numberCols() {
 	$("td.AgentNumber").each(function (i, v) {
 		$(v).text('');
 		$(v).text(i + 1 + ".");
-		$(this).css('width', '35px');
+		$(this).css('width', '45px');
 
 	});
 	$('.UDsubnumber').filter(function (e) {
@@ -2889,7 +3001,7 @@ function cloneTable(tableId, divId) {
 
 		// use native DOM methods to update the ID
 		this.setAttribute('id', this.getAttribute('id') + i);
-
+		this.setAttribute('name', this.getAttribute('id') + i);
 		// $(this).closest('td').attr('id',i);
 
 		// $(this).closest('td:nth-child(2)').text(this.value); 
@@ -2937,7 +3049,7 @@ function cloneTable2(tableId, divId, CVnum, num) {
 
 			// use native DOM methods to update the ID
 			this.setAttribute('id', this.getAttribute('id') + CVnum);
-
+			this.setAttribute('name', this.getAttribute('id') + CVnum);
 			$(this).closest('td:nth-child(2) div').html(this.value);
 			this.value = '';
 
@@ -2969,7 +3081,7 @@ function cloneTable3(tableId, divId, num) {
 
 			// use native DOM methods to update the ID
 			this.setAttribute('id', this.getAttribute('id') + i);
-
+			this.setAttribute('name', this.getAttribute('id') + i);
 			this.value = '';
 
 		});
@@ -2983,29 +3095,34 @@ function cloneTable3(tableId, divId, num) {
 }
 
 function cloneDiv(divID1, divID2, num) {
-
+var i = 0;
 
 	var myclone = jQuery("#" + divID1).clone(false);
 
 	for (var j = 0; j < num + 1; j++) {
 		myclone[0].setAttribute('id', myclone[0].getAttribute('id') + '_' + j);
+	
 		myclone.find('table').each(function () {
-
 			// use native DOM methods to update the ID
 			this.setAttribute('id', this.getAttribute('id') + '_' + j);
-
 		});
+
 		$('#' + divID2).append(myclone);
 
 	}
 	var arr = $("[id^=CVpassTable_]");
 
 	$.each(arr, function (index, value) {
+		
 		$(value).find('.phone').inputmask("(999) 999-9999");
 		$(value).find('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
 		});
+		$(value).find('.fillIn').each(function () {
+			i = i + 1;
+					this.setAttribute('name', 'cvCell'+i);
+				});
 		$(value).find('.address').blur(function () {
 			$(this).parent().next().find('input').focus();
 			if (!$(this).val()) {
@@ -3043,6 +3160,7 @@ function cloneDiv(divID1, divID2, num) {
 						$(this).attr('placeholder', '');
 					}
 				});
+				
 			} else {
 				newRows = parseInt(inpNum - numRows) * -1;
 				rowNum = numRows + 1;
@@ -3178,7 +3296,51 @@ function PrintElem(elem)
 			});
 	}
 }
+function printForm(form) {
+	if (form !== undefined) {
+    var mywindow = window.open('', 'PRINT', 'height='+h+',width='+w);
+	
+    mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
+	mywindow.document.write('<table class="full" ></table>');
+	mywindow.document.write('<form>');
 
+	var $a = $("#" + form).clone();
+	$a.appendTo(mywindow.document.body);
+	
+	mywindow.document.write('</form>');
+    mywindow.document.write('</body></html>');
+	$("td.number").each(function (i, v) {
+		$(v).text('');
+		$(v).text(i + 1 + ".");
+		$(this).css('width', '35px');
+	});
+	var num = mywindow.document.getElementsByClassName('number');
+	for (var i = 0; i < num.length; i++) {
+		num[i].innerHTML = i + 1 + ".";
+	}
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+	
+    return true;
+	}else{
+		
+	$('#blurDIV').addClass('blur');
+	$.alert({
+				title: 'Information',
+				type: 'blue',
+				icon: 'fa fa-info-circle',
+				content: 'No RS found. Unable to print.',
+				boxWidth: '30%',
+				useBootstrap: false,
+				buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
+			});
+	}
+}
 (function () {
     var width = screen.width,
         height = screen.height;
@@ -3190,6 +3352,7 @@ function PrintElem(elem)
         }
     }, 50);
 }());
+
 		 	
 function resetReset() {
 	console.time('Reset Function Time');
@@ -3218,7 +3381,7 @@ function resetReset() {
 			$('#CVWitnessDetailsTable').html('');
 			$('#FUQ').html('');
 			//$("#FUQtxtArea").each(function() {$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size")))});
-			$("#FUQtxtArea").removeAttr("style");
+			$(".txtAreaGrow").removeAttr("style");
 			$('.selectThis').html('');
 			$('#CVWitnessDamagesTable').html('');
 			$('[id^=checkbox]').attr('disabled',false);
@@ -3227,6 +3390,7 @@ function resetReset() {
 			checkedAll = [];
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
+			$('#blurDIV').removeClass('blur');
 	console.timeEnd('Reset Function Time');
 }
 var today = new Date();

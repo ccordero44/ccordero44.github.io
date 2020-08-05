@@ -370,7 +370,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 }
 #FUQtxtArea {
 	width: 100%;
-	font-size: 17px;
+	font-size: 14px;
 	display: table-row;
 	page-break-inside: auto;
 }
@@ -415,7 +415,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 .noborder {
 	border: none;
 	width: auto;
-	font-size: 17px;
+	font-size: 14px;
 }
 
 .minus {
@@ -566,10 +566,11 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 18px;
-	width: 18px;
+	height: 17px;
+	width: 17px;
 	background-color: #CCD7FF;
 	border: 1px solid black;
+	align-self: center;
 }
 
 .container input:checked~.checkmark {
@@ -581,33 +582,29 @@ body {
 
 .checkmark:after {
 	content: "\2713";
-	position: absolute;
 	display: none;
-	font-size: 20px;
+
+
 }
 
 
 /* Show the checkmark when checked */
 
 .container input:checked~.checkmark:after {
-	display: block;
+	display : flex;
+	
 }
 
 
 /* Style the checkmark/indicator */
 
 .container .checkmark:after {
-	left: 2px;
-	bottom: 4px;
-	width: 25px;
-	height: 20px;
-	/*border: solid black;*/
-	/* border-width: 0 2px 2px 0;*/
-	/* -webkit-transform: rotate(20deg);
-  -ms-transform: rotate(20deg);
-  transform: rotate(20deg);*/
+	width: 17px;
+	height: 17px;
 	color: blue;
 	font-weight: bold;
+	align-items : center;
+	justify-content: center;
 }
 
 td {
@@ -644,15 +641,15 @@ table.half {
 }
 
 .number {
-	width: 35px;
+	width: 45px !important;
 	text-align: right;
-	padding-right: 10px;
+	padding-right: 10px !important;
 }
 
 .AgentNumber {
-	width: 35px;
+	width: 45px !important;
 	text-align: right;
-	padding-right: 10px;
+	padding-right: 10px !important;
 }
 
 .UDsubnumber {
@@ -675,7 +672,7 @@ table.half {
 }
 
 .indent2 {
-	width: 45px;
+	width: 55px;
 }
 
 .tdTab {
@@ -839,7 +836,7 @@ input.currency {
 	z-index: 999;
 }
 
-#reset {
+#resetButton {
 	position: fixed;
 	left: 316px;
 	z-index: 9999;
@@ -916,7 +913,7 @@ input.currency {
 	right: 64px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 
 .divider1 {
@@ -924,7 +921,7 @@ input.currency {
 	left: 122px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 
 .divider2 {
@@ -932,7 +929,7 @@ input.currency {
 	left: 60px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 
 .divider3 {
@@ -940,56 +937,56 @@ input.currency {
 	left: calc(50% - 1px);
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider4 {
 	position: absolute;
 	left: 182px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider5 {
 	position: absolute;
 	left: 242px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider6 {
 	position: absolute;
 	left: 303px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider7 {
 	position: absolute;
 	right: 124px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider8 {
 	position: absolute;
 	right: 184px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider9 {
 	position: absolute;
 	right: 244px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 .divider10 {
 	position: absolute;
 	right: 304px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 1px solid #ccc;
+	border-left: 2px ridge #ccc;
 }
 
 
@@ -997,21 +994,24 @@ input.currency {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	height: 37px;
+	height: 40px;
 	width: 100%;
 	border: 1px solid #e7e7e7;
 	background-color: #f3f3f3;
-	box-shadow: 0 2px 0 0 rgba(100, 121, 143, 0.3);
+	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
 	z-index: 999;
 }
-#footer {
+
+/*#footer {
 	padding-bottom: 25px;
 	padding-top: 50px;
 	float: left;
 	width: 100%;
-}
+}*/
 #RSgeneral {
-	margin-top: 40px;
+	margin-top: 45px;
 	margin-bottom: 40px;
 	min-width: 865px;
 	max-width: 865px;
@@ -1288,6 +1288,73 @@ span.banners {
 	margin-bottom: 5px;
 	font-weight: 700;
 }
+.factsOL {
+    
+    background: repeating-linear-gradient(#CCD7FF, #CCD7FF 30px, black 30px, black 31px);
+    line-height: 31px;
+    -webkit-print-color-adjust: exact !important;
+	font-size: 17px;
+	padding-left: 5px !important;
+	width: 100%;
+	top: 0;
+}
+#statusBar {
+	cursor: grab;
+	font-family: Arial;
+	user-select: none;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	height: 27px;
+	width: 100%;
+	border: 1px solid #e7e7e7;
+	background-color: #f3f3f3;
+	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	z-index: 999;
+}
+#statusInner1 {
+	color: grey;
+	display: block;
+	width: 99%;
+	margin: auto;
+	height: 20px;
+	/*border: 2px inset #e7e7e7;*/
+	line-height: 20px;
+	font-size: 15px;
+	text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+	margin-top: 3px;
+}
+#version {
+	float: right;
+	width: 10%;
+	display: inline;
+	text-align: center;
+}
+#footer {
+	float: left;
+	width: 73%;
+	display: inline;
+	margin-left: 5px;
+}
+
+#autoSaveOn {
+	float: left;
+	width: 15%;
+	display: none;
+	text-align: center;
+	/*border-left: 5px ridge #e7e7e7;
+	border-right: 5px ridge #e7e7e7;*/
+}
+#autoSaveOff {
+	float: left;
+	width: 15%;
+	text-align: center;
+	/*border-left: 5px ridge #e7e7e7;
+	border-right: 5px ridge #e7e7e7;*/
+}
+
 /* PRINT CSS */
 
 @media print {
@@ -1348,15 +1415,6 @@ span.banners {
 	td {
 		color: black !important;
 	}
-	@page :last {
-	footer {
-    position: running(pageFooter);
-	bottom: 0px;
-	margin-bottom: 0px;
-	padding-bottom: 0px;
-	position: absolute;
-}
-	}
 	hr {
 		display: none;
 
@@ -1369,5 +1427,16 @@ span.banners {
 	}
 	.jconfirm-open{
 		display: none;
+	}
+	.factsOL {
+		background: repeating-linear-gradient(white, white 30px, black 30px, black 31px);
+		border-top: 10px solid white;
+		padding-top: 0px;
+		background-color: white;
+		outline: none;
+	}
+	#closingQuestions {
+		page-break-inside: avoid !important;
+		display: table;
 	}
 }
