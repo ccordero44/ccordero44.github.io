@@ -13,6 +13,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Recorded Statement General</title>
 <link rel="stylesheet" type="text/css" href="files\rs.css">
+<link rel="stylesheet" type="text/css" href="files\tooltipster.bundle.min.css" />
+<link rel="stylesheet" type="text/css" href="files\tooltipster-sideTip-shadow.min.css" />
 <script type="text/javascript" src="files\jquery.min.js"></script>
 <script src="files\jquery-1.12.4.js"></script>
 <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
@@ -21,6 +23,7 @@
 <script src="files\jquery.popupoverlay.min.js"></script>
 <link rel="stylesheet" href="files\jquery-confirm.min.css">
 <script src="files\jquery-confirm.min.js"></script>
+<script type="text/javascript" src="files\tooltipster.bundle.min.js"></script>
 <link rel="icon" 
    type="image/png" 
    href="images\record.png">
@@ -32,6 +35,8 @@
 <button class="scroll-down-button button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
 
 <form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
+<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="statusTxt"><img id="transIcon" src="images\translate.png"></img> <span>English</span></div><div id="autoSaveOn" title="Autosave is On"><img src="images\save.png" id="onIcon"></img> on<span id="counter">60</span></div><div id="autoSaveOff" title="Autosave is Off"><img src="images\save.png" id="offIcon"></img> off</div><div id="dateTime"></div><div id="version">(v 1.2.1.2)</div></div></div>
+
 <div id="toolbar">
    <button id="leftbutton" class="button" title="Reload Form
       (Use this if the form isn't responding or reacting properly)"><i class="fa fa-repeat" aria-hidden="true"></i></button>
@@ -145,6 +150,7 @@
    <button type="button" id="get" title="Load Saved Data" class="button"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>
    <button type="button" onclick="" id="resetButton" title="Clear All Form Fields" class="button"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 </div>
+
 <div id="blurDIV">   
  <div id="firstPart">  
    <div style="width:100%">
@@ -192,7 +198,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="lang" value="English" />
+            <input required title="Language of RS" type="radio" name="lang" value="eng" />
             <span class="checkmark"></span>
             </label>
          </td>
@@ -200,14 +206,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="lang" value="Spanish"/>
+            <input type="radio" name="lang" value="es"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="lang" value="Polish"/>
+            <input type="radio" name="lang" value="pl"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -217,7 +223,110 @@
             <label class="container ">Other:
             <input type="radio" name="lang" value="Other"/>
             <span class="checkmark"></span>
-            </label><input type="text" class="fillIn" name="other_lang" style="font-size: 17px; width: 100px"/>
+            </label><select class="fillIn srcLanguage" name="other_lang" id="other_lang" style="font-size: 17px; width: 100px">
+<option selected value=""></option>
+<option value="af">Afrikaans</option>
+<option value="sq">Albanian</option>
+<option value="am">Amharic</option>
+<option value="ar">Arabic</option>
+<option value="hy">Armenian</option>
+<option value="az">Azerbaijani</option>
+<option value="eu">Basque</option>
+<option value="be">Belarusian</option>
+<option value="bn">Bengali</option>
+<option value="bs">Bosnian</option>
+<option value="bg">Bulgarian</option>
+<option value="ca">Catalan</option>
+<option value="ceb">Cebuano</option>
+<option value="zh-CN">Chinese (Simplified)</option>
+<option value="zh-TW">Chinese (Traditional)</option>
+<option value="co">Corsican</option>
+<option value="hr">Croatian</option>
+<option value="cs">Czech</option>
+<option value="da">Danish</option>
+<option value="nl">Dutch</option>
+<option value="eo">Esperanto</option>
+<option value="et">Estonian</option>
+<option value="fi">Finnish</option>
+<option value="fr">French</option>
+<option value="fy">Frisian</option>
+<option value="gl">Galician</option>
+<option value="ka">Georgian</option>
+<option value="de">German</option>
+<option value="el">Greek</option>
+<option value="gu">Gujarati</option>
+<option value="ht">Haitian Creole</option>
+<option value="ha">Hausa</option>
+<option value="haw">Hawaiian</option>
+<option value="he">Hebrew</option>
+<option value="hi">Hindi</option>
+<option value="hmn">Hmong</option>
+<option value="hu">Hungarian</option>
+<option value="is">Icelandic</option>
+<option value="ig">Igbo</option>
+<option value="id">Indonesian</option>
+<option value="ga">Irish</option>
+<option value="it">Italian</option>
+<option value="ja">Japanese</option>
+<option value="jw">Javanese</option>
+<option value="kn">Kannada</option>
+<option value="kk">Kazakh</option>
+<option value="km">Khmer</option>
+<option value="ko">Korean</option>
+<option value="ku">Kurdish</option>
+<option value="ky">Kyrgyz</option>
+<option value="lo">Lao</option>
+<option value="la">Latin</option>
+<option value="lv">Latvian</option>
+<option value="lt">Lithuanian</option>
+<option value="lb">Luxembourgish</option>
+<option value="mk">Macedonian</option>
+<option value="mg">Malagasy</option>
+<option value="ms">Malay</option>
+<option value="ml">Malayalam</option>
+<option value="mt">Maltese</option>
+<option value="mi">Maori</option>
+<option value="mr">Marathi</option>
+<option value="mn">Mongolian</option>
+<option value="my">Myanmar (Burmese)</option>
+<option value="ne">Nepali</option>
+<option value="no">Norwegian</option>
+<option value="ny">Nyanja (Chichewa)</option>
+<option value="ps">Pashto</option>
+<option value="fa">Persian</option>
+<option value="pt">Portuguese</option>
+<option value="pa">Punjabi</option>
+<option value="ro">Romanian</option>
+<option value="ru">Russian</option>
+<option value="sm">Samoan</option>
+<option value="gd">Scots Gaelic</option>
+<option value="sr">Serbian</option>
+<option value="st">Sesotho</option>
+<option value="sn">Shona</option>
+<option value="sd">Sindhi</option>
+<option value="si">Sinhala (Sinhalese)</option>
+<option value="sk">Slovak</option>
+<option value="sl">Slovenian</option>
+<option value="so">Somali</option>
+<option value="su">Sundanese</option>
+<option value="sw">Swahili</option>
+<option value="sv">Swedish</option>
+<option value="tl">Tagalog (Filipino)</option>
+<option value="tg">Tajik</option>
+<option value="ta">Tamil</option>
+<option value="te">Telugu</option>
+<option value="th">Thai</option>
+<option value="tr">Turkish</option>
+<option value="uk">Ukrainian</option>
+<option value="ur">Urdu</option>
+<option value="uz">Uzbek</option>
+<option value="vi">Vietnamese</option>
+<option value="cy">Welsh</option>
+<option value="xh">Xhosa</option>
+<option value="yi">Yiddish</option>
+<option value="yo">Yoruba</option>
+<option value="zu">Zulu</option>
+</select><!--<input type="text" class="fillIn" name="other_lang" style="font-size: 17px; width: 100px"/>-->
          </td>
       </tr>
    </table>
@@ -458,18 +567,20 @@
    <table class="section2 full tight" style="padding-top:25px;">
       <tr>
          <td class="number"></td>
-         <td class="block indent" colspan="5">Who was the driver of the vehicle at the time of the loss?</td>
+         <td class="block indent" colspan="1">Who was the driver of the vehicle at the time of the loss?</td>
          <td><input Required title="IV Driver Question" type="text" class="fillIn" style="width:100%"/></td>
       </tr>
    </table>
    <table class="section2 tight full" >
       <tr>
-         <td class="indent"></td>
-         <td class="block indent" colspan="5">If the vehicle was parked - who parked it?</td>
+         <td class="indent2"></td>
+         <td class="block indent" colspan="1">If the vehicle was parked - who parked it?</td>
          <td><input title="IV Driver Question" type="text" class="fillIn" style="width:100%"/></td>
       </tr>
+	  </table>
+   <table class="section2 tight full" >
       <tr>
-         <td></td>
+         <td class="indent2"></td>
          <td class="block indent" ><label class="container ">DOP
             <input required type="radio" name="driver2" value="DOP"/>
             <span class="checkmark"></span>
@@ -675,11 +786,12 @@
       <tr>
          <td class="number"></td>
          <td colspan="2" class="indent block" >In detail describe what occurred in the loss (Loss Details)</td>
-         <td></td>
+         <td ></td>
       </tr>
       <tr>
-         <td class="indent"></td>
-         <td class="indent" colspan="3"><textarea rows="1" class="factsOL txtAreaGrow" type="text" class="" style="width:100%;"></textarea></td>
+         <td class="indent2"></td>
+         <td class="indent" colspan="3"><textarea rows="1" class="factsOL txtAreaGrow" type="text" class="" style="width:100% !important;"></textarea></td>
+		 
       </tr>
    </table>
   </div>
@@ -1329,7 +1441,7 @@
    <table class="section2 tight full">
       <tr>
          <td class="number"></td>
-         <td colspan="5"class="indent block">If the vehicle was used for work at the time of loss - was the driver on the</td>
+         <td colspan="5"class="indent">If the vehicle was used for work at the time of loss - was the driver on the</td>
       </tr>
       <tr>
          <td class="indent2"></td>
@@ -1452,7 +1564,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="FUQlang" />
+            <input required title="Language of RS" type="radio" name="FUQlang" value="eng"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1460,14 +1572,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="FUQlang" />
+            <input type="radio" name="FUQlang" value="es"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="FUQlang" />
+            <input type="radio" name="FUQlang" value="pl"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -1475,9 +1587,112 @@
       <tr>
          <td>
             <label class="container ">Other:
-            <input type="radio" name="FUQlang" />
+            <input type="radio" name="FUQlang" value="Other"/>
             <span class="checkmark"></span>
-            </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
+            </label><select class="fillIn srcLanguage" name="FUQother_lang" id="FUQother_lang" style="font-size: 17px; width: 100px">
+<option selected value=""></option>
+<option value="af">Afrikaans</option>
+<option value="sq">Albanian</option>
+<option value="am">Amharic</option>
+<option value="ar">Arabic</option>
+<option value="hy">Armenian</option>
+<option value="az">Azerbaijani</option>
+<option value="eu">Basque</option>
+<option value="be">Belarusian</option>
+<option value="bn">Bengali</option>
+<option value="bs">Bosnian</option>
+<option value="bg">Bulgarian</option>
+<option value="ca">Catalan</option>
+<option value="ceb">Cebuano</option>
+<option value="zh-CN">Chinese (Simplified)</option>
+<option value="zh-TW">Chinese (Traditional)</option>
+<option value="co">Corsican</option>
+<option value="hr">Croatian</option>
+<option value="cs">Czech</option>
+<option value="da">Danish</option>
+<option value="nl">Dutch</option>
+<option value="eo">Esperanto</option>
+<option value="et">Estonian</option>
+<option value="fi">Finnish</option>
+<option value="fr">French</option>
+<option value="fy">Frisian</option>
+<option value="gl">Galician</option>
+<option value="ka">Georgian</option>
+<option value="de">German</option>
+<option value="el">Greek</option>
+<option value="gu">Gujarati</option>
+<option value="ht">Haitian Creole</option>
+<option value="ha">Hausa</option>
+<option value="haw">Hawaiian</option>
+<option value="he">Hebrew</option>
+<option value="hi">Hindi</option>
+<option value="hmn">Hmong</option>
+<option value="hu">Hungarian</option>
+<option value="is">Icelandic</option>
+<option value="ig">Igbo</option>
+<option value="id">Indonesian</option>
+<option value="ga">Irish</option>
+<option value="it">Italian</option>
+<option value="ja">Japanese</option>
+<option value="jw">Javanese</option>
+<option value="kn">Kannada</option>
+<option value="kk">Kazakh</option>
+<option value="km">Khmer</option>
+<option value="ko">Korean</option>
+<option value="ku">Kurdish</option>
+<option value="ky">Kyrgyz</option>
+<option value="lo">Lao</option>
+<option value="la">Latin</option>
+<option value="lv">Latvian</option>
+<option value="lt">Lithuanian</option>
+<option value="lb">Luxembourgish</option>
+<option value="mk">Macedonian</option>
+<option value="mg">Malagasy</option>
+<option value="ms">Malay</option>
+<option value="ml">Malayalam</option>
+<option value="mt">Maltese</option>
+<option value="mi">Maori</option>
+<option value="mr">Marathi</option>
+<option value="mn">Mongolian</option>
+<option value="my">Myanmar (Burmese)</option>
+<option value="ne">Nepali</option>
+<option value="no">Norwegian</option>
+<option value="ny">Nyanja (Chichewa)</option>
+<option value="ps">Pashto</option>
+<option value="fa">Persian</option>
+<option value="pt">Portuguese</option>
+<option value="pa">Punjabi</option>
+<option value="ro">Romanian</option>
+<option value="ru">Russian</option>
+<option value="sm">Samoan</option>
+<option value="gd">Scots Gaelic</option>
+<option value="sr">Serbian</option>
+<option value="st">Sesotho</option>
+<option value="sn">Shona</option>
+<option value="sd">Sindhi</option>
+<option value="si">Sinhala (Sinhalese)</option>
+<option value="sk">Slovak</option>
+<option value="sl">Slovenian</option>
+<option value="so">Somali</option>
+<option value="su">Sundanese</option>
+<option value="sw">Swahili</option>
+<option value="sv">Swedish</option>
+<option value="tl">Tagalog (Filipino)</option>
+<option value="tg">Tajik</option>
+<option value="ta">Tamil</option>
+<option value="te">Telugu</option>
+<option value="th">Thai</option>
+<option value="tr">Turkish</option>
+<option value="uk">Ukrainian</option>
+<option value="ur">Urdu</option>
+<option value="uz">Uzbek</option>
+<option value="vi">Vietnamese</option>
+<option value="cy">Welsh</option>
+<option value="xh">Xhosa</option>
+<option value="yi">Yiddish</option>
+<option value="yo">Yoruba</option>
+<option value="zu">Zulu</option>
+</select>
          </td>
       </tr>
    </table>
@@ -2000,7 +2215,7 @@
    <table class="section2 tight full">
       <tr>
          <td class="number"></td>
-         <td colspan="5"class="indent block">If the vehicle was used for work at the time of loss - was the driver on the</td>
+         <td colspan="5"class="indent">If the vehicle was used for work at the time of loss - was the driver on the</td>
       </tr>
       <tr>
          <td class="indent2"></td>
@@ -3476,7 +3691,7 @@
    <table class="section2 tight full">
       <tr>
          <td class="number"></td>
-         <td colspan="5"class="indent block">If the vehicle was used for work at the time of loss - was the driver on the</td>
+         <td colspan="5"class="indent">If the vehicle was used for work at the time of loss - was the driver on the</td>
       </tr>
       <tr>
          <td class="indent2"></td>
@@ -4507,7 +4722,7 @@
    <table class="section2 tight full">
       <tr>
          <td class="number"></td>
-         <td colspan="5"class="indent block">If the vehicle was used for work at the time of loss - was the driver on the</td>
+         <td colspan="5"class="indent">If the vehicle was used for work at the time of loss - was the driver on the</td>
       </tr>
       <tr>
          <td class="indent2"></td>
@@ -6982,18 +7197,22 @@
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="block indent">Vehicle Year:</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn " style="width:100%" /></td>
             <td class="block ">Make:</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn " style="width:100%" /></td>
             <td class="block ">Model:</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn " style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
          <tr>
             <td colspan="1" class="number"></td>
             <td class="block indent">How often does A use the vehicle(s) on policy for work/business related purposes? </td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+		 <tr>
+            <td colspan="1" class="indent2"></td>
+            <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7016,7 +7235,11 @@
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="block indent">If Yes, what tools/materials are provided by A's employer?</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+		 <tr>
+            <td colspan="1" class="indent2"></td>
+            <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7045,14 +7268,22 @@
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="block indent">If Yes, what tools/materials do you transport?</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+		 <tr>
+            <td colspan="1" class="indent2"></td>
+            <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
          <tr>
             <td colspan="1" class="indent2"></td>
             <td class="block indent">If No, how are tools/materials brought to the job site?</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn FOL" style="width:100%" /></td>
+         </tr>
+		 <tr>
+            <td colspan="1" class="indent2"></td>
+            <td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7113,7 +7344,7 @@
                </label>
             </td>
             <td class="block">Specify:</td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn " style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7162,7 +7393,7 @@
       <table class="section2 VNOPrental tight full" >
          <tr>
             <td colspan="1" class="indent2"></td>
-            <td class="indent ">to to <strong>PER WEEK</strong>:</td>
+            <td class="indent ">go to <strong>PER WEEK</strong>:</td>
             <td colspan="1"><input Required type="number" class="fillIn" style="width:25%" value="1" min="1"/></td>
          </tr>
       </table>
@@ -7217,7 +7448,7 @@
             <td colspan="1" class="indent2"></td>
             <td class="indent"></td>
             <td class="indent tdTab block">If yes, how are they paid? </td>
-            <td><input Required type="text" class="fillIn " style="width:100%" /></td>
+            <td><input type="text" class="fillIn " style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7292,7 +7523,7 @@
             <td class="indent2"></td>
             <td class="indent block">business/corporation(s)?</td>
             <td class="indent "><label class="container">Yes
-               <input Required type="radio" name="IVregAgent" />
+               <input type="radio" name="IVregAgent" />
                <span class="checkmark"></span>
                </label>
             </td>
@@ -7361,7 +7592,7 @@
          <tr>
             <td class="indent2"></td>
             <td class="indent block">Agent's name?</td>
-            <td colspan="3"><input type="text" class="fillIn date" style="width:100%" /></td>
+            <td colspan="3"><input type="text" class="fillIn" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -7391,7 +7622,7 @@
          <tr>
             <td class="indent2"></td>
             <td class="indent block">Agent's name?</td>
-            <td colspan="3"><input type="text" class="fillIn date" style="width:100%" /></td>
+            <td colspan="3"><input type="text" class="fillIn" style="width:100%" /></td>
          </tr>
       </table>
       <table class="section2 VNOPrental tight full" >
@@ -10803,7 +11034,7 @@
       </tr>
       <tr>
          <td><label class="container ">English
-            <input required title="Language of RS" type="radio" name="WITlang" />
+            <input required title="Language of RS" type="radio" name="WITlang" value="eng"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -10811,14 +11042,14 @@
       <tr>
          <td>
             <label class="container ">Spanish
-            <input type="radio" name="WITlang" />
+            <input type="radio" name="WITlang" value="es"/>
             <span class="checkmark"></span>
             </label>
          </td>
       </tr>
       <tr>
          <td><label class="container ">Polish
-            <input type="radio" name="WITlang" />
+            <input type="radio" name="WITlang" value="pl"/>
             <span class="checkmark"></span>
             </label>
          </td>
@@ -10826,9 +11057,112 @@
       <tr>
          <td>
             <label class="container ">Other:
-            <input type="radio" name="WITlang" />
+            <input type="radio" name="WITlang" value="Other"/>
             <span class="checkmark"></span>
-            </label><input type="text" class="fillIn" style="font-size: 17px; width: 100px"/>
+            </label><select class="fillIn srcLanguage" name="WITother_lang" id="WITother_lang" style="font-size: 17px; width: 100px">
+<option selected value=""></option>
+<option value="af">Afrikaans</option>
+<option value="sq">Albanian</option>
+<option value="am">Amharic</option>
+<option value="ar">Arabic</option>
+<option value="hy">Armenian</option>
+<option value="az">Azerbaijani</option>
+<option value="eu">Basque</option>
+<option value="be">Belarusian</option>
+<option value="bn">Bengali</option>
+<option value="bs">Bosnian</option>
+<option value="bg">Bulgarian</option>
+<option value="ca">Catalan</option>
+<option value="ceb">Cebuano</option>
+<option value="zh-CN">Chinese (Simplified)</option>
+<option value="zh-TW">Chinese (Traditional)</option>
+<option value="co">Corsican</option>
+<option value="hr">Croatian</option>
+<option value="cs">Czech</option>
+<option value="da">Danish</option>
+<option value="nl">Dutch</option>
+<option value="eo">Esperanto</option>
+<option value="et">Estonian</option>
+<option value="fi">Finnish</option>
+<option value="fr">French</option>
+<option value="fy">Frisian</option>
+<option value="gl">Galician</option>
+<option value="ka">Georgian</option>
+<option value="de">German</option>
+<option value="el">Greek</option>
+<option value="gu">Gujarati</option>
+<option value="ht">Haitian Creole</option>
+<option value="ha">Hausa</option>
+<option value="haw">Hawaiian</option>
+<option value="he">Hebrew</option>
+<option value="hi">Hindi</option>
+<option value="hmn">Hmong</option>
+<option value="hu">Hungarian</option>
+<option value="is">Icelandic</option>
+<option value="ig">Igbo</option>
+<option value="id">Indonesian</option>
+<option value="ga">Irish</option>
+<option value="it">Italian</option>
+<option value="ja">Japanese</option>
+<option value="jw">Javanese</option>
+<option value="kn">Kannada</option>
+<option value="kk">Kazakh</option>
+<option value="km">Khmer</option>
+<option value="ko">Korean</option>
+<option value="ku">Kurdish</option>
+<option value="ky">Kyrgyz</option>
+<option value="lo">Lao</option>
+<option value="la">Latin</option>
+<option value="lv">Latvian</option>
+<option value="lt">Lithuanian</option>
+<option value="lb">Luxembourgish</option>
+<option value="mk">Macedonian</option>
+<option value="mg">Malagasy</option>
+<option value="ms">Malay</option>
+<option value="ml">Malayalam</option>
+<option value="mt">Maltese</option>
+<option value="mi">Maori</option>
+<option value="mr">Marathi</option>
+<option value="mn">Mongolian</option>
+<option value="my">Myanmar (Burmese)</option>
+<option value="ne">Nepali</option>
+<option value="no">Norwegian</option>
+<option value="ny">Nyanja (Chichewa)</option>
+<option value="ps">Pashto</option>
+<option value="fa">Persian</option>
+<option value="pt">Portuguese</option>
+<option value="pa">Punjabi</option>
+<option value="ro">Romanian</option>
+<option value="ru">Russian</option>
+<option value="sm">Samoan</option>
+<option value="gd">Scots Gaelic</option>
+<option value="sr">Serbian</option>
+<option value="st">Sesotho</option>
+<option value="sn">Shona</option>
+<option value="sd">Sindhi</option>
+<option value="si">Sinhala (Sinhalese)</option>
+<option value="sk">Slovak</option>
+<option value="sl">Slovenian</option>
+<option value="so">Somali</option>
+<option value="su">Sundanese</option>
+<option value="sw">Swahili</option>
+<option value="sv">Swedish</option>
+<option value="tl">Tagalog (Filipino)</option>
+<option value="tg">Tajik</option>
+<option value="ta">Tamil</option>
+<option value="te">Telugu</option>
+<option value="th">Thai</option>
+<option value="tr">Turkish</option>
+<option value="uk">Ukrainian</option>
+<option value="ur">Urdu</option>
+<option value="uz">Uzbek</option>
+<option value="vi">Vietnamese</option>
+<option value="cy">Welsh</option>
+<option value="xh">Xhosa</option>
+<option value="yi">Yiddish</option>
+<option value="yo">Yoruba</option>
+<option value="zu">Zulu</option>
+</select>
          </td>
       </tr>
    </table>
@@ -11518,10 +11852,11 @@
   <div id="closingQuestions">
    <table class="section2 full" style="padding-bottom: 50px;">
       <tr>
-         <td colspan="1" class="indent">Have you understood all the questions that I have asked?</td>
+		<td class="indent2"></td>
+         <td colspan="3" class="indent block">Have you understood all the questions that I have asked?</td>
          <td class="indent"></td>
 		 <td class="indent"></td>
-		 <td class="indent"><label class="container">Yes
+		 <td class=""><label class="container">Yes
             <input Required title="First Closing Question" type="radio" name="closing1"/>
             <span class="checkmark" ></span>
             </label></td>
@@ -11533,10 +11868,11 @@
          
       </tr>
       <tr>
-         <td colspan="1" class="indent">Is everything you stated true to the best of your knowledge?</td>
+		<td class="indent2"></td>
+         <td colspan="3" class="indent block">Is everything you stated true to the best of your knowledge?</td>
 		 <td class="indent"></td>
 		 <td class="indent"></td>
-         <td class="indent"><label class="container">Yes
+         <td class=""><label class="container">Yes
             <input Required title="Second Closing Question" type="radio" name="closing2" />
             <span class="checkmark"></span>
             </label></td>
@@ -11547,10 +11883,11 @@
          </td>
       </tr>
       <tr>
-         <td colspan="1" class="indent">Are you aware that this conversation has been recorded?</td>
+		<td class="indent2"></td>
+         <td colspan="3" class="indent block">Are you aware that this conversation has been recorded?</td>
 		 <td class="indent"></td>
 		 <td class="indent"></td>
-         <td class="indent"><label class="container">Yes
+         <td class=""><label class="container">Yes
             <input Required title="Third Closing Question" type="radio" name="closing3" />
             <span class="checkmark"></span>
             </label></td>
@@ -11561,10 +11898,11 @@
          </td>
       </tr>
       <tr>
-         <td colspan="1" class="indent">Do I have your permission to stop recording?</td>
+		<td class="indent2"></td>
+         <td colspan="3" class="indent block">Do I have your permission to stop recording?</td>
 		 <td class="indent"></td>
 		 <td class="indent"></td>
-         <td class="indent"><label class="container">Yes
+         <td class=""><label class="container">Yes
             <input Required title="Fourth Closing Question" type="radio" name="closing4" />
             <span class="checkmark"></span>
             </label></td>
@@ -11721,7 +12059,6 @@
 </form>
 
 <div id="overlay"></div>
-<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="autoSaveOn" title="Autosave is On"><i class="fa fa-save"></i> on (<span id="counter">60</span>)</div><div id="autoSaveOff" title="Autosave is Off"><i class="fa fa-save"></i> off</div><div id="version">(v 1.1.0.0)</div></div></div>
 </body>
 
 </html>
