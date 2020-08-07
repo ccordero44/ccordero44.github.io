@@ -63,21 +63,25 @@
     }
     
     .customMapControlwrapper {
-        
-        border: none;
-        border-radius: 3px;
-        box-shadow: 0 1px 0px rgba(0,0,0,.1);
-        cursor: pointer;
-        text-align: center;
-        margin: 0px 1px 0px 10px;
-        
-        font-family: Roboto,Arial,sans-serif;
-        font-size: 16px;
-        line-height: 16px;
-        padding-left: 10px;
-        padding-right: 10px;
-		border: 1px solid gray;
-        width: auto;
+
+	left: 15px;
+	content: 'Top';
+	top: 4px;
+	float: left;
+	border: 1px solid gray;
+	padding: 6px 10px;
+	margin-top: 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	position: fixed;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 36.86px;
+	height: 32px;
+	color: dodgerblue;
+	background-color: #e6e6e6;
        
 	}
 
@@ -114,9 +118,9 @@
 			margin-left: 20px;
 			background-color: #f3f3f3;
 			padding-top: 5px;
-			border-left: 1px solid grey;
-			border-right: 1px solid grey;
-			border-bottom: 1px solid grey;
+			border-left: 1px solid silver;
+			border-right: 1px solid silver;
+			border-bottom: 1px solid silver;
 			/*animation: growDown 300ms ease-in-out forwards;
 			transform-origin: top center;*/
         }
@@ -178,13 +182,13 @@ hr.style-seven:before { /* Not really supposed to work, but does */
 	background-color: #f3f3f3;
 	margin-left: 5px;
 	margin-right: 5px;
-	color: gray;
+	color: silver;
 	padding-bottom: 5px;
 }
 .separator::before, .separator::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid silver;
 }
 .separator::before {
     margin-right: .25em;
@@ -644,6 +648,7 @@ table.half {
 	width: 45px !important;
 	text-align: right;
 	padding-right: 10px !important;
+
 }
 
 .AgentNumber {
@@ -754,7 +759,19 @@ input {
 	box-sizing: border-box;
 	text-transform: uppercase;
 }
-
+select {
+	color: blue;
+	background-color: #CCD7FF;
+	font-family: Arial;
+	box-sizing: border-box;
+	text-transform: sentence;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+input, textarea {
+	outline: none!important;
+}
 .addressTD td {
 	font-size: 17px;
 }
@@ -810,7 +827,10 @@ input {
 .center {
 	text-align: center;
 }
-
+td.tooltip:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
 .bodyTable {
 	margin-left: 25px;
 	margin-right: 0px;
@@ -910,26 +930,26 @@ input.currency {
 }
 .divider {
 	position: absolute;
-	right: 64px;
+	right: 63px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 
 .divider1 {
 	position: absolute;
-	left: 122px;
+	left: 123px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 
 .divider2 {
 	position: absolute;
-	left: 60px;
+	left: 63px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 
 .divider3 {
@@ -937,56 +957,56 @@ input.currency {
 	left: calc(50% - 1px);
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider4 {
 	position: absolute;
-	left: 182px;
+	left: 183px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider5 {
 	position: absolute;
-	left: 242px;
+	left: 243px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider6 {
 	position: absolute;
 	left: 303px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider7 {
 	position: absolute;
-	right: 124px;
+	right: 123px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider8 {
 	position: absolute;
-	right: 184px;
+	right: 183px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider9 {
 	position: absolute;
-	right: 244px;
+	right: 243px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 .divider10 {
 	position: absolute;
-	right: 304px;
+	right: 303px;
 	top: 10%;
 	bottom: 10%;
-	border-left: 2px ridge #ccc;
+	border-left: 1px solid silver;
 }
 
 
@@ -996,11 +1016,11 @@ input.currency {
 	left: 0px;
 	height: 40px;
 	width: 100%;
-	border: 1px solid #e7e7e7;
-	background-color: #f3f3f3;
-	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	border-bottom: 1px solid silver;
+	background: BUTTONFACE;
+	/*-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);*/
 	z-index: 999;
 }
 
@@ -1299,62 +1319,118 @@ span.banners {
 	top: 0;
 }
 #statusBar {
-	cursor: grab;
+	cursor: initial;
 	font-family: Arial;
+	FONT-SIZE: 10pt;
 	user-select: none;
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
+	display: block;
 	height: 27px;
 	width: 100%;
-	border: 1px solid #e7e7e7;
-	background-color: #f3f3f3;
-	-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	/*border: 1px solid #e7e7e7;*/
+	border-top: 1px solid silver;
+	background: BUTTONFACE;
+	/*-webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);*/
 	z-index: 999;
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	
 }
+
 #statusInner1 {
-	color: grey;
+	color: #737373;
 	display: block;
-	width: 99%;
+	width: 100%;
 	margin: auto;
 	height: 20px;
 	/*border: 2px inset #e7e7e7;*/
 	line-height: 20px;
-	font-size: 15px;
-	text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
-	margin-top: 3px;
+	/*font-size: 15px;*/
+	/*text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);*/
+	margin-top: 4px;
 }
 #version {
-	float: right;
+	float: left;
 	width: 10%;
 	display: inline;
 	text-align: center;
 }
 #footer {
 	float: left;
-	width: 73%;
+	width: calc(53% - 4px);
 	display: inline;
-	margin-left: 5px;
+	
 }
 
 #autoSaveOn {
 	float: left;
-	width: 15%;
+	width: 7%;
 	display: none;
 	text-align: center;
-	/*border-left: 5px ridge #e7e7e7;
-	border-right: 5px ridge #e7e7e7;*/
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
 }
 #autoSaveOff {
 	float: left;
-	width: 15%;
+	width: 7%;
 	text-align: center;
-	/*border-left: 5px ridge #e7e7e7;
-	border-right: 5px ridge #e7e7e7;*/
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+}
+#counter {
+	/*font-family:'digital-clock-font';*/
+	display: none;
+}
+#counter:before {
+	content: " (";
+}
+#counter:after {
+	content: ")";
+}
+#dateTime {
+	float: left;
+	width: 18%;
+	display: inline;
+	text-align: center;
+	border-right: 1px solid silver;
+	
+}
+#statusTxt {
+	float: left;
+	width: 12%;
+	text-align: center;
+	border-left: 1px solid silver;
+	margin-top: -2px;
+}
+#transIcon {
+	width: 20px;
+	height: 20px;
+	vertical-align: sub;
+	
+}
+#onIcon {
+	width: 18px;
+	height: 18px;
+	vertical-align: sub;
+}
+#offIcon {
+	width: 18px;
+	height: 18px;
+	vertical-align: sub;
+}
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('digital-7.ttf');
 }
 
+.fa-save:before, .fa-floppy-o:before {
+	font-size: 11pt;
+}
 /* PRINT CSS */
 
 @media print {
@@ -1434,6 +1510,7 @@ span.banners {
 		padding-top: 0px;
 		background-color: white;
 		outline: none;
+		
 	}
 	#closingQuestions {
 		page-break-inside: avoid !important;

@@ -23,7 +23,8 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-
+	
+display_dt();
 	var version = $('#version').html();
 $('.button').not('#resetButton').click(function(e){
 	e.preventDefault();
@@ -34,11 +35,7 @@ $("input").keypress(function(e) {
     return false;
   }
 });
-	/*if ( window.history.length > 1 ) {
-		$.when(window.history.back()).done(function () {
-			//$('#reset').trigger('click');
-		});
-	}	*/	
+
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
 		$("#resetButton i").addClass("rotate");
@@ -103,7 +100,7 @@ $("input").keypress(function(e) {
 		  var n = 0;
 		  for (const element of formElements) {
 			  n = n + 1
-			//if ($(element).is(":visible")) { 
+			
 			if (element.name.length == 0) {
 				$(element).attr('name', 'dynamic_'+n);
 			}
@@ -126,18 +123,7 @@ $("input").keypress(function(e) {
 					}
 				}
 			}
-		  //}//else {
-			//	$(element).attr('name', n);
-			//	if (element.type !== 'radio') {
-			//		data[formIdentifier][element.name] = element.value;
-			//	}
-			//	if (element.type == 'radio') {
-			//		if (element.checked) {
-			//			console.log(element.value);
-			//			data[formIdentifier][element.name] = element.value;
-			//		}
-			//	}
-			//}
+		 
 		  }
 		  return data;
 		};
@@ -151,18 +137,22 @@ $("input").keypress(function(e) {
 		};
 		
 		const populateForm = () => {
+			
 		  if (localStorage.key(formIdentifier)) {
+			 // $('#statusTxt').html('fetching...');
 			const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
 			
 			var n = 0;
 			for (const element of formElements) {
+				
 				
 				n = n + 1;
 			if (element.name.length == 0) {
 				$(element).attr('name', 'dynamic_'+n);
 			}
 			  if (element.name in savedData) {
-			
+				
+					
 				  if (element.type !== 'radio') {
 					element.value = savedData[element.name];
 					$(element).trigger('input');
@@ -177,7 +167,6 @@ $("input").keypress(function(e) {
 					  $(element).val(n);
 					  if (savedData[element.name] !== "") {
 					  if (element.value == savedData[element.name]) {
-						  
 						element.checked = true;
 						$(element).trigger('change');
 					  }
@@ -186,6 +175,7 @@ $("input").keypress(function(e) {
 						  $(element).trigger('change');
 					  }
 				  }
+				 // $('#statusTxt').html('...');
 			  }/*else{
 				  var docTitle = document.title;
 				  document.title += "Error with data!";
@@ -202,7 +192,10 @@ $("input").keypress(function(e) {
 			var doctitle = document.title;
 			doctitle = doctitle.replace(" - " + message, '');
 			$('#footer').html(doctitle + " - " + message);
+			//$('#statusTxt').html('done');
 			setTimeout(function(){ $('#footer').html(doctitle);$('#save').prop('disabled', false); }, 2000);
+			
+			
 		  }else{
 			$('#blurDIV').addClass('blur');
 			$.alert({
@@ -220,7 +213,8 @@ $("input").keypress(function(e) {
 			});
 		  }
 		  $('.phone').trigger('blur');
-		
+		  
+		  
 		};
 	$('#save').click(function () {
 		$('#get').prop('disabled', true);
@@ -292,6 +286,7 @@ $("input").keypress(function(e) {
 		setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
 	});
 	$('#get').click(function () {
+		
 		populateForm();
 		$('.txtAreaGrow').trigger('keyup');
 		
@@ -417,6 +412,69 @@ $("input").keypress(function(e) {
 
 	});
 	
+	
+	$('input[name="lang"]').change(function () {
+		if ($(this).is(':checked')) {
+			if ($(this).val() == "es" || $(this).val() == "pl") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $(this).closest('label').text());
+				$('#statusTxt span').html($(this).closest('label').text());
+			}else if ($(this).val() == "Other") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $('#other_lang option:selected').text());
+				$('#statusTxt span').html($('#other_lang option:selected').text());
+			}else{
+				$('td').not('.number').attr('title','Select a language to translate.');
+				$('#statusTxt span').html($(this).closest('label').text());
+			//	$('.tooltip').tooltipster('instance').destroy();
+			};
+		}else{
+			$('td').not('.number').attr('title','Select a language to translate.');
+			$('#statusTxt span').html('English');
+		};
+	});
+	$('#other_lang').change(function () {
+		$('input[name="lang"]').trigger('change');
+	});
+	$('input[name="FUQlang"]').change(function () {
+		if ($(this).is(':checked')) {
+			if ($(this).val() == "es" || $(this).val() == "pl") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $(this).closest('label').text());
+				$('#statusTxt span').html($(this).closest('label').text());
+			}else if ($(this).val() == "Other") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $('#FUQother_lang option:selected').text());
+				$('#statusTxt span').html($('#other_lang option:selected').text());
+			}else{
+				$('td').not('.number').attr('title','Select a language to translate.');
+				$('#statusTxt span').html($(this).closest('label').text());
+			};
+		}else{
+			$('td').not('.number').attr('title','Select a language to translate.');
+		};
+	});
+	$('#FUQother_lang').change(function () {
+		$('input[name="FUQlang"]').trigger('change');
+	});
+	$('input[name="WITlang"]').change(function () {
+		if ($(this).is(':checked')) {
+			if ($(this).val() == "es" || $(this).val() == "pl") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $(this).closest('label').text());
+				$('#statusTxt span').html($(this).closest('label').text());
+			}else if ($(this).val() == "Other") {
+				$('td').not('.number').attr('title','Click to translate question to ' + $('#WITother_lang option:selected').text());
+				$('#statusTxt span').html($('#other_lang option:selected').text());
+			}else{
+				$('td').not('.number').attr('title','Select a language to translate.');
+				$('#statusTxt span').html($(this).closest('label').text());
+			};
+		}else{
+			$('td').not('.number').attr('title','Select a language to translate.');
+		};
+	});
+	$('#WITother_lang').change(function () {
+		$('input[name="WITlang"]').trigger('change');
+	});
+		
+		
+		
 	$(function() {
 		//  changes mouse cursor when highlighting loawer right of box
 		$(".txtAreaGrow").mousemove(function(e) {
@@ -1288,7 +1346,7 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums4" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums4" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn address" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('jobSites', html, 1);
 		/*$('textarea').each(function (index, value) {
 			$(value).change(function () {
@@ -1315,7 +1373,7 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums3" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums3" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('occTable', html, 1)
 		/*$('textarea').each(function (index, value) {
 			$(value).change(function () {
@@ -1521,7 +1579,7 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums17" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums17" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('jobSitesDaily', html, 1);
 
 		$('.minus').each(function () {
@@ -1537,7 +1595,7 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums18" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:17px" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums18" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('jobSitesWeekly', html, 1);
 
 		$('.minus').each(function () {
@@ -1976,7 +2034,14 @@ $('.rowNumbers').on('input', function(){
 			}
 			return pos;
 		};
-		
+		$('td').not('.number').each(function () {
+		if (!$(this).find('input').is(':text') && !$(this).find('input').is(':radio') && $(this).text() !== '') {
+			if ($(this).closest('tr').find('td:eq(0)').hasClass('number') || $(this).closest('tr').find('td:eq(0)').hasClass('indent2')) {
+		//	$(this).addClass('tooltip');
+			$(this).attr('title','Select a language to translate.');
+			};
+		};
+	});
 	/*end of document ready*/
 });
 function showMain() {
@@ -2031,14 +2096,15 @@ function coverageCheck(status, ele) {
 				};
 				$('#docTitle').html(title2.replace(/_/g, " ")); 
 				$(document).attr('title', title.replace(/_/g, " "));
-				$('#footer').html(title);
+				$('#footer').html(title.replace(/_/g, " "));
+				
 			}else{
 				title = title.replace(", " + $(arr[i]).attr('id'), '');
 				title += ", " + $(arr[i]).attr('id');
 				title2 = title.replace("Recorded Statement General, ",""); //", " + $(arr[i]).attr('id');
 				$('#docTitle').html(title2.replace(/_/g," "));
 				$(document).attr('title', title.replace(/_/g, " "));
-				$('#footer').html(title);
+				$('#footer').html(title.replace(/_/g, " "));
 			}
 		} else if ($(arr[i]).attr('id') === ele && $(arr[i]).css('display') === 'none') {
 			title = title.replace(", " + $(arr[i]).attr('id'), '');
@@ -2049,7 +2115,7 @@ function coverageCheck(status, ele) {
 				$('#docTitle').html(title2.replace(/_/g, " "));
 			}
 			$(document).attr('title', title.replace(/_/g, " "));
-			$('#footer').html(title);
+			$('#footer').html(title.replace(/_/g, " "));
 		} 
 		
 	}
@@ -2071,6 +2137,7 @@ function loadFunctions() {
 	$('.hidden').each(function (index, value) {
 		$(value).hide();
 	});
+	
 	$('input[name="VNOPrental"]').click(function () {
 		if ($(this).val() === 'Yes') {
 			$('#VNOPrental').show();
@@ -2080,13 +2147,25 @@ function loadFunctions() {
 			numberCols();
 		};
 	});
-
-
+	
+	
+	$("td").not('.number').on('click', function () {	
+		if ($('input[name="lang"]').is(':visible')) {
+			translateTo('lang', 'other_lang', $(this));
+		}
+		if ($('input[name="FUQlang"]').is(':visible')) {
+			translateTo('FUQlang', 'FUQother_lang', $(this));
+		}
+		if ($('input[name="WITlang"]').is(':visible')) {
+			translateTo('WITlang', 'WITother_lang', $(this));
+		}
+    });
+		
 	numberCols();
 	$("td.numspacer").each(function (i, v) {
 		$(this).css('width', '35px');
 	});
-
+	
 	var interval;
 	$('.scroll-up-button').on('mousedown', function (e) {
 		interval = setInterval(function () {
@@ -2469,15 +2548,15 @@ function fillInAddress(input, autocomplete) {
 }
 
 function titleCase(str) {
-	return;
-	/*str = str.toLowerCase().split(' ');
+	
+	str = str.toLowerCase().split(' ');
 	for (var i = 0; i < str.length; i++) {
 		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
 	}
-	var newStrng = str.join(' ');
-	//return str.join(' ');
-	return charCase1(newStrng);*/
-	return str.toUpperCase();
+	//var newStrng = str.join(' ');
+	return str.join(' ');
+	/*return charCase1(newStrng);*/
+	//return str.toUpperCase();
 }
 
 function charCase1(str) {
@@ -2687,6 +2766,7 @@ function printFunction() {
 														$(':input[required]').removeClass('banners');
 														$('span').removeClass('banners');
 														$('#blurDIV').removeClass('blur');
+														$('.cloneTrans').remove();
 														printForm('RSgeneral');
 														}
 												}, 
@@ -3373,6 +3453,7 @@ function resetReset() {
 			$('.address1').trigger('input');
 			$('.address2').trigger('input');
 			$('.addressNorm').trigger('blur');
+			$('input[name="lang"]').trigger('change');
 			$('.date').trigger('blur');
 			$('.time').trigger('blur');
 			$('.phone').val('');
@@ -3391,6 +3472,8 @@ function resetReset() {
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
 			$('#blurDIV').removeClass('blur');
+			//$('#statusTxt span').html('English');
+			$('input[name="lang"]').trigger('change');
 	console.timeEnd('Reset Function Time');
 }
 var today = new Date();
@@ -3421,3 +3504,72 @@ var today = new Date();
 	 $('input:radio[name="'+name+'"]').trigger('change');
 	
  }
+ function display_dt() {
+	var x = new Date()
+	var hours = x.getHours();
+	var ampm = (hours >= 12) ? "PM" : "AM";
+	var hours = (hours+24)%24;
+	if(hours==0){ //At 00 hours we need to show 12 am
+    hours=12;
+    }
+    else if(hours>12)
+    {
+    hours=hours%12;
+    }
+	
+	var x1 = x.getMonth() + 1 + "/" + x.getDate() + "/" + x.getFullYear();
+	x1 = x1 + " - " + hours + ":" + ((x.getMinutes()<10?'0':'') + x.getMinutes()) + ":" + ((x.getSeconds()<10?'0':'') + x.getSeconds()) + " " + ampm;
+	$('#dateTime').html(x1);
+	display_c();
+}
+function display_c() {
+	var refresh = 1000;
+	mytime = setTimeout('display_dt()', refresh)
+}
+function translateTo(RadioEle, SelectEle, $this) {
+	var radioVal = getRadioVal(document.getElementById('RSgeneral'), RadioEle);
+	if (radioVal && radioVal !== 'eng' && !$this.find('input').is(':text') && !$this.find('input').is(':radio') && $this.text() !== '') {
+		if ($this.closest('tr').find('td:eq(0)').hasClass('number') || $this.closest('tr').find('td:eq(0)').hasClass('indent2')) {
+			
+			var url = "https://translation.googleapis.com/language/translate/v2";
+					//Strings requiring translation
+			url += "?q=" + encodeURI($this.text().replace(/,/g,'').replace(/&/g,'and').replace(/#/g,'number'));
+					//Target language
+			if (radioVal == "Other") {
+				url += "&target=" + $('#'+SelectEle+' option:selected').val() ;
+			}else{
+				url += "&target=" + radioVal; 
+			};
+					//set the source language
+			url += "&source="; 
+					//Replace with your API key
+			url += "&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
+			$.get(url, function (data, status) {
+				//setTimeout(function(){ $this.tooltipster( "destroy" ); }, 10000);
+				$this.tooltipster({
+					functionAfter: function() {$this.tooltipster('instance').destroy()},
+					restoration: 'current',
+					trigger: 'custom',
+					triggerOpen: {
+						click: true,
+						tap: true
+					},
+					triggerClose: {
+						click: true,
+						tap: true
+					}
+				});
+				$this.tooltipster('content', data.data.translations[0].translatedText);
+				$this.css('text-decoration','underline');
+					
+				var instance = $this.tooltipster('open').tooltipster('instance');
+					
+				instance.on('closing', function () {
+					$this.css('text-decoration','none');
+							
+				});
+			});
+					
+		};				
+	};
+};
