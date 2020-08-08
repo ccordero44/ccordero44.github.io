@@ -20,7 +20,7 @@
 <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
 <script src="files\ef0a3db2e4.js"></script>
 <script src="files\inputmask.js"></script>
-<script src="files\jquery.popupoverlay.min.js"></script>
+<!--<script src="files\jquery.popupoverlay.min.js"></script>-->
 <link rel="stylesheet" href="files\jquery-confirm.min.css">
 <script src="files\jquery-confirm.min.js"></script>
 <script type="text/javascript" src="files\tooltipster.bundle.min.js"></script>
@@ -35,7 +35,7 @@
 <button class="scroll-down-button button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
 
 <form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
-<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="statusTxt"><img id="transIcon" src="images\translate.png"></img> <span>English</span></div><div id="autoSaveOn" title="Autosave is On"><img src="images\save.png" id="onIcon"></img> on<span id="counter">60</span></div><div id="autoSaveOff" title="Autosave is Off"><img src="images\save.png" id="offIcon"></img> off</div><div id="dateTime"></div><div id="version">(v 1.2.1.2)</div></div></div>
+<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="statusTxt" title="Language of RS"><img id="transIcon" src="images\translate.png"></img> <span>English</span></div><div id="autoSaveOn" title="Autosave is On"><img src="images\save check.png" id="onIcon"></img> on<span id="counter">60</span></div><div id="autoSaveOff" title="Autosave is Off"><img src="images\save x.png" id="offIcon"></img> off</div><div id="dateTime"></div><div id="version">(v 1.2.2.0)</div></div></div>
 
 <div id="toolbar">
    <button id="leftbutton" class="button" title="Reload Form
@@ -62,83 +62,83 @@
                     <div class="customMapControldropdown-content" id="dropdownContent">
 					<div class="separator">Coverage Issues</div>
                     <label class="container2" id="container0" title="MVS RS" style="border-radius: 0px 3px 0px 0px;">MVS
- 						 <input type="checkbox" id="checkbox0">
+ 						 <input type="checkbox" id="checkbox0" name="checkbox0">
   							<span class="checkmark2"></span>
 						</label>
                     <label class="container2" id="container1" title="MCTD RS">MCTD
- 						 <input type="checkbox" id="checkbox1">
+ 						 <input type="checkbox" id="checkbox1" name="checkbox1">
   							<span class="checkmark2"></span>
 						</label>
                     <label class="container2" id="container2" title="POINTS RS">POINTS
- 						 <input type="checkbox" id="checkbox2">
+ 						 <input type="checkbox" id="checkbox2" name="checkbox2">
   							<span class="checkmark2"></span>
 						</label>
 					<label class="container2" id="container3" title="REBUILT RS" >REBUILT
  						 <input type="checkbox" id="checkbox3">
-  							<span class="checkmark2"></span>
+  							<span class="checkmark2" name="checkmark2"></span>
 						</label>	
 					<label class="container2" id="container13" title="MED CONDITION" >MED COND.
- 						 <input type="checkbox" id="checkbox13">
+ 						 <input type="checkbox" id="checkbox13" name="checkbox13">
   							<span class="checkmark2"></span>
 						</label>	
 					<label class="container2" id="container6" title="AGENT QUESTIONS" >AGENT Q'S
- 						 <input type="checkbox" id="checkbox6">
+ 						 <input type="checkbox" id="checkbox6" name="checkbox6">
   							<span class="checkmark2"></span>
 						</label>
 						<div class="separator">BI Related</div>
 						<label class="container2" id="container11" title="FLOOD RS" >INJURY
- 						 <input type="checkbox" id="checkbox11">
+ 						 <input type="checkbox" id="checkbox11" name="checkbox11">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container12" title="HIT PEDESTRIAN RS" >HIT PED.
- 						 <input type="checkbox" id="checkbox12">
+ 						 <input type="checkbox" id="checkbox12" name="checkbox12">
   							<span class="checkmark2"></span>
 						</label>
 						<div class="separator">Comp & Other</div>
 						<label class="container2" id="container10" title="THEFT RS" >THEFT
- 						 <input type="checkbox" id="checkbox10">
+ 						 <input type="checkbox" id="checkbox10" name="checkbox10">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container4" title="FIRE RS">FIRE
- 						 <input type="checkbox" id="checkbox4">
+ 						 <input type="checkbox" id="checkbox4" name="checkbox4">
   							<span class="checkmark2"></span>
 						</label>	
 					 <label class="container2" id="container5" title="FLOOD RS" >FLOOD
- 						 <input type="checkbox" id="checkbox5">
+ 						 <input type="checkbox" id="checkbox5" name="checkbox5">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container14" title="TOW STATEMENT RS" >TOW STMNT
- 						 <input type="checkbox" id="checkbox14">
+ 						 <input type="checkbox" id="checkbox14" name="checkbox14">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container15" title="WITNESS RS" >WITNESS
- 						 <input type="checkbox" id="checkbox15">
+ 						 <input type="checkbox" id="checkbox15" name="checkbox15">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container16" title="OUT OF STATE RS" >OUT OF STATE
- 						 <input type="checkbox" id="checkbox16">
+ 						 <input type="checkbox" id="checkbox16" name="checkbox16">
   							<span class="checkmark2"></span>
 						</label>
 						<label class="container2" id="container18" title="BIZ USE RS" >FOLLOW-UP
- 						 <input type="checkbox" id="checkbox18">
+ 						 <input type="checkbox" id="checkbox18" name="checkbox18">
   							<span class="checkmark2"></span>
 						</label>
 						<div class="separator">Built-In</div>
                     <label class="container2" id="container7" title="NON-OWNER RS" >NON-OWNER
- 						 <input type="checkbox" id="checkbox7">
+ 						 <input type="checkbox" id="checkbox7" name="checkbox7">
   							<span class="checkmark2"></span>
 						</label>
 						
 					<label class="container2" id="container8" title="BIZ USE RS" >BIZ USE
- 						 <input type="checkbox" id="checkbox8">
+ 						 <input type="checkbox" id="checkbox8" name="checkbox8">
   							<span class="checkmark2"></span>
 						</label>
 					<label class="container2" id="container17" title="BIZ USE RS" >UD
- 						 <input type="checkbox" id="checkbox17">
+ 						 <input type="checkbox" id="checkbox17" name="checkbox17">
   							<span class="checkmark2"></span>
 						</label>
 					<label class="container2" id="container9" title="BIZ USE RS" >TERRITORY
- 						 <input type="checkbox" id="checkbox9">
+ 						 <input type="checkbox" id="checkbox9" name="checkbox9">
   							<span class="checkmark2"></span>
 						</label>
                     </div>
@@ -608,7 +608,7 @@
       <tr>
          <td class="number"></td>
          <td class="block indent" >Number of persons in the insured's vehicle?</td>
-         <td class=""><input Required title="IV Pasengers Question" type="number" class="fillIn center rowNumbers" style="width:75px" min="1" value="5"/></td>
+         <td class=""><input Required title="IV Pasengers Question" type="number" class="fillIn center rowNumbers" style="width:75px" min="0" value="0"/></td>
       </tr>
    </table>
    <table class="section border tableProper tablenobreak" border="1" id="IVpassTable">
@@ -711,7 +711,7 @@
          <tr>
             <td class="number"></td>
             <td class="block indent" >Number of persons in the claimant's vehicle?</td>
-            <td class=""><input Required title="CV Pasengers Question" type="number" class="fillIn center rowNumbers" style="width:75px" min="1" value="5"/></td>
+            <td class=""><input Required title="CV Pasengers Question" type="number" class="fillIn center rowNumbers" style="width:75px" min="0" value="0"/></td>
          </tr>
       </table>
       <table class="section border tableProper tablenobreak" border="1" id="CVpassTable">
@@ -1851,8 +1851,28 @@
          <td colspan="2"><input type="text" class="fillIn FOL" style="width:100%"/></td>
       </tr>
    </table>
+   <!--TESTING-->
+   <table class="section2 tight full" id="FUQuestions1" style="table-layout: fixed">
+      <tr>
+		<td class="block"><i class="fa fa-plus-circle noprint" style="padding-top:2px;color:dodgerblue;cursor:pointer;" id="addFUQ" title="Click to add another question."></i></td>
+		<td class="number"></td>
+         <td class="block editable" contenteditable placeholder="Type question here"></td>
+         <td><input Required title="Location of Loss" type="text" class="fillIn FOL" style="width:100%"/></td>
+      </tr>
+      <tr>
+		<td></td>
+		<td class="indent2"></td>
+         <td colspan="2"><input type="text" class="fillIn FOL" style="width:100%"/></td>
+      </tr>
+	  <tr>
+		<td></td>
+		<td class="indent2"></td>
+         <td colspan="2"><input type="text" class="fillIn FOL" style="width:100%"/></td>
+      </tr>
+   </table>
    
-	<div id="FUQwrapper">
+   <!-- -->
+	<div id="FUQwrapper" style="display:none">
 		<textarea id="FUQtxtArea" rows="5" class="txtAreaGrow" wrap="soft"></textarea>
 	</div>
   </div> 
@@ -8013,8 +8033,12 @@
  <table class="section2 tight full">
       <tr>
          <td class="number"></td>
-         <td colspan="2" class="indent block">If accidents and violations were not disclosed to the agent, why?</td>
+         <td colspan="1" class="indent block">If accidents and violations were not disclosed to the agent, why?</td>
 		 <td><input required="" type="text" class="fillIn FOL" style="width:100%"></td>
+	  </tr>
+	  <tr>
+         <td class="indent2"></td>
+		 <td colspan="2" class="indent"><input required="" type="text" class="fillIn FOL" style="width:100%"></td>
 	  </tr>
 </table>
 <table class="section2 tight full">
@@ -12040,20 +12064,7 @@
 	  
    </div>
    
-   <div id="PopupOverlay"></div>
-   <div id="PopupWindow">
-      <h3><strong class="highlight">Popup</strong> Window!</h3>
-      <p>This is the text inside my <strong class="highlight">popup</strong> window!</p>
-	  <div id="centerbuttonWrapper"><span id="continue1" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i> Print</span> </div>
-      <a href="#" onclick="ClosePopup();"><i class="fa fa-times" aria-hidden="true"></i></a>
-   </div>
 
-	<section id="popup1">
-	  <h2></h2>
-	  <p></p>
-	  <div id="centerbuttonWrapper"><span id="continue" class="center" type="button" title="Print anyway"><i class="fa fa-print" aria-hidden="true"></i> Print</span> </div>
-	  <a href="#" onclick="ClosePopup();"><i class="fa fa-times" aria-hidden="true"></i></a>
-	</section>
 	
 </div>
 </form>
