@@ -23,7 +23,7 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-	
+resetReset();	
 display_dt();
 	var version = $('#version').html();
 $('.button').not('#resetButton').click(function(e){
@@ -102,7 +102,7 @@ $("input").keypress(function(e) {
 			  n = n + 1
 			
 			if (element.name.length == 0) {
-				$(element).attr('name', 'dynamic_'+n);
+				$(element).attr('name', n);
 			}
 			if (element.name.length > 0) {
 				
@@ -148,7 +148,7 @@ $("input").keypress(function(e) {
 				
 				n = n + 1;
 			if (element.name.length == 0) {
-				$(element).attr('name', 'dynamic_'+n);
+				$(element).attr('name', n);
 			}
 			  if (element.name in savedData) {
 				
@@ -184,7 +184,7 @@ $("input").keypress(function(e) {
 				  }, 2000);
 			  }*/
 			}
-			
+			console.log(n);
 			const message = "Form has been filled with saved data.";
 			//displayAlert(message);
 			//alert(message);
@@ -286,11 +286,10 @@ $("input").keypress(function(e) {
 		setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
 	});
 	$('#get').click(function () {
-		
+		$('input:radio').prop('checked', false);
 		populateForm();
 		$('.txtAreaGrow').trigger('keyup');
-		
-		
+
 	});
 
 	$('.collapsible').click(function (e) {
@@ -321,17 +320,8 @@ $("input").keypress(function(e) {
 			};
 		};		
 	});
-	$('#PopupOverlay').on('mousedown', function () {
-		ClosePopup();
-	});
-	$('#continue').click(function () {
-		printOption();
-		ClosePopup();
-		window.print();
-	});
-	$('#cancel').click(function () {
-		ClosePopup();
-	});
+	
+	
 	$('.customMapControlwrapper').hover(function () {
 	$('#overlay').show();
 	$('#blurDIV').addClass('blur');
@@ -430,6 +420,7 @@ $("input").keypress(function(e) {
 			$('td').not('.number').attr('title','Select a language to translate.');
 			$('#statusTxt span').html('English');
 		};
+		$('input').attr('title','');
 	});
 	$('#other_lang').change(function () {
 		$('input[name="lang"]').trigger('change');
@@ -1844,16 +1835,20 @@ $('.rowNumbers').on('input', function(){
 		var newRows = 0;
 		var rowNum = 0;
 		var inpNum = $(this).val();
-
+		
 
 		let table = $(this).parents("table").next("table");
-
+		if (inpNum == 0) {
+			table.hide();
+		}else{
+			table.show();
+		}
 		var tableRef = $('#' + $(table).attr('id') + '>tbody')[0];
 		numRows = parseInt(tableRef.rows.length);
 		if (inpNum > numRows) {
 			newRows = inpNum - numRows;
 			rowNum = numRows + 1;
-			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:18px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
+			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
 			/*$("textarea.fillIn").change(function () {
 				var $this = $(this);
@@ -1897,7 +1892,7 @@ $('.rowNumbers').on('input', function(){
 		if (inpNum > numRows) {
 			newRows = inpNum - numRows;
 			rowNum = numRows + 1;
-			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><input type="text" class="fillIn" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%; font-size:18px" ></input></td><td><input type="text" class="fillIn phone" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td></tr>';
+			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><input type="text" class="fillIn" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%; font-size:14px" ></input></td><td><input type="text" class="fillIn phone" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
 			/*$("input.fillIn").change(function () {
 				var $this = $(this);
@@ -1945,7 +1940,7 @@ $('.rowNumbers').on('input', function(){
 		if (inpNum > numRows) {
 			newRows = inpNum - numRows;
 			rowNum = numRows + 1;
-			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:18px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
+			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
 			/*$("textarea.fillIn").change(function () {
 				var $this = $(this);
@@ -1983,7 +1978,7 @@ $('.rowNumbers').on('input', function(){
 		if (inpNum > numRows) {
 			newRows = inpNum - numRows;
 			rowNum = numRows + 1;
-			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:18px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
+			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
 			/*$("textarea.fillIn").change(function () {
 				var $this = $(this);
@@ -2042,6 +2037,75 @@ $('.rowNumbers').on('input', function(){
 			};
 		};
 	});
+	
+	$('.editable').on('click', function () {
+		//$(this).text('');
+		setTimeout(function() {
+			$(this).focus();
+		}, 0);
+	});
+	jQuery(function($){
+    $(".test").focusout(function(){
+        var element = $(this);        
+        if (!element.text().replace(" ", "").length) {
+            element.empty();
+        }
+    });
+});
+$('#addFUQ').click(function () {
+		var clone = $('#FUQuestions1').clone();
+		var num = parseInt($('.number').length)+1;
+		clone.find('td:eq(0)').empty();
+		clone.find('td:eq(0)').append('<i class="fa fa-minus-circle noprint FUQminus" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove question."></i>');
+		clone.find('.editable').text('');
+		clone.find('.FOL').val('');
+		clone.attr('id','FUQuestions'+num);
+		clone.insertAfter('#FUQuestions' + (parseInt(num)-1));
+		numberCols();
+	$('table').on('input', '.FOL', function() {
+		var cursPosPre = $(this).getCursorPosition();
+		var valLength = $(this).val().length;
+		if (isOverflown($(this))) {
+			var $this = $(this).val();
+			var stringsplit = $this.split(' ');
+			var stringsplit2 = $this.split(' ').pop();
+			var cursPos = $(this).getCursorPosition();
+				stringsplit.pop();
+			var curTxt = $(this).closest('tr').next().find('.FOL').val();
+				if (curTxt == '') {
+					$(this).closest('tr').next().find('.FOL').val(stringsplit2+curTxt);
+					$(this).closest('tr').next().find('.FOL').focus();
+			
+				}else{
+					$(this).closest('tr').next().find('.FOL').val(stringsplit2+" "+curTxt);	
+					
+				};
+				$(this).closest('tr').next().find('.FOL').trigger('input');
+				$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition(stringsplit2.length);
+				
+				if (cursPos < stringsplit.slice(0,stringsplit.length).join(' ').length) {
+					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
+					$(this).focus();
+					
+					$(this).setCursorPosition(cursPos);
+				}else{
+					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
+				};
+				$(this).closest('tr').next().find('.FOL').trigger('input');
+		};
+	});	
+	$('.FUQminus').click(function () {
+		$(this).closest('table').remove();
+		numberCols();
+	});
+	$('.editable').on('click', function () {
+		//$(this).text('');
+		setTimeout(function() {
+			$(this).focus();
+		}, 0);
+	});
+});
+
 	/*end of document ready*/
 });
 function showMain() {
@@ -2242,7 +2306,8 @@ function loadFunctions() {
         $(this).prop("checked",$(this).data("chk"));
     }); */
 
-	$('.FOL').on('input paste', function () {
+	//$('.FOL').on('input paste', function () {
+$('table').on('input', '.FOL', function() {
 		var cursPosPre = $(this).getCursorPosition();
 		var valLength = $(this).val().length;
 		if (isOverflown($(this))) {
@@ -2489,7 +2554,7 @@ function autoAddress(input) {
 			country: 'us'
 		}
 	};
-	var autocomplete = new google.maps.places.Autocomplete(input, options);
+	 autocomplete = new google.maps.places.Autocomplete(input, options);
 
 	google.maps.event.addListener(autocomplete, 'place_changed',
 		function () {
@@ -2750,7 +2815,7 @@ function printFunction() {
 					//$('#PopupWindow a').click(function () {
 						//$this.css("animation-duration", "");
 					//});
-					//OpenPopup();
+				
 					 printConfirm = $.confirm({
 											title: heading,
 											content: text,
@@ -2774,7 +2839,7 @@ function printFunction() {
 											},
 											
 										});
-					//$('#popup1').popup("show");
+				
 					
 				} else {
 					$this.removeClass('banners');
@@ -2790,8 +2855,7 @@ function printFunction() {
 			
 			$(document).attr('title', docTitle);
 			
-			$('#popup1').popup("hide");
-			printForm('RSgeneral');
+					printForm('RSgeneral');
 			//$('#reset').trigger('click');
 			
 		}else{
@@ -2868,48 +2932,13 @@ function printOption() {
 		if (i === 0) {
 			
 			window.print();
-			$('#popup1').popup("hide");
+		
 		}
 	});
 }
 
-function OpenPopup() {
 
-	$('#scrollTop').trigger('click');
-	document.getElementById('PopupOverlay').style.display = 'block';
-	//document.getElementById('PopupWindow').style.display = 'block';
-	var win = $(window),
-		// winW = win.width()/2,
-		// winH = win.height()/2,
-		scrollTop = win.scrollTop(),
-		// scrollLeft = win.scrollLeft(),
-		container = $("#PopupWindow").css({
-			"display": "block",
-			"visibility": "hidden"
-		}),
-		contW = container.width(),
-		contH = container.height(),
-		
-		// left = ((winW-contW)+scrollLeft)*2,
-		top = scrollTop + contH;
 
-$("#PopupWindow").css('top', top);
-
-	container.css({
-		"visibility": "visible"
-	});
-disableScroll();
-}
-
-function ClosePopup() {
-	$('#popup1').popup("hide");
-	//document.getElementById('PopupOverlay').style.display = 'none';
-	//document.getElementById('PopupWindow').style.display = 'none';
-	//$('#popup1_wrapper').attr('visibility','hidden');
-	//$('#popup1').attr('visibility','hidden');
-	//$('#popup1_background').attr('visibility','hidden');
-//enableScroll();
-}
 function disableScroll() {
 		$('body').css('overflow', 'hidden');
     // Get the current page scroll position 
@@ -3223,7 +3252,7 @@ var i = 0;
 			if (inpNum > numRows) {
 				newRows = inpNum - numRows;
 				rowNum = numRows + 1;
-				var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:18px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
+				var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
 				addRows($(table).attr('id'), html, newRows)
 				/*$(value).find("textarea.fillIn").change(function () {
 					var $this = $(this);
@@ -3474,6 +3503,8 @@ function resetReset() {
 			$('#blurDIV').removeClass('blur');
 			//$('#statusTxt span').html('English');
 			$('input[name="lang"]').trigger('change');
+			$('.FUQminus').trigger('click')
+			$('.editable').text('');
 	console.timeEnd('Reset Function Time');
 }
 var today = new Date();

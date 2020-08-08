@@ -779,6 +779,7 @@ input, textarea {
 #IVpassTable {
 	margin-left: 50px;
 	margin-right: 25px;
+	display: none;
 }
 	
 #jobSitesDaily {
@@ -1430,6 +1431,22 @@ span.banners {
 
 .fa-save:before, .fa-floppy-o:before {
 	font-size: 11pt;
+}
+.editable:after {
+	content: "?";
+}
+[contenteditable] {
+  outline: 0px solid transparent;
+  text-transform: capitalize;
+}
+
+.editable[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555; 
+}
+
+.editable[placeholder]:empty:focus:before {
+    content: "";
 }
 /* PRINT CSS */
 
