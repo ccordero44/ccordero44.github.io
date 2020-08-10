@@ -23,7 +23,7 @@ $(window).bind('resolutionchange', function () {
 	$(window).trigger('scroll');
 })
 $(document).ready(function () {
-resetReset();	
+
 display_dt();
 	var version = $('#version').html();
 $('.button').not('#resetButton').click(function(e){
@@ -80,6 +80,7 @@ $("input").keypress(function(e) {
 		var n = 0;
 		  for (const element of formElements) {
 			  n = n + 1
+			
 			if (element.name.length == 0) {
 				$(element).attr('name', n);
 			}
@@ -102,7 +103,7 @@ $("input").keypress(function(e) {
 			  n = n + 1
 			
 			if (element.name.length == 0) {
-				$(element).attr('name', n);
+				$(element).attr('name', 'dynamic_'+n);
 			}
 			if (element.name.length > 0) {
 				
@@ -137,9 +138,9 @@ $("input").keypress(function(e) {
 		};
 		
 		const populateForm = () => {
-			
+	
 		  if (localStorage.key(formIdentifier)) {
-			 // $('#statusTxt').html('fetching...');
+			 
 			const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
 			
 			var n = 0;
@@ -148,53 +149,52 @@ $("input").keypress(function(e) {
 				
 				n = n + 1;
 			if (element.name.length == 0) {
-				$(element).attr('name', n);
-			}
+				$(element).attr('name', 'dynamic_'+n);
+			};
 			  if (element.name in savedData) {
 				
 					
 				  if (element.type !== 'radio') {
 					element.value = savedData[element.name];
 					$(element).trigger('input');
-				  }
+				  };
 				  if (element.type == 'radio') {
 					  if (element.value == savedData[element.name]) {
 						element.checked = true;
 						$(element).trigger('change');
-					  }
-				  }
+					  };
+				  };
 				  if (element.type == 'checkbox') {
+					 
 					  $(element).val(n);
 					  if (savedData[element.name] !== "") {
 					  if (element.value == savedData[element.name]) {
 						element.checked = true;
 						$(element).trigger('change');
-					  }
+						
+					  };
 					  }else{
 						  element.checked = false;
 						  $(element).trigger('change');
-					  }
-				  }
-				 // $('#statusTxt').html('...');
-			  }/*else{
-				  var docTitle = document.title;
-				  document.title += "Error with data!";
-				  setTimeout(function() {
-					document.title = docTitle; // hide the alert box after 1 second
-				  }, 2000);
-			  }*/
+					  };
+					  
+				  };
+				  if (element.type == 'number') {
+					  $(element).trigger('input');
+				  };
+					
+			  }
+			  //$(element).trigger('change');
 			}
-			console.log(n);
+			
 			const message = "Form has been filled with saved data.";
-			//displayAlert(message);
-			//alert(message);
-			$('#save').prop('disabled', true);
+			
 			var doctitle = document.title;
 			doctitle = doctitle.replace(" - " + message, '');
 			$('#footer').html(doctitle + " - " + message);
 			//$('#statusTxt').html('done');
-			setTimeout(function(){ $('#footer').html(doctitle);$('#save').prop('disabled', false); }, 2000);
-			
+			setTimeout(function(){ $('#footer').html(doctitle); }, 2000);
+			$('#save').prop('disabled', false);
 			
 		  }else{
 			$('#blurDIV').addClass('blur');
@@ -213,14 +213,20 @@ $("input").keypress(function(e) {
 			});
 		  }
 		  $('.phone').trigger('blur');
-		  
-		  
+		  $('#get').html('<i class="fa fa-folder-open-o" aria-hidden="true"></i>');
+			
 		};
-	$('#save').click(function () {
+	$('#save').on('mousedown',function () {
+		var $this = $(this);
+		$this.empty();
+		$this.html('<i class="fa fa-spinner fa-pulse"></i>');
+	});
+	$('#save').on('mouseup',function () {
+		var $this = $(this);
 		$('#get').prop('disabled', true);
 		event.preventDefault();
 		 var doctitle = document.title; 
-		  //alert(message);
+		  
 		  $('#blurDIV').addClass('blur');
 		  $.confirm({
 			boxWidth: '40%',
@@ -234,68 +240,78 @@ $("input").keypress(function(e) {
 				save: {
 					btnClass: 'btn-blue',
 					action: function () {
+					
 					var $checkbox = this.$content.find('#enableCheckbox');
 						if ($checkbox.prop('checked')) {
-							var count = 59, timer = setInterval(function() {
-									$("#counter").html(count--);
-									if(count < 0) clearInterval(timer);
-								}, 1000);
+							
+								$('#get').prop('disabled', false);
 								$('#autoSaveOff').hide();
 								$('#autoSaveOn').show();
 							timerID = setInterval(function() {
 								var doctitle = document.title; 
-								var count = 59, timer = setInterval(function() {
-									$("#counter").html(count--);
-									if(count < 0) clearInterval(timer);
-								}, 1000);
+								
 								data = getFormData();
 								localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
 								const message = "Form data has been saved.";
 								doctitle = doctitle.replace(" - " + message, '');
-								//document.title = doctitle + " - " + message;
 								$('#footer').html(doctitle + " - " + message);
-								setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+								$('#get').prop('disabled', false);
+								setTimeout(function(){ $('#footer').html(doctitle); }, 6000);
 								console.log('Data Saved');
 								
 							}, 60 * 1000);
 							
 							$('#blurDIV').removeClass('blur');
 						}else{
+							$('#get').prop('disabled', false);
 							$('#autoSaveOn').hide();
 							$('#autoSaveOff').show();
 							clearInterval(timerID);
 							$('#blurDIV').removeClass('blur');
-							setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+							
+							setTimeout(function(){ $('#footer').html(doctitle); }, 6000);
+							
 						};
 					  data = getFormData();
 					  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
 					  const message = "Form data has been saved.";
-					  //displayAlert(message);
 					  doctitle = doctitle.replace(" - " + message, '');
-					  //document.title = doctitle + " - " + message;
 					  $('#footer').html(doctitle + " - " + message);
+					  $this.html('<i class="fa fa-floppy-o" aria-hidden="true"></i>');
 					}  
 				},
 				cancel: function () {
 					$('#blurDIV').removeClass('blur');
-					setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+					setTimeout(function(){ $('#footer').html(doctitle); }, 6000);
+					$('#get').prop('disabled', false);
+					$this.html('<i class="fa fa-floppy-o" aria-hidden="true"></i>');
 					return;
 				}
 			}
 		});
-		setTimeout(function(){ $('#footer').html(doctitle);$('#get').prop('disabled', false); }, 6000);
+		
 	});
-	$('#get').click(function () {
-		$('input:radio').prop('checked', false);
-		populateForm();
-		$('.txtAreaGrow').trigger('keyup');
-
+	$('#get').on('mousedown',function () {
+		$(this).html('<i class="fa fa-spinner fa-pulse"></i>');
+		$('#save').prop('disabled', true);
+	});
+	$('#get').on('mouseup',function () {
+		$(this).empty();
+			$('input:radio').prop('checked', false);
+			populateForm();	
+			$('.txtAreaGrow').trigger('keyup');
+			
+		$('input:checkbox').each(function () {
+			if ($(this).prop('checked') == true) {
+				$(this).trigger('change');
+			}
+		});		
+			
 	});
 
 	$('.collapsible').click(function (e) {
 		e.preventDefault();
 		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus') {
-			//alert('Please select an RS template from the dropdown menu first, then try again.');
 			$('#blurDIV').addClass('blur');
 			$.alert({
 				title: 'Information',
@@ -351,7 +367,7 @@ $("input").keypress(function(e) {
 		  error: function( data ) {
 			console.log( "Error:");
 		 window.open('https://chrome.google.com/webstore/detail/clickonce-for-google-chro/kekahkplibinaibelipdcikofmedafmb/related');
-		// alert('Missing Chrome extension detected.\n\nPlease download the Chrome extension "ClickOnce for Google Chrome" in order to run Oaisys Desktop directly from this RS template, then try again.');
+
 		  $('#blurDIV').addClass('blur');
 		  $.alert({
 				title: 'Information',
@@ -393,12 +409,7 @@ $("input").keypress(function(e) {
 				}
 			}
 		});
-		//var r = confirm("Are you sure you'd like to reload the page and lose any unsaved data?");
-		//if (r == true) {
-			//location.reload();
-		 // } else {
-			//  return;
-		  //}
+		
 
 	});
 	
@@ -414,7 +425,6 @@ $("input").keypress(function(e) {
 			}else{
 				$('td').not('.number').attr('title','Select a language to translate.');
 				$('#statusTxt span').html($(this).closest('label').text());
-			//	$('.tooltip').tooltipster('instance').destroy();
 			};
 		}else{
 			$('td').not('.number').attr('title','Select a language to translate.');
@@ -492,9 +502,8 @@ $("input").keypress(function(e) {
 			};
 		});
 	});
-	//$('.selectThis').keypress(function(e){ return e.which != 13; });
+	
 	$("input:radio").change(function () {
-		//setCookie($(this).attr('name'), $(this).val());	
 		
 		if ($("input[name^=TERRITORY]").prop("checked") == true) {
 			$('#checkbox9').prop("checked",true);
@@ -503,17 +512,9 @@ $("input").keypress(function(e) {
 			$('#checkbox9').prop("checked",false);
 			$('#checkbox9').attr("disabled",false);
 		};
-		/*if ($(this).attr('name') == $("input[name^=rideshare]").attr('name') || $(this).attr('name') == $("input[name^=business]").attr('name') || $(this).attr('name') == $("input[name^=BIZ]").attr('name')) {
-			if ($("input[name^=rideshare]").prop("checked") == true || $("input[name^=business]").prop("checked") == true || $("input[name^=BIZ]").prop("checked") == true) {
-				$('#checkbox8').prop("checked",true);
-				$('#checkbox8').attr("disabled",true);
-			}else{
-				$('#checkbox8').prop("checked",false);
-				$('#checkbox8').attr("disabled",false);
-			};
-		};*/
+	
 		if ($(this).attr('name') == $("input[name^=UD]").attr('name') || $(this).attr('name') == $("input[name^=driver2]").attr('name') || $(this).attr('name') == $("input[name^=UDdriver]").attr('name')) {
-			//if ($("input[name^=UD]").prop("checked") == true || $("input[name^=driver2]").prop("checked") == true || $("input[name^=UDdriver]").prop("checked") == true) {
+			
 			if ($(this).val() == 'UD') {
 				$('#checkbox17').prop("checked",true);
 				$('#checkbox17').attr("disabled",true);
@@ -542,7 +543,7 @@ $("input").keypress(function(e) {
 	}
 	}); 
 $( window ).resize( function(){
- //h = $(window).height() / 2;
+
   if( w != $( window ).width() ){
  
     window.resizeTo(w, h);
@@ -565,9 +566,7 @@ $( window ).resize( function(){
 			};
 		});
 	});
-	//$('.addressNorm').each(function (index, value) {
 			$('.addressNorm').focus( function () {
-				//$(this).attr('placeholder', 'Enter a location');
 				normalAddress(this);
 			});
 			
@@ -576,7 +575,6 @@ $( window ).resize( function(){
 					$(this).attr('placeholder', '');
 				};
 			});
-	//});
 	$('input[name="UDdiscovered"]').click(function () {
 		if ($(this).val() === "Yes") {
 			$('#MCTDUD').show();
@@ -642,13 +640,6 @@ $( window ).resize( function(){
 		};
 	});
 	$('#bugbutton').click(function () {
-		/*var body = prompt("Please enter as much information about what you were doing prior to and after experiencing the bug.");
-		if (body == null || body == "") {
-			alert("Bug report cancelled.");
-			return;
-		}else{
-			document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),body);
-		};*/
 		$('#blurDIV').addClass('blur');
 		$.confirm({
 			title: 'Report a bug',
@@ -769,8 +760,7 @@ $( window ).resize( function(){
 	$('#checkbox4').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'FIRE');
-			//alert("Fire RS coming soon...")
-			//$(this).prop('checked',false);
+
 			$('#lastPart').hide();
 			numberCols();
 		} else {
@@ -782,8 +772,7 @@ $( window ).resize( function(){
 	$('#checkbox5').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'FLOOD');
-			//alert("Flood RS coming soon...")
-			//$(this).prop('checked',false);
+
 			$('#addVehicles').hide();
 			$('#lastPart').hide();
 			numberCols();
@@ -799,8 +788,7 @@ $( window ).resize( function(){
 			coverageCheck("notOk", 'THEFT');
 			
 			$('#lastPart').hide();
-			//alert("Theft RS coming soon...")
-			//$(this).prop('checked',false);
+
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'THEFT');
@@ -812,8 +800,7 @@ $( window ).resize( function(){
 	$('#checkbox11').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'INJURY');
-			//alert("Injury RS coming soon...")
-			//$(this).prop('checked',false);
+
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'INJURY');
@@ -823,8 +810,7 @@ $( window ).resize( function(){
 	$('#checkbox12').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'HIT_PEDESTRIAN');
-			//alert("HIT PEDESTRIAN RS coming soon...")
-			//$(this).prop('checked',false);
+
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'HIT_PEDESTRIAN');
@@ -834,8 +820,7 @@ $( window ).resize( function(){
 	$('#checkbox13').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'MED_CONDITION');
-			//alert("MED CONDITION RS coming soon...")
-			//$(this).prop('checked',false);
+
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'MED_CONDITION');
@@ -845,8 +830,7 @@ $( window ).resize( function(){
 	$('#checkbox14').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'TOW');
-			//alert("TOW RS coming soon...")
-			//$(this).prop('checked',false);
+
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'TOW');
@@ -854,44 +838,43 @@ $( window ).resize( function(){
 		};
 	});
 	$('#checkbox15').change(function () {
-		
 		if (this.checked) {
 			if ($('[id^=checkbox]:checked').length <= 1) {
-			$('[id^=checkbox]').attr('disabled',true);
-			$(this).attr('disabled',false);
-			loadFunctions();
-			coverageCheck("notOk", 'WITNESS');
-			$('#firstPart').hide();
-			$('#secondPart').hide();
-			$('#addVehicles').hide();
-			$('#folTable').hide();
-			$('#lastPart').hide();
-			//alert("WITNESS RS coming soon...")
-			//$(this).prop('checked',false);
-			numberCols();
+				$('[id^=checkbox]').attr('disabled',true);
+				$('input[id^=checkbox]').not(this).parent().css('color','silver');
+				$('input[id^=checkbox]').not(this).next().css('border-color','silver');
+				$(this).attr('disabled',false);
+				loadFunctions();
+				coverageCheck("notOk", 'WITNESS');
+				$('#firstPart').hide();
+				$('#secondPart').hide();
+				$('#addVehicles').hide();
+				$('#folTable').hide();
+				$('#lastPart').hide();
+				numberCols();
 			}else{
-			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Witness, then try again.");
-			
-			$.alert({
-				title: 'Information',
-				type: 'blue',
-				icon: 'fa fa-info-circle',
-				content: 'Please uncheck any other recorded statement templates before proceeding with the Witness Statement, then try again.',
-				onContentReady: function () {
-					$('#blurDIV').addClass('blur');
-				},
-				boxWidth: '40%',
-				useBootstrap: false,
-				buttons: {
-					Ok: function () {
-						$('#blurDIV').removeClass('blur');
+				$.alert({
+					title: 'Information',
+					type: 'blue',
+					icon: 'fa fa-info-circle',
+					content: 'Please uncheck any other recorded statement templates before proceeding with the Witness Statement, then try again.',
+					onContentReady: function () {
+						$('#blurDIV').addClass('blur');
+					},
+					boxWidth: '40%',
+					useBootstrap: false,
+					buttons: {
+						Ok: function () {
+							$('#blurDIV').removeClass('blur');
+						}
 					}
-				}
-			});
-			$(this).prop('checked',false);
+				});
+				$(this).prop('checked',false);
 		};
 		} else {
 			$('[id^=checkbox]').attr('disabled',false);
+			$('[id^=checkbox]').parent().css('color','initial');
+			$('input[id^=checkbox]').not(this).next().css('border-color','initial');
 			coverageCheck("Ok", 'WITNESS');
 			$('#firstPart').show();
 			$('#secondPart').show();
@@ -905,22 +888,26 @@ $( window ).resize( function(){
 	$('#checkbox16').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'OUT_OF_STATE');
-			//alert("OUT OF STATE RS coming soon...")
-			//$(this).prop('checked',false);
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'OUT_OF_STATE');
 			numberCols();
 		};
 	});
+
 	$('#checkbox6').change(function () {
 		if (this.checked) {
+			
 			if ($('[id^=checkbox]:checked').length <= 1) {
-			$('[id^=checkbox]').attr('disabled',true);
-			$(this).attr('disabled',false);
+				$('[id^=checkbox]').attr('disabled',true);
+				$('[id^=checkbox]').not(this).parent().css('color','silver');
+				$('input[id^=checkbox]').not(this).next().css('border-color','silver');
+				$(this).attr('disabled',false);
 				$('#firstPart').hide();
 				$('#secondPart').hide();
 				$('#addVehicles').hide();
+				$('#cvTable').hide();
+				$('#cvTables').hide();
 				$('#folTable').hide();
 				$('#lastPart').hide();
 				$('#closingQuestions').hide();
@@ -931,9 +918,7 @@ $( window ).resize( function(){
 					$('#agentQfirstPart').hide();
 				};
 				numberCols();
-			}else{
-				//alert("Please uncheck any other recorded statement templates before proceeding with the Agent Questions, then try again.");
-				
+			}else{				
 				$.alert({
 					title: 'Information',
 					type: 'blue',
@@ -954,16 +939,22 @@ $( window ).resize( function(){
 			};
 		} else {
 				$('[id^=checkbox]').attr('disabled',false);
+				$('[id^=checkbox]').parent().css('color','initial');
+				$('input[id^=checkbox]').not(this).next().css('border-color','initial');
 				$('#firstPart').show();
 				$('#secondPart').show();
 				$('#addVehicles').show();
+				$('#cvTable').show();
+				$('#cvTables').show();
 				$('#folTable').show();
 				$('#lastPart').show();
 				$('#closingQuestions').show();
 				$('#AgentQuestions').hide();
 				$('#agentQfirstPart').hide();
+				$('.rowNumbers2').trigger('input');
 				numberCols();
 		};
+		
 	});
 	$('#checkbox7').change(function () {
 		if (this.checked) {
@@ -990,7 +981,6 @@ $( window ).resize( function(){
 	$('#checkbox18').change(function () {
 		if (this.checked) {
 		if ($('[id^=checkbox]:checked').length <= 1) {
-			//$('[id^=checkbox]').attr('disabled',true);
 			$(this).attr('disabled',false);
 			loadFunctions();
 			coverageCheck("notOk", 'FOLLOWUP');	
@@ -1000,9 +990,7 @@ $( window ).resize( function(){
 			$('#folTable').hide();
 			$('#lastPart').hide();			
 			numberCols();
-		}else{
-			//alert("Please uncheck any other recorded statement templates before proceeding with the RS - Follow Up, then try again.");
-			
+		}else{			
 			$.alert({
 					title: 'Information',
 					type: 'blue',
@@ -1022,37 +1010,31 @@ $( window ).resize( function(){
 			$(this).prop('checked',false);
 		};
 		} else {
-			//$('[id^=checkbox]').attr('disabled',false);
 			coverageCheck("Ok", 'FOLLOWUP');
 			$('#firstPart').show();
 			$('#secondPart').show();
 			$('#addVehicles').show();
 			$('#folTable').show();
 			$('#lastPart').show();
+			$('.rowNumbers2').trigger('input');
 			numberCols();
 		};
 	});
 	$('#checkbox9').change(function () {
 		if (this.checked) {
-			coverageCheck("notOk", 'TERRITORY');
-			$("input:radio[name=TERRITORY]:first").prop("checked",true);			
+			coverageCheck("notOk", 'TERRITORY');			
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'TERRITORY');
-			$("input:radio[name=TERRITORY]:first").prop("checked",false);
 			numberCols();
 		};
 	});
 	$('#checkbox17').change(function () {
 		if (this.checked) {
-			coverageCheck("notOk", 'UD');
-			//$("input:radio[name=UDdriver]:second").prop("checked",true);
-			//$("input:radio[name=UDdriver]").attr("disabled",true);			
+			coverageCheck("notOk", 'UD');			
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'UD');
-			//$("input:radio[name=UDdriver]:second").prop("checked",false);
-			//$("input:radio[name=UDdriver]").attr("disabled",false);
 			numberCols();
 		};
 	});
@@ -1087,38 +1069,35 @@ $( window ).resize( function(){
 	});
 	
 	$("input[name^=BIZ]").change(function () {
-		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'rideshare' );
-		var val2 = getRadioVal( document.getElementById('RSgeneral'), 'business' );
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="rideshare"]:visible').attr('name') );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="business"]:visible').attr('name') );
 		
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", $(this).attr('name'));
 			numberCols();
 		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
 			coverageCheck("Ok", $(this).attr('name'));
-			//$('#checkbox8').prop("checked",false);
 			numberCols();
 		};
 	});
 	$("input[name^=rideshare]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'BIZ' );
-		var val2 = getRadioVal( document.getElementById('RSgeneral'), 'business' );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="business"]:visible').attr('name') );
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", 'BIZ');
 			numberCols();
 		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
 			coverageCheck("Ok", "BIZ");
-			//$('#checkbox8').prop("checked",false);
 			numberCols();
 		};
 	});
 	$("input[name^=business]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'BIZ' );
-		var val2 = getRadioVal( document.getElementById('RSgeneral'), 'rideshare' );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="rideshare"]:visible').attr('name') );
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", 'BIZ');
 			numberCols();
 		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
-			//$('#checkbox8').prop("checked",false);
 			coverageCheck("Ok", "BIZ");
 			numberCols();
 		};
@@ -1209,19 +1188,16 @@ $( window ).resize( function(){
 		};
 	});
 	$('.address').bind('input', function(){
-	//$('.address').change(function () {
 		if (!$(this).val()) {
 			$(this).attr('placeholder', '');
 		};
 	});
 	$('.address1').bind('input', function(){
-	//$('.address1').change(function () {
 		if (!$(this).val()) {
 			$(this).attr('placeholder', '');
 		};
 	});
 	$('.address2').bind('input', function(){
-	//$('.address2').change(function () {
 		if (!$(this).val()) {
 			$(this).attr('placeholder', '');
 		};
@@ -1234,11 +1210,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums10" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;height:70px"></textarea></td><td><textarea type="text" class="noborder address" style="width:100%;height:70px"></textarea></td><td><textarea type="text" class="noborder" style="width:100%;height:70px"></textarea></td><td><textarea type="text" class="noborder" style="width:100%;height:70px"></textarea></td><td><textarea type="text" class="noborder" style="width:100%;height:70px"></textarea></td><td><label class="container">Yes<input Required type="radio" name="IVsandPurposeUse'+rowNum+'" /><span class="checkmark"></span></label><br/><br/><label class="container">No<input Required type="radio" name="IVsandPurposeUse'+rowNum+'" /><span class="checkmark"></span></label></td><td><textarea type="text" class="noborder" style="width:100%;height:70px"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVsandPurposeUse', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.address').focus(function () {
 			$(this).attr('placeholder','Enter a location');
 			autoAddress(this);
@@ -1258,12 +1229,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums9" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('insuredsSpouses', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1279,12 +1244,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums6" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVregisteredTable', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1300,12 +1259,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums5" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVownersTable', html, 1)
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1318,7 +1271,6 @@ $( window ).resize( function(){
 		var arr2 = $("#VOPtable tr td:nth-child(2) input");
 		var arr3 = $("#VOPtable2 tr td:nth-child(2) input");
 		for (w=0;w<arr2.length;w++) {
-			//console.log($(arr2[w]).val());
 				$(arr3[w]).val($(arr2[w]).val());
 		}
 	});
@@ -1326,7 +1278,6 @@ $( window ).resize( function(){
 		var arr2 = $("#EDVOPtable tr td:nth-child(2) input");
 		var arr3 = $("#EDVOPtable2 tr td:nth-child(2) input");
 		for (w=0;w<arr2.length;w++) {
-			//console.log($(arr2[w]).val());
 				$(arr3[w]).val($(arr2[w]).val());
 		}
 	});
@@ -1339,11 +1290,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums4" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn address" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('jobSites', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
@@ -1366,19 +1312,12 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums3" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('occTable', html, 1)
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
 				numberColsOther('VOPnums3');
-				//cloneTable('VOPtable','VOPtable2')
 			});
 		});
-		//cloneTable('VOPtable','VOPtable2')
 	});
 
 	$('#addVOPtable2').click(function () {
@@ -1389,19 +1328,12 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums2" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVpurp', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
 				numberColsOther('VOPnums2');
-				//cloneTable('VOPtable','VOPtable2')
 			});
 		});
-		//cloneTable('VOPtable','VOPtable2')
 	});
 	$('#addVOPtable7').click(function () {
 		var inpNum = 1;
@@ -1411,17 +1343,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums7" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder address" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVaddress', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});
-		$('input').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
@@ -1441,11 +1362,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums11" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="date" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder phone" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('MCTDUDfound', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1462,12 +1378,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums12" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first address" style="width:100%;"></td><td><input type="number" class="noborder center" style="width:100%"></td><td><input type="text" class="noborder" style="width:100%"></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVgaragedLocations', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
@@ -1487,12 +1397,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums13" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%;"></td><td><input type="text" class="noborder" style="width:100%"></td><td><input type="text" class="noborder" style="width:100%"></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('AllVNOPinAres', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
@@ -1512,11 +1416,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums14" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder center" style="width:100%"></textarea></td><td><textarea type="text" class="noborder center" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('Upoints', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1532,11 +1431,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums15" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder center" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('Ulosses', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1552,11 +1446,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums16" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder center" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('rebuiltPriors', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1604,11 +1493,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums8" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="date" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder phone" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('extraUDs', html, 1);
-		/*$('textarea').each(function (index, value) {
-			$(value).change(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1625,13 +1509,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('VOPtable', html, 1);
-		/*$('input').each(function (index, value) {
-		//	$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(.date):not(.time):not(.phone)").keyup(function () {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1650,13 +1527,6 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="EDVOPnums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('EDVOPtable', html, 1);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
-
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1673,14 +1543,7 @@ $( window ).resize( function(){
 			var num = 2;
 		}
 		var html = '<table class="tight section2 full witnessTable"><tr><td class="indent2"></td><td class="indent block">Claimant\'s vehicle:</td><td>(C'+num+')</td><td class="indent block">Year</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Make</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Model</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr><tr><td colspan="3" class="indent2"></td><td class="indent block">Color</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Body Style</td><td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table>';
-		$('#moreCVWitnessTable').append(html);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
-		
+		$('#moreCVWitnessTable').append(html);		
 	});
 	$('#minusC1WitnessTable').click(function () {
 		$('#moreCVWitnessTable').html('');
@@ -1694,20 +1557,9 @@ $( window ).resize( function(){
 		}
 		var html = '<table class="tight section2 full witnessTable2"><tr><td class="indent2"></td><td class="indent block" style="width:160px;">Claimant\'s vehicle:</td><td class="indent block">(C'+num+') Direction:</td><td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Speed:</td><td colspan="2"><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block" style="width:160px !important;"></td><td class="indent block">Stop Sign?</td><td class="indent block"><label class="container">Yes<input required type="radio" name="witnessCV'+num+'SS" /><span class="checkmark"></span></label></td><td class="indent"><label class="container">No<input type="radio" name="witnessCV'+num+'SS" /><span class="checkmark"></span></label></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block" style="width:160px !important;"></td><td class="indent block">Traffic Light Color:</td><td><label class="container">Green<input required type="radio" name="witnessCV'+num+'lightColor" /><span class="checkmark"></span></label></td><td><label class="container">Green Arrow<input type="radio" name="witnessCV'+num+'lightColor" /><span class="checkmark"></span></label></td><td><label class="container">Yellow<input type="radio" name="witnessCV'+num+'lightColor" /><span class="checkmark"></span></label></td><td><label class="container">Red<input type="radio" name="witnessCV'+num+'lightColor" /><span class="checkmark"></span></label></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block" style="width:160px !important;"></td><td class="indent block">Did Claimant fail to observe stop sign or traffic light?</td><td class="block"><label class="container">Yes<input required type="radio" name="WitnessCV'+num+'runControl" /><span class="checkmark"></span></label></td><td class=""><label class="container">No<input type="radio" name="WitnessCV'+num+'runControl" /><span class="checkmark"></span></label></td></tr></table>';
 		$('#CVWitnessDetailsTable').append(html);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
 		
 	});
-	$('#addFUQ').click(function () {
-		
-		var html = '<table class="section2 tight full" ><tr><td class="number"></td><td class="block"><span contenteditable="true" class="selectThis" data-placeholder="Add a new question" data-focused-advice="Start typing"></span>?</td><td><input Required title="Location of Loss" type="text" class="fillIn FOL" style="width:100%"/></td></tr><tr><td class="indent2"></td><td colspan="2"><input type="text" class="fillIn FOL" style="width:100%"/></td></tr></table>';
-		$('#FUQ').append(html);
-		numberCols();
-	});
+
 	$('#minusCVWitnessDetailsTable').click(function () {
 		$('#CVWitnessDetailsTable').html('');
 	});
@@ -1718,14 +1570,7 @@ $( window ).resize( function(){
 			var num = 2;
 		}
 		var html = '<table class="tight section2 full witnessTable3" style="padding-top:15px;"><tr><td class="indent2"></td><td class="indent block">Claimant\'s vehicle: (C'+num+')</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent">Was there any damage to the vehicle prior to the loss?</td><td class="indent"><label class="container">Yes<input required type="radio" name="witnessCV'+num+'UPD" /><span class="checkmark"></span></label></td><td class="indent"><label class="container">No<input type="radio" name="witnessCV'+num+'UPD" /><span class="checkmark"></span></label></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">If yes: What was previously damaged?</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table>';
-		$('#CVWitnessDamagesTable').append(html);
-		/*$('input').each(function (index, value) {
-			$(value).not('#ClaimNo').not('#ClaimNo2').not('#adj').not('.date').not('.time').not('.phone').change(function () {
-			//$(value).keyup(function () {
-				$(this).val(titleCase($(this).val()));
-			})
-		});*/
-		
+		$('#CVWitnessDamagesTable').append(html);	
 	});
 	$('#minusCVWitnessDamagesTable').click(function () {
 		$('#CVWitnessDamagesTable').html('');		
@@ -1759,14 +1604,6 @@ $( window ).resize( function(){
 
 	loadFunctions();
 
-	/*$('.rowNumbers').inputmask({
-		alias: "decimal",
-		integerDigits: 5,
-		digits: 0,
-		digitsOptional: false,
-		placeholder: "",
-		allowMinus: false
-	});*/
 $('.rowNumbers2').bind('input', function(){
 		var numRows = 0;
 		var newRows = 0;
@@ -1800,10 +1637,6 @@ $('.rowNumbers2').bind('input', function(){
 			var html = '<input type="text" class="fillIn"  style="width:100%;"/>';
 			
 			addColumn($(table).attr('id'), html, newRows);
-			/*$("input.noborder:not(#ClaimNo):not(#ClaimNo2):not(#adj)").change(function () {
-				var $this = $(this);
-				$this.val(titleCase($this.val()));
-			});*/
 
 		} else {
 			newRows = parseInt(inpNum - numRows) * -1;
@@ -1830,7 +1663,6 @@ $('.rowNumbers2').bind('input', function(){
 	});
 	
 $('.rowNumbers').on('input', function(){
-	//$('.rowNumbers').change(function () {
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1850,10 +1682,6 @@ $('.rowNumbers').on('input', function(){
 			rowNum = numRows + 1;
 			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
-			/*$("textarea.fillIn").change(function () {
-				var $this = $(this);
-				$this.val(titleCase($this.val()));
-			});*/
 			$('.phone').inputmask({
 				mask: "(999) 999-9999",
 				showMaskOnHover: false,
@@ -1878,7 +1706,6 @@ $('.rowNumbers').on('input', function(){
 
 	});
 	$('.rowNumbers3').bind('input', function(){
-	//$('.rowNumbers3').change(function () {
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1894,10 +1721,6 @@ $('.rowNumbers').on('input', function(){
 			rowNum = numRows + 1;
 			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><input type="text" class="fillIn" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%; font-size:14px" ></input></td><td><input type="text" class="fillIn phone" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
-			/*$("input.fillIn").change(function () {
-				var $this = $(this);
-				$this.val(titleCase($this.val()));
-			});*/
 
 		} else {
 			newRows = parseInt(inpNum - numRows) * -1;
@@ -1927,7 +1750,6 @@ $('.rowNumbers').on('input', function(){
 		$(window).scrollTop($(window).scrollTop() + (clickY - e.pageY));
 	};
 	$('.rowNumbers4').bind('input', function(){
-	//$('.rowNumbers4').change(function () {
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1942,10 +1764,7 @@ $('.rowNumbers').on('input', function(){
 			rowNum = numRows + 1;
 			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
-			/*$("textarea.fillIn").change(function () {
-				var $this = $(this);
-				$this.val(titleCase($this.val()));
-			});*/
+
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
 				autoAddress(this);
@@ -1965,7 +1784,6 @@ $('.rowNumbers').on('input', function(){
 
 	});
 	$('.rowNumbers5').bind('input', function(){
-	//$('.rowNumbers5').change(function () {
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1980,10 +1798,6 @@ $('.rowNumbers').on('input', function(){
 			rowNum = numRows + 1;
 			var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td></tr>';
 			addRows($(table).attr('id'), html, newRows);
-			/*$("textarea.fillIn").change(function () {
-				var $this = $(this);
-				$this.val(titleCase($this.val()));
-			});*/
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
 				autoAddress(this);
@@ -2032,14 +1846,12 @@ $('.rowNumbers').on('input', function(){
 		$('td').not('.number').each(function () {
 		if (!$(this).find('input').is(':text') && !$(this).find('input').is(':radio') && $(this).text() !== '') {
 			if ($(this).closest('tr').find('td:eq(0)').hasClass('number') || $(this).closest('tr').find('td:eq(0)').hasClass('indent2')) {
-		//	$(this).addClass('tooltip');
 			$(this).attr('title','Select a language to translate.');
 			};
 		};
 	});
 	
 	$('.editable').on('click', function () {
-		//$(this).text('');
 		setTimeout(function() {
 			$(this).focus();
 		}, 0);
@@ -2054,15 +1866,14 @@ $('.rowNumbers').on('input', function(){
 });
 $('#addFUQ').click(function () {
 		var clone = $('#FUQuestions1').clone();
-		var num = parseInt($('.number').length)+1;
+		var num = parseInt($('table[id^=FUQuestions]').length)+1;
 		clone.find('td:eq(0)').empty();
 		clone.find('td:eq(0)').append('<i class="fa fa-minus-circle noprint FUQminus" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove question."></i>');
 		clone.find('.editable').text('');
 		clone.find('.FOL').val('');
 		clone.attr('id','FUQuestions'+num);
-		clone.insertAfter('#FUQuestions' + (parseInt(num)-1));
-		numberCols();
-	$('table').on('input', '.FOL', function() {
+		
+	$(clone).on('input', '.FOL', function() {
 		var cursPosPre = $(this).getCursorPosition();
 		var valLength = $(this).val().length;
 		if (isOverflown($(this))) {
@@ -2094,19 +1905,24 @@ $('#addFUQ').click(function () {
 				$(this).closest('tr').next().find('.FOL').trigger('input');
 		};
 	});	
+	for (var r = 0; r < $('table[id^=FUQuestions]').length; r++) {
+	clone.insertAfter($('table[id^=FUQuestions]')[r]);
+	}
+		numberCols();
 	$('.FUQminus').click(function () {
 		$(this).closest('table').remove();
 		numberCols();
 	});
 	$('.editable').on('click', function () {
-		//$(this).text('');
 		setTimeout(function() {
 			$(this).focus();
 		}, 0);
 	});
 });
+$('#RSgeneral')[0].reset();	
 
 	/*end of document ready*/
+	
 });
 function showMain() {
 	$('#cvTable').show();
@@ -2133,14 +1949,10 @@ function coverageCheck(status, ele) {
 	$('.hidden').each(function (index, value) {
 		if (status === "Ok" && $(value).attr('id') === ele) {
 			$(value).hide();
-			
-		//	$('#AgentQuestions').hide();
-		
+
 		} else if (status !== "Ok" && $(value).attr('id') === ele) {
 			$(value).show();
-			/*if (!(ele == 'NON-OWNERS' || ele == 'FLOOD' || ele == 'FIRE' || ele == 'THEFT' || ele == 'TOW' || ele == 'WITNESS' || ele == 'INJURY' || ele == 'HIT PEDESTRIAN' || ele == 'OUT OF STATE' || ele == 'FOLLOWUP')) {
-				$('#AgentQuestions').show();
-			};*/
+
 		};
 	
 
@@ -2249,7 +2061,6 @@ function loadFunctions() {
 
 	$("#scrollBottom").click(function() { 
 	
-       // $("html, body").animate({ scrollBottom: 0 }, "slow");
 		$.fn.scrollBottom = function(scroll){
 		  if(typeof scroll === 'number'){
 			window.scrollTo(0,$(document).height() - $(window).height() - scroll);
@@ -2263,7 +2074,6 @@ function loadFunctions() {
 		return false;	
      }); 
 	 $("#scrollTop").click(function() { 
-       // $("html, body").animate({ scrollTop: 0 }, "slow");
 		$(window).scrollTop(0);
 		return false;	
      }); 
@@ -2299,14 +2109,7 @@ function loadFunctions() {
 		};
 	});
 	
-	/*$("input:radio:checked").data("chk",true);
-    $("input:radio").click(function(){
-        $("input[name='"+$(this).attr("name")+"']:radio").not(this).removeData("chk");
-        $(this).data("chk",!$(this).data("chk"));
-        $(this).prop("checked",$(this).data("chk"));
-    }); */
 
-	//$('.FOL').on('input paste', function () {
 $('table').on('input', '.FOL', function() {
 		var cursPosPre = $(this).getCursorPosition();
 		var valLength = $(this).val().length;
@@ -2326,9 +2129,8 @@ $('table').on('input', '.FOL', function() {
 					
 				};
 				$(this).closest('tr').next().find('.FOL').trigger('input');
-				//$(this).closest('tr').next().find('.FOL').focus();
+
 				$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition(stringsplit2.length);
-				//$('[name='+$(this).closest('tr').next().find('.FOL').prop('name')+']').setCursorPosition($this.length - cursPosPre + 1);
 				
 				if (cursPos < stringsplit.slice(0,stringsplit.length).join(' ').length) {
 					$(this).val(stringsplit.slice(0,stringsplit.length).join(' '));
@@ -2373,14 +2175,7 @@ $('table').on('input', '.FOL', function() {
 		};
 
 	});
-	/*$("textarea.fillIn").change(function () {
-		var $this = $(this);
-		$this.val(titleCase($this.val()));
-	});
-	$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone)").change(function () {
-		var $this = $(this);
-		$this.val(titleCase($this.val()));
-	});*/
+
 	$('#RSNumother').change(function () {
 		if ($(this).val() !== '') {
 			$(this).attr('type','text');
@@ -2391,15 +2186,12 @@ $('table').on('input', '.FOL', function() {
 		}
 	});
 	$('input:Required').change(function () {
-	//setCookie($(this).attr('name'), $(this).val());
 	
 	if ( $( this ).hasClass( "banners" ) ) {
 		var el = document.querySelectorAll(":required");
 		$(el).each(function () {
 			if ($(el).is(":visible")) {
 				if ($(this)[0].checkValidity()) {
-					//$(this).closest('td').prev().css('color', 'black')
-					//$(this).parent().closest('table').find('td').css('color', 'black')
 					
 					$(this).next('span').removeClass('banners');
 				};
@@ -2408,41 +2200,11 @@ $('table').on('input', '.FOL', function() {
 		$(this).removeClass('banners');
 	};
 	});
-	/*$("input.noborder").change(function () {
-		var $this = $(this);
-		$this.val(titleCase($this.val()));
-	});
-	$("#adj").keyup(function () {
-		var $this = $(this);
-		$this.val($this.val().toUpperCase());
-	});
-	$("#adj2").keyup(function () {
-		var $this = $(this);
-		$this.val($this.val().toUpperCase());
-	});
-	$("#adj3").keyup(function () {
-		var $this = $(this);
-		$this.val($this.val().toUpperCase());
-	});
-	$(".upper").keyup(function () {
-		var $this = $(this);
-		$this.val($this.val().toUpperCase());
-	});
-	$("textarea").change(function () {
-		var $this = $(this);
-		$this.val(titleCase($this.val()));
-	});*/
+
 	$('.currency').each(function () {
 		$(this).inputmask("currency");
 	});
-	/*$('.number').each(function () {
-		$(this).inputmask({
-			'alias': 'decimal',
-			rightAlign: true,
-			'groupSeparator': '.',
-			'autoGroup': true
-		});
-	});*/
+
 	$('#ClaimNo').inputmask("A[A]-999999");
 	$('#AgentClaimNo').inputmask("A[A]-999999");
 	$('.time').inputmask("[hh:mm]", {
@@ -2770,17 +2532,12 @@ function printFunction() {
 		toggleRequired(this, true)
 	})).done(function () {
 		var i = 0;
-		//var el = document.querySelectorAll(":required");
 		var text = '';
 		var heading;
 		var str;
 		var strText;
 		var printConfirm;
 	
-	//	$('#PopupWindow').height(0);
-
-
-		//$(el).each(function () {
 		$(':input[required]').each(function () {
 			if ($(this).closest('div').is(":hidden")) {
 				toggleRequired(this, false)
@@ -2812,9 +2569,6 @@ function printFunction() {
 					$('#PopupWindow h3').html(heading);
 					$('#PopupWindow p').html(text);
 					$('#PopupWindow').height(160);	
-					//$('#PopupWindow a').click(function () {
-						//$this.css("animation-duration", "");
-					//});
 				
 					 printConfirm = $.confirm({
 											title: heading,
@@ -2856,7 +2610,6 @@ function printFunction() {
 			$(document).attr('title', docTitle);
 			
 					printForm('RSgeneral');
-			//$('#reset').trigger('click');
 			
 		}else{
 			$('#blurDIV').addClass('blur');
@@ -2916,9 +2669,6 @@ function printOption() {
 						$(arr[j]).next('span').removeClass('banners');
 					}
 					
-					  //if (confirm(heading + "\n\n" + text)) {
-					//	window.print();
-					 // };
 
 				} else {
 					var arr = $('[name^='+$this.attr('name')+']');
@@ -2938,24 +2688,6 @@ function printOption() {
 }
 
 
-
-function disableScroll() {
-		$('body').css('overflow', 'hidden');
-    // Get the current page scroll position 
-  /*  scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, 
-
-        // if any scroll is attempted, set this to the previous value 
-		
-        window.onscroll = function() { 
-            window.scrollTo(scrollLeft, scrollTop); 
-        }; */
-} 
-  
-function enableScroll() { 
-	$('body').css('overflow', 'auto');
-    //window.onscroll = function() {}; 
-} 
 function toggleRequired(ele, boolean) {
 	$(ele).prop('required', boolean);
 }
@@ -2985,17 +2717,13 @@ function addColumn(tblId, myHtmlContent, num) {
 	$('#otherCVs').show();
 	$('#cvTable').show();
 	$('#cvdamages').show();
-	/*$("input.fillIn:not(#ClaimNo):not(#adj)").change(function () {
-		var $this = $(this);
-		$this.val(titleCase($this.val()));
-	});*/
+
 }
 
 function deleteColumn(tblId, col) {
 
 	for (var j = 0; j < col - 1; j++) {
 		var allRows = document.getElementById(tblId).rows;
-		//for (j=1; j<col-1; j++) {	
 		for (var i = 0; i < allRows.length; i++) {
 
 			if (allRows[i].cells.length > 1) {
@@ -3008,7 +2736,6 @@ function deleteColumn(tblId, col) {
 }
 
 function numberCols() {
-	//if (coverageCheck === 'NotOk') {$('#AgentQuestions').show();}else{$('#AgentQuestions').hide();}
 	$('.number').filter(function (e) {
 		return !$(this).parent().is(":visible");
 	}).each(function (e) {
@@ -3111,18 +2838,11 @@ function cloneTable(tableId, divId) {
 		// use native DOM methods to update the ID
 		this.setAttribute('id', this.getAttribute('id') + i);
 		this.setAttribute('name', this.getAttribute('id') + i);
-		// $(this).closest('td').attr('id',i);
-
-		// $(this).closest('td:nth-child(2)').text(this.value); 
 		$(this).closest('td:nth-child(2) input').val(this.value)
 		$(this).closest('td:nth-child(2) input').prop('disabled', true);
-		//$(this).closest('td:nth-child(2) input').remove();
-		//$(this).closest('td:nth-child(2) td').html(vals);
-		//clone.find('td:nth-child(2)').html(vals);
-		
+
 		if (!($(this).is(':disabled'))) {
-	//	console.log($(this).is(':disabled'));
-		this.value = '';
+			this.value = '';
 		}
 		
 
@@ -3253,11 +2973,7 @@ var i = 0;
 				newRows = inpNum - numRows;
 				rowNum = numRows + 1;
 				var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
-				addRows($(table).attr('id'), html, newRows)
-				/*$(value).find("textarea.fillIn").change(function () {
-					var $this = $(this);
-					$this.val(titleCase($this.val()));
-				});*/
+				addRows($(table).attr('id'), html, newRows);
 				$(value).find('.phone').inputmask("(999) 999-9999");
 				$(value).find('.address').focus(function () {
 					$(this).attr('placeholder', 'Enter a location');
@@ -3273,16 +2989,12 @@ var i = 0;
 			} else {
 				newRows = parseInt(inpNum - numRows) * -1;
 				rowNum = numRows + 1;
-				removeRows($(table).attr('id'), newRows)
+				removeRows($(table).attr('id'), newRows);
 			}
 
 		})
 
 
-		/*$(value).find("textarea.fillIn").change(function () {
-			var $this = $(this);
-			$this.val(titleCase($this.val()));
-		});*/
 		$('#' + $(value).attr('id') + ' > thead > tr > th:first').text("CV" + (index + 2))
 
 	})
@@ -3355,17 +3067,12 @@ function PrintElem(elem)
 	
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
     mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
-   // mywindow.document.write('<h1>' + document.title  + '</h1>');
-    //mywindow.document.write(document.getElementById('firstPart').innerHTML);
 	mywindow.document.write('<table class="full" ></table>');
 	mywindow.document.write('<form>');
 	var $b = $("#firstPart").clone();
 	$b.appendTo(mywindow.document.body);
 	var $a = $("#" + elem).clone();
 	$a.appendTo(mywindow.document.body);
-	//mywindow.document.write($a.html());
-    //mywindow.document.write(document.getElementById(elem).innerHTML);
-	//mywindow.document.write($(elem).html());
 	mywindow.document.write(document.getElementById('closingQuestions').innerHTML);
 	mywindow.document.write('</form>');
     mywindow.document.write('</body></html>');
@@ -3380,15 +3087,10 @@ function PrintElem(elem)
 		num[i].innerHTML = i + 1 + ".";
 	}
     mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-
-   // mywindow.print();
-   // mywindow.close();
-	
+    mywindow.focus(); // necessary for IE >= 10*/	
     return true;
 	}else{
-		
-	//alert("No RS found. Unable to print.");
+
 	$('#blurDIV').addClass('blur');
 	$.alert({
 				title: 'Information',
@@ -3465,7 +3167,6 @@ function printForm(form) {
 		 	
 function resetReset() {
 	console.time('Reset Function Time');
-		//	$('.rowNumbers').trigger('change');
 			$('.collapsible i').attr("class", 'fa fa-minus');
 			$('.rowNumbers').trigger('input');
 			$('.rowNumbers2').trigger('input');
@@ -3490,21 +3191,21 @@ function resetReset() {
 			$('#moreCVWitnessTable').html('');
 			$('#CVWitnessDetailsTable').html('');
 			$('#FUQ').html('');
-			//$("#FUQtxtArea").each(function() {$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size")))});
 			$(".txtAreaGrow").removeAttr("style");
 			$('.selectThis').html('');
 			$('#CVWitnessDamagesTable').html('');
 			$('[id^=checkbox]').attr('disabled',false);
+			$('[id^=checkbox]').trigger('change');
 			$('input[name="RSother"]').trigger('change');
 			$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone)").css('font-size', 17);
 			checkedAll = [];
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
 			$('#blurDIV').removeClass('blur');
-			//$('#statusTxt span').html('English');
 			$('input[name="lang"]').trigger('change');
 			$('.FUQminus').trigger('click')
 			$('.editable').text('');
+			numberCols();
 	console.timeEnd('Reset Function Time');
 }
 var today = new Date();
@@ -3576,7 +3277,6 @@ function translateTo(RadioEle, SelectEle, $this) {
 					//Replace with your API key
 			url += "&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
 			$.get(url, function (data, status) {
-				//setTimeout(function(){ $this.tooltipster( "destroy" ); }, 10000);
 				$this.tooltipster({
 					functionAfter: function() {$this.tooltipster('instance').destroy()},
 					restoration: 'current',
