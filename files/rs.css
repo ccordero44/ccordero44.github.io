@@ -1462,6 +1462,9 @@ span.banners {
 	textarea {
 		background-color: white;
 	}
+	select {
+		background-color: white;
+	}
 	 ::-webkit-input-placeholder {
 		color: transparent;
 	}

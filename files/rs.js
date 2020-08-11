@@ -19,9 +19,12 @@ $( window ).load( function(){
 });
 
 $(window).bind('resolutionchange', function () {
-	window.resizeTo(w, h)
-	$(window).trigger('scroll');
-})
+	//$(this).bind('focus', function (event) {
+
+		window.resizeTo(w, h)
+
+	//});
+});
 $(document).ready(function () {
 
 display_dt();
@@ -208,6 +211,7 @@ $("input").keypress(function(e) {
 				buttons: {
 					Ok: function () {
 						$('#blurDIV').removeClass('blur');
+						$('#save').prop('disabled', false);
 					}
 				}
 			});
@@ -545,9 +549,15 @@ $("input").keypress(function(e) {
 $( window ).resize( function(){
 
   if( w != $( window ).width() ){
- 
+	  $(window)
+	  .keypress(function () {
+		$(window).trigger('resolutionchange');
+	  })
+	  .mousedown(function () {
+		  $(window).trigger('resolutionchange');
+	  });
     window.resizeTo(w, h);
-	$(window).trigger('scroll');
+	//$(window).trigger('scroll');
   }
 
 });
@@ -3156,11 +3166,14 @@ function printForm(form) {
     var width = screen.width,
         height = screen.height;
     setInterval(function () {
+	  
         if (screen.width !== width || screen.height !== height) {
             width = screen.width;
             height = screen.height;
             $(window).trigger('resolutionchange');
+			
         }
+	
     }, 50);
 }());
 
