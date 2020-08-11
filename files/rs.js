@@ -101,12 +101,12 @@ $("input").keypress(function(e) {
 		const getFormData = () => {
 		  let data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
 		
-		  var n = 0;
+		  var nn = 0;
 		  for (const element of formElements) {
-			  n = n + 1
+			  nn = nn + 1
 			
 			if (element.name.length == 0) {
-				$(element).attr('name', 'dynamic_'+n);
+				$(element).attr('name', 'dynamic_'+nn);
 			}
 			if (element.name.length > 0) {
 				
@@ -123,7 +123,7 @@ $("input").keypress(function(e) {
 						data[formIdentifier][element.name] = element.value;
 					}else{
 						data[formIdentifier][element.name] = "";
-						$(element).val(n);
+						$(element).val(nn);
 					}
 				}
 			}
@@ -146,13 +146,13 @@ $("input").keypress(function(e) {
 			 
 			const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
 			
-			var n = 0;
+			var nn = 0;
 			for (const element of formElements) {
 				
 				
-				n = n + 1;
+				nn = nn + 1;
 			if (element.name.length == 0) {
-				$(element).attr('name', 'dynamic_'+n);
+				$(element).attr('name', 'dynamic_'+nn);
 			};
 			  if (element.name in savedData) {
 				
@@ -169,7 +169,7 @@ $("input").keypress(function(e) {
 				  };
 				  if (element.type == 'checkbox') {
 					 
-					  $(element).val(n);
+					  $(element).val(nn);
 					  if (savedData[element.name] !== "") {
 					  if (element.value == savedData[element.name]) {
 						element.checked = true;
@@ -1620,6 +1620,7 @@ $('.rowNumbers2').bind('input', function(){
 		var rowNum = 0;
 		var inpNum = $(this).val();
 		let table = $(this).parents("table").next("table");
+		$('[name^="dynamic_"]').prop('name','');
 		if (inpNum === '' || inpNum === '0') {
 			$('#' + table.attr('id')).hide();
 			$('#cvTable').hide();
@@ -1672,7 +1673,7 @@ $('.rowNumbers2').bind('input', function(){
 
 	});
 	
-$('.rowNumbers').on('input', function(){
+$('.rowNumbers').bind('input', function(){
 		var numRows = 0;
 		var newRows = 0;
 		var rowNum = 0;
@@ -1680,7 +1681,8 @@ $('.rowNumbers').on('input', function(){
 		
 
 		let table = $(this).parents("table").next("table");
-		if (inpNum == 0) {
+		$('[name^="dynamic_"]').attr('name','');
+		if (inpNum == 0 && table.attr('id')=="IVpassTable") {
 			table.hide();
 		}else{
 			table.show();
@@ -2937,10 +2939,10 @@ function cloneDiv(divID1, divID2, num) {
 var i = 0;
 
 	var myclone = jQuery("#" + divID1).clone(false);
-
+	
 	for (var j = 0; j < num + 1; j++) {
 		myclone[0].setAttribute('id', myclone[0].getAttribute('id') + '_' + j);
-	
+		myclone.find('.rowNumbers').prop('name',myclone.find('.rowNumbers').prop('name') + '_' + j);
 		myclone.find('table').each(function () {
 			// use native DOM methods to update the ID
 			this.setAttribute('id', this.getAttribute('id') + '_' + j);
@@ -2949,20 +2951,26 @@ var i = 0;
 		$('#' + divID2).append(myclone);
 
 	}
+	myclone.find('.rowNumbers').val('0');
+	
 	var arr = $("[id^=CVpassTable_]");
 
 	$.each(arr, function (index, value) {
 		
-		$(value).find('.phone').inputmask("(999) 999-9999");
-		$(value).find('.address').focus(function () {
+		
+		$('#' + $(value).attr('id') + ' > thead > tr > th:first').text("CV" + (index + 2))
+
+	})
+	$('.phone').inputmask("(999) 999-9999");
+		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
 			autoAddress(this);
 		});
-		$(value).find('.fillIn').each(function () {
+		/*$(value).find('.fillIn').each(function () {
 			i = i + 1;
 					this.setAttribute('name', 'cvCell'+i);
-				});
-		$(value).find('.address').blur(function () {
+		});*/
+		$('.address').blur(function () {
 			$(this).parent().next().find('input').focus();
 			if (!$(this).val()) {
 				$(this).attr('placeholder', '');
@@ -2976,7 +2984,12 @@ var i = 0;
 
 
 			let table = $(this).parents("table").next("table");
-
+			$('[name^="dynamic_"]').attr('name','');
+			/*if (inpNum == 0) {
+				table.hide();
+			}else{
+				table.show();
+			}*/
 			var tableRef = $('#' + $(table).attr('id') + '>tbody')[0];
 			numRows = parseInt(tableRef.rows.length);
 			if (inpNum > numRows) {
@@ -2984,12 +2997,12 @@ var i = 0;
 				rowNum = numRows + 1;
 				var html = '<tr><td class="tablefirst rowNums">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td class="addressTD"><textarea type="text" class="fillIn address" style="width:100%; font-size:14px" ></textarea></td><td class="phoneTD"><input type="text" class="fillIn phone" style="width:100%"></input></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td></tr>';
 				addRows($(table).attr('id'), html, newRows);
-				$(value).find('.phone').inputmask("(999) 999-9999");
-				$(value).find('.address').focus(function () {
+				$('.phone').inputmask("(999) 999-9999");
+				$('.address').focus(function () {
 					$(this).attr('placeholder', 'Enter a location');
 					autoAddress(this);
 				});
-				$(value).find('.address').blur(function () {
+				$('.address').blur(function () {
 					$(this).parent().next().find('input').focus();
 					if (!$(this).val()) {
 						$(this).attr('placeholder', '');
@@ -3004,10 +3017,8 @@ var i = 0;
 
 		})
 
-
-		$('#' + $(value).attr('id') + ' > thead > tr > th:first').text("CV" + (index + 2))
-
-	})
+		myclone.find('.rowNumbers').trigger('input');
+		
 
 }
 function getRadioVal(form, name) {
