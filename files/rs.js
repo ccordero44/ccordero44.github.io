@@ -334,9 +334,11 @@ $("input").keypress(function(e) {
 			if ($('.collapsible i').attr("class") == 'fa fa-minus') {
 				$('.collapsible i').attr("class", 'fa fa-plus');
 				 hideMain();
+				 numberCols();
 			}else{
 				$('.collapsible i').attr("class", 'fa fa-minus');
 				showMain();
+				numberCols();
 			};
 		};		
 	});
@@ -517,7 +519,7 @@ $("input").keypress(function(e) {
 			$('#checkbox9').attr("disabled",false);
 		};
 	
-		if ($(this).attr('name') == $("input[name^=UD]").attr('name') || $(this).attr('name') == $("input[name^=driver2]").attr('name') || $(this).attr('name') == $("input[name^=UDdriver]").attr('name')) {
+		if ($(this).attr('name') == $("input[name^=UD]").attr('name') || $(this).attr('name') == $("input[name^=driver2]").attr('name') ) {
 			
 			if ($(this).val() == 'UD') {
 				$('#checkbox17').prop("checked",true);
@@ -714,6 +716,7 @@ $( window ).resize( function(){
 			$('input[name="RSother"]').trigger('change');
 			$('input[name="RSother"]').parents(".section").next("table").find('.fillIn').removeClass('banners');
 		}
+		
 		}else{
 			$('#blurDIV').addClass('blur');
 			$.alert({
@@ -1162,6 +1165,15 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
+	$('input[name="theftRebuiltFlood"]').change(function () {
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'REBUILT');
+			numberCols();
+		} else if ($(this).val() === 'No' && $('#checkbox3').prop("checked") === false) {
+			coverageCheck("Ok", 'REBUILT');
+			numberCols();
+		};
+	});
 	$('input[name="OOSUD"]').change(function () {
 		var val = getRadioVal( document.getElementById('RSgeneral'), 'driver2' );
 		if ($(this).val() === 'Yes') {
@@ -1372,6 +1384,7 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums11" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="date" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder phone" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('MCTDUDfound', html, 1);
+		$('.phone').inputmask("(999) 999-9999");
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -1503,6 +1516,7 @@ $( window ).resize( function(){
 		rowNum = numRows + 1;
 		var html = '<td class="VOPnums8" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="noborder VOP1first" style="width:100%;"></textarea></td><td><textarea type="date" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder phone" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td><textarea type="text" class="noborder" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('extraUDs', html, 1);
+		$('.phone').inputmask("(999) 999-9999");
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
@@ -2311,7 +2325,8 @@ var componentForm = {
 	street_number: 'short_name',
 	route: 'short_name',
 	locality: 'short_name',
-	administrative_area_level_1: 'short_name'
+	administrative_area_level_1: 'short_name',
+	postal_code: 'short_name'
 };
 var address1 = {
 	street_number: 'short_name',
@@ -2319,7 +2334,8 @@ var address1 = {
 };
 var address2 = {
 	locality: 'short_name',
-	administrative_area_level_1: 'short_name'
+	administrative_area_level_1: 'short_name',
+	postal_code: 'short_name'
 };
 
 function autoAddress(input) {
@@ -2361,7 +2377,7 @@ function fillInAddress(input, autocomplete) {
 				val += place.address_components[i][componentForm[addressType]] + " ";
 
 				$(input).val(val);
-
+				$(input).trigger('keydown');
 			}
 
 		}
@@ -2374,16 +2390,22 @@ function fillInAddress(input, autocomplete) {
 				val += place.address_components[i][address1[addressType]] + " ";
 
 				$(input).val(val);
+				$(input).trigger('keydown');
 			}
 			if (address2[addressType]) {
 				val2 += place.address_components[i][address2[addressType]] + " ";
 				$(input).closest('tr').next().find('.fillIn.address2').val(val2);
+				$(input).closest('tr').next().find('.fillIn.address2').trigger('keydown');
 				var input2 = $(input).closest('tr').next().find('.fillIn.address2');
 				$(input2).closest('tr').next().find('input').focus();
+			
 			}
 
 		}
 	}
+	
+	$(input).trigger('keydown');
+	$(input).closest('tr').next().find('.fillIn.address2').trigger('keydown');
 }
 
 function titleCase(str) {
