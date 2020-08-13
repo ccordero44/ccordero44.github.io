@@ -318,7 +318,8 @@ return;
 }else{
 myVin = myVin.toUpperCase();
 var xhr = new XMLHttpRequest();
-var url = "https://marketcheck-prod.apigee.net/v1/vin/"+myVin+"/specs?api_key=4R88AFPtsiZz6RITfAzD9WK0FZK8OfAm";
+//var url = "https://marketcheck-prod.apigee.net/v1/vin/"+myVin+"/specs?api_key=4R88AFPtsiZz6RITfAzD9WK0FZK8OfAm";
+var url = "https://marketcheck-prod.apigee.net/v2/decode/car/"+myVin+"/specs?api_key=4R88AFPtsiZz6RITfAzD9WK0FZK8OfAm";
 xhr.open("GET", url, true);
 xhr.send();
 // Called whenever the readyState attribute changes 
