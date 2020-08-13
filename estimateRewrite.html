@@ -1,0 +1,1083 @@
+
+<html>
+<head>
+
+	
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" 
+      type="image/png" 
+      href="images\car-repair.png">
+<title>Manual Entry Audit Estimate Tool</title>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="files\inputmask.js"></script>
+<script type="text/javascript">
+
+		function OpenPopup() {
+            document.getElementById('PopupOverlay').style.display = 'block';
+            document.getElementById('PopupWindow').style.display = 'block';
+        }
+        function ClosePopup() {
+            document.getElementById('PopupOverlay').style.display = 'none';
+            document.getElementById('PopupWindow').style.display = 'none';
+        }
+ 
+$( window ).load(function() {
+  window.resizeTo(800, 1035);
+});
+function addRow(val1,val2) {
+return Number(val1 * val2);
+}
+
+function add(){
+var row_index = 0;
+var sumRow = 0;
+ var sum1 = 0;
+
+$('input.qty').each(function () {
+ var $tableRow = $('#table1 tbody tr:eq(0)');
+  let row_index = $(this).closest("tr").index();
+  sumRow += addRow($(this).val(),$(this).parent().next().find('input.sum1').inputmask('unmaskedvalue'));
+
+	
+ });
+ 
+ $("#sum1").html('$'+numberWithCommas(sumRow.toFixed(2)));
+ $('#sum6').html('$'+numberWithCommas(sumRow.toFixed(2)));
+ var sum2 = 0;
+ $('input.sum2').each(function () {
+ 
+     sum2 += Number($(this).inputmask('unmaskedvalue'));
+});
+if (Number.isNaN(sum2)) {
+$("#sum2").html('');
+}else{
+$("#sum2").html(sum2.toFixed(2));
+}
+ var sum3 = 0;
+ $('input.sum3').each(function () {
+ 
+     sum3 += Number($(this).inputmask('unmaskedvalue'));
+});
+$("#sum3").html(sum3.toFixed(2));
+
+var sum4 = 0;
+$('#sum4').html($('#sum2').html());
+ $('input.sum4').each(function () {
+ 
+     sum4 = Number($(this).inputmask('unmaskedvalue')) * $("#sum4").html();
+});
+$("#sum9").html('$'+sum4.toFixed(2));
+
+var sum5 = 0;
+$('#sum5').html($('#sum3').html());
+ $('input.sum5').each(function () {
+ 
+     sum5 = Number($(this).inputmask('unmaskedvalue')) * $("#sum5").html();
+});
+$("#sum10").html('$'+sum5.toFixed(2));
+
+
+ var sum6 = 0;
+ $('input.sum6').each(function () {
+
+   
+	sum6 = percentage(Number($(this).inputmask('unmaskedvalue')),clean($("#sum6").html()))
+	
+});
+
+var sum6Double = Number(toFixed(sum6,2));
+$("#sum11").html('$'+sum6Double.toFixed(2));
+
+var sum8 = 0;
+ $('input.sum8').each(function () {
+	sum8 = Number($(this).inputmask('unmaskedvalue')) * $("input.sum7").inputmask('unmaskedvalue');
+});
+
+$("#sum12").html('$'+sum8.toFixed(2));
+var sum7 = 0;
+ $('td.tDed').each(function () {
+ 
+	sum7 += Number(clean($(this).html()));
+});
+$("#sum7").html('$'+numberWithCommas(sum7.toFixed(2)));
+
+
+var sum9 = 0;
+ $('input.sum9').each(function () {
+ 
+     sum9 += Number($('input.sum9').inputmask('unmaskedvalue')) - Number(clean($("#sum7").html()));
+});
+$("#sum8").html('$'+numberWithCommas(sum9.toFixed(2)));
+}
+
+
+
+$(document).ready(function () {
+$('#misc').click(function(){
+        $('#misc input').removeAttr("disabled"); 
+		$('#misc input').select();
+});
+
+$('#misc input').change(function(){
+
+        $(this).attr("disabled","disabled");
+	if ($(this).val()) {
+		$('#miscTooltip1 span.tooltiptext').html("<p class='title'>"+$(this).val()+"</p>Enter the quantity of the "+$(this).val()+" charges.");
+		$('#miscTooltip2 span.tooltiptext').html("<p class='title'>"+$(this).val()+" Rate</p>Enter the rate of the "+$(this).val()+" charges.");
+		$('#miscTooltip2 span.tooltiptext').width(146 + (2*$(this).val().length));
+	
+	}else{
+		$('#miscTooltip1 span.tooltiptext').html("<p class='title'>Misc.</p>Enter the quantity of any misc. fees/charges.");
+		$('#miscTooltip2 span.tooltiptext').html("<p class='title'>Misc.</p>Enter the price or hourly rate of any misc fees/charges.");
+		$('#miscTooltip2 span.tooltiptext').width(150);
+	
+	}
+});
+ $('#claimNo').inputmask("A[A]-999999");
+$('#phone').inputmask("(999) 999-9999");
+$('input.sum1').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+$('input.sum8').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+ $('input.sum7').inputmask({
+alias: "decimal",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+$('input.sum2').inputmask({
+alias: "decimal",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+  $('input.sum3').inputmask({
+alias: "decimal",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+  $("input.sum6").inputmask({
+alias: "percentage",
+integerDigits: 6,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+  $('input.sum4').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+  $('input.sum5').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+  $('input.sum9').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+$("#body").hover(function(){
+    $('.sum4').css({'background-color':'yellow','border':'0px solid' });
+});
+$("#body").mouseout(function(){
+    $('.sum4').css({'background-color':'white','border':'0px' });
+});
+$("#paint").hover(function(){
+    $('.sum5').css({'background-color':'yellow','border':'0px solid' });
+});
+$("#paint").mouseout(function(){
+    $('.sum5').css({'background-color':'white','border':'0px' });
+});
+$("#parts").hover(function(){
+    $('.sum6').css({'background-color':'yellow','border':'0px solid' });
+});
+$("#parts").mouseout(function(){
+    $('.sum6').css({'background-color':'white','border':'0px' });
+});
+
+    $(".sum1").change( function() { add(); } );
+	$(".qty").change( function() { add(); } );
+	$(".sum2").change( function() { add(); } );
+  
+	$(".sum3").change( function() { add(); } );
+
+	$(".sum4").change( function() { add(); } );
+
+	$(".sum5").change( function() { add(); } );
+	
+	$(".sum6").change( function() { add();} );
+	$(".sum8").change( function() { add();} );
+	$(".sum9").change( function() { add(); } );
+
+	$(":input").click( function() {	var $this = $(this); 
+	$this.select(); } );
+	$("#VIN").change( function() { run();} );
+	$("#vehInfo").click( function() {	if ($('#VIN').val()=='') {$('#VIN').select()}; } );
+	$("#vehInfo").focus( function() {	if ($('#VIN').val()=='') {$('#VIN').select()}; } );
+	$(".upper").keyup( function() { var $this = $(this); $this.val(upper($this.val())); } );
+	$("#note").keyup( function() { var $this = $(this); $this.val(titleCase($this.val())); } );
+	$("#table1 tr input.text").keyup( function() { var $this = $(this); $this.val(titleCase($this.val())); } );
+	$("#misc input").keyup( function() { var $this = $(this); $this.val(titleCase($this.val())); } );
+	let el = document.querySelector(".input-wrap .input");
+let widthMachine = document.querySelector(".input-wrap .width-machine");
+el.addEventListener("keyup", () => {
+  widthMachine.innerHTML = el.value;
+});
+
+  $('#roleSelect').change(function(){
+  
+    $("#width_tmp_option").html($('#roleSelect option:selected').text()); 
+    $(this).width($("#width_tmp_select").width());  
+	$('#role').html($(this).val() + ' Unrelated Estimate Deductions')
+	
+  });
+    $(function(){
+    $("#width_tmp_option").html($('#roleSelect option:selected').text()); 
+    $('#roleSelect').width($("#width_tmp_select").width());  
+	$('#role').html($(this).val() + ' Unrelated Estimate Deductions')
+  });
+});
+function toFixed(num, fixed) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+    return num.toString().match(re)[0];
+}
+function rIndex(x) {
+  return x.rowIndex;
+}
+function percentage(num, per)
+{
+  return (num/100)*per;
+}
+
+function clean(str) {
+return str.replace(/,|\$/g, '');
+}
+function clearAll() {
+removeRows('table1');
+ $('#initials').focus();
+$(':input').val('');
+$(":input").trigger("change");
+$('#role').html('Unrelated Estimate Deductions')
+
+	let el = document.querySelector(".input-wrap .input");
+let widthMachine = document.querySelector(".input-wrap .width-machine");
+  widthMachine.innerHTML = el.value;
+  add();
+  window.resizeTo(800, 1035)
+}
+
+function run() {
+var myVin = $('#VIN').val();
+if (myVin == '') {
+return;
+}else{
+myVin = myVin.toUpperCase();
+var xhr = new XMLHttpRequest();
+var url = "https://marketcheck-prod.apigee.net/v1/vin/"+myVin+"/specs?api_key=4R88AFPtsiZz6RITfAzD9WK0FZK8OfAm";
+xhr.open("GET", url, true);
+xhr.send();
+// Called whenever the readyState attribute changes 
+xhr.onreadystatechange = function() {
+ 
+  // Check if fetch request is done
+  if (xhr.readyState == 4 && xhr.status == 200) { 
+  
+    // Parse the JSON string
+    var jsonData = JSON.parse(xhr.responseText);
+    
+    // Call the displaySpecs(), passing in the parsed JSON string
+    displaySpecs(jsonData);
+ $('#VIN').val(myVin);
+ 
+  }else{
+
+  if (xhr.readyState == 4) { 
+ 
+ window.alert("Please enter a valid VIN");
+ $('#VIN').val('');
+ $('#VIN').select();
+
+ }
+  }
+ 
+};
+// Do the HTTP call using the url variable we specified above
+}
+
+}
+function displaySpecs(data) {
+
+    var output;
+    var i;
+    
+    // Loop through the artists, and add them as list items
+    //for (var i in data) {
+        output = data.year + " " + data.make + " " + data.model; 
+   // }
+    
+    
+
+    // Output the data to the "artistlist" element
+    $('#vehInfo').val(output);
+   
+};
+function upper(str) { 
+
+    var string = str.toUpperCase(); 
+    return string; 
+} 
+
+function autoAddress() {
+	var input = document.getElementById("address");
+	var options = {
+		componentRestrictions: {country: 'us'}
+	};
+    autocomplete = new google.maps.places.Autocomplete(input, options);
+	autocomplete.setFields(['address_component']);
+	autocomplete.addListener('place_changed', fillInAddress);
+
+}
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name'
+
+};
+function fillInAddress() {
+document.getElementById('address').value = '';
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+     if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+	  
+       document.getElementById('address').value += val + " ";
+    }
+  }
+ 
+}
+function formatPhoneNumber(phoneNumberString) {
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+
+  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  if (match) {
+  
+    return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+  }
+  return null
+}
+function titleCase(str) {
+  str = str.toLowerCase().split(' ');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+ var newStrng = str.join(' ');
+  //return str.join(' ');
+  return charCase1(newStrng);
+  
+}
+function charCase1(str) {
+str = str.split('/');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+ 
+  return charCase2(str.join('/'));
+}
+
+function charCase2(str) {
+str = str.split('.');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+ 
+  return str.join('.');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function addRows(tableID) {
+window.resizeTo(800, $( window ).height()+60);
+  let table = document.getElementById(tableID);
+var tableRef = table.getElementsByTagName('tbody')[0];
+
+var text;
+var inp;
+var inp2;
+var inp3;
+
+
+i = tableRef.rows.length;
+
+
+var myHtmlContent = "<tr><td id='newRowTD"+i+"'><input class='text' style='width:50px;text-align:center' /></td><td><input class='text' style='width:100px;text-align:left'/></td><td><input class='text' style='width:200px;text-align:left'/></td><td><input class='qty' style='width:75px;text-align:center'/></td><td><input class='sum1' style='width:100px;text-align:right'/></td><td><input class='sum2' style='width:75px;text-align:center'/></td><td><input class='sum3' style='width:75px;text-align:center'/></td></tr>";
+
+var newRow   = tableRef.insertRow(tableRef.rows.length);
+newRow.id = "wholeRow" + i;
+newRow.innerHTML = myHtmlContent;
+
+$('input.sum1').inputmask({
+alias: "currency",
+prefix: "$",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false,
+
+  });
+$('input.sum2').inputmask({
+alias: "decimal",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+  $('input.sum3').inputmask({
+alias: "decimal",
+integerDigits: 5,
+digits: 2,
+digitsOptional: false,
+placeholder: "0",
+allowMinus: false
+  });
+    $('.sum1').change( function() { add(); } );
+	$('.sum2').change( function() { add(); } );
+	$(".sum3").change( function() { add(); } );
+	$(":input").click( function() {	var $this = $(this); 
+	$this.select(); } );
+	$("#table1 tr input.text").keyup( function() { var $this = $(this); $this.val(titleCase($this.val())); } );
+	
+}
+function removeRows(tableID) {
+   let table = document.getElementById(tableID);
+ var tableRef = table.getElementsByTagName('thead')[0];
+
+$('[id^="wholeRow"]').remove();
+
+ }
+ 
+ function printFunction() {
+	var i =0;
+  var el = document.querySelectorAll(":required");
+  var text = '';
+  var heading;
+   $('#PopupWindow').height(0);
+$(el).each(function () {
+var $this = $(this);
+
+if (!$this[0].checkValidity()) {
+i = i + 1;
+ text += '<b>' + i + '.</b> A valid selection for <b>' + $this.parent().find('.tooltiptext').html() + '</b> is required. ' + $this[0].validationMessage + '<br /><br />';
+  //alert('A valid selection for ' + text + ' is required. ("' + $('#' + $this[0].id + ' option:selected').text() + '" is not valid)\n\n' + $this[0].validationMessage);
+  heading = i + ' Invalid Selection(s)';
+
+ $this.css("animation", "glowing 1300ms infinite"); 
+  $('#PopupWindow').height($('#PopupWindow').height() + 80 - (i * 10));
+  $('#PopupWindow h3').html(heading);
+  $('#PopupWindow p').html(text);
+  
+  $('#PopupWindow a').click(function(){
+$this.css("animation-duration", "");
+});
+OpenPopup();
+  } 
+
+  });
+    if (i === 0) {
+    window.print(); 
+	
+	}
+} 
+</script>
+</head>
+
+<body onload="autoAddress()">
+
+<style>
+#misc input:disabled {
+color: black;
+background-color: transparent;
+}
+#misc input::placeholder {
+color: black;
+}
+
+body {
+  overflow-x: hidden;
+
+}
+#width_tmp_select{
+  display : none;
+
+} 
+.input {
+  border: 0px;
+  font-family: 'Courier New';
+  font-size: inherit;
+  
+}
+.note {
+font-weight: bold;
+text-decoration: underline;
+  border: 0px;
+  font-family: 'Courier New';
+  font-size: 12px;
+  resize: none;
+}
+
+textarea {
+  border: 0px;
+  font-family: 'Courier New';
+  font-size: 12px;
+  resize: none;
+}
+textarea:focus {
+outline: none !important;
+    background-color: lightblue;
+	border-style: inset;
+	border-width: 1px;
+    background-color: #CCD7FF;
+	border-collapse: collapsed;
+}
+.input-wrap {
+  position: relative;
+}
+.input-wrap .input {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.width-machine {
+  /*   Sort of a magic number to add extra space for number spinner */
+  padding: 0 1rem; 
+}
+.dashed {
+border-top: 1px dashed;
+border-bottom: 1px dashed;
+}
+input {
+font-family: 'Courier New';
+font-size: 14px;
+border: 0px;
+}
+input:focus {
+    outline: none !important;
+    background-color: lightblue;
+	border-style: inset;
+	border-width: 1px;
+    background-color: #CCD7FF;
+	border-collapse: collapsed;
+}
+select {
+-webkit-appearance: none;
+border: 0px;
+font-family: 'Courier New';
+font-size: 14px;
+}
+select:focus {
+outline: none !important;
+    background-color: lightblue;
+	border-style: inset;
+	border-width: 1px;
+    background-color: #CCD7FF;
+	border-collapse: collapsed;
+}
+td {
+margin:0;
+}
+p {
+font-size: 14px;
+}
+th, td {
+font-size: 14px;
+}
+button {
+float:left;
+  background-color: DodgerBlue; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block; 
+  font-family: 'Courier New';
+  font-size: 12px;
+  color: dodgerblue;
+  cursor: pointer;
+}
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: calc(100% + 100px);
+  background-color: lightyellow;
+  color: black;
+  text-align: left;
+  border-radius: 2px;
+  border: 1px solid black;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1; 
+  top: calc(100% + 20px);
+  right: calc(100% - 150px);
+  font-weight: normal;
+}
+
+body {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+ 
+}
+
+.title {
+margin-top: 0px;
+margin-bottom: 5px;
+font-weight: bold;
+text-decoration: underline;
+
+}
+select:invalid { color: gray; background-color: yellow;}
+/*select {
+  background-color: yellow;
+}
+select:valid {
+  background-color: white;
+}*/
+option {
+background-color: white;
+color: black;
+}
+select option:invalid {
+display: none;
+}
+#printPage
+{
+  margin: auto;
+  padding: 0px;
+  width: 750px; /* width: 7in; */
+  height: auto; /* or height: 9.5in; */
+  
+  page-break-after: always;
+}
+
+.center {
+text-align: center;
+}
+
+        #PopupOverlay {
+            display: none;
+            position: fixed;
+            left: 0px; right: 0px;
+            top: 0px; bottom: 0px;
+            background-color: #000000;
+            opacity:.75;
+        }
+        #PopupWindow {
+            display: none;
+            position: absolute;
+            width: 350px; height: 0px;
+            left: 50%; top: 50%;
+            margin: -75px 0 0 -175px;
+            border: solid 2px #cccccc;
+            background-color: #ffffff;
+        }
+        #PopupWindow h3 {
+            display: block;
+            margin: 0;
+            padding: 3px 5px;
+            background-color: #cccccc;
+            text-align: center;
+        }
+        #PopupWindow p {
+            margin: 0px;
+            padding: 5px;
+            font-size: 90%;
+        }
+        #PopupWindow a {
+            display: block;
+            position: absolute;
+            top:  70px;
+			left: 180px;
+            margin: -70px 0 0 145px;
+            width: 25px; height: 25px;
+            background-color: #ff3333;
+            text-align: center;
+            text-decoration: none;
+            font-size: 120%;
+        }
+
+      @keyframes glowing {
+0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 64, 0.7), 0 0 0 0 rgba(255, 0, 64, 0.7);
+    }
+    40% {
+        box-shadow: 0 0 0 50px rgba(255, 0, 64, 0), 0 0 0 0 rgba(255, 0, 64, 0.7);
+    }
+    80% {
+        box-shadow: 0 0 0 50px rgba(255, 0, 64, 0), 0 0 0 30px rgba(255, 0, 64, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 64, 0), 0 0 0 30px rgba(255, 0, 64, 0);
+    }
+	
+}
+@media print {
+button {
+display: none;
+}
+select {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+background: none;
+}
+select:invalid {
+visibility: hidden;
+}
+.tooltip {
+display: none;
+}
+
+.print {
+display: inline !important;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+      color: transparent;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+      color: transparent;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+      color: transparent;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+      color: transparent;
+  }
+
+}
+</style>
+<button onclick="clearAll();">Clear</button>
+<button onclick="printFunction();">Print</button>
+<div id="printPage">
+<p style="text-align: center; font-family: 'Courier New'; font-size: 24px;padding-top:75px;margin:0"><strong>Manual Entry UPD Audit</strong></p>
+<!--<p style="text-align: center; font-family: 'Courier New';" >Reviewed By:<input class="upper" style="text-align: left; font-family: 'Courier New';  width: auto;" type="text" /></p>
+-->
+<p style="text-align: center; font-family: 'Courier New';padding-bottom:50px" ><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;">Enter the Name or Initials of the Estimate Reviewer.</span></span> Reviewed By: <span class="input-wrap"><span class="width-machine" aria-hidden="true"></span><input id="initials" autofocus class="input upper" type="text"></span></p>
+<p></p>
+<div style="width: 49%; float: left;">
+
+<p style="text-align: right; font-family: 'Courier New';width: 380px;margin:0;">
+<span class="tooltip print">
+
+<select required name="roleSelect" id="roleSelect" style="text-align-last:right; ">
+  <option value="" selected>Select: </option>  
+	<option value="Insured's">Insured: </option>
+    <option value="Claimant's">Claimant: </option>
+  </select>
+  <span class="tooltiptext" style="width:130px;top:20px;text-align:center;">Select Party Type</span>
+  </span> 
+  <select id="width_tmp_select">
+  <option id="width_tmp_option"></option>
+</select>
+<input placeholder="Select Party Type" id="roleWho" style="text-align: left; font-family: 'Courier New'; width: 280px;" type="text" class="upper" />
+</p>
+<p style="text-align: right; font-family: 'Courier New';  width: 300px;margin:0;">Owner: <input placeholder="Enter Owner's Name" class="upper" style="text-align: left; font-family: 'Courier New'; width: 200px;" type="text" /></p>
+<p style="text-align: right; font-family: 'Courier New';  width: 380px;margin:0;">Address: <input id="address" class="upper" style="text-align: left; font-family: 'Courier New'; width: 280px;" type="text"></input></p>
+<p style="text-align: right; font-family: 'Courier New';  width: 300px;margin:0;">Evening: <input placeholder="Enter Phone Number" id="phone" style="text-align: left; font-family: 'Courier New'; width: 200px;" type="text" /></p>
+</div>
+<div style="width: 49%; float: right;">
+<p style="text-align: right; font-family: 'Courier New';  width: 300px;margin:0;">Claim #: <input id="claimNo" placeholder="Enter Claim Number"  style="text-align: left; font-family: 'Courier New';  width: 150px;" type="text"></input></p>
+<p style="text-align: right; font-family: 'Courier New';  width: 300px;margin:0;"><label for="DOL">Date of Loss: </label><input id="DOL" style="text-align: left; font-family: 'Courier New'; width: 150px;" type="date" /></p>
+<p style="text-align: right; font-family: 'Courier New';  width: 350px;margin:0;"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:175px">Primary Point of Impact</span></span> <label for="POI">Primary POI: </label><select required name="POI" id="POI" style="text-align: left; font-family: 'Courier New'; width: 200px;" >
+    <option value="">Select Point of Impact</option>
+	<option value="1">1. Right Fender</option>
+    <option value="2">2. RF Door</option>
+    <option value="3">3. Right Side Mid</option>
+    <option value="4">4. RR Door</option>
+	<option value="5">5. Right Quarter Panel</option>
+	<option value="6">6. Rear</option>
+	<option value="7">7. Left Quarter Panel</option>
+	<option value="8">8. Left Rear Door</option>
+	<option value="9">9. Left Side Mid</option>
+	<option value="10">10. LF Door</option>
+	<option value="11">11. Left Fender</option>
+	<option value="12">12. Front</option>
+  </select></p>
+ <p style="text-align: right; font-family: 'Courier New';  width: 350px;margin:0;"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:190px">Secondary Point of Impact</span></span> <label for="POI2">Secondary POI: </label><select required name="POI2" id="POI2" style="text-align: left; font-family: 'Courier New'; width: 200px;" >
+    <option value="">Select Point of Impact</option>
+	<option value="1">1. Right Fender</option>
+    <option value="2">2. RF Door</option>
+    <option value="3">3. Right Side Mid</option>
+    <option value="4">4. RR Door</option>
+	<option value="5">5. Right Quarter Panel</option>
+	<option value="6">6. Rear</option>
+	<option value="7">7. Left Quarter Panel</option>
+	<option value="8">8. Left Rear Door</option>
+	<option value="9">9. Left Side Mid</option>
+	<option value="10">10. LF Door</option>
+	<option value="11">11. Left Fender</option>
+	<option value="12">12. Front</option>
+  </select></p> 
+</div>
+<br /><br /><br /><br />
+<p style="text-align: right; font-family: 'Courier New';  width: 100%;padding-top:50px">Year Make Model: <input id="vehInfo" style="text-align: left; font-family: 'Courier New';  width: 75%;" type="text" /></p>
+
+<p style="text-align: left; font-family: 'Courier New'; width:auto;margin-left:100px;">VIN: <input id="VIN" placeholder="Enter Vehicle ID" style="text-align: left; font-family: 'Courier New'; width: 200px;" type="text" /></p>
+<p id="role" style="text-align: center; font-family: 'Courier New'; width:auto;font-size: 12px">Unrelated Estimate Deductions</p>
+
+<table id="table1" style="width:750px;margin:auto;">
+<thead>
+  <tr>
+	<th class="dashed" style="text-align: center; font-family: 'Courier New'; width:50px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Line Item Number</p>Enter the Line Number of the deduction as listed on the estimate.</span></span> NO.</th>
+    <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:100px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Operation</p>Enter the operation for the deduction as listed on the estimate (i.e. 'Rpr', 'Rpl').</span></span> OP.</th>
+    <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:200px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Description</p>Enter the description of the deduction as listed on the estimate.</span></span> DESCRIPTION</th>
+      <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Quantity</p>Enter the quantity of the deduction as listed on the estimate.</span></span> QTY</th>
+      <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:100px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Price</p>Enter the unit price of the deduction as listed on the estimate.</span></span> PRICE</th>
+      <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Body Labor</p>Enter the body labor hours of the deduction as listed on the estimate.</span></span> LABOR</th>
+      <th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Paint Labor</p>Enter the paint labor hours for the deduction as listed on the estimate.</span></span> PAINT</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+<td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+<td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+<td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+ <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+ <td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+  <tr>
+ <td><input class="text" style="width:50px;text-align:center"/></td>
+ <td><input class="text" style="width:100px;text-align:left"/></td>
+ <td><input class="text" style="width:200px;text-align:left"/></td>
+<td><input class="qty" style="width:75px;text-align:center"/></td>
+ <td><input class="sum1" style="width:100px;text-align:right"/></td>
+ <td><input class="sum2" style="width:75px;text-align:center"/></td>
+<td><input class="sum3" style="width:75px;text-align:center"/></td>
+ </tr>
+   </tbody>
+ <tfoot>
+ <tr>
+		
+      <td colspan="4" style="text-align: right; font-family: 'Courier New'; width:50px;padding-right:50px;" class="dashed"><span onclick="addRows('table1')" class="tooltip" style="float:left"><i class="fa fa-plus-circle" style="padding-top:2px" ></i><span class="tooltiptext" style="width:150px;"><p class="title">Add Row</p>Click to add a new row.</span></span>SUBTOTALS</td>
+      <td id="sum1" style="text-align: center; font-family: 'Courier New'; width:75px" class="dashed">$0.00</td>
+      <td id="sum2" style="text-align: center; font-family: 'Courier New'; width:50px" class="dashed">0.00</td>
+      <td id="sum3" style="text-align: center; font-family: 'Courier New'; width:50px" class="dashed">0.00</td>  
+	  </tr>
+ </tfoot>
+
+  </table>
+   
+  <br>
+  <br>
+  <br>
+  <div style="float:left;width:35%;">
+  <label for="note" class="note">Notes:</label>
+  <textarea id="note" rows="10" cols="35" style="padding-top:10px"></textarea>
+  </div>
+  <div style="width:750px;margin:auto;">
+ <table style="float:right;width:60%;border-bottom: 1px dashed;">
+  <thead>
+  <tr>
+	<th class="dashed" style="text-align: left; font-family: 'Courier New'; width:150px">Category:</th>
+	<th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px">Basis</th>
+	<th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px">Rate</th>
+	<th class="dashed" style="text-align: center; font-family: 'Courier New'; width:75px"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+	<td style="text-align: left; font-family: 'Courier New'; width:150px"><span id="body" class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Body Labor Rate</p>Enter the Body Labor Rate as listed on the estimate.</span></span> Body Labor</td>
+	<td id="sum4" style="text-align: right; font-family: 'Courier New'; width:75px">0.00</td>
+	<td style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip print"><input class="sum4" style="width:75px;text-align:right"/><span class="tooltiptext" style="width:150px;"><p class="title">Body Labor Rate</p>Enter the Body Labor Rate as listed on the estimate.</span></span></td>
+	<td id="sum9" class="tDed" style="text-align: right; font-family: 'Courier New'; width:75px">$0.00</td>
+</tr>
+<tr>
+	<td style="text-align: left; font-family: 'Courier New'; width:150px"><span id="paint" class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Paint Labor Rate</p>Enter the Paint Labor Rate as listed on the estimate.</span></span> Paint Labor</td>
+	<td id="sum5" style="text-align: right; font-family: 'Courier New'; width:75px">0.00</td>
+	<td style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip print"><input class="sum5" style="width:75px;text-align:right"/><span class="tooltiptext" style="width:150px;"><p class="title">Paint Labor Rate</p>Enter the Paint Labor Rate as listed on the estimate.</span></span></td>
+	<td id="sum10" class="tDed" style="text-align: right; font-family: 'Courier New'; width:75px">$0.00</td>
+</tr>
+<tr>
+	<td style="text-align: left; font-family: 'Courier New'; width:150px"><span id="parts" class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:150px;"><p class="title">Sales Tax</p>Enter the Sales Tax as listed on the estimate.</span></span> Parts</td>
+	<td id="sum6" class="tDed" style="text-align: right; font-family: 'Courier New'; width:75px">$0.00</td>
+	<td style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip print"><input class="sum6" style="width:75px;text-align:right"/><span class="tooltiptext" style="width:150px;"><p class="title">Sales Tax</p>Enter the Sales Tax as listed on the estimate.</span></span></td>
+	<td id="sum11" class="tDed" style="text-align: right; font-family: 'Courier New'; width:75px">$0.00</td>
+</tr>
+<tr>
+	<td id="misc" style="text-align: left; font-family: 'Courier New'; width:150px"><input disabled placeholder="Misc."></input></td>
+	<td id="miscTooltip1" style="text-align: right; font-family: 'Courier New'; width:75px"><span class="tooltip print"><input class="sum7" style="width:75px;text-align:right;padding-right:0"/><span class="tooltiptext" style="width:150px;"><p class="title">Misc.</p>Enter the quantity of any misc. fees/charges.</span></span></td>
+	<td id="miscTooltip2" style="text-align: center; font-family: 'Courier New'; width:75px"><span class="tooltip print"><input class="sum8" style="width:75px;text-align:center"/><span class="tooltiptext" style="width:150px;"><p class="title">Misc.</p>Enter the price or hourly rate of any misc fees/charges.</span></span></td>
+	<td id="sum12" class="tDed" style="text-align: right; font-family: 'Courier New'; width:75px"></td>
+</tr>
+<tr>
+	<td colspan="3" style="text-align: left; font-family: 'Courier New'; width:150px;border-top: 1px dashed;">Total Deductions:</td>
+	<td id="sum7" class="sum9" style="text-align: right; font-family: 'Courier New'; width:75px;border-top: 1px dashed;">$0.00</td>
+</tr>
+<tr>
+	<td colspan="3" style="text-align: left; font-family: 'Courier New'; width:150px;border-top: 1px dashed;"><span class="tooltip"><i class="fa">&#xf05a;</i><span class="tooltiptext" style="width:250px;"><p class="title">Estimate Prior to Deductions</p>Enter the total dollar amount of the estimate after taxes and prior to any deductions.</span></span> Estimate Prior to Deductions:</td>
+	<td  style="text-align: right; font-family: 'Courier New'; width:90px;border-top: 1px dashed;"><input class="sum9" style="width:90px;text-align:right"/></td>
+</tr>
+<tr>
+	<td colspan="3" style="text-align: left; font-family: 'Courier New'; width:150px;border-top: 1px dashed;">Estimate Without UPD:</td>
+	<td id="sum8" style="text-align: right; font-family: 'Courier New'; width:75px;border-top: 1px dashed;">$0.00</td>
+</tr>
+  </tbody>
+  
+  </table>
+  </div>
+  </div>
+  
+    <div id="PopupOverlay"></div>
+    <div id="PopupWindow">
+        <h3><strong class="highlight">Popup</strong> Window!</h3>
+        <p>This is the text inside my <strong class="highlight">popup</strong> window!</p>
+        <a href="#" onclick="ClosePopup();">x</a>
+    </div>
+  </body>
+
+  </html>
