@@ -1,15 +1,15 @@
 <html>
 <head> 
 <title>Weather Reports</title>
+<meta http-equiv="x-ua-compatible" content="ie=edge"/>
 </head>
-<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css" />
-  <script type="text/javascript" src="api.js"></script>
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/redmond/jquery-ui.css" />
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="skycons.js"></script>
+  <script type="text/javascript" src="files/skycons.js"></script>
   <script type='text/javascript' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY&libraries=places"></script>
-
-  
+<script src="https://kit.fontawesome.com/97cf3c607e.js"></script>
 <style>
 .center {
   margin: auto;
@@ -39,6 +39,93 @@
   background-color: blue;
   opacity:1;
 }
+button.print-button {
+  width: 70px;
+  height: 70px;
+  float: right;
+}
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  border: solid 4px black;
+}
+span.print-icon::after {
+  border-width: 2px;
+}
+
+button.print-button {
+  position: relative;
+  padding: 0;
+  border: 0;
+  
+  border: none;
+  background: transparent;
+}
+
+span.print-icon, span.print-icon::before, span.print-icon::after, button.print-button:hover .print-icon::after {
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+span.print-icon {
+  position: relative;
+  display: inline-block;  
+  padding: 0;
+  margin-top: 20%;
+
+  width: 60%;
+  height: 35%;
+  background: #fff;
+  border-radius: 20% 20% 0 0;
+}
+
+span.print-icon::before {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 12%;
+  right: 12%;
+  height: 110%;
+
+  transition: height .2s .15s;
+}
+
+span.print-icon::after {
+  content: " ";
+  position: absolute;
+  top: 55%;
+  left: 12%;
+  right: 12%;
+  height: 0%;
+  background: #fff;
+  background-repeat: no-repeat;
+  background-size: 70% 90%;
+  background-position: center;
+  background-image: linear-gradient(
+    to top,
+    #fff 0, #fff 14%,
+    #333 14%, #333 28%,
+    #fff 28%, #fff 42%,
+    #333 42%, #333 56%,
+    #fff 56%, #fff 70%,
+    #333 70%, #333 84%,
+    #fff 84%, #fff 100%
+  );
+
+  transition: height .2s, border-width 0s .2s, width 0s .2s;
+}
+
+button.print-button:hover {
+  cursor: pointer;
+}
+
+button.print-button:hover .print-icon::before {
+  height:0px;
+  transition: height .2s;
+}
+button.print-button:hover .print-icon::after {
+  height:120%;
+  transition: height .2s .15s, border-width 0s .16s;
+}
+
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -230,7 +317,7 @@ width: auto;
     bottom: 0;
     left: 0;
     right: 0;
-    background: url(seasons.jpg) center center;
+    background: url(images/seasons.jpg) center center;
     background-size:cover;
     opacity: .4;
     width: 100%;
@@ -267,11 +354,14 @@ width: auto;
 body {
 width: auto;
 }
+
+@media print {
+#print, #clear {visibility: hidden; }
+}
 </style>
 
 
 <script type="text/javascript">
-	
 window.onscroll = function() {scrollFunction()};
 var hourlyIcon;
 function scrollFunction() {
@@ -303,7 +393,7 @@ var unixTime;
 
 
 function run() {
-
+document.getElementById("backimg").style.display = "none";
 
 if (document.getElementById("address").value === ""){
 var myCoords = document.getElementById("lat").value + "," + document.getElementById("lon").value;
@@ -314,7 +404,7 @@ var addy = document.getElementById("address").value;
 var myCoords = addy.replace(/ /gi, "+");
 var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+myCoords+"&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
 }
-console.log("api url: " + url);
+
 var getJSON = function(url, successHandler, errorHandler) {
 	var xhr = typeof XMLHttpRequest != 'undefined'
 		? new XMLHttpRequest()
@@ -342,16 +432,15 @@ var getJSON = function(url, successHandler, errorHandler) {
 
 getJSON(url, function(data) {
 if (data.status === 'OK') {
-	document.getElementById("backimg").style.display = "none";
 	//document.getElementById("foot").style.display = "block";
     if (document.getElementById("address").value === ""){
-    document.getElementById("head").innerHTML = "<h2>WEATHER RESULTS FOR:</h2>";
+    document.getElementById("head").innerHTML = '<button class="print-button" id="print" HREF="javascript: void(0);" ONCLICK="window.print();" style="display: none;" ><span class="print-icon"></span></button>' + "<h2>WEATHER RESULTS FOR:</h2>";
    // document.getElementById("foot").innerHTML = "Latitude: " + data.results[0].geometry.location.lat + " | " + " Longitude: " + data.results[0].geometry.location.lng;
     document.getElementById("decode").innerHTML = data.results[0].formatted_address;
     myLat = data.results[0].geometry.location.lat;
     myLng = data.results[0].geometry.location.lng;
     }else{
-    document.getElementById("head").innerHTML = "<h2>WEATHER RESULTS FOR:</h2>";
+    document.getElementById("head").innerHTML = '<button class="print-button" id="print" HREF="javascript: void(0);" ONCLICK="window.print();" style="display: none;" ><span class="print-icon"></span></button>' + "<h2>WEATHER RESULTS FOR:</h2>";
     if (data.results.length > 1){
     //document.getElementById("foot").innerHTML = "Latitude: " + data.results[1].geometry.location.lat + " | " + " Longitude: " + data.results[1].geometry.location.lng;
     document.getElementById("decode").innerHTML = data.results[1].formatted_address;
@@ -384,12 +473,13 @@ window.resizeTo(650,430);
         document.getElementById("emptydiv").style.display = "inline";
         document.getElementById("weatherDiv").style.display = "inline";
         document.getElementById("emptydiv2").style.display = "inline";
+         document.getElementById("print").style.display = "inline";
         weather();
 }	
 	
 	
 }, function(status) {
-	console.log(status);
+	//alert(status);
 });
 
 }
@@ -474,8 +564,8 @@ function weather() {
 document.getElementById("run").disabled = false;
 
     document.getElementById("foot").style.display = "block";
-       var url = "https://api.darksky.net/forecast/4feedf3c483d277c7654ca0713f23ab8/" + myLat + "," + myLng + "," + uniDate + "?exclude=currently,minutely";
-     
+		var proxy = 'https://cors-anywhere.herokuapp.com/';
+		var url = proxy + "https://api.darksky.net/forecast/4feedf3c483d277c7654ca0713f23ab8/" + myLat + "," + myLng + "," + uniDate + "?exclude=currently,minutely";
         var getJSON = function(url, successHandler, errorHandler) {
         var xhr = typeof XMLHttpRequest != 'undefined'
         ? new XMLHttpRequest()
@@ -501,8 +591,11 @@ document.getElementById("run").disabled = false;
  getJSON(url, function(result) {
 if (result.code !== 400) {
  var weath = result.daily.data[0].icon;
-
- document.body.style.backgroundImage = "url(weath + '.jpg')";
+	var tempHigh = result.daily.data[0].temperatureHigh + "&#176";
+	var timeHigh = unixtoTime(result.daily.data[0].temperatureHighTime);
+	var timeLow = unixtoTime(result.daily.data[0].temperatureLowTime);
+	var tempLow = result.daily.data[0].temperatureLow + "&#176";
+ document.body.style.backgroundImage = "url('images/" + weath + ".jpg')";
  document.body.style.backgroundSize = "cover";
 myLat = result.latitude;
 myLng = result.longitude;
@@ -519,8 +612,7 @@ document.getElementById("decode").innerHTML += "<br/><br/> " + thDay + "- " + re
 var skycons = new Skycons({"color": "white"});
 for (i = 0; i < result.hourly.data.length; i++) {
 var convTime = unixtoTime(result.hourly.data[i].time);
-
-
+var temp = result.hourly.data[i].temperature + "&#176";
 
 if(result.hourly.data[i].precipType == null){
 var varType = " ";
@@ -535,8 +627,8 @@ var varType2 = "<ul><li>Type: " + result.hourly.data[i].precipType + "</li></ul>
 var thTime = tConvert(convTime);
 
 //document.getElementById("weatherDiv").innerHTML += "<li>" + thTime + " - " + result.hourly.data[i].summary + " - Wind Speed: " + result.hourly.data[i].windSpeed + "</li>";
-templist += "<button class='collapsible'>" + thTime + " - " + result.hourly.data[i].summary + varType + "<canvas id='myIcon"+i+"' class='wIcon' width='25' height='25'></canvas></button><div class='content'><ul><li>Wind Data:<ul><li>Speed: " + metersTomiles(result.hourly.data[i].windSpeed) + " mph (" + result.hourly.data[i].windSpeed + " meters per hour)" + "</li></ul><ul><li>Gust: " + metersTomiles(result.hourly.data[i].windGust) + " mph (" + result.hourly.data[i].windGust + " meters per hour)" + "</li></ul><ul><li>Direction: " + degToCompass(result.hourly.data[i].windBearing) + "</li></ul><li>Precipitation Data:<ul><li>Intensity: " + result.hourly.data[i].precipIntensity + " mm per hour</li></ul><ul><li>Probability: " + Math.round(result.hourly.data[i].precipProbability * 10) + "%</li></ul>" + varType2 + "</li></ul></li></ul></div>";
-
+templist += "<button class='collapsible'>" + thTime + " - " + result.hourly.data[i].summary + varType + "<canvas id='myIcon"+i+"' class='wIcon' width='25' height='25'></canvas> [" + temp + "]</button><div class='content'><ul><li>Wind Data:<ul><li>Speed: " + metersTomiles(result.hourly.data[i].windSpeed) + " mph (" + result.hourly.data[i].windSpeed + " meters per hour)" + "</li></ul><ul><li>Gust: " + metersTomiles(result.hourly.data[i].windGust) + " mph (" + result.hourly.data[i].windGust + " meters per hour)" + "</li></ul><ul><li>Direction: " + degToCompass(result.hourly.data[i].windBearing) + "</li></ul><li>Precipitation Data:<ul><li>Intensity: " + result.hourly.data[i].precipIntensity + " mm per hour</li></ul><ul><li>Probability: " + Math.round(result.hourly.data[i].precipProbability * 10) + "%</li></ul>" + varType2 + "</li></ul></li></ul></div>";
+//<ul><li>Temperature Data:<ul><li>High:<ul><li>Temp: " + tempHigh + "</li></ul><ul><li>Time: " + tConvert(timeHigh) + "</li></ul></li></ul><ul><li>Low: <ul><li>Temp: " + tempLow + "</li></ul><ul><li>Time: " + tConvert(timeLow) + "</li></ul></li></ul></li></ul>
 }
 document.getElementById("weatherDiv").innerHTML += "<button class='collapsible' id='mybutton'>Hourly Summary:</button><div class='content'>" + templist + "</div>";
      var iconID = document.getElementsByClassName("wIcon");
@@ -556,7 +648,7 @@ dropButton();
 
 		
 }, function(status) {
-	console.log(status);
+	alert(status);
 	document.body.innerHTML = url;
 	
 });
@@ -641,8 +733,10 @@ function degToCompass(num) {
 </script>
 
 <body>
+
 <div class="backdiv">
 <div class="backimg" id="backimg"></div>
+
 <div id="head" class="center"></div>
 <div id="emptydiv" class="empty"></div>
 <div align="center" id="dropdown">
@@ -658,6 +752,7 @@ function degToCompass(num) {
 <div id="emptydiv2" class="empty"></div>
 <div id="foot" class="center"></div>
 <div class="centerInput">
+
 <input type="text" id="lat" placeholder="Enter Latitude" style="display: none;" autofocus></input>
 <input type="text" id="lon" placeholder="Enter Longitude" style="display: none;"></input>
 <input type="text" id="address" placeholder="Enter Address" style="display: none;" autofocus></input>
