@@ -1,4 +1,4 @@
-var myKey = "AIzaSyBZxmJGnFdgp0AgD5uPfHRCt9gfMHt7v6I";
+var myKey = "AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg";
 var shops = [
     	["Auto Art", "9356 Franklin Ave", "Franklin Park, IL 60131", " 847-455-5522", " 847-455-5533", " info@autoartinc.com", 41.9341569, -87.86069169999999, " Email Tow Request to Wes's", "https://maps.googleapis.com/maps/api/streetview?size=900x300&location=41.9341569,-87.8606917&key=" + myKey],
    	["Procision Auto Body", "2701 SW Adams St", "Peoria, IL 61602", " 309-637-1946", " 309-637-1397", " procision@sbcglobal.net", 40.6721575, -89.619195, " Email Tow Request to shop","https://maps.googleapis.com/maps/api/streetview?size=900x300&location=40.672214,-89.619290&key=" + myKey],
