@@ -294,7 +294,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.btn-circle.btn-lg {
+/*.btn-circle.btn-lg {
   
   padding-left: 10px;
   padding-right: 10px;
@@ -302,7 +302,7 @@ hr.style-seven:before { /* Not really supposed to work, but does */
   line-height: 16px;
   border-radius: 5px;
   width: auto;
-}
+}*/
 
 .links {
 	background: none!important;
@@ -446,6 +446,7 @@ body:active {
 }
 
 body {
+	
 	cursor: grab;
 	width: 100%;
 	height: 100%;
@@ -872,6 +873,9 @@ input.currency {
 	position: fixed;
 	left: 135px;
 	z-index: 9999;
+	/*background: url('../images/import.png');
+	background-repeat: no-repeat;
+	background-size: 36.86px 36.86px;*/
 }
 .alert {
   width: 80vw;
@@ -892,12 +896,7 @@ input.currency {
 	z-index: 9999;
 }
 .mybutton {
-	padding-left: 10px;
-    padding-right: 10px;
-    font-size: 16px;
-    line-height: 16px;
-    border-radius: 5px;
-    width: 36.86px;
+
 	right: 135px;
 }
 #bugbutton {
@@ -905,21 +904,11 @@ input.currency {
 }
 #undo {
 	right: 255px;
-	padding-left: 10px;
-    padding-right: 10px;
-    font-size: 16px;
-    line-height: 16px;
-    border-radius: 5px;
-    width: 36.86px;
+	
 }
 .collapsible {
 	right: 315px;
-	padding-left: 10px;
-    padding-right: 10px;
-    font-size: 16px;
-    line-height: 16px;
-    border-radius: 5px;
-    width: 36.86px;
+
 }
 
 .scroll-top {
@@ -1016,7 +1005,7 @@ input.currency {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	height: 40px;
+	height: 41px;
 	width: 100%;
 	border-bottom: 1px solid silver;
 	background: BUTTONFACE;
@@ -1033,7 +1022,7 @@ input.currency {
 	width: 100%;
 }*/
 #RSgeneral {
-	margin-top: 45px;
+	margin-top: 50px;
 	margin-bottom: 40px;
 	min-width: 865px;
 	max-width: 865px;
@@ -1074,7 +1063,8 @@ input.currency {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
+	font-size: 17px;
+	line-height: 17px;
 	position: fixed;
 	cursor: pointer;
 	border-radius: 5px;
