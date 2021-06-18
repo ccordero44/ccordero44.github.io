@@ -1,4 +1,4 @@
-var size = [1075,809]; 
+var size = [1075,815]; 
 $( window ).load( function(){
 
 var dpi_x = $('.container img').width;
