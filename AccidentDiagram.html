@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<script>
+var loc = window.location.pathname;
+var dir = loc.substring(0, loc.lastIndexOf('/'));
+var windowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,toolbar=no,height:815";
+function openWindow () {
+window.open(dir+'/Accident Diagram/index.html','_blank',windowFeatures);
+this.close();
+};
+</script>
+<body onload="openWindow()">
+
+</body>
+</html>
+
+  
