@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<title>Accident Diagram Tool</title>
+<link rel="stylesheet" type="text/css" href="files\diagram.css">
+<link rel="stylesheet" type="text/css" href="files\sticky.css">
+<script type="text/javascript" src="files\jquery.min.js"></script>
+<script src="files\jquery-1.12.4.js"></script>
+<script src="files\jquery-ui.js"></script>
+<script src="files\jquery.ui.rotatable.min.js"></script>
+<script src="files\diagram.js"></script>
+<script src="files\jquery.ddslick.min.js"></script>
+<script src="files\ef0a3db2e4.js"></script>
+<script src="files\jquery.textover.min.js"></script>
+<link rel="icon" 
+   type="image/png" 
+   href="files\images\crash.png">
+</head>
+
+<body>
+<script>
+var streetlbls = [];
+var textlbls = [];
+</script>
+<div id="pageWrapper">
+<div id="column1">
+<div id="navArrow"><i class="fa fa-caret-right"></i></div>
+</div>
+<div id="column2">
+<h3>Insured Vehicle</h3>
+<p id="addIV"><span class="plus"></span><span class="underline">Add</span></p>
+<hr>
+<h3>Claimant Vehicle</h3>
+<p id="addCV"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="removeCV"><span class="minus"></span><span class="underline">Remove</span></p>
+<hr>
+<h3>Traffic Controls</h3>
+<h4>Stop Signs</h4>
+<p id="stopSign"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="removeSS"><span class="minus"></span><span class="underline">Remove</span></p>
+<h4>Traffic Lights</h4>
+<p id="trafficLight"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="removeTL"><span class="minus"></span><span class="underline">Remove</span></p>
+<hr>
+<h3>Diagram Icons</h3>
+<h4>Point of Impact</h4>
+<p id="addbangIcon"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="removebangIcon"><span class="minus"></span><span class="underline">Remove</span></p>
+<h4>Arrows</h4>
+<p id="btn_drawar"><span class="plus"></span><span class="underline">Enable</span></p>
+<p id="btn_delar"><span class="minus"></span><span class="underline">Remove</span></p>
+<h4>Speed Limit</h4>
+<p id="speedLimitAdd"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="speedLimitRemove"><span class="minus"></span><span class="underline">Remove</span></p>
+<hr>
+<h3>Diagram Labels</h3>
+<h4>Street Name</h4>
+<p id="addLabel"><span class="plus"></span><span class="underline">Enable</span></p>
+<p id="removeLabel"><span class="minus"></span><span class="underline">Remove</span></p>
+<h4>Text Label</h4>
+<p id="addLabel2"><span class="plus"></span><span class="underline">Enable</span></p>
+<p id="removeLabel2"><span class="minus"></span><span class="underline">Remove</span></p>
+<h4>Sticky Note</h4>
+<p id="stickyAdd"><span class="plus"></span><span class="underline">Add</span></p>
+<p id="stickyRemove"><span class="minus"></span><span class="underline">Remove</span></p>
+<div id="toolbar">
+<button id="print" onclick="javascript:window.print()" ><i class="fa fa-print" aria-hidden="true"></i></button>
+<button id="reset" onclick="javascript:location.reload()" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
+</div>
+</div>
+
+<div id ="wrapper">
+<div class="container" id="container">
+<img id="diagram" src="files/images/crash.png" draggable=false>
+<div class="rotator draggable" id="IV">
+<svg width="124.31500000000003" height="124.31500000000003" >
+  <image id="IVimg"  width="124.31500000000003" height="124.31500000000003" href="files/images/vehicle1.png"></image>
+</svg>
+</div>
+
+</div>
+
+</div>
+<ul class="dropdown" style="float: left;">
+<li>
+<div id="intersectionDropdown" class="dd-container" style="width: 260px;"></div>
+</li>
+</ul>
+<svg width="124.31500000000003" height="124.31500000000003" id="compass">
+  <image   width="124.31500000000003" height="124.31500000000003" href="files/images/compass.png"></image>
+</svg>
+</div>
+</body>
+
+
+
+</html>
