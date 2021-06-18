@@ -9,7 +9,7 @@ var dir = loc.substring(0, loc.lastIndexOf('/'));
 var windowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,toolbar=no,height:815";
 function openWindow () {
 window.open(dir+'/Accident Diagram/index.html','_blank',windowFeatures);
-open(location, '_self').close();
+window.close();
 };
 </script>
 <body onload="openWindow()">
