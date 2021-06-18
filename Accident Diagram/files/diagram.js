@@ -1,4 +1,4 @@
-var size = [1075,837]; 
+var size = [1075,807]; 
 $( window ).load( function(){
 
 var dpi_x = $('.container img').width;
@@ -445,6 +445,24 @@ $('p[id^="addLabel"]').mouseup(function (e) {
 
 	};
 });
+
+/*$(document).on('click', '.arrsvg path', function (e) { 
+
+var $this = $(e.target).parent();
+
+	if ($this.children('path').css('stroke') === 'rgb(255, 0, 0)') {
+	$this.children('path').css('stroke', 'rgb(0, 0, 255)');
+	$this.children('defs').children('marker').children('path').css('fill','rgb(0, 0, 255)');
+	
+	}else{
+	$this.children('path').css('stroke', 'rgb(255, 0, 0)'); 
+	$this.children('defs').children('marker').children('path').css('fill','rgb(255, 0, 0)');
+	};
+
+
+	});*/
+	
+
 //REPLACE 'container' WITH THE ID OF ELEMENT WHERE TO DRAW ARROWS
 var elm_container = document.querySelector('#container');
  
@@ -519,9 +537,21 @@ function drawArrowSVG(parent){
 
   //append in #container SVG arrow with base in $c_e1 and the arrow in $c_e2 coords
   function drawArrow(c_e1, c_e2){
-    var arrsvg = $('<svg class="arrsvg" style="position:absolute; top:0; left:0; margin:0; "><defs><marker id="arrow" markerWidth="8" markerHeight="8" refx="3" refy="4" orient="auto"><path d="M1,1 L1,7 L7,4 L1,1" style="fill:red;" /></marker></defs><path d="M'+ c_e1.x +','+ c_e1.y +' L'+ c_e2.x +','+ c_e2.y +'" style="stroke:red; stroke-width: 2.3px; fill: none; marker-end: url('+ location.href.replace(/[#]*$/ig, '') +'#arrow);"/></svg>');
+    var arrsvg = $('<svg  class="arrsvg" style="position:absolute; top:0; left:0; margin:0; "><title>Click to change arrow color</title><defs><marker id="arrow'+$('.arrsvg').length+'" markerWidth="8" markerHeight="8" refx="3" refy="4" orient="auto"><path d="M1,1 L1,7 L7,4 L1,1" style="fill:red;" /></marker></defs><path d="M'+ c_e1.x +','+ c_e1.y +' L'+ c_e2.x +','+ c_e2.y +'" style="stroke:red; stroke-width: 2.3px; fill: none; marker-end: url('+ location.href.replace(/[#]*$/ig, '') +'#arrow'+$('.arrsvg').length+');"/></svg>');
     //container.insertAdjacentHTML('beforeend', arrsvg);  //add the arrow to the end in #container
   $(container).append(arrsvg);
+ $(arrsvg).click(function(e){
+	 var $this = $(e.target);
+
+	if ($this.children('path').css('stroke') === 'rgb(255, 0, 0)') {
+	$this.children('path').css('stroke', 'rgb(0, 0, 255)');
+	$this.children('defs').children('marker').children('path').css('fill','rgb(0, 0, 255)');
+	
+	}else{
+	$this.children('path').css('stroke', 'rgb(255, 0, 0)'); 
+	$this.children('defs').children('marker').children('path').css('fill','rgb(255, 0, 0)');
+	};
+  });
   //$(container).click(function() {
 var arrsvg1 = $('.arrsvg');
  	let num = arrsvg1.length;
@@ -530,7 +560,7 @@ var arrsvg1 = $('.arrsvg');
 					
 					$('#btn_delar').show();
 					var svg = arrsvg[0];//document.getElementsByTagName("svg")[numPath];
-					console.log(svg);
+					
 					var bbox = svg.getBBox();
 			svg.setAttribute("viewBox", (bbox.x-10)+" "+(bbox.y-10)+" "+(bbox.width+20)+" "+(bbox.height+20));
 			svg.setAttribute("width", (bbox.width+20)  + "px");
