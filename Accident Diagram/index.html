@@ -3,8 +3,10 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 <title>Accident Diagram Tool</title>
-<link rel="stylesheet" type="text/css" href="files\diagram.css">
+
 <link rel="stylesheet" type="text/css" href="files\sticky.css">
+<link rel="stylesheet" type="text/css" href="files\grid.css">
+<link rel="stylesheet" type="text/css" href="files\diagram.css">
 <script type="text/javascript" src="files\jquery.min.js"></script>
 <script src="files\jquery-1.12.4.js"></script>
 <script src="files\jquery-ui.js"></script>
@@ -13,6 +15,8 @@
 <script src="files\jquery.ddslick.min.js"></script>
 <script src="files\ef0a3db2e4.js"></script>
 <script src="files\jquery.textover.min.js"></script>
+<script src="files\grid.js"></script>
+<script src="files\jquery.visible.js"></script>
 <link rel="icon" 
    type="image/png" 
    href="files\images\crash.png">
@@ -23,76 +27,135 @@
 var streetlbls = [];
 var textlbls = [];
 </script>
+
 <div id="pageWrapper">
+<ul class="dropdown" style="float: left;">
+<li>
+<div  id="intersectionDropdown" class="dd-container" style="width: 260px;"></div>
+</li>
+</ul>
+
+<div id='rotateMode'>
+ <button id="left" title="Pan Left" class="btn"><i class="fa fa-chevron-left"></i></button>
+ <button id="right" title="Pan Right" class="btn"><i class="fa fa-chevron-right"></i></button>
+ <button id="up" title="Pan Up" class="btn"><i class="fa fa-chevron-up"></i></button>
+ <button id="down" title="Pan Down" class="btn"><i class="fa fa-chevron-down"></i></button>
+</div>
 <div id="column1">
-<div id="navArrow"><i class="fa fa-caret-right"></i></div>
+<div id="navArrow"><i class="fa fa-bars"></i></div>
 </div>
+
 <div id="column2">
-<h3>Insured Vehicle</h3>
-<p id="addIV"><span class="plus"></span><span class="underline">Add</span></p>
-<hr>
-<h3>Claimant Vehicle</h3>
-<p id="addCV"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="removeCV"><span class="minus"></span><span class="underline">Remove</span></p>
-<hr>
-<h3>Traffic Controls</h3>
-<h4>Stop Signs</h4>
-<p id="stopSign"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="removeSS"><span class="minus"></span><span class="underline">Remove</span></p>
-<h4>Traffic Lights</h4>
-<p id="trafficLight"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="removeTL"><span class="minus"></span><span class="underline">Remove</span></p>
-<hr>
-<h3>Diagram Icons</h3>
-<h4>Point of Impact</h4>
-<p id="addbangIcon"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="removebangIcon"><span class="minus"></span><span class="underline">Remove</span></p>
-<h4>Arrows</h4>
-<p id="btn_drawar"><span class="plus"></span><span class="underline">Enable</span></p>
-<p id="btn_delar"><span class="minus"></span><span class="underline">Remove</span></p>
-<h4>Speed Limit</h4>
-<p id="speedLimitAdd"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="speedLimitRemove"><span class="minus"></span><span class="underline">Remove</span></p>
-<hr>
-<h3>Diagram Labels</h3>
-<h4>Street Name</h4>
-<p id="addLabel"><span class="plus"></span><span class="underline">Enable</span></p>
-<p id="removeLabel"><span class="minus"></span><span class="underline">Remove</span></p>
-<h4>Text Label</h4>
-<p id="addLabel2"><span class="plus"></span><span class="underline">Enable</span></p>
-<p id="removeLabel2"><span class="minus"></span><span class="underline">Remove</span></p>
-<h4>Sticky Note</h4>
-<p id="stickyAdd"><span class="plus"></span><span class="underline">Add</span></p>
-<p id="stickyRemove"><span class="minus"></span><span class="underline">Remove</span></p>
-<div id="toolbar">
-<button id="print" onclick="javascript:window.print()" ><i class="fa fa-print" aria-hidden="true"></i></button>
-<button id="reset" onclick="javascript:location.reload()" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
-</div>
+	<div class="AccordionArrow" style="display:block!important;"></div>
+	<h3 class="titlebar-inactive titlebar-active" tabindex="1">Insured Vehicles</h3>
+	<div class="title-bar-body" style="display:block!important;">
+		<p id="addIV-hatchback"><span class="plus"></span><span class="underline">Hatchback</span></p>
+		<p id="addIV-sedan"><span class="plus"></span><span class="underline">Sedan</span></p>
+		<p id="addIV-wagon"><span class="plus"></span><span class="underline">Wagon</span></p>
+		<p id="addIV-van"><span class="plus"></span><span class="underline">Van</span></p>
+		<p id="addIV-pickup"><span class="plus"></span><span class="underline">Pickup Truck</span></p>
+		<p id="addIV-moto"><span class="plus"></span><span class="underline">Motorcycle</span></p>
+		<p id="addIV-bike"><span class="plus"></span><span class="underline">Bike</span></p>
+		<p id="addIV-semi"><span class="plus"></span><span class="underline">Semi</span></p>
+		<p id="addIV-bus"><span class="plus"></span><span class="underline">Bus</span></p>
+		<p id="addIV-ped"><span class="plus"></span><span class="underline">Pedestrian</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive" tabindex="1">Claimant Vehicles</h3>
+	<div class="title-bar-body">
+		<p id="addCV-hatchback"><span class="plus"></span><span class="underline">Hatchback</span></p>
+		<p id="addCV-sedan"><span class="plus"></span><span class="underline">Sedan</span></p>
+		<p id="addCV-wagon"><span class="plus"></span><span class="underline">Wagon</span></p>
+		<p id="addCV-van"><span class="plus"></span><span class="underline">Van</span></p>
+		<p id="addCV-pickup"><span class="plus"></span><span class="underline">Pickup Truck</span></p>
+		<p id="addCV-moto"><span class="plus"></span><span class="underline">Motorcycle</span></p>
+		<p id="addCV-bike"><span class="plus"></span><span class="underline">Bike</span></p>
+		<p id="addCV-semi"><span class="plus"></span><span class="underline">Semi</span></p>
+		<p id="addCV-bus"><span class="plus"></span><span class="underline">Bus</span></p>
+		<p id="addCV-ped"><span class="plus"></span><span class="underline">Pedestrian</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive" tabindex="1">Other Vehicles</h3>
+	<div class="title-bar-body">
+		<p id="addOther-police"><span class="plus"></span><span class="underline">Police Car</span></p>
+		<p id="addOther-ambulance"><span class="plus"></span><span class="underline">Ambulance</span></p>
+		<p id="addOther-fire"><span class="plus"></span><span class="underline">Fire Truck</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive">Traffic Controls</h3>
+	<div class="title-bar-body">
+		<p id="speedLimitAdd"><span class="plus"></span><span class="underline">Speed Limit</span></p>
+		<p id="stopSign"><span class="plus"></span><span class="underline">Stop Sign</span></p>
+		<p id="trafficLight"><span class="plus"></span><span class="underline">Traffic Light</span></p>
+		<p id="addDNE"><span class="plus"></span><span class="underline">Do Not Enter</span></p>
+		<p id="addNLT"><span class="plus"></span><span class="underline">No Left Turn</span></p>
+		<p id="addNRT"><span class="plus"></span><span class="underline">No Right Turn</span></p>
+		<p id="addNoPark"><span class="plus"></span><span class="underline">No Parking</span></p>
+		<p id="addNTOR"><span class="plus"></span><span class="underline">No Turn On Red</span></p>
+		<p id="addNoU"><span class="plus"></span><span class="underline">No U-Turn</span></p>
+		<p id="addOWL"><span class="plus"></span><span class="underline">One Way Left</span></p>
+		<p id="addOWR"><span class="plus"></span><span class="underline">One Way Right</span></p>
+		<p id="addPS"><span class="plus"></span><span class="underline">Pedestrian Signal</span></p>
+		<p id="addPC"><span class="plus"></span><span class="underline">Pedestrian X-ing</span></p>
+		<p id="addYield"><span class="plus"></span><span class="underline">Yield</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive">Lane Markings</h3>
+	<div class="title-bar-body">
+		<p id="addCW"><span class="plus"></span><span class="underline">Crosswalk 2 Lanes</span></p>
+		<p id="addCW2"><span class="plus"></span><span class="underline">Crosswalk 1 Lane</span></p>
+		<p id="addLT"><span class="plus"></span><span class="underline">Left Turn E & W</span></p>
+		<p id="addLT2"><span class="plus"></span><span class="underline">Left Turn N & S</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive">Diagram Icons</h3>
+	<div class="title-bar-body">
+		<p id="addbangIcon"><span class="plus"></span><span class="underline">Point of Impact</span></p>
+		<p id="addHouse"><span class="plus"></span><span class="underline">House</span></p>
+		<p id="addBuilding"><span class="plus"></span><span class="underline">Building</span></p>
+	</div>
+	<hr>
+	<div class="AccordionArrow"></div>
+	<h3 class="titlebar-inactive">Diagram Labels</h3>
+	<div class="title-bar-body">
+		<h4>Arrows</h4>
+		<p id="btn_drawar"><span class="plus"></span><span class="underline">Enable</span></p>
+		<p id="btn_delar"><span class="minus"></span><span class="underline">Remove</span></p>
+		<h4>Street Name</h4>
+		<p id="addLabel"><span class="plus"></span><span class="underline">Enable</span></p>
+		<p id="removeLabel"><span class="minus"></span><span class="underline">Remove</span></p>
+		<h4>Text Label</h4>
+		<p id="addLabel2"><span class="plus"></span><span class="underline">Enable</span></p>
+		<p id="removeLabel2"><span class="minus"></span><span class="underline">Remove</span></p>
+		<h4>Sticky Note</h4>
+		<p id="stickyAdd"><span class="plus"></span><span class="underline">Add</span></p>
+		<p id="stickyRemove"><span class="minus"></span><span class="underline">Remove</span></p>
+	</div>
+	<div id="toolbar">
+	<button id="print" onclick="javascript:window.print()" ><i class="fa fa-print" aria-hidden="true"></i></button>
+	<button id="reset" onclick="javascript:location.reload()" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
+	</div>
 </div>
 
 <div id ="wrapper">
-<div class="container" id="container">
-<img id="diagram" src="files/images/crash.png" draggable=false>
-<div class="rotator draggable" id="IV">
-<svg width="124.31500000000003" height="124.31500000000003" >
-  <image id="IVimg"  width="124.31500000000003" height="124.31500000000003" href="files/images/vehicle1.png"></image>
-</svg>
-</div>
-
-</div>
-
-</div>
-<ul class="dropdown" style="float: left;">
-<li>
-<div id="intersectionDropdown" class="dd-container" style="width: 260px;"></div>
-</li>
-</ul>
-<svg width="124.31500000000003" height="124.31500000000003" id="compass">
-  <image   width="124.31500000000003" height="124.31500000000003" href="files/images/compass.png"></image>
-</svg>
+	<div class="zoom-control" style="height: 20px; position: absolute; z-index: 5; right: 45px; top: 29px;"><div class="zoom-button" title="Zoom Out" style="padding: 3px 3px 3px 3px; width: 14px; height: 14px; margin-top: 0px; margin-right: 2px;"><i class="fa fa-minus" aria-hidden="true"></i></div><div class="zoom-bar"><div class="inner" style="height: 2px; margin-top: 12px;"></div></div><div class="zoom-bar"><div class="inner" style="height: 4px; margin-top: 10px;"></div></div><div class="zoom-bar"><div class="inner" style="height: 6px; margin-top: 8px;"></div></div><div class="zoom-bar active"><div class="inner" style="height: 8px; margin-top: 6px;"></div></div><div class="zoom-bar"><div class="inner" style="height: 10px; margin-top: 4px;"></div></div><div class="zoom-bar"><div class="inner" style="height: 12px; margin-top: 2px;"></div></div><div title="Zoom In" class="zoom-button" style="padding: 3px 3px 3px 3px; width: 14px; height: 14px; margin-top: 0px; margin-left: 2px;"><i class="fa fa-plus" aria-hidden="true"></i></div></div>
+	<div class="scale-vis-control" style="display:none;justify-content: center;position: absolute; z-index: 5; padding:3px; background-color:white; right:45px; top: 69px;">
+		<div class="scale-vis-control-start"></div>
+		<div class="scale-vis-control-line" style="width: 27px;"></div>
+		<div class="scale-vis-control-label" style="width:19px">14 ft</div>
+		<div class="scale-vis-control-line" style="width: 27px;"></div>
+		<div class="scale-vis-control-end"></div>
+	</div>
+	<div id="trash" title="Drag items here to remove them from the diagram." class="trash-empty"></div>
+	<div id="compass"></div>
+	<div class="container" id="container">
+		<div id="gridwrapper"></div>
+	</div>
 </div>
 </body>
-
-
-
 </html>
