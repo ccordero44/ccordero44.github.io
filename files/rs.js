@@ -452,13 +452,14 @@ window.onclick = function(event) {
 
 	$('.collapsible').click(function (e) {
 		e.preventDefault();
-		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus') {
+		var arr = ["#THEFT", "#FIRE", "#FLOOD", "#WITNESS", "#FOLLOWUP", "#OFAC"].join(' ,');
+		if ($('[id^=checkbox]:checked').length < 1 && $('.collapsible i').attr("class") == 'fa fa-minus' || $(arr).is(':visible')) {
 			$('#blurDIV').addClass('blur');
 			$.alert({
 				title: 'Information',
 				type: 'blue',
 				icon: 'fa fa-info-circle',
-				content: 'Please select an RS template from the dropdown menu, then try again.',
+				content: 'Please select a valid RS template from the dropdown menu, then try again.',
 				boxWidth: '30%',
 				useBootstrap: false,
 				buttons: {
@@ -469,11 +470,9 @@ window.onclick = function(event) {
 			});
 		}else{
 			if ($('.collapsible i').attr("class") == 'fa fa-minus') {
-				$('.collapsible i').attr("class", 'fa fa-plus');
 				 hideMain();
 				 numberCols();
 			}else{
-				$('.collapsible i').attr("class", 'fa fa-minus');
 				showMain();
 				numberCols();
 			};
@@ -644,7 +643,13 @@ window.onclick = function(event) {
 				$(this).height($(this).height()+31);
 			};
 		});
-		
+	$("input:checkbox").change(function () {
+		if ($('[id^=checkbox]:checked').length === 0 && $('.collapsible i').attr("class") == 'fa fa-plus') {
+				$('.collapsible i').attr("class", 'fa fa-minus');
+				showMain();
+				numberCols();
+			};
+	});		
 		
 	$("input:radio").change(function () {
 		
@@ -653,6 +658,7 @@ window.onclick = function(event) {
 			$('#checkbox9').attr("disabled",true);
 		}else{
 			$('#checkbox9').prop("checked",false);
+			$('#checkbox9').trigger('change');
 			$('#checkbox9').attr("disabled",false);
 		};
 	
@@ -663,6 +669,7 @@ window.onclick = function(event) {
 				$('#checkbox17').attr("disabled",true);
 			}else{
 				$('#checkbox17').prop("checked",false);
+				$('#checkbox17').trigger('change');
 				$('#checkbox17').attr("disabled",false);
 			};
 		};
@@ -674,6 +681,7 @@ window.onclick = function(event) {
 					$('#checkbox7').attr("disabled",true);	
 				}else{
 					$('#checkbox7').prop("checked",false);
+					$('#checkbox7').trigger('change');
 					$('#checkbox7').attr("disabled",false);
 				};
 		
@@ -683,6 +691,10 @@ window.onclick = function(event) {
 		}else if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) !== 'NON-OWNERS') {
 			$('#checkbox7').attr("disabled",false);
 		};
+	}else{
+		$('#checkbox7').prop("checked",false);
+		$('#checkbox7').attr("disabled",false);
+		
 	};
 	
 	
@@ -716,6 +728,7 @@ window.onclick = function(event) {
 			$('#checkbox8').attr("disabled",true);
 		} else {
 			$('#checkbox8').prop("checked",false);
+			$('#checkbox8').trigger('change');
 			$('#checkbox8').attr("disabled",false);
 			
 		};
@@ -728,6 +741,7 @@ window.onclick = function(event) {
 					$("label[for='"+$(this).prop('id')+"']").removeClass('disabledInput');
 				};
 		});	
+		
 	}); 
 	
 	}); //end of document ready
@@ -2319,8 +2333,11 @@ $('#addAddressInQ').click(function () {
 		}else{
 			var num = 2;
 		}
-		var html = '<table class="tight section2 full witnessTable3" style="padding-top:15px;"><tr><td class="indent2"></td><td class="indent block">Claimant\'s vehicle: (C'+num+')</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent">Was there any damage to the vehicle prior to the loss?</td><td class="indent"><label class="container">Yes<input required type="radio" name="witnessCV'+num+'UPD" /><span class="checkmark"></span></label></td><td class="indent"><label class="container">No<input type="radio" name="witnessCV'+num+'UPD" /><span class="checkmark"></span></label></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">If yes: What was previously damaged?</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table>';
-		$('#CVWitnessDamagesTable').append(html);	
+		var html = '<table class="tight section2 full witnessTable3" style="padding-top:15px;"><tr><td class="indent2"></td><td class="indent block">Claimant\'s vehicle: (C'+num+')</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent">Was there any damage to the vehicle prior to the loss?</td><td class="indent"><label class="container">Yes<input required type="radio" name="witnessCV'+num+'UPD" value="Yes" /><span class="checkmark"></span></label></td><td class="indent"><label class="container">No<input type="radio" name="witnessCV'+num+'UPD" value="No" /><span class="checkmark"></span></label></td></tr></table><table class="tight section2 full" style="display:none;"><tr><td class="indent2"></td><td class="indent block">If yes: What was previously damaged?</td><td><input Required type="text" class="fillIn FOL" style="width: 100%"/></td></tr><tr><td class="indent2"></td><td class="indent" colspan="2"><input type="text" class="fillIn FOL" style="width: 100%"/></td></tr></table>';
+	$('#CVWitnessDamagesTable').append(html);
+	$('input[name="witnessCV'+num+'UPD"]').change(function () {
+		hideshow($(this),$(this).parents('table').next('table'));	
+	});
 	});
 	$('#minusCVWitnessDamagesTable').click(function () {
 		$('#CVWitnessDamagesTable').html('');		
@@ -2724,24 +2741,60 @@ $('#RSgeneral')[0].reset();
 	
 });
 function showMain() {
-	$('#cvTable').show();
+var arr = ['#cvTable', '#cvTables', '#secondPart', '#addVehicles', '#folTable', '#lastPart', '#addProperty'].join(', ');
+$(arr).show();
+$('.collapsible i').attr("class", 'fa fa-minus');
+	/*$('#cvTable').show();
 	$('#cvTables').show();
-	$('.rowNumbers2').trigger('input');
-	$('.rowNumbers6').trigger('input');
 	$('#secondPart').show();
 	$('#addVehicles').show();
 	$('#folTable').show();
 	$('#lastPart').show();
-	$('#addProperty').show();
+	$('#addProperty').show();*/
+	$('.rowNumbers2').trigger('input');
+	$('.rowNumbers6').trigger('input');
 }
 function hideMain() {
-	$('#cvTable').hide();
+var arr = ['#cvTable', '#cvTables', '#secondPart', '#addVehicles', '#folTable', '#lastPart', '#addProperty'].join(', ');
+var count = 0;
+var ele = [];
+for (const element of arr.split(', ')) {
+	count = count + $(element + ' input:radio:checked').length;
+	
+	//ele = ele.filter(function(x) {return x !== undefined;});
+	 $(element + ' input:radio:checked').each(function() {
+		ele.push($(this).parent().text());
+	});
+};
+console.log(ele);
+if (count === 0) {
+		
+		$(arr).hide();
+		$('.collapsible i').attr("class", 'fa fa-plus');
+	}else{
+		$('#blurDIV').addClass('blur');
+		$.alert({
+			title: 'Information',
+			type: 'blue',
+			icon: 'fa fa-info-circle',
+			content: 'Unable to collapse sections with checked boxes. Please uncheck the "' +ele.join(" & ")+ '" box and try again.',
+			boxWidth: '30%',
+			useBootstrap: false,
+			buttons: {
+				Ok: function () {
+					$('#blurDIV').removeClass('blur');
+				}
+			}
+		});
+	};
+
+	/*$('#cvTable').hide();
 	$('#cvTables').hide();
 	$('#secondPart').hide();
 	$('#addVehicles').hide();
 	$('#folTable').hide();
 	$('#lastPart').hide();
-	$('#addProperty').hide();
+	$('#addProperty').hide();*/
 }
 function coverageCheck(status, ele) {
 	var arr = $(".hidden");
@@ -2825,6 +2878,7 @@ function loadFunctions() {
 	$("#NOresideVNOPOYes").hide();
 	$("#NOresideVNOPONo").hide();
 	$("#NON-OWNER_TO_DO").hide();
+	$('#witnessPDTable, #witnessCV1UPDTable, #witnessIVUPDTable').hide();
 	$('.hidden').each(function (index, value) {
 		$(value).hide();
 	});
@@ -2851,6 +2905,15 @@ function loadFunctions() {
 			numberCols();
 		};*/
 		hideshow($(this),$("#NOrented"),$("#NOowned"));
+	});
+	$('input[name="witnessIVUPD"]').change(function () {
+			hideshow($(this),$('#witnessIVUPDTable'));
+	});
+	$('input[name="witnessCV1UPD"]').change(function () {
+			hideshow($(this),$(this).parents('table').next('table'));	
+	});
+	$('input[name="witnessPD"]').change(function () {
+			hideshow($(this),$('#witnessPDTable'));
 	});
 	$("td").not('.number').on('click', function () {	
 		if ($('input[name="lang"]').is(':visible')) {
@@ -4025,7 +4088,7 @@ function PrintElem(elem)
     var mywindow = window.open('', 'PRINT', 'height='+docHeight+',width='+docWidth);
 	
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body><script>var delayInMilliseconds = 2000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
+    mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
 	mywindow.document.write('<table class="full" ></table>');
 	mywindow.document.write('<form id="RSgeneral">');
 	var b = $("#firstPart").clone();

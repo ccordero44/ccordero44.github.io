@@ -633,7 +633,9 @@ table.half {
 	margin: auto;
 	float: left;
 }
-
+#witnessPDTable, #witnessCV1UPDTable, #witnessIVUPDTable {
+	display: none;
+}
 .spacer {
 	width: 25px;
 }
