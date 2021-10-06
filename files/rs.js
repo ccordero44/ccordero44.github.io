@@ -1177,7 +1177,7 @@ $( window ).resize( function(){
 	$('#checkbox5').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'FLOOD');
-
+			$('#addProperty').hide();
 			$('#addVehicles').hide();
 			$('#lastPart').hide();
 			numberCols();
@@ -1185,6 +1185,7 @@ $( window ).resize( function(){
 			coverageCheck("Ok", 'FLOOD');
 			$('#addVehicles').show();
 			$('#lastPart').show();
+			$('#addProperty').show();
 			numberCols();
 		};
 	});
@@ -1269,6 +1270,7 @@ $( window ).resize( function(){
 				$('#cvTables').hide();
 				$('#folTable').hide();
 				$('#lastPart').hide();
+				$('#addProperty').hide();
 				document.title = "Witness Recorded Statement";
 				numberCols();
 			}else{
@@ -1303,6 +1305,7 @@ $( window ).resize( function(){
 				$('#cvTables').show();
 				$('#folTable').show();
 				$('#lastPart').show();
+				$('#addProperty').show();
 				document.title = title;
 			numberCols();
 		};
@@ -1333,6 +1336,7 @@ $( window ).resize( function(){
 				$('#cvTables').hide();
 				$('#folTable').hide();
 				$('#lastPart').hide();
+				$('#addProperty').hide();
 				$('#closingQuestions').hide();
 				$('#AgentQuestions').show();
 				if ($('.hidden:visible').length == 1) {
@@ -1372,6 +1376,7 @@ $( window ).resize( function(){
 				$('#cvTables').show();
 				$('#folTable').show();
 				$('#lastPart').show();
+				$('#addProperty').show();
 				$('#closingQuestions').show();
 				$('#AgentQuestions').hide();
 				$('#agentQfirstPart').hide();
@@ -1426,7 +1431,8 @@ $( window ).resize( function(){
 			$('#secondPart').hide();
 			$('#addVehicles').hide();
 			$('#folTable').hide();
-			$('#lastPart').hide();			
+			$('#lastPart').hide();	
+			$('#addProperty').hide();			
 			numberCols();
 		}else{			
 			$.alert({
@@ -1458,6 +1464,7 @@ $( window ).resize( function(){
 			$('#addVehicles').show();
 			$('#folTable').show();
 			$('#lastPart').show();
+			$('#addProperty').show();
 			$('.rowNumbers2').trigger('input');
 			$('.rowNumbers6').trigger('input');
 			numberCols();
@@ -1486,6 +1493,7 @@ $( window ).resize( function(){
 				$('#cvTables').hide();
 				$('#folTable').hide();
 				$('#lastPart').hide();
+				$('#addProperty').hide();
 				document.title = "OFAC Recorded Statement";
 				//$('#closingQuestions').hide();
 				$('#OFAC').show();
@@ -1520,6 +1528,7 @@ $( window ).resize( function(){
 				$('#cvTables').show();
 				$('#folTable').show();
 				$('#lastPart').show();
+				$('#addProperty').show();
 				//$('#closingQuestions').show();
 				$('#OFAC').hide();
 				document.title = title;
@@ -2723,7 +2732,7 @@ function showMain() {
 	$('#addVehicles').show();
 	$('#folTable').show();
 	$('#lastPart').show();
-
+	$('#addProperty').show();
 }
 function hideMain() {
 	$('#cvTable').hide();
@@ -2732,7 +2741,7 @@ function hideMain() {
 	$('#addVehicles').hide();
 	$('#folTable').hide();
 	$('#lastPart').hide();
-
+	$('#addProperty').hide();
 }
 function coverageCheck(status, ele) {
 	var arr = $(".hidden");
@@ -4146,6 +4155,7 @@ function resetReset() {
 			$('.rowNumbers5').trigger('input');
 			$('#addVehicles').show();
 			$('#lastPart').show();
+			$('#addProperty').show();
 			$('#firstPart').show();
 			$('#secondPart').show();
 			$('#folTable').show();
