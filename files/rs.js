@@ -1090,7 +1090,7 @@ $( window ).resize( function(){
 							return false;
 						}
 						$('#blurDIV').removeClass('blur');
-						document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
+						document.location.href = mailtoURL('ccordero44@gmail.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
 					}
 				},
 				cancel: function () {
