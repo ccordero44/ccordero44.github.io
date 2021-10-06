@@ -44,7 +44,7 @@
 <body>
 <button class="scroll-up-button button" title = "Scroll Up"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></button>
 <button class="scroll-down-button button" title="Scroll Down"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></button>
-<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="statusTxt" title="Language of RS"><img id="transIcon" src="images\translate.png"></img> <span>English</span></div><div id="autoSaveOn" title="Autosave is On"><img src="images\save check.png" id="onIcon"></img> on<span id="counter">60</span></div><div id="autoSaveOff" title="Autosave is Off"><img src="images\save x.png" id="offIcon"></img> off</div><div id="dateTime">...</div><div id="version">v 1.3.2.0</div></div></div>
+<div id="statusBar" class="noprint"><div id="statusInner1"><div id="footer" class="footer">Recorded Statement General</div><div id="statusTxt" title="Language of RS"><img id="transIcon" src="images\translate.png"></img> <span>English</span></div><div id="autoSaveOn" title="Autosave is On"><img src="images\save check.png" id="onIcon"></img> on<span id="counter">60</span></div><div id="autoSaveOff" title="Autosave is Off"><img src="images\save x.png" id="offIcon"></img> off</div><div id="dateTime">...</div><div id="version">v 1.3.2.1</div></div></div>
 <form id="RSgeneral" name="RSgeneral" onSubmit="return false;">
 
 
@@ -101,7 +101,7 @@
   							<span class="checkmark2"></span>
 						</label>
 						<div class="separator">BI Related</div>
-						<label for="checkbox11" class="container2" id="container11" title="FLOOD RS" >INJURY
+						<label for="checkbox11" class="container2" id="container11" title="INJURY RS" >INJURY
  						 <input type="checkbox" id="checkbox11" name="checkbox11">
   							<span class="checkmark2"></span>
 						</label>
@@ -156,11 +156,11 @@
  						 <input type="checkbox" id="checkbox8" name="checkbox8">
   							<span class="checkmark2"></span>
 						</label>
-					<label for="checkbox17" class="container2" id="container17" title="BIZ USE RS" >UD
+					<label for="checkbox17" class="container2" id="container17" title="UD RS" >UD
  						 <input type="checkbox" id="checkbox17" name="checkbox17">
   							<span class="checkmark2"></span>
 						</label>
-					<label for="checkbox9" class="container2" id="container9" title="BIZ USE RS" >TERRITORY
+					<label for="checkbox9" class="container2" id="container9" title="TERRITORY RS" >TERRITORY
  						 <input type="checkbox" id="checkbox9" name="checkbox9">
   							<span class="checkmark2"></span>
 						</label>
@@ -12397,18 +12397,18 @@
 				<td class="indent2"></td>
 				<td class="indent">Was there any damage to the vehicle prior to the loss?</td>
 				<td class="indent"><label class="container">Yes
-					<input required type="radio" name="witnessIVUPD" />
+					<input required type="radio" name="witnessIVUPD" value="Yes" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 				 <td class="indent"><label class="container">No
-					<input type="radio" name="witnessIVUPD" />
+					<input type="radio" name="witnessIVUPD" value="No" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 			</tr>		 
 		 </table>
-		<table class="tight section2 full">
+		<table class="tight section2 full" id="witnessIVUPDTable">
 			<tr>
 				<td class="indent2"></td>
 				<td class="indent block">If yes: What was previously damaged?</td>
@@ -12435,18 +12435,18 @@
 				<td class="indent2"></td>
 				<td class="indent">Was there any damage to the vehicle prior to the loss?</td>
 				<td class="indent"><label class="container">Yes
-					<input required type="radio" name="witnessCV1UPD" />
+					<input required type="radio" name="witnessCV1UPD" value="Yes" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 				 <td class="indent"><label class="container">No
-					<input type="radio" name="witnessCV1UPD" />
+					<input type="radio" name="witnessCV1UPD" value="No" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 			</tr>		 
 		 </table>
-		<table class="tight section2 full">
+		<table class="tight section2 full" id="witnessCV1UPDTable">
 			<tr>
 				<td class="indent2"></td>
 				<td class="indent block">If yes: What was previously damaged?</td>
@@ -12474,18 +12474,18 @@
 				<td class="indent2"></td>
 				<td class="indent">Was there any damage to the property prior to the loss?</td>
 				<td class="indent"><label class="container">Yes
-					<input required type="radio" name="witnessPD" />
+					<input required type="radio" name="witnessPD" value="Yes" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 				 <td class="indent"><label class="container">No
-					<input type="radio" name="witnessPD" />
+					<input type="radio" name="witnessPD" value="No" />
 					<span class="checkmark"></span>
 					</label>
 				 </td>
 			</tr>		 
 		 </table>
-		<table class="tight section2 full">
+		<table class="tight section2 full" id="witnessPDTable">
 			<tr>
 				<td class="indent2"></td>
 				<td class="indent block">If yes: What was previously damaged?</td>
@@ -12645,27 +12645,22 @@
 <table class="section2 tight full" style="padding-top:25px;">
     <tr>
          <td class="number"></td>
-         <td  colspan="2" class="indent block">What is the name, address and phone # of the shop where A brought the vehicle for repairs?</td>
-		 <td></td>
+         <td  colspan="3" class="indent block">What is the name, address and phone # of the shop where A brought the vehicle for repairs?</td>
+	
 	</tr>
       <tr>
          <td class="spacer"></td>
-         <td class="indent"></td>
+         <td class="indent block">Name:</td>
          <td colspan="2"><input type="text" class="fillIn" style="width:100%"></td>
       </tr>
       <tr>
          <td class="spacer"></td>
-         <td class="indent"></td>
+         <td class="indent block">Address:</td>
          <td colspan="2"><input type="text" class="fillIn" style="width:100%"></td>
       </tr>
       <tr>
          <td class="spacer"></td>
-         <td class="indent"></td>
-         <td colspan="2"><input type="text" class="fillIn" style="width:100%"></td>
-      </tr>
-      <tr>
-         <td class="spacer"></td>
-         <td class="indent"></td>
+         <td class="indent block">Phone:</td>
          <td colspan="2"><input type="text" class="fillIn phone" style="width:100%"></td>
       </tr>
    </table>		
