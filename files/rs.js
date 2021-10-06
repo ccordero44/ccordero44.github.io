@@ -4025,7 +4025,7 @@ function PrintElem(elem)
     var mywindow = window.open('', 'PRINT', 'height='+docHeight+',width='+docWidth);
 	
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
+    mywindow.document.write('</head><body><script>var delayInMilliseconds = 2000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
 	mywindow.document.write('<table class="full" ></table>');
 	mywindow.document.write('<form id="RSgeneral">');
 	var b = $("#firstPart").clone();
