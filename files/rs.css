@@ -16,12 +16,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(68,68,68,0.2); /* Black background with opacity */
+  /*background-color: rgba(68,68,68,0.2); /* Black background with opacity */
+  background-color: rgba(0,0,0,0.4);
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
   cursor: pointer; /* Add a pointer on hover */
 
 }
 .blur {
+	font-weight: bold;
 	filter: blur(3px);
 	-webkit-filter: blur(3px);
 }
@@ -448,7 +450,7 @@ body:active {
 body {
 	cursor: grab;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	min-height: 100%;
 	margin: 0;
 	padding: 0;
@@ -657,7 +659,11 @@ table.half {
 	text-align: right;
 	padding-right: 10px !important;
 }
-
+.OFACNumber {
+	width: 45px !important;
+	text-align: right;
+	padding-right: 10px !important;
+}
 .UDsubnumber {
 	width: 35px;
 	text-align: right;
@@ -752,7 +758,11 @@ textarea.fillIn {
 .addressTD {
 	width: 2%;
 }
-
+.question {
+	background-color: white;
+	border: none;
+	color: black;
+}
 input {
 	color: blue;
 	background-color: #CCD7FF;
@@ -760,7 +770,27 @@ input {
 	box-sizing: border-box;
 	text-transform: uppercase;
 }
-select {
+div.ui-datepicker{
+ font-size: 80%;
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 45%;
+    user-select: none;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: .9em;
+    border-collapse: collapse;
+    padding: .2em;
+    text-align: right;
+    text-decoration: none;
+    border: 1px solid #c5c5c5;
+    background: #f6f6f6;
+    font-weight: normal;
+    color: #454545;
+}
+button.ui-datepicker-close {
+	display: none;
+}
+.select {
 	color: blue;
 	background-color: #CCD7FF;
 	font-family: Arial;
@@ -769,10 +799,15 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+	outline: none!important
 }
 input, textarea {
 	outline: none!important;
 }
+ .disabledInput{
+    color: silver !important;
+}
+
 .addressTD td {
 	font-size: 17px;
 }
@@ -801,7 +836,10 @@ input, textarea {
 	margin-left: 50px;
 	margin-right: 25px;
 }
-
+.addressInQuestion {
+	margin-left: 50px;
+	margin-right: 25px;
+}
 #CVpassTable {
 	margin-left: 50px;
 	margin-right: 25px;
@@ -846,6 +884,7 @@ td.tooltip:hover {
 input.currency {
 	text-align: left !important;
 }
+
 #leftbutton {
 	position: fixed;
 	left: 75px;
@@ -872,9 +911,10 @@ input.currency {
 	position: fixed;
 	left: 135px;
 	z-index: 9999;
-	/*background: url('../images/import.png');
-	background-repeat: no-repeat;
-	background-size: 36.86px 36.86px;*/
+
+}
+.fa-spinner {
+		color: dodgerblue;
 }
 .alert {
   width: 80vw;
@@ -1114,7 +1154,7 @@ input.currency {
 #addC1WitnessTable {
 	cursor: pointer;
 }
-#minusC1WitnessTable {
+#minusC1WitnessTable, .fa-plus-circle, .fa-minus-circle {
 	cursor: pointer;
 }
 #addCVWitnessDetailsTable {
@@ -1242,9 +1282,11 @@ button:focus {
 span.banners {
 	border: 0px;
 }
-::-webkit-scrollbar {
-	width: 0px;
+html ::-webkit-scrollbar {
+	/*display: none;*/
 	background-color: #F5F5F5;
+	width: 0px;
+	overflow-x: hidden !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1264,7 +1306,7 @@ span.banners {
 	width: 0px;
 }
 
-#otherCVs {
+#otherCVs, #otherProperties {
 	font-size: 14px;
 }
 .form-control {
@@ -1300,15 +1342,19 @@ span.banners {
 	font-weight: 700;
 }
 .factsOL {
-    
+    border-spacing: 0px;
     background: repeating-linear-gradient(#CCD7FF, #CCD7FF 30px, black 30px, black 31px);
     line-height: 31px;
     -webkit-print-color-adjust: exact !important;
 	font-size: 17px;
 	padding-left: 5px !important;
 	width: 100%;
-	top: 0;
+	top: 31px;
 }
+.theState {
+	text-transform: capitalize;
+}
+
 #statusBar {
 	cursor: initial;
 	font-family: Arial;
@@ -1427,7 +1473,7 @@ span.banners {
 }
 [contenteditable] {
   outline: 0px solid transparent;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .editable[placeholder]:empty:before {
@@ -1438,10 +1484,148 @@ span.banners {
 .editable[placeholder]:empty:focus:before {
     content: "";
 }
+.fillIn.txtAreaGrow {
+	width: 100% !important;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  font-size: 20px;
+line-height: 1;
+color: #555;
+-webkit-font-smoothing: antialiased;
+font-family: "Muli","Helvetica","Tahoma","Geneva","Arial",sans-serif;
+letter-spacing: -.03rem;
+box-sizing: border-box;
+margin-bottom: .425rem;
+font-weight: 600;
+border-radius: 5px;
+}
+.select2-selection__rendered {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: -15px;
+  margin-right: -10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modalBtn {
+margin-bottom: -4px;
+margin-left: 2px;
+margin-right: 2px;
+display: inline-block;
+padding: 6px 12px;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+touch-action: manipulation;
+cursor: pointer;
+user-select: none;
+border-radius: 4px;
+min-height: 1em;
+-webkit-tap-highlight-color: transparent;
+border: 0;
+background-image: none;
+background-color: #ecf0f1;
+transition: background .2s;
+text-transform: uppercase;
+font-size: 14px;
+font-weight: bold;
+text-shadow: none;
+box-shadow: none;
+color: #333;
+margin-top: 10px;	
+}
+#modalDel {
+	background-color: #e74c3c;
+	color: #fff;
+}
+#modalDel:disabled {
+	color: #dadada;
+	background-color: #ecf0f1;
+}
+#modalOk:disabled {
+	color: #dadada;
+	background-color: #ecf0f1;
+}
+
+.select2-results__options {
+	white-space: nowrap;
+}
+.select2-search__field {
+-webkit-font-smoothing: antialiased;
+color: inherit;
+font: inherit;
+margin: 0;
+display: block;
+transition: border-color;
+border-radius: .1875rem;
+background-color: white;
+box-shadow: inset 0 1px 3px rgba(0,0,0,.06);
+margin-bottom: 0;
+line-height: inherit;
+padding: 4px;
+width: 100%;
+box-sizing: border-box;
+border: 1px solid #aaa;
+}
+.select2-container--open .select2-dropdown--below ::-webkit-scrollbar {
+	/*display: block !important;*/
+	overflow-x: hidden !important;
+	overflow-y: scroll !important;
+	width: 10px !important;
+	height: 0px !important;
+}
+.lastCol {
+	width:0%;
+	border-top:hidden;
+	border-right:hidden;
+	border-bottom:hidden;
+}
 /* PRINT CSS */
 
 @media print {
+@page
+{
+size: portrait;
 
+}
+
+	
 	.checkmark {
 		background-color: white;
 	}
@@ -1452,7 +1636,7 @@ span.banners {
 		background-color: white;
 	}
 	select {
-		background-color: white;
+		background-color: white !important;
 	}
 	 ::-webkit-input-placeholder {
 		color: transparent;
@@ -1478,12 +1662,16 @@ span.banners {
 		display: none;
 	}
 	#RSgeneral {
-		margin-top: 0px;
+		margin-top: 0;
 	}
-
-	.noprint {
+	.VOPtable {
+		margin-left: 50px;
+		margin-right: 25px;
+	}
+	.noprint .minus {
 		display: none !important;
 	}
+
 	#VOPtable2 tr td:nth-child(2) {
 		background-color: white;
 	}
@@ -1516,7 +1704,8 @@ span.banners {
 	}
 	.factsOL {
 		background: repeating-linear-gradient(white, white 30px, black 30px, black 31px);
-		border-top: 10px solid white;
+		border-top: 2px solid white;
+		border-bottom: 2px solid white;
 		padding-top: 0px;
 		background-color: white;
 		outline: none;

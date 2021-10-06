@@ -9,26 +9,41 @@
 */
 var title = $(document).attr('title');
 var timerID;
-var w = 0;
-var h = 0;
+var docWidth = 0;
+var docHeight = 0;
 var checkedAll = [];
 $( window ).load( function(){
 
-   w = 900;
-   h = 1200;
+   docWidth = 900;
+   docHeight = 1200;
 });
 
 $(window).bind('resolutionchange', function () {
 	//$(this).bind('focus', function (event) {
 
-		window.resizeTo(w, h)
+		window.resizeTo(docWidth, docHeight);
 
 	//});
 });
 $(document).ready(function () {
-
+document.body.style.zoom = 1.0
+document.getElementById('RSgeneral').addEventListener('wheel', event => {
+  if (event.ctrlKey) {
+    event.preventDefault()
+  }
+}, true)
 display_dt();
 	var version = $('#version').html();
+//	$('.OFACDate').each(function(){
+	$('.OFACDate').dateRangePicker({
+		monthSelect: true,
+		yearSelect: [2009, moment().get('year')],
+		/*startDate: moment().subtract(120, 'months').format('YYYY-MM-DD'),*/
+		endDate: moment().endOf('day').format('YYYY-MM-DD'),
+		customArrowPrevSymbol: '<i class="fa fa-arrow-circle-left"></i>',
+		customArrowNextSymbol: '<i class="fa fa-arrow-circle-right"></i>'
+//});
+	});
 $('.button').not('#resetButton').click(function(e){
 	e.preventDefault();
 });
@@ -48,6 +63,7 @@ $("input").keypress(function(e) {
 			
 			$(value).val('');
 		});
+		$('.VIN').trigger('change');
 		$('input').each(function (index, value) {
 				$(value).removeClass('banners');
 		});
@@ -57,7 +73,8 @@ $("input").keypress(function(e) {
 			}
 			
 		setTimeout(function () {
-			
+		//var scale = 'scale(1)';
+		//document.body.style.zoom = (window.innerWidth / window.outerWidth)
 			loadFunctions();
 			resetReset();
 			title = 'Recorded Statement General';
@@ -75,7 +92,9 @@ $("input").keypress(function(e) {
 	});
 		const formId = "RSgeneral"; // ID of the form
 		const url = location.href; //  href for the page
-		const formIdentifier = `${formId}`; // Identifier used to identify the form
+		//const formIdentifier = `${formId}`; // Identifier used to identify the form
+		//const keyID = $('#ClaimNo').val() + ' ' + $('#RStakenWith').val() + ' ' + $('#Date_of_RS').val() + ' ' + $("input[name='RSNo']:checked").val();
+		//const formIdentifier = `${keyID}`; // Identifier used to identify the form
 		const saveButton = document.querySelector("#save"); // select save button
 		const alertBox = document.querySelector(".alert"); // select alert display div
 		let form = document.querySelector(`#${formId}`); // select form
@@ -98,7 +117,7 @@ $("input").keypress(function(e) {
 				}
 			}
 		  }
-		const getFormData = () => {
+		const getFormData = (formIdentifier) => {
 		  let data = { [formIdentifier]: {} }; // create an empty object with the formIdentifier as the key and an empty object as its value
 		
 		  var nn = 0;
@@ -140,8 +159,8 @@ $("input").keypress(function(e) {
 		  }, 2000);
 		};
 		
-		const populateForm = () => {
-	
+		const populateForm = (formIdentifier) => {
+		
 		  if (localStorage.key(formIdentifier)) {
 			 
 			const savedData = JSON.parse(localStorage.getItem(formIdentifier)); // get and parse the saved data from localStorage
@@ -217,15 +236,27 @@ $("input").keypress(function(e) {
 			});
 		  }
 		  $('.phone').trigger('blur');
+		  $('#get').empty();
 		  $('#get').html('<i class="fa fa-folder-open-o" aria-hidden="true"></i>');
-			
+		  $('#blurDIV').removeClass('blur');
+		  $('#overlay').hide();
 		};
+	$('#rightbutton').on('click', function () {
+		//var keyID = $('#ClaimNo').val() + ' ' + $('#RStakenWith').val().toUpperCase() + ' ' + $('#Date_of_RS').val() + ' ' + $("input[name='RSNo']:checked").val() + ' ('+document.title+')';
+		var keyID = $("input[id$='ClaimNo']:visible").val() + ' ' + $("input[id$='RStakenWith']:visible").val().toUpperCase() + ' ' + $("input[id$='Date_of_RS']:visible").val() + ' ' + $("input[name$='RSNo']:checked:visible").val() + ' ('+document.title+')';
+		var formIdentifier = `${keyID}`;
+		printFunction(getFormData(formIdentifier));
+	});
 	$('#save').on('mousedown',function () {
 		var $this = $(this);
 		$this.empty();
 		$this.html('<i class="fa fa-spinner fa-pulse"></i>');
 	});
 	$('#save').on('mouseup',function () {
+		//var keyID = $('#ClaimNo').val() + ' ' + $('#RStakenWith').val().toUpperCase() + ' ' + $('#Date_of_RS').val() + ' ' + $("input[name='RSNo']:checked").val() + ' ('+document.title+')';
+		var keyID = $("input[id$='ClaimNo']:visible").val() + ' ' + $("input[id$='RStakenWith']:visible").val().toUpperCase() + ' ' + $("input[id$='Date_of_RS']:visible").val() + ' ' + $("input[name$='RSNo']:checked:visible").val() + ' ('+document.title+')';
+		var formIdentifier = `${keyID}`; // Identifier used to identify the form
+
 		var $this = $(this);
 		$('#get').prop('disabled', true);
 		event.preventDefault();
@@ -254,7 +285,7 @@ $("input").keypress(function(e) {
 							timerID = setInterval(function() {
 								var doctitle = document.title; 
 								
-								data = getFormData();
+								data = getFormData(formIdentifier);
 								localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
 								const message = "Form data has been saved.";
 								doctitle = doctitle.replace(" - " + message, '');
@@ -276,7 +307,7 @@ $("input").keypress(function(e) {
 							setTimeout(function(){ $('#footer').html(doctitle); }, 6000);
 							
 						};
-					  data = getFormData();
+					  data = getFormData(formIdentifier);
 					  localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
 					  const message = "Form data has been saved.";
 					  doctitle = doctitle.replace(" - " + message, '');
@@ -295,22 +326,128 @@ $("input").keypress(function(e) {
 		});
 		
 	});
-	$('#get').on('mousedown',function () {
-		$(this).html('<i class="fa fa-spinner fa-pulse"></i>');
-		$('#save').prop('disabled', true);
-	});
-	$('#get').on('mouseup',function () {
-		$(this).empty();
-			$('input:radio').prop('checked', false);
-			populateForm();	
-			$('.txtAreaGrow').trigger('keyup');
+const btnRemove = document.querySelector('#modalDel');
+const sb = document.querySelector('#savedData');
+btnRemove.onclick = (e) => {
+            e.preventDefault();
 			
-		$('input:checkbox').each(function () {
-			if ($(this).prop('checked') == true) {
-				$(this).trigger('change');
+           $.confirm({
+			boxWidth: '30%',
+			useBootstrap: false,
+			type: 'red',
+			icon: 'fa fa-warning',
+			content: 'Are you sure you\'d like to permanently delete this Recorded Statement?',
+			title: 'Warning',
+			buttons: {
+				delete: {
+					btnClass: 'btn-red',
+					action: function () {
+
+					 // save the selected option
+						let selected = [];
+
+						for (let i = 0; i < sb.options.length; i++) {
+							selected[i] = sb.options[i].selected;
+							
+						}
+
+						// remove all selected option
+						let index = sb.options.length;
+						while (index--) {
+							if (selected[index]) {
+								localStorage.removeItem(sb.value);
+								sb.remove(index);
+								
+							}
+						}
+					 $('#savedData').trigger('change');
+					}
+				},
+				cancel: function () {
+					
+					return;
+				}
 			}
-		});		
-			
+		});
+        };
+		
+	var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("get");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+$('.saved-data').select2({
+  placeholder: 'Select a saved Recorded Statement'
+});
+
+
+btn.onclick = function() {
+	$('#blurDIV').addClass('blur');
+	$('button').prop('disabled', true);
+	$('#modalDel').prop('disabled', true);
+	$('#modalOk').prop('disabled', true);
+	$(this).html('<i class="fa fa-spinner fa-pulse"></i>');
+	$("#savedData").children('option:not(:first)').remove();
+	var $dropdown = $("#savedData");
+	var i = -1;
+	$.each(Object.keys(localStorage), function() {
+		i = i + 1;
+	if (Object.keys(localStorage)[i].indexOf("Recorded Statement") >= 0) {	
+		$dropdown.append($("<option />").val(Object.keys(localStorage)[i]).text(Object.keys(localStorage)[i]));
+	};
+	});
+  modal.style.display = "block";
+  
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  $('#blurDIV').removeClass('blur');
+  $('#get').empty();
+  $('#get').html('<i class="fa fa-folder-open-o" aria-hidden="true"></i>');
+  $('button').prop('disabled', false);
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+	$('#blurDIV').removeClass('blur');
+	$('#get').empty();
+	$('#get').html('<i class="fa fa-folder-open-o" aria-hidden="true"></i>');
+	$('button').prop('disabled', false);
+  }
+}
+
+	$('#select2-savedData-container').on('click',function () {
+		$('input.select2-search__field').after('');
+		$('input.select2-search__field').after('<img src="images/search.png" id="input_img" style="position: absolute;top: 8px;right: 7px;width: 20px;height: 20px;cursor:text;">');
+		
+	});
+	$('#savedData').on('change',function () {
+		if ($(this).val()) {
+			$('#modalDel').prop('disabled', false);
+			$('#modalOk').prop('disabled', false);
+		}else{
+			$('#modalDel').prop('disabled', true);
+			$('#modalOk').prop('disabled', true);
+		};
+	});
+	$('#modalOk').on('click',function () {
+		$('#overlay').show();
+		$('#savedData').blur(); 
+		$('button').prop('disabled', false);		
+		$('.txtAreaGrow').trigger('keyup');
+		$('input:radio').not("input[name$='RSNo']").prop('checked', false);
+		$('input:text').val('');
+		$.when(modal.style.display = "none").done(function () { setTimeout(function(){populateForm($('#savedData').val());$('input:checkbox:checked').trigger('change');$(".txtAreaGrow").removeAttr("style");}, 500);});
+		
+		
 	});
 
 	$('.collapsible').click(function (e) {
@@ -497,18 +634,18 @@ $("input").keypress(function(e) {
 			}
 		})
 		//  the following simple make the textbox "Auto-Expand" as it is typed in
-		.keyup(function(e) {
+		.on('keyup',function (e) {
 			//  this if statement checks to see if backspace or delete was pressed, if so, it resets the height of the box so it can be resized properly
 			//if (e.which == 8 || e.which == 46) {
-				$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size"))+31);
+				$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size"))-31);
 			//}
 			//  the following will help the text expand as typing takes place
 			while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
 				$(this).height($(this).height()+31);
 			};
 		});
-	});
-	
+		
+		
 	$("input:radio").change(function () {
 		
 		if ($("input[name^=TERRITORY]").prop("checked") == true) {
@@ -529,28 +666,108 @@ $("input").keypress(function(e) {
 				$('#checkbox17').attr("disabled",false);
 			};
 		};
-	if ($('#VNOP').length) {	
-		if ($(this).attr('name') == $("input[name^=VNOP]").attr('name')) {
-			
-				if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) == 'NON-OWNERS') {
+	if ($('input[name=VNOP]:checked').length) {	
+		if ($(this).attr('name') === $("input[name=VNOP]").attr('name')) {
+		
+				if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) === 'NON-OWNERS') {
 					$('#checkbox7').prop("checked",true);
-					$('#checkbox7').attr("disabled",true);
+					$('#checkbox7').attr("disabled",true);	
 				}else{
 					$('#checkbox7').prop("checked",false);
 					$('#checkbox7').attr("disabled",false);
 				};
 		
-		}
-		if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) == 'VNOP') {
+		};
+		if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) === 'VNOP') {
 			$('#checkbox7').attr("disabled",true);
 		}else if (getRadioVal( document.getElementById('RSgeneral'), 'VNOP' ) !== 'NON-OWNERS') {
 			$('#checkbox7').attr("disabled",false);
 		};
-	}
+	};
+	
+	
+	/*if ($(this).attr('name') == $("input[name$='BIZ']").attr('name') || $(this).attr('name') == $("input[name*='rideshare']").attr('name') || $(this).attr('name') ==  $("input[name*='business']").attr('name')) {
+		if (getRadioVal(document.getElementById('RSgeneral'),$(this).attr('name')) == 'Yes') {
+			$('#checkbox8').prop("checked",true);
+			$('#checkbox8').attr("disabled",true);
+		} else {
+			$('#checkbox8').prop("checked",false);
+			$('#checkbox8').attr("disabled",false);
+			
+		};
+		
+	};*/
+	//if (getRadioVal( document.getElementById('RSgeneral'),$("input[name$='BIZ']:visible:checked").attr('name')) === "Yes" ) {
+		let var1 = $("input[name$='BIZ'][value='Yes']:visible:checked").length || 0;
+		let var2 = $("input[name*=rideshare][value='Yes']:visible:checked").length || 0;
+		let var3 = $("input[name*=business][value='Yes']:visible:checked").length || 0;
+		let var4 = $("#checkbox8:checked").length || 0;
+		//var1 += $("input[name$='BIZ']:visible:checked").length || $("input[name*=rideshare]:visible:checked").length || $("input[name*=business]:visible:checked").length || 0;
+	//};
+	//if (getRadioVal( document.getElementById('RSgeneral'),$("input[name*=business]:visible:checked").attr('name')) === "Yes") {
+		//var1 += $("input[name*=rideshare]:visible:checked").length || 0;
+	//};		
+	//if (getRadioVal( document.getElementById('RSgeneral'),$("input[name*=rideshare]:visible:checked").attr('name')) === "Yes" ) {
+		//var1 += $("input[name*=business]:visible:checked").length || 0;	
+	//};
+	if (bizChecked === false) {		
+		if (var1+var2+var3> 0) {
+			$('#checkbox8').prop("checked",true);
+			$('#checkbox8').attr("disabled",true);
+		} else {
+			$('#checkbox8').prop("checked",false);
+			$('#checkbox8').attr("disabled",false);
+			
+		};
+	};
+		$("input:checkbox").each(function () {
+		
+			if ($(this).prop('disabled')) {
+					$("label[for='"+$(this).prop('id')+"']").addClass('disabledInput');
+				}else {
+					$("label[for='"+$(this).prop('id')+"']").removeClass('disabledInput');
+				};
+		});	
 	}); 
+	
+	}); //end of document ready
+	let ele = [];
+	$('div:not(#secondPart)').on('hide', function () {
+			
+				if ($('#'+$(this).attr('id')+" input:radio:checked")) {
+					$('#'+$(this).attr('id')+" input:radio:checked").each(function () {
+						
+						ele.push($(this).attr('name'));
+						undo(ele.pop());
+						});
+				};
+
+		
+		
+
+		});
+	(function ($) {
+        $.each(['show', 'hide', 'fadeOut', 'fadeIn'], function (i, ev) {
+            var el = $.fn[ev];
+            $.fn[ev] = function () {
+                var result = el.apply(this, arguments);
+                result.promise().done(function () {
+                    this.triggerHandler(ev, [result]);
+                })
+                return result;
+            };
+        });
+    })(jQuery);
+	$(function(){
+		$("input.autogrow").autoGrowInput({minWidth:150,comfortZone:1});
+	});
+	
+	
+	
+	
 $( window ).resize( function(){
 
-  if( w != $( window ).width() ){
+  if( docWidth != $( window ).width() ){
 	  $(window)
 	  .keypress(function () {
 		$(window).trigger('resolutionchange');
@@ -558,7 +775,7 @@ $( window ).resize( function(){
 	  .mousedown(function () {
 		  $(window).trigger('resolutionchange');
 	  });
-    window.resizeTo(w, h);
+    window.resizeTo(docWidth, docHeight);
 	//$(window).trigger('scroll');
   }
 
@@ -579,7 +796,7 @@ $( window ).resize( function(){
 		});
 	});
 			$('.addressNorm').focus( function () {
-				normalAddress(this);
+			//	normalAddress(this);
 			});
 			
 			$('.addressNorm').blur(function () {
@@ -588,21 +805,62 @@ $( window ).resize( function(){
 				};
 			});
 	$('input[name="UDdiscovered"]').click(function () {
-		if ($(this).val() === "Yes") {
+		hideshow($(this),$("#MCTDUD"));
+		/*if ($(this).val() === "Yes") {
 			$('#MCTDUD').show();
 		} else {
 			$('#MCTDUD').hide();
-		}
+		}*/
+	})
+	$('input[name="BINDERtradeIn"]').change(function () {
+		hideshow($(this),$("#BINDERtradeInTable"));
+	})
+	$('input[name="BINDERotherVeh"]').change(function () {
+		hideshow($(this),$("#BINDERotherVehTable"));
+		hideshow($(this),$("#BINDERmoreVehTable"));
+	})
+	$('input[name="BINDERotherVeh2"]').change(function () {
+		hideshow($(this),$("#BINDERotherVehTable2"));
+		hideshow($(this),$("#BINDERmoreVehTable2"));
+	})
+	$('input[name="BINDERmemberofHH"]').change(function () {
+		hideshow($(this),$("#BINDERmemberofHHTable"));
+	})
+	$('input[name="BINDERmemberofHHVeh"]').change(function () {
+		hideshow($(this),$("#BINDERmemberofHHVehTable"));
+		hideshow($(this),$("#BINDERmoreHHVehTable"));
+		
+	})
+	$('input[name="CVupd"]').change(function () {
+		hideshow($(this),$("#cvUPDTable"));	
+	})
+	$('input[name="PDupd"]').change(function () {
+		hideshow($(this),$("#pdUPDTable"));	
+	})
+	$('input[name="IVupd"]').change(function () {
+		hideshow($(this),$("#ivUPDTable"));	
 	})
 	$('input[name="anyUDs"]').click(function () {
-		if ($(this).val() === "Yes") {
+		hideshow($(this),$("#anyUDs"));
+		/*if ($(this).val() === "Yes") {
 			$('#anyUDs').show();
 		} else {
 			$('#anyUDs').hide();
-		}
+		}*/
 	})
+	$('input[name="stillatshop"]').click(function () {
+		hideshow($(this),$("#stillatshopYes"),$('#stillatshopNo'));
+		/*if ($(this).val() === "Yes") {
+			$('#stillatshopYes').show();
+			$('#stillatshopNo').hide();
+		} else {
+			$('#stillatshopYes').hide();
+			$('#stillatshopNo').show();
+		}*/
+	})
+	
 	$("#resetButton").mousedown(function () {
-	$('#blurDIV').addClass('blur');
+		$('#blurDIV').addClass('blur');
 		$.confirm({
 			boxWidth: '30%',
 			useBootstrap: false,
@@ -631,25 +889,159 @@ $( window ).resize( function(){
 
 
 	$('.date').each(function (index, value) {
-		$(value).focus(function () {
-			$(value).attr('type', 'date');
-		});
+		//$(value).focus(function () {
+			//$(value).attr('type', 'date');
+			$(value).datepicker({
+				//showButtonPanel: true,
+				changeMonth: true, 
+				changeYear: true, 
+				dateFormat: "mm/dd/yy",
+				yearRange: "-90:+00"				
+			});
+		//});
 		$(value).blur(function () {
 			if ($(value).val() === '') {
 				$(value).attr('type', 'text');
 			};
 		});
 	});
-	
+	$.datepicker._gotoToday = function(id) { 
+		$(id).datepicker('setDate', new Date()).datepicker('hide').blur(); 
+	};
 
 	$("input[name^=NOresideVNOPO]").change(function () {
-		if ($(this).val() === "Yes") {
+		hideshow($(this),$("#NOresideVNOPOYes"),$('#NOresideVNOPONo'));
+		/*if ($(this).val() === "Yes") {
 			$("#NOresideVNOPOYes").show();
 			$("#NOresideVNOPONo").hide();
 		}else{
 			$("#NOresideVNOPOYes").hide();
 			$("#NOresideVNOPONo").show();
+		};*/
+	});
+	$("input[name^=priorInjuries]").change(function () {
+		hideshow($(this),$("#priorInjuriesDiv"));
+	/*	if ($(this).val() === "Yes") {
+			$("#priorInjuriesDiv").show();
+		}else{
+			$("#priorInjuriesDiv").hide();
+		};*/
+	});
+	$("input[name^=existingMedCond]").change(function () {
+		hideshow($(this),$("#priorMedCondDiv"));
+		/*if ($(this).val() === "Yes") {
+			$("#priorMedCondDiv").show();
+		}else{
+			$("#priorMedCondDiv").hide();
+		};*/
+	});
+	$("input[name^=VNOPins]").change(function () {
+		hideshow($(this),$("#VNOPinsuranceQs"));
+		/*if ($(this).val() === "Yes") {
+			$("#VNOPinsuranceQs").show();
+		}else{
+			$("#VNOPinsuranceQs").hide();
+		};*/
+	});
+	$("input.checkboxPrompt").change(function () {
+		if ($(this).val() === "Yes") {
+			$(this).parents("table").next("table").show();
+		}else{
+			$(this).parents("table").next("table").hide();
 		};
+	});
+	$("input[name^=medsTakenPriorto]").change(function () {
+		hideshow($(this),$("#medsPriorToLoss"));
+		/*if ($(this).val() === "Yes") {
+			$("#medsPriorToLoss").show();
+		}else{
+			$("#medsPriorToLoss").hide();
+		};*/
+	});
+	$("input[name^=takentoHosp]").change(function () {
+		hideshow($(this),$("#takenToHospitalQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#takenToHospitalQ").show();
+		}else{
+			$("#takenToHospitalQ").hide();
+		};*/
+	});
+	$("input[name^=PCPorUC]").change(function () {
+		hideshow($(this),$("#PCPorUCQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#PCPorUCQ").show();
+		}else{
+			$("#PCPorUCQ").hide();
+		};*/
+	});
+	$("input[name^=xraysTaken]").change(function () {
+		hideshow($(this),$("#xraysTakenQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#xraysTakenQ").show();
+		}else{
+			$("#xraysTakenQ").hide();
+		};*/
+	});
+	$("input[name^=RXprescribed]").change(function () {
+		hideshow($(this),$("#RXprescribedQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#RXprescribedQ").show();
+		}else{
+			$("#RXprescribedQ").hide();
+		};*/
+	});
+	$("input[name^=OTCtaken]").change(function () {
+		hideshow($(this),$("#OTCtakenQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#OTCtakenQ").show();
+		}else{
+			$("#OTCtakenQ").hide();
+		};*/
+	});
+	$("input[name^=timeOffRX]").change(function () {
+	hideshow($(this),$("#notRXbyPCPYes"),$("#notRXbyPCPNo"));	
+		
+		/*if ($("input[name^=timeOffRX]:checked").length > 0) {
+			if ($(this).val() === "Yes") {
+				$("#notRXbyPCPNo").hide();
+				$("#notRXbyPCPYes").show();
+			}else{
+				$("#notRXbyPCPNo").show();
+				$("#notRXbyPCPYes").hide();
+			}
+		}else{
+			$("#notRXbyPCPNo").hide();
+			$("#notRXbyPCPYes").hide();
+		};*/
+	});
+	$("input[name^=perfFunctions]").change(function () {
+		if ($("input[name^=perfFunctions]:checked").length === 0) {
+			$(this).parents("table").next("table").Hide();
+		};
+	});
+	$("input[name^=OOPexp]").change(function () {
+		hideshow($(this),$("#OOPexpQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#OOPexpQ").show();
+		}else{
+			$("#OOPexpQ").hide();
+		};*/
+	});
+	$("input[name^=pubaid]").change(function () {
+		hideshow($(this),$("#pubaidQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#pubaidQ").show();
+		}else{
+			$("#pubaidQ").hide();
+		};*/
+	});
+	$("input[name^=FUtreatment]").change(function () {
+		hideshow($(this),$("#FUtreatmentQ"));
+		/*if ($(this).val() === "Yes") {
+			$("#FUtreatmentQ").show();
+		}else{
+			$("#FUtreatmentQ").hide();
+		};*/
 	});
 	$('#bugbutton').click(function () {
 		$('#blurDIV').addClass('blur');
@@ -684,7 +1076,7 @@ $( window ).resize( function(){
 							return false;
 						}
 						$('#blurDIV').removeClass('blur');
-						document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue);
+						document.location.href = mailtoURL('ccordero@americanfreedomins.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
 					}
 				},
 				cancel: function () {
@@ -840,6 +1232,16 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
+	$('#checkbox21').change(function () {
+		if (this.checked) {
+			coverageCheck("notOk", 'BINDER');
+
+			numberCols();
+		} else {
+			coverageCheck("Ok", 'BINDER');
+			numberCols();
+		};
+	});
 	$('#checkbox14').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'TOW');
@@ -854,16 +1256,20 @@ $( window ).resize( function(){
 		if (this.checked) {
 			if ($('[id^=checkbox]:checked').length <= 1) {
 				$('[id^=checkbox]').attr('disabled',true);
-				$('input[id^=checkbox]').not(this).parent().css('color','silver');
+				$('[id^=checkbox]').not(this).parent().css('color','silver');
 				$('input[id^=checkbox]').not(this).next().css('border-color','silver');
 				$(this).attr('disabled',false);
 				loadFunctions();
-				coverageCheck("notOk", 'WITNESS');
+				//coverageCheck("notOk", 'WITNESS');
+				$('#WITNESS').show()
 				$('#firstPart').hide();
 				$('#secondPart').hide();
 				$('#addVehicles').hide();
+				$('#cvTable').hide();
+				$('#cvTables').hide();
 				$('#folTable').hide();
 				$('#lastPart').hide();
+				document.title = "Witness Recorded Statement";
 				numberCols();
 			}else{
 				$.alert({
@@ -886,14 +1292,18 @@ $( window ).resize( function(){
 		};
 		} else {
 			$('[id^=checkbox]').attr('disabled',false);
-			$('[id^=checkbox]').parent().css('color','initial');
+			$('[id^=checkbox]').not(this).parent().css('color','initial');
 			$('input[id^=checkbox]').not(this).next().css('border-color','initial');
-			coverageCheck("Ok", 'WITNESS');
-			$('#firstPart').show();
-			$('#secondPart').show();
-			$('#addVehicles').show();
-			$('#folTable').show();
-			$('#lastPart').show();
+			//coverageCheck("Ok", 'WITNESS');
+			$('#WITNESS').hide();
+				$('#firstPart').show();
+				$('#secondPart').show();
+				$('#addVehicles').show();
+				$('#cvTable').show();
+				$('#cvTables').show();
+				$('#folTable').show();
+				$('#lastPart').show();
+				document.title = title;
 			numberCols();
 		};
 		
@@ -910,7 +1320,7 @@ $( window ).resize( function(){
 
 	$('#checkbox6').change(function () {
 		if (this.checked) {
-			
+				
 			if ($('[id^=checkbox]:checked').length <= 1) {
 				$('[id^=checkbox]').attr('disabled',true);
 				$('[id^=checkbox]').not(this).parent().css('color','silver');
@@ -931,7 +1341,7 @@ $( window ).resize( function(){
 					$('#agentQfirstPart').hide();
 				};
 				numberCols();
-			}else{				
+			}/*else{				
 				$.alert({
 					title: 'Information',
 					type: 'blue',
@@ -949,8 +1359,9 @@ $( window ).resize( function(){
 				}
 				});
 				$(this).prop('checked',false);
-			};
+			};*/
 		} else {
+			
 				$('[id^=checkbox]').attr('disabled',false);
 				$('[id^=checkbox]').parent().css('color','initial');
 				$('input[id^=checkbox]').not(this).next().css('border-color','initial');
@@ -965,38 +1376,52 @@ $( window ).resize( function(){
 				$('#AgentQuestions').hide();
 				$('#agentQfirstPart').hide();
 				$('.rowNumbers2').trigger('input');
+				$('.rowNumbers6').trigger('input');
 				numberCols();
 		};
 		
 	});
+	var nonOwnerChecked = false;
 	$('#checkbox7').change(function () {
+		
 		if (this.checked) {
 			coverageCheck("notOk", 'NON-OWNERS');
 			$("#NON-OWNER_TO_DO").show();
 			$('input[name=VNOP][value=NON-OWNERS]').prop('checked', true);
 			numberCols();
+			nonOwnerChecked = true;
 		} else {
 			coverageCheck("Ok", 'NON-OWNERS');
 			$("#NON-OWNER_TO_DO").hide();
 			$('input[name=VNOP][value=NON-OWNERS]').prop('checked', false);
 			numberCols();
+			nonOwnerChecked = false;
 		};
 	});
+	var bizChecked = false;
 	$('#checkbox8').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'BIZ');			
 			numberCols();
+			bizChecked = true;
 		} else {
-			coverageCheck("Ok", 'BIZ');
-			numberCols();
+			if (getRadioVal( document.getElementById('RSgeneral'), $('input[name*="rideshare"]:visible').attr('name') ) !== 'Yes' && getRadioVal( document.getElementById('RSgeneral'), $('input[name*="business"]:visible').attr('name') ) !=='Yes' && getRadioVal( document.getElementById('RSgeneral'), $('input[name*="BIZ"]:visible').attr('name') ) !== 'Yes') {
+				coverageCheck("Ok", 'BIZ');
+				numberCols();
+				bizChecked = false;
+			};
 		};
 	});
 	$('#checkbox18').change(function () {
 		if (this.checked) {
 		if ($('[id^=checkbox]:checked').length <= 1) {
+			$('[id^=checkbox]').attr('disabled',true);
+			$('[id^=checkbox]').not(this).parent().css('color','silver');
+			$('input[id^=checkbox]').not(this).next().css('border-color','silver');
 			$(this).attr('disabled',false);
 			loadFunctions();
-			coverageCheck("notOk", 'FOLLOWUP');	
+			//coverageCheck("notOk", 'FOLLOWUP');	
+			$("#FOLLOWUP").show();
 			$('#firstPart').hide();
 			$('#secondPart').hide();
 			$('#addVehicles').hide();
@@ -1023,15 +1448,86 @@ $( window ).resize( function(){
 			$(this).prop('checked',false);
 		};
 		} else {
-			coverageCheck("Ok", 'FOLLOWUP');
+			$('[id^=checkbox]').attr('disabled',false);
+			$('[id^=checkbox]').not(this).parent().css('color','initial');
+			$('input[id^=checkbox]').not(this).next().css('border-color','initial');
+			//coverageCheck("Ok", 'FOLLOWUP');
+			$("#FOLLOWUP").hide();
 			$('#firstPart').show();
 			$('#secondPart').show();
 			$('#addVehicles').show();
 			$('#folTable').show();
 			$('#lastPart').show();
 			$('.rowNumbers2').trigger('input');
+			$('.rowNumbers6').trigger('input');
 			numberCols();
 		};
+	});
+	$('#checkbox19').change(function () {
+		if (this.checked) {
+			coverageCheck("notOk", 'UNAUTHORIZED_REPAIRS');			
+			numberCols();
+		} else {
+			coverageCheck("Ok", 'UNAUTHORIZED_REPAIRS');
+			numberCols();
+		};
+	});
+	$('#checkbox20').change(function () {
+		if (this.checked) {
+			if ($('[id^=checkbox]:checked').length <= 1) {
+				$('[id^=checkbox]').attr('disabled',true);
+				$('[id^=checkbox]').not(this).parent().css('color','silver');
+				$('input[id^=checkbox]').not(this).next().css('border-color','silver');
+				$(this).attr('disabled',false);
+				$('#firstPart').hide();
+				$('#secondPart').hide();
+				$('#addVehicles').hide();
+				$('#cvTable').hide();
+				$('#cvTables').hide();
+				$('#folTable').hide();
+				$('#lastPart').hide();
+				document.title = "OFAC Recorded Statement";
+				//$('#closingQuestions').hide();
+				$('#OFAC').show();
+				numberCols();
+			}else{				
+				$.alert({
+					title: 'Information',
+					type: 'blue',
+					icon: 'fa fa-info-circle',
+					content: 'Please uncheck any other recorded statement templates before proceeding with the OFAC RS, then try again.',
+					onContentReady: function () {
+						$('#blurDIV').addClass('blur');
+					},
+					boxWidth: '40%',
+					useBootstrap: false,
+					buttons: {
+					Ok: function () {
+						$('#blurDIV').removeClass('blur');
+					}
+				}
+				});
+				$(this).prop('checked',false);
+			};
+		} else {
+				$('[id^=checkbox]').attr('disabled',false);
+				$('[id^=checkbox]').not(this).parent().css('color','initial');
+				$('input[id^=checkbox]').not(this).next().css('border-color','initial');
+				$('#firstPart').show();
+				$('#secondPart').show();
+				$('#addVehicles').show();
+				$('#cvTable').show();
+				$('#cvTables').show();
+				$('#folTable').show();
+				$('#lastPart').show();
+				//$('#closingQuestions').show();
+				$('#OFAC').hide();
+				document.title = title;
+				$('.rowNumbers2').trigger('input');
+				$('.rowNumbers6').trigger('input');
+				numberCols();
+		};
+		
 	});
 	$('#checkbox9').change(function () {
 		if (this.checked) {
@@ -1080,8 +1576,41 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
-	
-	$("input[name^=BIZ]").change(function () {
+	$("input[name$='BIZ']").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name*="rideshare"]:visible').attr('name') ) || "No";
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name$="business"]:visible').attr('name') ) || "No";
+		
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", "BIZ");
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", "BIZ");
+			numberCols();
+		};
+	});
+	$("input[name*=rideshare]").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name$="BIZ"]:visible').attr('name') ) || "No";
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name$="business"]:visible').attr('name') ) || "No";
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'BIZ');
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", "BIZ");
+			numberCols();
+		};
+	});
+	$("input[name*=business]").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name$="BIZ"]:visible').attr('name') ) || "No";
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name$="rideshare"]:visible').attr('name') ) || "No";
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'BIZ');
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", "BIZ");
+			numberCols();
+		};
+	});
+	/*$("input[name^=BIZ]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="rideshare"]:visible').attr('name') );
 		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="business"]:visible').attr('name') );
 		
@@ -1093,9 +1622,32 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
+	$("input[name^=THEFTBIZ]").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="THEFTrideshare"]:visible').attr('name') );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="THEFTbusiness"]:visible').attr('name') );
+		
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'BIZ');
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", 'BIZ');
+			numberCols();
+		};
+	});
 	$("input[name^=rideshare]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'BIZ' );
 		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="business"]:visible').attr('name') );
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'BIZ');
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", "BIZ");
+			numberCols();
+		};
+	});
+	$("input[name^=THEFTrideshare]").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'THEFTBIZ' );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="THEFTbusiness"]:visible').attr('name') );
 		if ($(this).val() === 'Yes') {
 			coverageCheck("notOk", 'BIZ');
 			numberCols();
@@ -1115,6 +1667,17 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
+	$("input[name^=THEFTbusiness]").change(function () {
+		var val1 = getRadioVal( document.getElementById('RSgeneral'), 'THEFTBIZ' );
+		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="THEFTrideshare"]:visible').attr('name') );
+		if ($(this).val() === 'Yes') {
+			coverageCheck("notOk", 'BIZ');
+			numberCols();
+		} else if ($(this).val() !== 'Yes' && val1 !== 'Yes' && val2 !== 'Yes' && $('#checkbox8').prop('checked') == false) {
+			coverageCheck("Ok", "BIZ");
+			numberCols();
+		};
+	});*/
 	$('input[name="UD"]').change(function () {
 		
 		var val = getRadioVal( document.getElementById('RSgeneral'), 'driver2' );
@@ -1130,6 +1693,7 @@ $( window ).resize( function(){
 		
 		if ($(this).val() === 'ED') {
 			coverageCheck("notOk", 'ED');
+			$('input:radio[name="EDdriver"][value="ED"]').prop("checked", true);
 			numberCols();
 		} else if ($(this).val() !== 'ED' && val !== 'ED') {
 			coverageCheck("Ok", 'ED');
@@ -1149,6 +1713,7 @@ $( window ).resize( function(){
 		};
 		if ($(this).val() === 'ED') {
 			coverageCheck("notOk", 'ED');
+			$('input:radio[name="EDdriver"][value="ED"]').prop("checked", true);
 			numberCols();
 		} else if ($(this).val() !== 'ED' && val !== 'ED') {
 			coverageCheck("Ok", 'ED');
@@ -1234,7 +1799,7 @@ $( window ).resize( function(){
 		addRows('IVsandPurposeUse', html, 1);
 		$('.address').focus(function () {
 			$(this).attr('placeholder','Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});	
 		$('.minus').each(function () {
 			$(this).click(function () {
@@ -1314,7 +1879,7 @@ $( window ).resize( function(){
 		addRows('jobSites', html, 1);
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});
 		
 		$('.minus').each(function () {
@@ -1332,13 +1897,23 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums3" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn center upper" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums3" style="text-align:right;">' + rowNum + '.</td><td><textarea type="text" class="fillIn txtAreaGrow" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn txtAreaGrow" style="width:100%;" ></textarea></td><td><textarea required type="text" class="fillIn txtAreaGrow" style="width:100%;" ></textarea></td><td><textarea type="text" class="fillIn txtAreaGrow" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn txtAreaGrow" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn txtAreaGrow" style="width:100%"></textarea></td><td><textarea type="text" class="fillIn txtAreaGrow center upper" style="width:100%"></textarea></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('occTable', html, 1)
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
 				numberColsOther('VOPnums3');
 			});
+		});
+		$('.txtAreaGrow').on('keyup',function (e) {
+			//  this if statement checks to see if backspace or delete was pressed, if so, it resets the height of the box so it can be resized properly
+			//if (e.which == 8 || e.which == 46) {
+				$(this).height(parseFloat($(this).css("min-height")) != 0 ? parseFloat($(this).css("min-height")) : parseFloat($(this).css("font-size"))-31);
+			//}
+			//  the following will help the text expand as typing takes place
+			while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+				$(this).height($(this).height()+31);
+			};
 		});
 	});
 
@@ -1348,13 +1923,25 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums2" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums2" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="fillIn VOP1first" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td><td><input type="text" class="fillIn" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('IVpurp', html, 1);
 		$('.minus').each(function () {
 			$(this).click(function () {
 				$(this).closest("tr").remove();
 				numberColsOther('VOPnums2');
 			});
+		});
+		$("input.fillIn:not(#ClaimNo):not(#WITClaimNo):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone):not(.FOL)").on('keydown', function () {
+			var fontSize = $(this).css('font-size');
+			if (isOverflown($(this)) && parseFloat(fontSize) > 9) {
+				$(this).css('font-size', parseFloat(fontSize)-1);
+			}else if (!isOverflown($(this)) && parseFloat(fontSize) < 17) {
+				$(this).css('font-size', parseFloat(fontSize)+1);
+			};
+			if ($(this).val() =='') {
+				$(this).css('font-size', 17);
+			};
+		
 		});
 	});
 	$('#addVOPtable7').click(function () {
@@ -1367,7 +1954,7 @@ $( window ).resize( function(){
 		addRows('IVaddress', html, 1);
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});
 		$('.minus').each(function () {
 			$(this).click(function () {
@@ -1375,6 +1962,90 @@ $( window ).resize( function(){
 				numberColsOther('VOPnums7');
 			});
 		});
+	});
+	$('#addRFM').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#reasonforMove').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows + 1;
+		var html = '<td class="RFMnums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder RFMfirst" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td><input type="text" class="noborder address" style="width:100%"></td> <td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('reasonforMove', html, 1);
+		$('.address').focus(function () {
+			$(this).attr('placeholder', 'Enter a location');
+			//autoAddress(this);
+		});
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('RFMnums');
+			});
+		});
+	});
+$('#addAddressInQ').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#addressInQ').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows;
+		var html = '<td class="addInQnum" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder addInQfirst address" style="width:100%;"></td><td><input class="date noborder" style="width:100%"></td><td><input type="text" class="date noborder" style="width:100%"></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('addressInQ', html, 1);
+		$('.address').focus(function () {
+			$(this).attr('placeholder', 'Enter a location');
+			//autoAddress(this);
+		});
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('addInQnum');
+			});
+		});
+		$('.date').each(function (index, value) {
+			$(value).datepicker({
+				changeMonth: true, 
+				changeYear: true, 
+				dateFormat: "mm/dd/yy",
+				yearRange: "-90:+00"				
+			});
+		$(value).blur(function () {
+			if ($(value).val() === '') {
+				$(value).attr('type', 'text');
+			};
+		});
+	});
+		
+	});
+	$('#addOFACtable').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#OFACaddress').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows + 1;
+		var html = '<td class="OFACnums" style="text-align:right;border-left:1px solid transparent!important;border-top:1px solid transparent!important;border-bottom:1px solid transparent!important;">' + rowNum + '.</td><td><input type="text" class="noborder address" style="width:100%"></input></td><td><input type="text" class="noborder OFACDate" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('OFACaddress', html, 1);
+		$('.address').focus(function () {
+			$(this).attr('placeholder', 'Enter a location');
+			//autoAddress(this);
+		});
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('OFACnums');
+			});
+		});
+		//$('.OFACDate').each(function(){
+			/*$('.OFACDate').dateRangePicker({
+				monthSelect: true,
+				yearSelect: [2009, moment().get('year')],
+				//startDate: moment().subtract(120, 'months').format('YYYY-MM-DD'),
+				endDate: moment().endOf('day').format('YYYY-MM-DD'),
+				customArrowPrevSymbol: '<i class="fa fa-arrow-circle-left"></i>',
+				customArrowNextSymbol: '<i class="fa fa-arrow-circle-right"></i>'
+			});*/
+		//});
+	});
+	$('#OFACpriorlocTxt1').change(function () {
+		$('#OFACpriorlocTxt2').html($(this).val().toUpperCase());
 	});
 	$('#addVOPtable11').click(function () {
 		var inpNum = 1;
@@ -1392,6 +2063,7 @@ $( window ).resize( function(){
 
 			});
 		});
+
 	});
 	$('#addVOPtable12').click(function () {
 		var inpNum = 1;
@@ -1403,7 +2075,7 @@ $( window ).resize( function(){
 		addRows('IVgaragedLocations', html, 1);
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});
 		$('.minus').each(function () {
 			$(this).click(function () {
@@ -1411,7 +2083,9 @@ $( window ).resize( function(){
 				numberColsOther('VOPnums12');
 			});
 		});
+		
 	});
+
 	$('#addVOPtable13').click(function () {
 		var inpNum = 1;
 		var tableRef = $('#' + $('#AllVNOPinAres').attr('id') + '>tbody')[0];
@@ -1422,7 +2096,7 @@ $( window ).resize( function(){
 		addRows('AllVNOPinAres', html, 1);
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});
 		$('.minus').each(function () {
 			$(this).click(function () {
@@ -1531,7 +2205,7 @@ $( window ).resize( function(){
 		var numRows = parseInt(tableRef.rows.length);
 		newRows = inpNum - numRows;
 		rowNum = numRows + 1;
-		var html = '<td class="VOPnums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		var html = '<td class="VOPnums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder VOP1first" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;border-top:hidden;border-right:hidden;border-bottom:hidden;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
 		addRows('VOPtable', html, 1);
 		$('.minus').each(function () {
 			$(this).click(function () {
@@ -1573,6 +2247,49 @@ $( window ).resize( function(){
 		$('#moreCVWitnessTable').html('');
 		
 	});
+	$('#BINDERaddVehTable').click(function () {
+	
+		if ($('.BINDERTable').length !== 0 ) {
+			var num = $('.BINDERTable').length + 2;
+		}else{
+			var num = 2;
+		}
+		var html = '<div class="BINDERTable"><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Year</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Make</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Model</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Vin #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Ins Co/Policy #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">If no insurance, why?</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table></div>';
+		$('#BINDERmoreVehTable').append(html);	
+		$('#BINDERmoreVehTable').show();
+	});
+	$('#BINDERaddVehTable2').click(function () {
+		if ($('.BINDERTable').length !== 0 ) {
+			var num = $('.BINDERTable').length + 2;
+		}else{
+			var num = 2;
+		}
+		var html = '<div class="BINDERTable"><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Year</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Make</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Model</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Vin #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Ins Co/Policy #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">If no insurance, why?</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">What happened to this vehicle?</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table></div>';
+		$('#BINDERmoreVehTable2').append(html);	
+		$('#BINDERmoreVehTable2').show();
+	});
+	$('#BINDERaddmemberofHHVeh').click(function () {
+		if ($('.BINDERmemberofHHTable').length !== 0 ) {
+			var num = $('.BINDERmemberofHHTable').length + 2;
+		}else{
+			var num = 2;
+		}
+		var html = '<div class="BINDERmemberofHHTable"><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Name</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Relationship to Insured</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Year</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Make</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td><td class="indent block">Model</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Vin #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">Ins Co/Policy #</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table><table class="tight section2 full"><tr><td class="indent2"></td><td class="indent block">If no insurance, why?</td><td><input Required type="text" class="fillIn" style="width: 100%"/></td></tr></table></div>';
+		$('#BINDERmoreHHVehTable').append(html);	
+		$('#BINDERmoreHHVehTable').show();
+	});
+	$('#BINDERminusVehTable').click(function () {
+		$('#BINDERmoreVehTable').html('');
+		$('#BINDERmoreVehTable').hide();		
+	});
+	$('#BINDERminusVehTable2').click(function () {
+		$('#BINDERmoreVehTable2').html('');
+		$('#BINDERmoreVehTable2').hide();
+	});
+	$('#BINDERminusmemberofHHVeh').click(function () {
+		$('#BINDERmoreHHVehTable').html('');
+		$('#BINDERmoreHHVehTable').hide();
+	});
 	$('#addCVWitnessDetailsTable').click(function () {
 		if ($('.witnessTable2').length !== 0 ) {
 			var num = $('.witnessTable2').length + 2;
@@ -1602,8 +2319,8 @@ $( window ).resize( function(){
 	$('#OutOfState').change(function (index, value) {
 		var state = $(this).val();
 		$('.theState').each(function () {
-			var punc = $(this).html()
-			$(this).html(state + punc);
+			//var punc = $(this).html()
+			$(this).html(state);
 		});
 	});
 	$('#UDinfoSpacer').width($('#refTD').outerWidth() - 2);
@@ -1611,13 +2328,13 @@ $( window ).resize( function(){
 
 
 		$(window).scroll(function () {
-			$('html').removeClass('hide-scrollbar');
-			$('html').addClass('show-scrollbar');
+			$('#blurDIV').removeClass('hide-scrollbar');
+			$('#blurDIV').addClass('show-scrollbar');
 
 			clearTimeout(timer);
 			timer = setTimeout(function () {
-				$('html').removeClass('show-scrollbar');
-				$('html').addClass('hide-scrollbar');
+				$('#blurDIV').removeClass('show-scrollbar');
+				$('#blurDIV').addClass('hide-scrollbar');
 
 
 			}, 100);
@@ -1686,7 +2403,51 @@ $('.rowNumbers2').bind('input', function(){
 
 
 	});
-	
+$('.rowNumbers6').bind('input', function(){
+		var numRows = 0;
+		var newRows = 0;
+		var rowNum = 0;
+		var inpNum = $(this).val();
+		let table = $(this).parents("table").next("table");
+		$('[name^="dynamic_"]').prop('name','');
+		if (inpNum === '' || inpNum === '0') {
+			$('#' + table.attr('id')).hide();
+			$('#pddamages').hide();
+			numberCols();
+			return;
+		} else {
+			$('#' + table.attr('id')).show();
+			$('#pddamages').show();
+		};
+		var tableRef = $(table).attr('id');
+
+		numRows = document.getElementById(tableRef).rows[0].cells.length;
+		
+		if (inpNum >= numRows) {
+			newRows = inpNum - numRows;
+			rowNum = parseInt(numRows) + 1;
+			var html = '<input type="text" class="fillIn"  style="width:100%;"/>';
+			
+			addColumn2($(table).attr('id'), html, newRows);
+
+		} else {
+			newRows = parseInt(inpNum - numRows) * -1;
+			rowNum = numRows + 1;
+			deleteColumn($(table).attr('id'), newRows);
+			
+
+
+		};
+		if (inpNum >= numRows && inpNum >= 2) {
+			newRows = inpNum - numRows;
+
+			numberCols();
+		} else {
+
+		};
+
+
+	});	
 $('.rowNumbers').bind('input', function(){
 		var numRows = 0;
 		var newRows = 0;
@@ -1716,7 +2477,7 @@ $('.rowNumbers').bind('input', function(){
 			
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
-				autoAddress(this);
+				//autoAddress(this);
 			});
 			$('.address').blur(function () {
 				$(this).parent().next().find('input').focus();
@@ -1793,7 +2554,7 @@ $('.rowNumbers').bind('input', function(){
 
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
-				autoAddress(this);
+			//	autoAddress(this);
 			});
 			$('.address').blur(function () {
 				$(this).parent().next().find('input').focus();
@@ -1826,7 +2587,7 @@ $('.rowNumbers').bind('input', function(){
 			addRows($(table).attr('id'), html, newRows);
 			$('.address').focus(function () {
 				$(this).attr('placeholder', 'Enter a location');
-				autoAddress(this);
+				//autoAddress(this);
 			});
 			$('.address').blur(function () {
 				$(this).parent().next().find('input').focus();
@@ -1896,6 +2657,8 @@ $('#addFUQ').click(function () {
 		clone.find('td:eq(0)').empty();
 		clone.find('td:eq(0)').append('<i class="fa fa-minus-circle noprint FUQminus" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove question."></i>');
 		clone.find('.editable').text('');
+		clone.find('.autogrow').val('');
+		clone.find('.autogrow').css({width:'150'});
 		clone.find('.FOL').val('');
 		clone.attr('id','FUQuestions'+num);
 		
@@ -1934,6 +2697,7 @@ $('#addFUQ').click(function () {
 	for (var r = 0; r < $('table[id^=FUQuestions]').length; r++) {
 	clone.insertAfter($('table[id^=FUQuestions]')[r]);
 	}
+	$("input.autogrow").autoGrowInput({minWidth:150,comfortZone:1});
 		numberCols();
 	$('.FUQminus').click(function () {
 		$(this).closest('table').remove();
@@ -1954,6 +2718,7 @@ function showMain() {
 	$('#cvTable').show();
 	$('#cvTables').show();
 	$('.rowNumbers2').trigger('input');
+	$('.rowNumbers6').trigger('input');
 	$('#secondPart').show();
 	$('#addVehicles').show();
 	$('#folTable').show();
@@ -1978,7 +2743,7 @@ function coverageCheck(status, ele) {
 
 		} else if (status !== "Ok" && $(value).attr('id') === ele) {
 			$(value).show();
-
+			
 		};
 	
 
@@ -2021,8 +2786,23 @@ function coverageCheck(status, ele) {
 		} 
 		
 	}
+	if ($('.coverageIssue:visible').length) {
+		$('#AgentQuestions').show();
+		$('#checkbox6').prop('checked',true);
+		$('#checkbox6').attr('disabled',true);
+		$('#checkbox6').parent().css('color','silver');
+		$('#checkbox6').next().css('border-color','silver');
+	}else{
+		$('#checkbox6').attr('disabled',false);
+		$("label[for='checkbox6']").removeClass('disabledInput');
+		$('#checkbox6').parent().css('color','initial');
+		$('#checkbox6').next().css('border-color','initial');
+		$('#AgentQuestions').hide();
+		$('#checkbox6').prop('checked',false);
+		
+		
+	}
 };
-
 
 function loadFunctions() {
 	title = 'Recorded Statement General';
@@ -2040,17 +2820,29 @@ function loadFunctions() {
 		$(value).hide();
 	});
 	
-	$('input[name="VNOPrental"]').click(function () {
-		if ($(this).val() === 'Yes') {
+	$('input[name="VNOPrental"]').change(function () {
+		hideshow($(this),$("#VNOPrental"));
+		/*if ($(this).val() === 'Yes') {
 			$('#VNOPrental').show();
 			numberCols();
 		} else {
 			$('#VNOPrental').hide();
 			numberCols();
-		};
+		};*/
 	});
 	
-	
+	$('input[name="NOrental"]').change(function () {
+			/*if ($(this).val() === 'Yes') {
+			$('#NOrented').show();
+			$('#NOowned').hide();
+			numberCols();
+		} else {
+			$('#NOowned').show();
+			$('#NOrented').hide();
+			numberCols();
+		};*/
+		hideshow($(this),$("#NOrented"),$("#NOowned"));
+	});
 	$("td").not('.number').on('click', function () {	
 		if ($('input[name="lang"]').is(':visible')) {
 			translateTo('lang', 'other_lang', $(this));
@@ -2170,7 +2962,7 @@ $('table').on('input', '.FOL', function() {
 		};
 	});
 
-	$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone):not(.FOL)").on('keydown', function () {
+	$("input.fillIn:not(#ClaimNo):not(#WITClaimNo):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone):not(.FOL)").on('keydown', function () {
 		var fontSize = $(this).css('font-size');
 		if (isOverflown($(this)) && parseFloat(fontSize) > 9) {
 			$(this).css('font-size', parseFloat(fontSize)-1);
@@ -2182,12 +2974,13 @@ $('table').on('input', '.FOL', function() {
 		};
 		
 	});
-	$('#addUDSec').click(function () {
+
+/*	$('#addUDSec').click(function () {
 		var UDsec = $('#UD').clone();
 		UDsec.find('#addUDSec').remove();
 		UDsec.find('.printdiv').remove();
 		$('#moreUD').append(UDsec);
-	});
+	}); */
 	
 	$('.IVs').keydown(function () {
 
@@ -2232,16 +3025,17 @@ $('table').on('input', '.FOL', function() {
 	});
 
 	$('#ClaimNo').inputmask("A[A]-999999");
+	$('#OFACClaimNo').inputmask("A[A]-999999");
 	$('#AgentClaimNo').inputmask("A[A]-999999");
-	$('.time').inputmask("[hh:mm]", {
+	/*$('.time').inputmask("[hh:mm]", {
         placeholder: "HH:MM", 
         insertMode: false, 
         showMaskOnHover: false,
         hourFormat: 12
       }
-   );
+   );*/
 	$('#FUQClaimNo').inputmask("A[A]-999999");
-	$('#ClaimNo2').inputmask("A[A]-999999");
+	$('#WITClaimNo').inputmask("A[A]-999999");
 	$('.phone').inputmask({
 		mask: "(999) 999-9999",
 		showMaskOnHover: false,
@@ -2251,13 +3045,13 @@ $('table').on('input', '.FOL', function() {
 	var autocomplete;
 	$('.address').focus(function () {
 		$(this).attr('placeholder', 'Enter a location');
-		autoAddress(this);
+		//autoAddress(this);
 
 	});
 
 	$('.address1').focus(function () {
 		$(this).attr('placeholder', 'Enter a location');
-		autoAddress(this);
+		//autoAddress(this);
 	});
 	$('.address').blur(function () {
 		$(this).parent().next().find('input').focus();
@@ -2348,7 +3142,7 @@ function autoAddress(input) {
 
 	google.maps.event.addListener(autocomplete, 'place_changed',
 		function () {
-			fillInAddress(input, autocomplete);
+			//fillInAddress(input, autocomplete);
 		});
 }
 function normalAddress(input) {
@@ -2558,19 +3352,26 @@ function clearAll() {
 
 }
 
-
-function printFunction() {
-	
+var heading;
+function printFunction(data) {
+	//var keyID = $('#ClaimNo').val() + ' ' + $('#RStakenWith').val().toUpperCase() + ' ' + $('#Date_of_RS').val() + ' ' + $("input[name='RSNo']:checked").val() + ' ('+document.title+')';
+	var keyID = $("input[id$='ClaimNo']:visible").val() + ' ' + $("input[id$='RStakenWith']:visible").val().toUpperCase() + ' ' + $("input[id$='Date_of_RS']:visible").val() + ' ' + $("input[name$='RSNo']:checked:visible").val() + ' ('+document.title+')';
+	var formIdentifier = `${keyID}`; 
+	localStorage.setItem(formIdentifier, JSON.stringify(data[formIdentifier]));
+var conf = 0;	
  var docTitle = document.title;
+ var i = 0;
 	$.when($('.required').each(function () {
 		toggleRequired(this, true)
 	})).done(function () {
 		var i = 0;
-		var text = '';
-		var heading;
+		var text = 'Missing information detected. Please complete the required fields highlighted with a red border.<br /><br />You may also click the print button below to proceed without filling in the required fields.<br />';
+		
 		var str;
 		var strText;
 		var printConfirm;
+		
+		var agentConfirm;
 	
 		$(':input[required]').each(function () {
 			if ($(this).closest('div').is(":hidden")) {
@@ -2583,27 +3384,16 @@ function printFunction() {
 			
 			var $this = $(this);
 			if ($(this).is(":visible")) {
-				if (!$(this)[0].checkValidity()) {
-					i = i + 1;
-
-					text = 'Missing information detected. Please complete the required fields highlighted with a red border.<br /><br />You may also click the print button below to proceed without filling in the required fields.<br />';
-					if (i > 1){
-						heading = i + ' Invalid Inputs';
-					}else{
-						heading = i + ' Invalid Input';
-					}
-
-					$this.addClass('banners');
-					var arr = $("[name^='"+$this.attr('name')+"']");
-					for (j = 0; j<arr.length; j++ ) {
-						$(arr[j]).next('span').addClass('banners');
-					}
+				
+					
+					if (!$(this)[0].checkValidity()) {
+					
 					$('#popup1 h2').html(heading);
 					$('#popup1 p').html(text);
 					$('#PopupWindow h3').html(heading);
 					$('#PopupWindow p').html(text);
 					$('#PopupWindow').height(160);	
-				
+				i = i + 1;
 					 printConfirm = $.confirm({
 											title: heading,
 											content: text,
@@ -2616,6 +3406,7 @@ function printFunction() {
 												print: {
 													btnClass: 'btn-blue',
 													action: function(){
+														
 														$(':input[required]').removeClass('banners');
 														$('span').removeClass('banners');
 														$('#blurDIV').removeClass('blur');
@@ -2628,6 +3419,15 @@ function printFunction() {
 											
 										});
 				
+
+					
+					
+
+					$this.addClass('banners');
+					var arr = $("[name^='"+$this.attr('name')+"']");
+					for (j = 0; j<arr.length; j++ ) {
+						$(arr[j]).next('span').addClass('banners');
+					};
 					
 				} else {
 					$this.removeClass('banners');
@@ -2638,7 +3438,13 @@ function printFunction() {
 
 				}
 			}
+					if (i > 1){
+						heading = i + ' Invalid Inputs';
+					}else{
+						heading = i + ' Invalid Input';
+					};
 		});
+		
 		if (i === 0) {
 			
 			$(document).attr('title', docTitle);
@@ -2646,7 +3452,68 @@ function printFunction() {
 					printForm('RSgeneral');
 			
 		}else{
+			printConfirm = $.confirm({
+											title: heading,
+											content: text,
+											type: 'blue',
+											icon: 'fa fa-info-circle',
+											boxWidth: '50%',
+											useBootstrap: false,
+											lazyOpen: true,
+											buttons: {
+												print: {
+													btnClass: 'btn-blue',
+													action: function(){
+														
+														$(':input[required]').removeClass('banners');
+														$('span').removeClass('banners');
+														$('#blurDIV').removeClass('blur');
+														$('.cloneTrans').remove();
+														printForm('RSgeneral');
+														}
+												}, 
+												cancel: function(){$('#blurDIV').removeClass('blur');}
+											},
+											
+										});
+		$('#AgentQuestions :input[required]').each(function () {
+			if ($(this).is(":visible")) {
+				if (!$(this)[0].checkValidity()) {
+					
+					
+					agentConfirm = $.confirm({
+								buttons: {
+									ok: function () {
+										
+										printConfirm.open();
+										//return;
+										}
+								},
+								boxWidth: '40%',
+								useBootstrap: false,
+								lazyOpen: true,
+								type: 'orange',
+								icon: 'fa fa-exclamation-circle',
+								title: 'Agent Questions not complete!',
+								content: 'Please set IR task for Agent Questions!',
+							});
+					conf = conf + 1;		
+					
+							
+				};
+			};
+			
+		});
+			if (conf !== 0) {
+				
+				
+				$('#blurDIV').addClass('blur');
+				agentConfirm.open();
+				return;
+			};
+			
 			$('#blurDIV').addClass('blur');
+			
 			printConfirm.open();
 			
 		};
@@ -2753,7 +3620,33 @@ function addColumn(tblId, myHtmlContent, num) {
 	$('#cvdamages').show();
 
 }
+function addColumn2(tblId, myHtmlContent, num) {
+	for (var j = 0; j < num + 1; j++) {
+		var tblHeadObj = document.getElementById(tblId).tHead;
+		var len = tblHeadObj.rows.length;
+		for (var h = 0; h < len; h++) {
 
+			var newTH = document.createElement('th');
+			tblHeadObj.rows[h].appendChild(newTH);
+			newTH.innerHTML = '<u>PD' + (tblHeadObj.rows[h].cells.length - 1) + ":</u>"
+			//cloneDiv($('#pdTable').attr('id'), $('#cvTables').attr('id'), (tblHeadObj.rows[h].cells.length - 3))
+			
+		}
+
+		var tblBodyObj = document.getElementById(tblId).tBodies[0];
+		for (var i = 0; i < tblBodyObj.rows.length; i++) {
+			var newCell = tblBodyObj.rows[i].insertCell(-1);
+			newCell.innerHTML = myHtmlContent //'[td] row:' + i + ', cell: ' + (tblBodyObj.rows[i].cells.length - 1)
+			
+		}
+	}
+
+	numberCols();
+	//$('#otherCVs').show();
+	//$('#cvTable').show();
+	$('#pddamages').show();
+
+}
 function deleteColumn(tblId, col) {
 
 	for (var j = 0; j < col - 1; j++) {
@@ -2813,7 +3706,14 @@ function numberCols() {
 
 		});
 	})
+
 	$("td.AgentNumber").each(function (i, v) {
+		$(v).text('');
+		$(v).text(i + 1 + ".");
+		$(this).css('width', '45px');
+
+	});
+	$("td.OFACNumber").each(function (i, v) {
 		$(v).text('');
 		$(v).text(i + 1 + ".");
 		$(this).css('width', '45px');
@@ -2853,6 +3753,7 @@ function numberColsOther(eleclass) {
 }
 
 function cloneTable(tableId, divId) {
+	if ($('#'+tableId).length){
 	var quantity = jQuery("table[id^=" + tableId + "]").length;
 	var i = 0
 
@@ -2885,14 +3786,17 @@ function cloneTable(tableId, divId) {
 
 	clone.find('i').each(function () {
 		$(this).closest('td').removeClass('minus');
-		$(this).closest('td').remove();
+		$(this).closest('td').css('border-right', 'hidden');
+		$(this).closest('td').css('border-bottom', 'hidden');
+		$(this).closest('td').html('');
+		//$(this).closest('td').remove();
 		$(this).closest('th').removeAttr("title");
 		$(this).closest('th').css('cursor', 'default');
 		$(this).closest('th').html('');
 	});
 	// overwrite the <div>
 	$('#' + divId).html(clone);
-
+	}
 }
 
 function cloneTable2(tableId, divId, CVnum, num) {
@@ -2974,19 +3878,22 @@ var i = 0;
 
 	}
 	myclone.find('.rowNumbers').val('0');
+
 	
 	var arr = $("[id^=CVpassTable_]");
 
 	$.each(arr, function (index, value) {
+		var newTxt = myclone.find('.rowNumbers').closest('td').prev('td');
+		newTxt = newTxt.html().replace(/CV.+/g,'CV' + (index + 2) + ' vehicle?');
 		
-		
+		myclone.find('.rowNumbers').closest('td').prev('td').text(newTxt);
 		$('#' + $(value).attr('id') + ' > thead > tr > th:first').text("CV" + (index + 2))
-
+		
 	})
 	$('.phone').inputmask("(999) 999-9999");
 		$('.address').focus(function () {
 			$(this).attr('placeholder', 'Enter a location');
-			autoAddress(this);
+			//autoAddress(this);
 		});
 		/*$(value).find('.fillIn').each(function () {
 			i = i + 1;
@@ -3007,11 +3914,11 @@ var i = 0;
 
 			let table = $(this).parents("table").next("table");
 			$('[name^="dynamic_"]').attr('name','');
-			/*if (inpNum == 0) {
+			if (inpNum == 0) {
 				table.hide();
 			}else{
 				table.show();
-			}*/
+			}
 			var tableRef = $('#' + $(table).attr('id') + '>tbody')[0];
 			numRows = parseInt(tableRef.rows.length);
 			if (inpNum > numRows) {
@@ -3022,7 +3929,7 @@ var i = 0;
 				$('.phone').inputmask("(999) 999-9999");
 				$('.address').focus(function () {
 					$(this).attr('placeholder', 'Enter a location');
-					autoAddress(this);
+					//autoAddress(this);
 				});
 				$('.address').blur(function () {
 					$(this).parent().next().find('input').focus();
@@ -3039,15 +3946,15 @@ var i = 0;
 
 		})
 
-		myclone.find('.rowNumbers').trigger('input');
-		
+		//myclone.find('.rowNumbers').trigger('input');
+		$('.rowNumbers').trigger('input');
 
 }
 function getRadioVal(form, name) {
     var val;
     // get list of radio buttons with specified name
-    var radios = form.elements[name];
-    
+    var radios = form.elements[name] || "";
+  
     // loop through list of radio buttons
     for (var i=0, len=radios.length; i<len; i++) {
         if ( radios[i].checked ) { // radio checked?
@@ -3106,17 +4013,22 @@ function PrintElem(elem)
 {
 
 	if (elem !== undefined) {
-    var mywindow = window.open('', 'PRINT', 'height='+h+',width='+w);
+    var mywindow = window.open('', 'PRINT', 'height='+docHeight+',width='+docWidth);
 	
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
     mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
 	mywindow.document.write('<table class="full" ></table>');
-	mywindow.document.write('<form>');
-	var $b = $("#firstPart").clone();
-	$b.appendTo(mywindow.document.body);
-	var $a = $("#" + elem).clone();
-	$a.appendTo(mywindow.document.body);
-	mywindow.document.write(document.getElementById('closingQuestions').innerHTML);
+	mywindow.document.write('<form id="RSgeneral">');
+	var b = $("#firstPart").clone();
+	var selectedValue = $("select[name$='other_lang']:visible option:selected").val();
+	b.find("option[value = '" + selectedValue + "']").attr("selected", "selected");
+	b.appendTo(mywindow.document.body);
+	var a = $("#" + elem).clone();
+	var selectedValue2 = $("select[name='OutOfState']:visible option:selected").val();
+	a.find("option[value = '" + selectedValue2 + "']").attr("selected", "selected");
+	a.appendTo(mywindow.document.body);
+	var c = $("#closingQuestions").clone();
+	c.appendTo(mywindow.document.body);
 	mywindow.document.write('</form>');
     mywindow.document.write('</body></html>');
 	$("td.number").each(function (i, v) {
@@ -3129,8 +4041,17 @@ function PrintElem(elem)
 	for (var i = 0; i < num.length; i++) {
 		num[i].innerHTML = i + 1 + ".";
 	}
+	var bann = mywindow.document.querySelectorAll('input');
+		for (i = 0; i<bann.length; i++ ) {
+				$(bann[i]).removeClass('banners');
+			}
+		var arr = mywindow.document.querySelectorAll('span');
+			for (i = 0; i<arr.length; i++ ) {
+				$(arr[i]).removeClass('banners');
+			}
     mywindow.document.close(); // necessary for IE >= 10
     mywindow.focus(); // necessary for IE >= 10*/	
+	
     return true;
 	}else{
 
@@ -3149,17 +4070,21 @@ function PrintElem(elem)
 				}
 			});
 	}
+	numberColsOther('number');
 }
 function printForm(form) {
 	if (form !== undefined) {
-    var mywindow = window.open('', 'PRINT', 'height='+h+',width='+w);
-	
+    var mywindow = window.open('', 'PRINT', 'height='+docHeight+',width='+docWidth);
     mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="files/rs.css"><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body><script>var delayInMilliseconds = 1000; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
+    mywindow.document.write('</head><body><script>var delayInMilliseconds = 1500; window.onload = setTimeout(function() {window.print();window.close();},delayInMilliseconds);</script>');
 	mywindow.document.write('<table class="full" ></table>');
 	mywindow.document.write('<form>');
 
 	var $a = $("#" + form).clone();
+	var selectedValue = $("select[name$='other_lang']:visible option:selected").val();
+	var selectedValue2 = $("select[name='OutOfState']:visible option:selected").val();
+    $a.find("option[value = '" + selectedValue + "']").attr("selected", "selected");
+	$a.find("option[value = '" + selectedValue2 + "']").attr("selected", "selected");
 	$a.appendTo(mywindow.document.body);
 	
 	mywindow.document.write('</form>');
@@ -3216,6 +4141,7 @@ function resetReset() {
 			$('.collapsible i').attr("class", 'fa fa-minus');
 			$('.rowNumbers').trigger('input');
 			$('.rowNumbers2').trigger('input');
+			$('.rowNumbers6').trigger('input');
 			$('.rowNumbers4').trigger('input');
 			$('.rowNumbers5').trigger('input');
 			$('#addVehicles').show();
@@ -3235,6 +4161,13 @@ function resetReset() {
 			$('.phone').val('');
 			$('input[id^=checkbox]').prop('checked', false);
 			$('#moreCVWitnessTable').html('');
+			$('#BINDERmoreVehTable').html('');
+			$('#BINDERmoreVehTable2').html('');
+			$('#BINDERmoreHHVehTable').html(''); 
+			$('#BINDERmemberofHHTable').hide();
+			$('#BINDERotherVehTable2').hide();
+			$('#BINDERotherVehTable').hide();
+			$('#BINDERtradeInTable').hide();
 			$('#CVWitnessDetailsTable').html('');
 			$('#FUQ').html('');
 			$(".txtAreaGrow").removeAttr("style");
@@ -3243,7 +4176,7 @@ function resetReset() {
 			$('[id^=checkbox]').attr('disabled',false);
 			$('[id^=checkbox]').trigger('change');
 			$('input[name="RSother"]').trigger('change');
-			$("input.fillIn:not(#ClaimNo):not(#ClaimNo2):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone)").css('font-size', 17);
+			$("input.fillIn:not(#ClaimNo):not(#WITClaimNo):not(#adj):not(#adj2):not(#adj3):not(.date):not(.time):not(.phone)").css('font-size', 17);
 			checkedAll = [];
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
@@ -3280,7 +4213,7 @@ var today = new Date();
  function undo(name) {
 	 $("input:radio[name='"+name+"']").prop('checked', false);
 	 $('input:radio[name="'+name+'"]').trigger('change');
-	
+
  }
  function display_dt() {
 	var x = new Date()
@@ -3321,7 +4254,7 @@ function translateTo(RadioEle, SelectEle, $this) {
 					//set the source language
 			url += "&source="; 
 					//Replace with your API key
-			url += "&key=AIzaSyDDNX2bR1DhscYgIfTMfJZfvouGAFj5VIY";
+			url += "&key=AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg";
 			$.get(url, function (data, status) {
 				$this.tooltipster({
 					functionAfter: function() {$this.tooltipster('instance').destroy()},
@@ -3349,4 +4282,93 @@ function translateTo(RadioEle, SelectEle, $this) {
 					
 		};				
 	};
+};
+
+function getChromeVersion () {
+    var pieces = navigator.userAgent.match(/Chrom(?:e|ium)\/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/);
+    if (pieces == null || pieces.length != 5) {
+        return undefined;
+    }
+    pieces = pieces.map(piece => parseInt(piece, 10));
+    return pieces[1]+'.'+pieces[2]+'.'+pieces[3]+'.'+pieces[4]
+        
+}
+function hideshow(ckbox,ele1,ele2) {
+//$('input[name="'+ckbox+'"]').change(function () {
+	if (ckbox.is(":checked")) {
+		
+		if (ckbox.val() === 'Yes') {
+			ele1.show();
+			if (ele2) {
+				ele2.hide();
+			};
+			numberCols();
+		} else {
+			ele1.hide();
+			if (ele2) {
+				ele2.show();
+			};
+			numberCols();
+		};
+	} else {
+		ele1.hide();
+		if (ele2) {
+			ele2.hide();
+		};
+		numberCols();
+	};
+//});	
+};
+
+function runVIN(ele) {
+if (ele.value !== '') {
+var myVin = $.trim(ele.value.toUpperCase());
+var xhr = new XMLHttpRequest();
+var url = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/"+myVin+"?format=json"
+var year, make, model, vehicle;
+xhr.open("GET", url, true);
+xhr.send();
+
+// Called whenever the readyState attribute changes 
+xhr.onreadystatechange = function() {
+ 
+  // Check if fetch request is done
+  if (xhr.readyState == 4 && xhr.status == 200) { 
+  
+    // Parse the JSON string
+    var jsonData = JSON.parse(xhr.responseText);
+    
+    // Call the displaySpecs(), passing in the parsed JSON string
+	
+//vehicle = displaySpecs(jsonData);
+	 year = jsonData.Results[9].Value;
+	 make = jsonData.Results[6].Value;
+	 model = jsonData.Results[8].Value;
+vehicle = "("+year + " " + make + " " + model+")";
+
+
+  }else{
+
+  if (xhr.readyState == 4) { 
+ 
+ //window.alert("VIN Error");
+ vehicle = "(VIN Error)";
+ }
+  }
+//$(ele).parent().nextAll().children("input").eq(0).val(vehicle);
+$(ele).parent().next('td').html(vehicle);
+};
+// Do the HTTP call using the url variable we specified above
+}else{
+	$(ele).parent().next('td').html('');
+}
+}
+function displaySpecs(data) {
+	var year = data.Results[9].Value;
+	var make = data.Results[6].Value;
+	var model = data.Results[8].Value;
+let veh = year + " " + make + " " + model;
+
+return veh;
+    
 };
