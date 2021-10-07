@@ -2766,7 +2766,7 @@ for (const element of arr.split(', ')) {
 		ele.push($(this).parent().text());
 	});
 };
-console.log(ele);
+
 if (count === 0) {
 		
 		$(arr).hide();
