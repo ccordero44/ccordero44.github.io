@@ -636,6 +636,9 @@ table.half {
 #witnessPDTable, #witnessCV1UPDTable, #witnessIVUPDTable {
 	display: none;
 }
+input[id$="RSNumother"] {
+	text-transform: lowercase;
+}
 .spacer {
 	width: 25px;
 }

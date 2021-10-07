@@ -1090,7 +1090,7 @@ $( window ).resize( function(){
 							return false;
 						}
 						$('#blurDIV').removeClass('blur');
-						document.location.href = mailtoURL('ccordero44@gmail.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
+						document.location.href = mailtoURL('ccordero44@gmail', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
 					}
 				},
 				cancel: function () {
@@ -3067,13 +3067,16 @@ $('table').on('input', '.FOL', function() {
 
 	});
 
-	$('#RSNumother').change(function () {
-		if ($(this).val() !== '') {
+	$('input[id$="RSNumother"').change(function () {
+		var val = parseInt($(this).val());
+		if (val !== '' && val >= 7) {
+			console.log(val);
 			$(this).attr('type','text');
 			var $this = $(this);
-			$this.val(ordinal_suffix_of($this.val()));
+			$this.val(ordinal_suffix_of(val));
 		}else{
 			$(this).attr('type','number');
+			$(this).val('');
 		}
 	});
 	$('input:Required').change(function () {
