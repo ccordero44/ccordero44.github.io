@@ -7,7 +7,7 @@
 		  
 $.ajax({
    type: "GET",
-   url: "file:\\\\10.74.11.100\\unique_data\\Claims\\TOOLKIT\\Shop%20Locator\\shops.csv",
+   url: "https://producersnational-my.sharepoint.com/:x:/p/ccordero/Eba4ny_YdlZBm6QwTXjCCfEBRt1PwMgPAC7fN_ijZQApmg?e=X88eeP",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
