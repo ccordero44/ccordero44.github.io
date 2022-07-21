@@ -228,11 +228,13 @@
             
             map.addListener('tilesloaded', function () {
 			scaledsize = new google.maps.Size(22, 22);
-			$(legend).show();
+			if ($(window).width() > 800) {
+				$(legend).show();
+				$(testDiv).show();
+			};
 			$(btnClickme).show();
 			$(clearMap).show();
 			$(shopList).show();
-			$(testDiv).show();
 			$(originInput).show();
                 document.getElementById("origin-input").innerHTML = 'Tilesloaded Event';
                 window.setTimeout(function () {
