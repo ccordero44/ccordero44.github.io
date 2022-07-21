@@ -411,12 +411,19 @@ map.fitBounds(resetBounds);
 
     $('#testDiv').hide();
     $('#legend').hide();
-
+	map.setOptions({
+		zoomControl: false,
+		streetViewControl: false
+	});
   } else {
 if ($('#myForm').is(':hidden')) {
     $('#testDiv').show();
     }
 	$('#legend').show();
+	  map.setOptions({
+		zoomControl: true,
+		streetViewControl: true
+	  });
     }
 
 });
