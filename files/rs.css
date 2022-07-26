@@ -22,6 +22,9 @@
   cursor: pointer; /* Add a pointer on hover */
 
 }
+th:not(#formTitle) {
+		font-size: 13px;
+	}
 .blur {
 	font-weight: bold;
 	filter: blur(3px);
@@ -635,9 +638,6 @@ table.half {
 }
 #witnessPDTable, #witnessCV1UPDTable, #witnessIVUPDTable {
 	display: none;
-}
-input[id$="RSNumother"] {
-	text-transform: lowercase;
 }
 .spacer {
 	width: 25px;
@@ -1621,6 +1621,7 @@ border: 1px solid #aaa;
 	border-right:hidden;
 	border-bottom:hidden;
 }
+
 /* PRINT CSS */
 
 @media print {
@@ -1694,6 +1695,7 @@ size: portrait;
 	td {
 		color: black !important;
 	}
+	
 	hr {
 		display: none;
 

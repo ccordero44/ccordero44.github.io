@@ -12,6 +12,7 @@ var timerID;
 var docWidth = 0;
 var docHeight = 0;
 var checkedAll = [];
+var hiddenEles = [];
 $( window ).load( function(){
 
    docWidth = 900;
@@ -90,6 +91,10 @@ $("input").keypress(function(e) {
 		}, 1);
 		
 	});
+	
+
+		
+
 		const formId = "RSgeneral"; // ID of the form
 		const url = location.href; //  href for the page
 		//const formIdentifier = `${formId}`; // Identifier used to identify the form
@@ -825,35 +830,38 @@ $( window ).resize( function(){
 		} else {
 			$('#MCTDUD').hide();
 		}*/
-	})
+	});
 	$('input[name="BINDERtradeIn"]').change(function () {
 		hideshow($(this),$("#BINDERtradeInTable"));
-	})
+	});
 	$('input[name="BINDERotherVeh"]').change(function () {
 		hideshow($(this),$("#BINDERotherVehTable"));
 		hideshow($(this),$("#BINDERmoreVehTable"));
-	})
+	});
 	$('input[name="BINDERotherVeh2"]').change(function () {
 		hideshow($(this),$("#BINDERotherVehTable2"));
 		hideshow($(this),$("#BINDERmoreVehTable2"));
-	})
+	});
 	$('input[name="BINDERmemberofHH"]').change(function () {
 		hideshow($(this),$("#BINDERmemberofHHTable"));
-	})
+	});
 	$('input[name="BINDERmemberofHHVeh"]').change(function () {
 		hideshow($(this),$("#BINDERmemberofHHVehTable"));
 		hideshow($(this),$("#BINDERmoreHHVehTable"));
 		
-	})
+	});
 	$('input[name="CVupd"]').change(function () {
 		hideshow($(this),$("#cvUPDTable"));	
-	})
+	});
 	$('input[name="PDupd"]').change(function () {
 		hideshow($(this),$("#pdUPDTable"));	
-	})
-	$('input[name="IVupd"]').change(function () {
+	});
+	$('input[name="IVupd"]').on('change', function () {
 		hideshow($(this),$("#ivUPDTable"));	
-	})
+	});
+	$('input[name="IVtowed"]').change(function () {
+		hideshow($(this),$("#IVDrivableTable"));	
+	});
 	$('input[name="anyUDs"]').click(function () {
 		hideshow($(this),$("#anyUDs"));
 		/*if ($(this).val() === "Yes") {
@@ -861,7 +869,7 @@ $( window ).resize( function(){
 		} else {
 			$('#anyUDs').hide();
 		}*/
-	})
+	});
 	$('input[name="stillatshop"]').click(function () {
 		hideshow($(this),$("#stillatshopYes"),$('#stillatshopNo'));
 		/*if ($(this).val() === "Yes") {
@@ -871,7 +879,7 @@ $( window ).resize( function(){
 			$('#stillatshopYes').hide();
 			$('#stillatshopNo').show();
 		}*/
-	})
+	});
 	
 	$("#resetButton").mousedown(function () {
 		$('#blurDIV').addClass('blur');
@@ -980,6 +988,7 @@ $( window ).resize( function(){
 			$("#takenToHospitalQ").hide();
 		};*/
 	});
+
 	$("input[name^=PCPorUC]").change(function () {
 		hideshow($(this),$("#PCPorUCQ"));
 		/*if ($(this).val() === "Yes") {
@@ -1030,7 +1039,7 @@ $( window ).resize( function(){
 	});
 	$("input[name^=perfFunctions]").change(function () {
 		if ($("input[name^=perfFunctions]:checked").length === 0) {
-			$(this).parents("table").next("table").Hide();
+			$(this).parents("table").next("table").hide();
 		};
 	});
 	$("input[name^=OOPexp]").change(function () {
@@ -1090,7 +1099,7 @@ $( window ).resize( function(){
 							return false;
 						}
 						$('#blurDIV').removeClass('blur');
-						document.location.href = mailtoURL('ccordero44@gmail.com', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
+						document.location.href = mailtoURL('ccordero44@gmail', $(document).attr('title') + ' Bug Report for ' + Date(),issue + '\n\nChrome Version: ' + getChromeVersion() + '\nRecorded Statement Version: ' + $('#version').text());
 					}
 				},
 				cancel: function () {
@@ -2677,11 +2686,50 @@ $('.rowNumbers').bind('input', function(){
         }
     });
 });
+  $('#addGRSOcc').click(function () {
+		var clone = $('#InsuredOccupationGeneralRS1').clone();
+		var num = parseInt($('div[id^=InsuredOccupationGeneralRS]').length)+1;
+		clone.find('table td:eq(1)').empty();
+		clone.find('table td:eq(1)').append('<i class="fa fa-minus-circle noprint minusGRSOcc" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove question."></i>');
+		clone.find('table td:eq(2)').empty();
+		clone.find('table td:eq(2)').append('<span onclick="selectElementContents(this)" contenteditable class="addInsdOccupation" style="width:150px;text-transform:capitalize !important">[Name]</span>\'s occupation?');
+		clone.find('table:eq(1) td:eq(1)').empty();
+		clone.find('table:eq(1) td:eq(1)').append('<span style="text-transform:capitalize !important" class="addInsdName"></span>\'s job title?');
+		clone.find('table:eq(2) td:eq(1)').empty();
+		clone.find('table:eq(2) td:eq(1)').append('<span style="text-transform:capitalize !important" class="addInsdName"></span>\'s Employer\'s Name');
+		clone.find('.autogrow').val('');
+		clone.find('.autogrow').css({width:'150'});
+		clone.find('.fillIn').val('');
+		clone.attr('id','InsuredOccupationGeneralRS'+num);
+			
+	for (var r = 0; r < $('div[id^=InsuredOccupationGeneralRS]').length; r++) {
+	clone.insertAfter($('div[id^=InsuredOccupationGeneralRS]')[r]);
+	}
+	$("input.autogrow").autoGrowInput({minWidth:150,comfortZone:1});
+		numberCols();
+	$('.minusGRSOcc').click(function () {
+		$(this).closest('div').remove();
+		numberCols();
+	});
+	$(".addInsdOccupation").on('keyup', function () {
+		var eleIndex = $(".addInsdOccupation").length - 1;
+		//$(".addInsdName"+eleIndex).html($(this).text())
+		var ele = $(this).closest('table').next().find('.addInsdName');
+		ele.html($(this).text());
+		$(ele).closest('table').next().find('.addInsdName').html($(this).text());
+		console.log(eleIndex);
+	});
+	if ($('.addInsdOccupation').length > 0) {
+			selectElementContents($('.addInsdOccupation')[$('.addInsdOccupation').length-1]);
+		}else{
+			selectElementContents($('.addInsdOccupation')[0]);
+		};
+});
 $('#addFUQ').click(function () {
 		var clone = $('#FUQuestions1').clone();
 		var num = parseInt($('table[id^=FUQuestions]').length)+1;
 		clone.find('td:eq(0)').empty();
-		clone.find('td:eq(0)').append('<i class="fa fa-minus-circle noprint FUQminus" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove question."></i>');
+		clone.find('td:eq(0)').append('<i class="fa fa-minus-circle noprint FUQminus" style="padding-top:2px;color:red;cursor:pointer;" title="Click to remove insured."></i>');
 		clone.find('.editable').text('');
 		clone.find('.autogrow').val('');
 		clone.find('.autogrow').css({width:'150'});
@@ -2766,7 +2814,7 @@ for (const element of arr.split(', ')) {
 		ele.push($(this).parent().text());
 	});
 };
-
+console.log(ele);
 if (count === 0) {
 		
 		$(arr).hide();
@@ -3067,16 +3115,13 @@ $('table').on('input', '.FOL', function() {
 
 	});
 
-	$('input[id$="RSNumother"').change(function () {
-		var val = parseInt($(this).val());
-		if (val !== '' && val >= 7) {
-			console.log(val);
+	$('#RSNumother').change(function () {
+		if ($(this).val() !== '') {
 			$(this).attr('type','text');
 			var $this = $(this);
-			$this.val(ordinal_suffix_of(val));
+			$this.val(ordinal_suffix_of($this.val()));
 		}else{
 			$(this).attr('type','number');
-			$(this).val('');
 		}
 	});
 	$('input:Required').change(function () {
@@ -4257,9 +4302,11 @@ function resetReset() {
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
 			$('#blurDIV').removeClass('blur');
-			$('input[name="lang"]').trigger('change');
-			$('.FUQminus').trigger('click')
+			//$('input[name="lang"]').trigger('change');
+			$('.FUQminus').trigger('click');
+			$('.minusGRSOcc').trigger('click');
 			$('.editable').text('');
+			$(hiddenEles).each(function(){$(this).hide()});
 			numberCols();
 	console.timeEnd('Reset Function Time');
 }
@@ -4371,18 +4418,24 @@ function getChromeVersion () {
 }
 function hideshow(ckbox,ele1,ele2) {
 //$('input[name="'+ckbox+'"]').change(function () {
+	//ele1.attr('data-hidden', 'true');
+	hiddenEles.push($(ele1));
 	if (ckbox.is(":checked")) {
 		
 		if (ckbox.val() === 'Yes') {
 			ele1.show();
+			
 			if (ele2) {
 				ele2.hide();
+				hiddenEles.push($(ele2));
 			};
 			numberCols();
 		} else {
 			ele1.hide();
+			
 			if (ele2) {
 				ele2.show();
+				hiddenEles.push($(ele2));
 			};
 			numberCols();
 		};
@@ -4448,3 +4501,10 @@ let veh = year + " " + make + " " + model;
 return veh;
     
 };
+function selectElementContents(el) {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+}
