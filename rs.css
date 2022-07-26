@@ -22,7 +22,7 @@
   cursor: pointer; /* Add a pointer on hover */
 
 }
-th {
+th:not(#formTitle) {
 		font-size: 13px;
 	}
 .blur {

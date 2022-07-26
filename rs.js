@@ -12,6 +12,7 @@ var timerID;
 var docWidth = 0;
 var docHeight = 0;
 var checkedAll = [];
+var hiddenEles = [];
 $( window ).load( function(){
 
    docWidth = 900;
@@ -90,6 +91,10 @@ $("input").keypress(function(e) {
 		}, 1);
 		
 	});
+	
+
+		
+
 		const formId = "RSgeneral"; // ID of the form
 		const url = location.href; //  href for the page
 		//const formIdentifier = `${formId}`; // Identifier used to identify the form
@@ -825,38 +830,38 @@ $( window ).resize( function(){
 		} else {
 			$('#MCTDUD').hide();
 		}*/
-	})
+	});
 	$('input[name="BINDERtradeIn"]').change(function () {
 		hideshow($(this),$("#BINDERtradeInTable"));
-	})
+	});
 	$('input[name="BINDERotherVeh"]').change(function () {
 		hideshow($(this),$("#BINDERotherVehTable"));
 		hideshow($(this),$("#BINDERmoreVehTable"));
-	})
+	});
 	$('input[name="BINDERotherVeh2"]').change(function () {
 		hideshow($(this),$("#BINDERotherVehTable2"));
 		hideshow($(this),$("#BINDERmoreVehTable2"));
-	})
+	});
 	$('input[name="BINDERmemberofHH"]').change(function () {
 		hideshow($(this),$("#BINDERmemberofHHTable"));
-	})
+	});
 	$('input[name="BINDERmemberofHHVeh"]').change(function () {
 		hideshow($(this),$("#BINDERmemberofHHVehTable"));
 		hideshow($(this),$("#BINDERmoreHHVehTable"));
 		
-	})
+	});
 	$('input[name="CVupd"]').change(function () {
 		hideshow($(this),$("#cvUPDTable"));	
-	})
+	});
 	$('input[name="PDupd"]').change(function () {
 		hideshow($(this),$("#pdUPDTable"));	
-	})
-	$('input[name="IVupd"]').change(function () {
+	});
+	$('input[name="IVupd"]').on('change', function () {
 		hideshow($(this),$("#ivUPDTable"));	
-	})
+	});
 	$('input[name="IVtowed"]').change(function () {
 		hideshow($(this),$("#IVDrivableTable"));	
-	})
+	});
 	$('input[name="anyUDs"]').click(function () {
 		hideshow($(this),$("#anyUDs"));
 		/*if ($(this).val() === "Yes") {
@@ -864,7 +869,7 @@ $( window ).resize( function(){
 		} else {
 			$('#anyUDs').hide();
 		}*/
-	})
+	});
 	$('input[name="stillatshop"]').click(function () {
 		hideshow($(this),$("#stillatshopYes"),$('#stillatshopNo'));
 		/*if ($(this).val() === "Yes") {
@@ -874,7 +879,7 @@ $( window ).resize( function(){
 			$('#stillatshopYes').hide();
 			$('#stillatshopNo').show();
 		}*/
-	})
+	});
 	
 	$("#resetButton").mousedown(function () {
 		$('#blurDIV').addClass('blur');
@@ -1034,7 +1039,7 @@ $( window ).resize( function(){
 	});
 	$("input[name^=perfFunctions]").change(function () {
 		if ($("input[name^=perfFunctions]:checked").length === 0) {
-			$(this).parents("table").next("table").Hide();
+			$(this).parents("table").next("table").hide();
 		};
 	});
 	$("input[name^=OOPexp]").change(function () {
@@ -4297,10 +4302,11 @@ function resetReset() {
 			cloneTable('VOPtable', 'VOPtable2');
 			cloneTable('EDVOPtable', 'EDVOPtable2');
 			$('#blurDIV').removeClass('blur');
-			$('input[name="lang"]').trigger('change');
+			//$('input[name="lang"]').trigger('change');
 			$('.FUQminus').trigger('click');
 			$('.minusGRSOcc').trigger('click');
 			$('.editable').text('');
+			$(hiddenEles).each(function(){$(this).hide()});
 			numberCols();
 	console.timeEnd('Reset Function Time');
 }
@@ -4412,18 +4418,24 @@ function getChromeVersion () {
 }
 function hideshow(ckbox,ele1,ele2) {
 //$('input[name="'+ckbox+'"]').change(function () {
+	//ele1.attr('data-hidden', 'true');
+	hiddenEles.push($(ele1));
 	if (ckbox.is(":checked")) {
 		
 		if (ckbox.val() === 'Yes') {
 			ele1.show();
+			
 			if (ele2) {
 				ele2.hide();
+				hiddenEles.push($(ele2));
 			};
 			numberCols();
 		} else {
 			ele1.hide();
+			
 			if (ele2) {
 				ele2.show();
+				hiddenEles.push($(ele2));
 			};
 			numberCols();
 		};
