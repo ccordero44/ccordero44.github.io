@@ -3,7 +3,7 @@
 <title>Address Geocoder</title>
 <meta http-equiv="x-ua-compatible" content="ie=edge"/>
 </head>
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE&libraries=places"></script> 
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg&libraries=places"></script> 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
         crossorigin="anonymous">
@@ -189,7 +189,7 @@ document.getElementById("cancel").style.display = "none";
   window.moveTo((screen.width - 700) / 2, (screen.height - 350) / 2);  
 
 });  
-var myKey = "AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE";
+var myKey = "AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg";
 if (document.getElementById("address").value === ""){
 var myCoords = document.getElementById("lat").value + "," + document.getElementById("lon").value;
 var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+myCoords+"&key=" + myKey;
