@@ -7,7 +7,7 @@
 		  
 $.ajax({
    type: "GET",
-   url: "https://producersnational.sharepoint.com/sites/ProducersNational/Shared%20Documents/General/shops.csv",
+   url: "https://cors-anywhere.herokuapp.com/https://producersnational.sharepoint.com/sites/ProducersNational/Shared%20Documents/General/shops.csv",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
