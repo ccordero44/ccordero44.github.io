@@ -7,7 +7,7 @@
 		  
 $.ajax({
    type: "GET",
-   url: "shops.csv",
+   url: "https://producersnational.sharepoint.com/sites/ProducersNational/Shared%20Documents/General/shops.csv",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
