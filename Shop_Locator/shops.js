@@ -37,9 +37,9 @@ $.ajax({
 });
 }, 
    error: function(CSVdata) {
-	window.location = 'https://producersnational.sharepoint.com';
+
        
-	   //var newwindow = window.open('https://producersnational.sharepoint.com');
+	   var newwindow = window.open('https://producersnational.sharepoint.com');
 	console.log('logged out');
 	statusCode = 0;
 	
