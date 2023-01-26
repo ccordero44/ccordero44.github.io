@@ -15,7 +15,7 @@
 });*/
 
 var statusCode = 0;
-
+$( document ).ready(function() {
 $.ajax({
    type: "GET",
    url: "https://producersnational.sharepoint.com/_api/web/currentuser",
@@ -54,4 +54,5 @@ $.ajax({
    };
 	});
 }
+});
 });
