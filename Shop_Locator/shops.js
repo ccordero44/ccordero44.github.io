@@ -5,16 +5,16 @@
 			// shops = data;
 		  // });
 		  
-/*$.ajax({
+$.ajax({
    type: "GET",
    url: "shops.csv",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
 		shops = data; }
-});*/
+});
 
-$.ajax({
+/*$.ajax({
    type: "GET",
    url: "",
    async: false,
@@ -23,4 +23,4 @@ $.ajax({
 		var data = $.csv.toArrays(CSVdata);
 	   shops = data;
 		console.log(data); }
-});
+});*/
