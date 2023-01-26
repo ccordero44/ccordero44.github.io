@@ -21,5 +21,6 @@ $.ajax({
     headers: {  'Access-Control-Allow-Origin': 'https://producersnational.sharepoint.com/sites/ProducersNational/Shared%20Documents/General/shops.csv' },
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
+	   shops = data;
 		console.log(data); }
 });
