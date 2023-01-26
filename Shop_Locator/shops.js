@@ -7,7 +7,7 @@
 		  
 $.ajax({
    type: "GET",
-   url: "shops.csv",
+   url: "https://raw.githubusercontent.com/ccordero44/Shops-List/d92e39cd2a2e5848682db030371bc5f4dd548a7a/shops.csv",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
