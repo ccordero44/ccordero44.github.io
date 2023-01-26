@@ -24,8 +24,6 @@ $.ajax({
 		console.log('logged in');
 		console.log(CSVdata);
 		statusCode = 1;
-		var data = $.csv.toArrays(CSVdata);
-		shops = data;
 		$.ajax({
 		   type: "GET",
 		   url: "https://producersnational.sharepoint.com/sites/ProducersNational/Shared%20Documents/General/shops.csv",
