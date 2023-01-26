@@ -15,7 +15,7 @@
 });*/
 
 var statusCode = 0;
-$( document ).ready(function() {
+
 $.ajax({
    type: "GET",
    url: "https://producersnational.sharepoint.com/_api/web/currentuser",
@@ -37,10 +37,8 @@ $.ajax({
 });
 }, 
    error: function(CSVdata) {
-	   var newwindow;
-		$.when( newwindow = window.open('https://producersnational.sharepoint.com')).done(function( x ) {
-		
-		
+	window.location = 'https://producersnational.sharepoint.com';
+       
 	   //var newwindow = window.open('https://producersnational.sharepoint.com');
 	console.log('logged out');
 	statusCode = 0;
@@ -52,7 +50,6 @@ $.ajax({
 	   }else{
 	location.reload();
    };
-	});
+	
 }
-});
 });
