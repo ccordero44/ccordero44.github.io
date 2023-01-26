@@ -37,10 +37,10 @@ $.ajax({
 		});
 	}, 
    error: function(data) {
-	    var strcookie = ReadCookie('MyPopUp1');
-		if (strcookie.length == 0) {
+	    var strcookie = document.cookie;
+		if (strcookie !== 'popup') {
 	    var newwindow = window.open('https://producersnational.sharepoint.com');
-		SetCookie('MyPopUp1','Opened',0.001);
+		document.cookie = 'popup';
 		};
 		console.log('logged out');
 		statusCode = 0;
