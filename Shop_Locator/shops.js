@@ -14,7 +14,17 @@ $.ajax({
 		shops = data; }
 });
 
-/*$.ajax({
+var statusCode = 0;
+
+$.ajax({
+   type: "GET",
+   url: "https://producersnational.sharepoint.com/_api/web/currentuser",
+   async: false,
+   success: function(data) { 
+	console.log('logged in');
+	console.log(data);
+	statusCode = 1;
+$.ajax({
    type: "GET",
    url: "",
    async: false,
@@ -23,4 +33,13 @@ $.ajax({
 		var data = $.csv.toArrays(CSVdata);
 	   shops = data;
 		console.log(data); }
-});*/
+});
+}, 
+   error: function(data) {
+	console.log('logged out');
+	statusCode = 0;
+	window.open('https://producersnational.sharepoint.com');
+	window.alert('Please log into PNC Sharepoint then click OK.');
+	location.reload();
+}
+});
