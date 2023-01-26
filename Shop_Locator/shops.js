@@ -5,14 +5,14 @@
 			// shops = data;
 		  // });
 		  
-$.ajax({
+/*$.ajax({
    type: "GET",
    url: "https://raw.githubusercontent.com/ccordero44/Shops-List/main/shops.csv",
    async: false,
    success: function(CSVdata) { 
 		var data = $.csv.toArrays(CSVdata);
 		shops = data; }
-});
+});*/
 
 var statusCode = 0;
 
@@ -38,8 +38,9 @@ $.ajax({
    error: function(data) {
 	console.log('logged out');
 	statusCode = 0;
-	window.open('https://producersnational.sharepoint.com');
+	var newwindow = window.open('https://producersnational.sharepoint.com');
 	window.alert('Please log into PNC Sharepoint then click OK.');
+	newwindow.close();
 	location.reload();
 }
 });
