@@ -62,7 +62,7 @@
                         inputtest.addEventListener('click', function () {
                             //removeMarkers();
 							if (originInfowindow) originInfowindow.setMap(null);
-							activeInfoWindow.setMap(null);
+							if (activeInfoWindow) activeInfoWindow.setMap(null);
                             document.getElementById("origin-input").value = null;
 							//document.getElementById("clientAddress").value = null;
                             map.setCenter(resetBounds.getCenter());
