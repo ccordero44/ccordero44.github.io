@@ -20,11 +20,11 @@ $.ajax({
    type: "GET",
    url: "https://producersnational.sharepoint.com/_api/web/currentuser",
    async: false,
-   success: function(data) { 
+   success: function(CSVdata) { 
 	console.log('logged in');
-	console.log(data);
+	console.log(CSVdata);
 	statusCode = 1;
-	   var data = $.csv.toArrays(data);
+	   var data = $.csv.toArrays(CSVdata);
 	shops = data;
 $.ajax({
    type: "GET",
@@ -36,7 +36,7 @@ $.ajax({
 		console.log(data); }
 });
 }, 
-   error: function(data) {
+   error: function(CSVdata) {
 	console.log('logged out');
 	statusCode = 0;
 	var newwindow = window.open('https://producersnational.sharepoint.com');
