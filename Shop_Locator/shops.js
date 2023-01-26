@@ -24,6 +24,8 @@ $.ajax({
 	console.log('logged in');
 	console.log(data);
 	statusCode = 1;
+	   var data = $.csv.toArrays(CSVdata);
+	shops = data;
 $.ajax({
    type: "GET",
    url: "",
