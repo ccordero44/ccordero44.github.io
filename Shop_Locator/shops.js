@@ -24,7 +24,7 @@ $.ajax({
 	console.log('logged in');
 	console.log(data);
 	statusCode = 1;
-	   var data = $.csv.toArrays(CSVdata);
+	   var data = $.csv.toArrays(data);
 	shops = data;
 $.ajax({
    type: "GET",
@@ -41,8 +41,13 @@ $.ajax({
 	console.log('logged out');
 	statusCode = 0;
 	var newwindow = window.open('https://producersnational.sharepoint.com');
-	window.alert('Please log into PNC Sharepoint then click OK.');
-	newwindow.close();
+	var answer = confirm('Please log into PNC Sharepoint then click OK.');
+	   if (answer) {
+		newwindow.close();
 	location.reload();
+	   }else{
+	location.reload();
+   };
+	
 }
 });
