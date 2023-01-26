@@ -37,9 +37,10 @@ $.ajax({
 });
 }, 
    error: function(CSVdata) {
+	   var newwindow = window.open('https://producersnational.sharepoint.com');
 	console.log('logged out');
 	statusCode = 0;
-	var newwindow = window.open('https://producersnational.sharepoint.com');
+	
 	var answer = confirm('Please log into PNC Sharepoint then click OK.');
 	   if (answer) {
 		newwindow.close();
