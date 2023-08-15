@@ -537,7 +537,7 @@ body {
 .title2 {
 	width: 100%;
 	text-align: left;
-	font-size: 20px;
+	font-size: 20px !important;
 	text-decoration: underline;
 	font-weight: bold;
 }
@@ -1620,6 +1620,10 @@ border: 1px solid #aaa;
 	border-top:hidden;
 	border-right:hidden;
 	border-bottom:hidden;
+}
+
+.hiddenUWQ {
+	display: none;
 }
 
 /* PRINT CSS */

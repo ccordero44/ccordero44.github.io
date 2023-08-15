@@ -55,7 +55,12 @@ $("input").keypress(function(e) {
     return false;
   }
 });
-
+	$('form').on('submit', function (e) {
+		e.preventDefault();
+		const form = $(e.target);
+		const json = convertFormToJson(form);
+		console.log(json);
+	});
 	$("form").on('reset', function (event) {
 		console.time('Reset Time');
 		$("#resetButton i").addClass("rotate");
@@ -801,6 +806,7 @@ $( window ).resize( function(){
   }
 
 });
+
 	$('.printdiv').each(function (index, value) {
 		$(value).attr('title','Print this section only');
 		$(value).click(function () {
@@ -833,6 +839,28 @@ $( window ).resize( function(){
 			$('#MCTDUD').hide();
 		}*/
 	});
+	$('#VIQ').on('input', function () {
+		$('#VIQ2').val($(this).val());
+	});
+	$('input[name="IVO"]').change(function () {
+		hideshow($(this),$("#IVOQ"));	
+		console.log($(this).val())
+		if ($(this).val() === "Yes") {
+			$('#UWQIVOwner').removeClass('hiddenUWQ').show();
+			coverageCheck("notOk", 'INSURABLE INTEREST');
+		}else{
+			$('#UWQIVOwner').addClass('hiddenUWQ').hide();
+			coverageCheck("Ok", 'INSURABLE INTEREST');
+		};
+		
+		numberCols();
+	});
+	$('input[name="SignedApp"]').change(function () {
+		hideshow($(this),$("#AppSigned"), $('#AppNotSigned'));
+	});
+	$('input[name="IVOFinance"]').change(function () {
+		hideshow($(this),$("#VOPFinance"));
+	});
 	$('input[name="BINDERtradeIn"]').change(function () {
 		hideshow($(this),$("#BINDERtradeInTable"));
 	});
@@ -858,8 +886,72 @@ $( window ).resize( function(){
 	$('input[name="PDupd"]').change(function () {
 		hideshow($(this),$("#pdUPDTable"));	
 	});
+	$('input[name="IVupd"],input[name="THEFTIVupd"],input[name="IVupd2"],input[name="IVupd3"]').on('change', function () {
+		if ($(this).val() === "Yes") {
+			$('#UWQUESTIONS').show();
+			numberCols();
+		}else{
+			$('#UWQUPD').addClass('hiddenUWQ').hide();
+			if ($('.coverageIssue:visible').length) {
+				$('#UWQUESTIONS').hide(); 
+				};
+				numberCols();
+		};
+	});
 	$('input[name="IVupd"]').on('change', function () {
 		hideshow($(this),$("#ivUPDTable"));	
+		if ($(this).val() === 'Yes') {
+			$('#UWQUPD').removeClass('hiddenUWQ').show();
+		};
+	});
+	$('input[name="IVDriverDL"]').on('change', function () {
+		if ($(this).val() === 'No') {
+			$('#UWQDL').show();
+			$('#UWQUESTIONS').show();
+			numberCols();
+		}else{
+			if ($('.coverageIssue:visible').length) {
+				$('#UWQUESTIONS').hide(); 
+				numberCols(); 
+				$('#UWQDL').hide();
+				}
+		};
+	});
+	$('input[name="UDDLstatus"]').on('change', function () {
+		if ($(this).val() === 'No') {
+			$('#UWQDL').show();
+			$('#UWQUESTIONS').show();
+			numberCols();
+		}else{
+			if ($('.coverageIssue:visible').length) {
+				$('#UWQUESTIONS').hide(); 
+				numberCols(); 
+				$('#UWQDL').hide();
+			}
+		};
+	});
+	$('input[name="THEFTIVupd"]').on('change', function () {	
+		$('#UWQUPD').show();
+	});
+	$('input[name="IVupd2"]').on('change', function () {	
+		$('#UWQUPD').show();
+	});
+	$('input[name="IVupd3"]').on('change', function () {	
+		$('#UWQUPD').show();
+	});
+	$('input[name="witnessIVUPD"]').on('change', function () {	
+		$('#UWQUPD').show();
+	});
+	$('.LOCN:visible').on('input', function () {
+		if ($(this).val().toLowerCase().indexOf("mex".toLowerCase()) !== -1 && $(this).val().toLowerCase().indexOf("new mex".toLowerCase()) === -1) {
+			$('#UWQMex').show();
+			$('#UWQUESTIONS').show();
+			numberCols();
+		}else{
+			$('#UWQMex').hide();
+			$('#UWQUESTIONS').hide();
+			numberCols();
+		};
 	});
 	$('input[name="IVtowed"]').change(function () {
 		hideshow($(this),$("#IVDrivableTable"));	
@@ -1251,10 +1343,11 @@ $( window ).resize( function(){
 	$('#checkbox13').change(function () {
 		if (this.checked) {
 			coverageCheck("notOk", 'MED_CONDITION');
-
+			$('#UWQImpairment').show();
 			numberCols();
 		} else {
 			coverageCheck("Ok", 'MED_CONDITION');
+			$('#UWQImpairment').hide();
 			numberCols();
 		};
 	});
@@ -1644,6 +1737,7 @@ $( window ).resize( function(){
 			numberCols();
 		};
 	});
+
 	/*$("input[name^=BIZ]").change(function () {
 		var val1 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="rideshare"]:visible').attr('name') );
 		var val2 = getRadioVal( document.getElementById('RSgeneral'), $('input[name^="business"]:visible').attr('name') );
@@ -2016,7 +2110,7 @@ $( window ).resize( function(){
 			});
 		});
 	});
-$('#addAddressInQ').click(function () {
+	$('#addAddressInQ').click(function () {
 		var inpNum = 1;
 		var tableRef = $('#' + $('#addressInQ').attr('id') + '>tbody')[0];
 		var numRows = parseInt(tableRef.rows.length);
@@ -2251,6 +2345,23 @@ $('#addAddressInQ').click(function () {
 		cloneTable('VOPtable', 'VOPtable2');
 	});
 	
+$('#addGaraging').click(function () {
+		var inpNum = 1;
+		var tableRef = $('#' + $('#VOPgarage').attr('id') + '>tbody')[0];
+		var numRows = parseInt(tableRef.rows.length);
+		newRows = inpNum - numRows;
+		rowNum = numRows + 1;
+		var html = '<td class="Garagenums" style="text-align:right;">' + rowNum + '.</td><td><input type="text" class="noborder Garage1first" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="number" class="noborder center" style="width:100%"></input></td><td><input type="text" class="noborder" style="width:100%"></input></td><td class="minus noprint" style="width: .25%;border-top:hidden;border-right:hidden;border-bottom:hidden;text-align:center;" title="Click to remove this row."><i class="fa fa-minus-circle" style="padding-top:2px"></i></td>';
+		addRows('VOPgarage', html, 1);
+		$('.minus').each(function () {
+			$(this).click(function () {
+				$(this).closest("tr").remove();
+				numberColsOther('Garagenums');
+				
+			});
+		});
+		
+	});
 	$('#EDaddVOPtable').click(function () {
 		var inpNum = 1;
 		var tableRef = $('#' + $('#EDVOPtable').attr('id') + '>tbody')[0];
@@ -2494,7 +2605,7 @@ $('.rowNumbers').bind('input', function(){
 
 		let table = $(this).parents("table").next("table");
 		$('[name^="dynamic_"]').attr('name','');
-		if (inpNum == 0 && table.attr('id')=="IVpassTable") {
+		if (inpNum == 0 && (table.attr('id')=="CVpassTable" ||table.attr('id')=="IVpassTable")) {
 			table.hide();
 		}else{
 			table.show();
@@ -2847,6 +2958,7 @@ if (count === 0) {
 	$('#addProperty').hide();*/
 }
 function coverageCheck(status, ele) {
+
 	var arr = $(".hidden");
 
 	$('.hidden').each(function (index, value) {
@@ -2857,9 +2969,17 @@ function coverageCheck(status, ele) {
 			$(value).show();
 			
 		};
-	
-
 	});
+	if (ele === 'UD' && status !== 'Ok') {
+		$('#UWQHHmembers').removeClass('hiddenUWQ').show();
+	};
+	if (ele === 'POINTS' && status !== 'Ok') {
+		$('#UWQDL').removeClass('hiddenUWQ').show();
+		$('#UWQAFA').removeClass('hiddenUWQ').show();
+	};
+	if (ele === 'BIZ' && status !== 'Ok') {
+		$('#UWQBiz').removeClass('hiddenUWQ').show();
+	};
 	var title2 = title.replace("Recorded Statement General, ",""); 
 	for (var i = 0; i < arr.length; i++) {
 		if ($(arr[i]).attr('id') === ele && $(arr[i]).css('display') !== 'none') {
@@ -2899,7 +3019,8 @@ function coverageCheck(status, ele) {
 		
 	}
 	if ($('.coverageIssue:visible').length) {
-		$('#AgentQuestions').show();
+		//$('#AgentQuestions').show();
+		$('#UWQUESTIONS').show();
 		$('#checkbox6').prop('checked',true);
 		$('#checkbox6').attr('disabled',true);
 		$('#checkbox6').parent().css('color','silver');
@@ -2909,7 +3030,9 @@ function coverageCheck(status, ele) {
 		$("label[for='checkbox6']").removeClass('disabledInput');
 		$('#checkbox6').parent().css('color','initial');
 		$('#checkbox6').next().css('border-color','initial');
-		$('#AgentQuestions').hide();
+		//$('#AgentQuestions').hide();
+		if ($('input:checked[name="IVupd"],input:checked[name="THEFTIVupd"],input:checked[name="IVupd2"],input:checked[name="IVupd3"]').val() !== "Yes") $('#UWQUESTIONS').hide();
+		//$('#UWQHHmembers, #UWQDL, #UWQAFA, #UWQFelony, #UWQFraud, #UWQIVOwner, #UWQUPD, #UWQBiz, #UWQMex, #UWQImpairment').addClass('hiddenUWQ').hide();
 		$('#checkbox6').prop('checked',false);
 		
 		
@@ -4309,6 +4432,7 @@ function resetReset() {
 			$('.minusGRSOcc').trigger('click');
 			$('.editable').text('');
 			$(hiddenEles).each(function(){$(this).hide()});
+			$('#UWQHHmembers, #UWQDL, #UWQAFA, #UWQFelony, #UWQFraud, #UWQIVOwner, #UWQUPD, #UWQBiz, #UWQMex, #UWQImpairment').addClass('hiddenUWQ').hide();
 			numberCols();
 	console.timeEnd('Reset Function Time');
 }
@@ -4513,3 +4637,13 @@ function selectElementContents(el) {
     sel.removeAllRanges();
     sel.addRange(range);
 }
+function convertFormToJson(form) {
+	const array = $(form).serializeArray();
+	const json = {};
+	$.each(array, function () {
+		json[this.name] = this.value || "";
+	});
+	return json;
+}
+
+	
