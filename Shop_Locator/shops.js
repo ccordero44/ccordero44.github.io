@@ -46,7 +46,7 @@ $.ajax({
 		
 		var answer = confirm('Please log into PNC Sharepoint then click OK.');
 		   if (answer) {
-			if (typeof newwindow !== 'undefined') newwindow.close();
+			//if (typeof newwindow !== 'undefined') newwindow.close();
 			   document.cookie = 'closed';
 		location.reload();
 		   }else{
