@@ -203,11 +203,12 @@
             var btnClickme = document.getElementById('clickMe');
             var clearMap = document.getElementById('clear');
             var shopList = document.getElementById('listShops');
-			var legend = document.getElementById('legend');
+	    var legend = document.getElementById('legend');
+	    var mapButton = document.getElementById('testDiv');
 			
 			
-			map.controls[google.maps.ControlPosition.TOP_LEFT].push(testDiv);
-			map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+	    map.controls[google.maps.ControlPosition.TOP_LEFT].push(mapButton);
+	    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(originInput);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(btnClickme);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearMap);
@@ -230,7 +231,7 @@
 			scaledsize = new google.maps.Size(22, 22);
 			if ($(window).width() > 800) {
 				$(legend).show();
-				$(testDiv).show();
+				$(mapButton).show();
 			};
 			$(btnClickme).show();
 			$(clearMap).show();
