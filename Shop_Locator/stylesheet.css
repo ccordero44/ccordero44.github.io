@@ -1,3 +1,6 @@
+.gm-style-iw {
+    max-height: fit-content !important;
+}
 .stars-container {
   position: relative;
   display: inline-block;
