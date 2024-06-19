@@ -1,22 +1,57 @@
 		 var shops = [];
-			// $.get( "shops.csv", function( CSVdata) {
-	
-			  // var data = $.csv.toArrays(CSVdata);
-			// shops = data;
-		  // });
+			
 		  
-/*$.ajax({
-   type: "GET",
-   url: "https://raw.githubusercontent.com/ccordero44/Shops-List/main/shops.csv",
-   async: false,
-   success: function(CSVdata) { 
-		var data = $.csv.toArrays(CSVdata);
-		shops = data; }
-});*/
 
 var statusCode = 0;
-
 $.ajax({
+		   type: "GET",
+		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
+		   async: false,
+		   success: function(response) { 
+			statusCode = 1;
+					$(response).find("Folder").eq(0).find("Placemark").each(function () {
+						var newShop = [];
+		                var _name = $(this).find('name').html();
+						var _desc = $(this).find('description').html();
+						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
+						
+						//console.log(_email);
+						//console.log(_name.toString().replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", ""));
+						//console.log(_coords[0] + ',' + _coords[1]);
+						//console.log(_desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", ""));
+						if (_coords.length > 1) {
+						var _phone = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[0].replace("Ph# ", "");
+						var _email = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[1].replace("Email: ", "");
+						newShop.push(_name.toString().replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
+					 
+					 $.ajax({
+						   type: "GET",
+						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg",
+						   async: false,
+						   success: function(result) { 
+						   var fullAddress = result.results[0].formatted_address.split(',');
+						  
+						  for (i=0; i < fullAddress.length; i++) {
+							newShop.push(fullAddress[i].trim());
+						   }
+						   newShop.pop();
+						   newShop.push(_phone);
+						   newShop.push("");
+						   newShop.push(_email);
+						   newShop.push(_coords[1]);
+						   newShop.push(_coords[0]);
+						   newShop.push("");
+						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE")
+						   newShop.push("");
+								shops.push(newShop);
+										}
+						});
+					};
+					}); 
+										}
+		});
+
+/*$.ajax({
    type: "GET",
    url: "https://producersnational.sharepoint.com/_api/web/currentuser",
    async: false,
@@ -54,4 +89,4 @@ $.ajax({
 	   };
 	return;
 }
-});
+});*/
