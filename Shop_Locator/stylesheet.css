@@ -288,7 +288,7 @@ i.bi.bi-geo-alt {
 		    border: 1px solid black;
 		}
 		#dvTable table {
-			white-space: nowrap;
+			/*white-space: nowrap;*/
 		}
 		#directionsPanel table {
 			border: 0px;
