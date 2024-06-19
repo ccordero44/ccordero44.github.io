@@ -8,7 +8,7 @@ $.ajax({
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
 		   async: false,
 		   success: function(response) { 
-			statusCode = 1;
+				
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
 		                var _name = $(this).find('name').html();
@@ -30,11 +30,15 @@ $.ajax({
 						   async: false,
 						   success: function(result) { 
 						   var fullAddress = result.results[0].formatted_address.split(',');
-						  
-						  for (i=0; i < fullAddress.length; i++) {
-							newShop.push(fullAddress[i].trim());
-						   }
-						   newShop.pop();
+						  //console.log(fullAddress);
+						  //for (i=0; i < fullAddress.length; i++) {
+							//newShop.push(fullAddress[i].trim());
+						  // }
+						  var cityState = fullAddress[1] + "," + fullAddress[2]
+						 // console.log(cityState);
+						  newShop.push(fullAddress[0]);
+						  newShop.push(cityState);
+						   //newShop.pop();
 						   newShop.push(_phone);
 						   newShop.push("");
 						   newShop.push(_email);
@@ -44,7 +48,8 @@ $.ajax({
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE")
 						   newShop.push("");
 								shops.push(newShop);
-										}
+									//console.log(newShop);
+														}
 						});
 					};
 					}); 
