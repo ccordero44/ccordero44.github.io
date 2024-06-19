@@ -26,7 +26,7 @@ $.ajax({
 						if (_coords.length > 1) {
 						var _phone = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[0].replace("Ph# ", "");
 						var _email = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[1].replace("Email: ", "");
-						newShop.push(_name.toString().replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
+						newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
 					 
 					 $.ajax({
 						   type: "GET",
@@ -59,6 +59,7 @@ $.ajax({
 					}); 
 										}
 		});
+		
 
 
 /*$.ajax({
