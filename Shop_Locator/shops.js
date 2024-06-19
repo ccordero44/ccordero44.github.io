@@ -14,7 +14,11 @@ $.ajax({
 		                var _name = $(this).find('name').html();
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
-						
+						var _towingIcon = $(this).find('styleUrl').text();
+						var _towing;
+						if (_towingIcon === "#icon-503-4186F0") {
+						_towing = "yesTow";
+						}
 						//console.log(_email);
 						//console.log(_name.toString().replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", ""));
 						//console.log(_coords[0] + ',' + _coords[1]);
@@ -46,7 +50,7 @@ $.ajax({
 						   newShop.push(_coords[0]);
 						   newShop.push("");
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE")
-						   newShop.push("");
+						   newShop.push(_towing);
 								shops.push(newShop);
 									//console.log(newShop);
 														}
@@ -55,6 +59,7 @@ $.ajax({
 					}); 
 										}
 		});
+
 
 /*$.ajax({
    type: "GET",
