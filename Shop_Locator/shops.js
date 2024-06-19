@@ -1,5 +1,5 @@
 		 var shops = [];
-			
+		 var myKey = "AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE";	
 		  
 
 var statusCode = 0;
