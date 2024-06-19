@@ -30,7 +30,7 @@ $.ajax({
 					 
 					 $.ajax({
 						   type: "GET",
-						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyD47fV1GghM_8WUl8tLa61gtgJnjxFk9mg",
+						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
 						   async: false,
 						   success: function(result) { 
 						   var fullAddress = result.results[0].formatted_address.split(',');
@@ -49,7 +49,7 @@ $.ajax({
 						   newShop.push(_coords[1]);
 						   newShop.push(_coords[0]);
 						   newShop.push("");
-						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE")
+						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
 								shops.push(newShop);
 									//console.log(newShop);
