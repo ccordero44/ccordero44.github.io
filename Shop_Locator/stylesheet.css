@@ -549,15 +549,16 @@ i.bi.bi-geo-alt {
             font-weight: bold;
             color: blue;
         }
-
+	pre {text-wrap:wrap;}
         .scrollFix {
             width: 100%;
             line-height: 1.35;
             overflow: hidden;
             white-space: nowrap;
-			margin-left: auto;
-			margin-right: auto;
-			display: block;
+	    margin-left: auto;
+	    margin-right: auto;
+	    display: block;
+	    width: 300px;
         }
 		
 	/*	.scrollFix img {
