@@ -764,7 +764,7 @@ function clearDir() {
 
         function myClick(id) {
 			
-            //google.maps.event.trigger(markers[id], 'click');
+            google.maps.event.trigger(markers[id], 'click');
 							map.setZoom(20);
                             map.setCenter(activeMarker.getPosition());
 							activeInfoWindow.open(map, activeMarker);
