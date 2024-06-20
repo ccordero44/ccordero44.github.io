@@ -770,7 +770,7 @@ function clearDir() {
 							map.setZoom(20);
                             map.setCenter(activeMarker.getPosition());
 							activeInfoWindow.open(map, activeMarker);
-						
+						google.maps.event.trigger( activeMarker, 'click' );
         }
 
 function GenerateTable() {
