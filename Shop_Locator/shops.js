@@ -29,12 +29,12 @@ $.ajax({
 						//var _email = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[1].replace("Email: ", "");
 						var _emails = _desc.toString().match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
 						var _phone, _email;
-							if (_phones.length > 0) {
+							if (_phones) {
 								_phone = _phones[0];
 							}else{
 								_phone = "";
 							};
-							if (_emails.length > 0) {
+							if (_emails) {
 								_email = _emails[0];
 							}else{
 								_email = "";
