@@ -657,9 +657,10 @@ function clearDir() {
 				//Myappraisers[j].setMap(null);
 			//};
 	            removeMarkers();
-            showAppraisers();
+         
             document.getElementById("checkbox0").checked = true;
             document.getElementById("checkbox1").checked = true;
+	   showAppraisers();
             document.getElementById("checkbox2").checked = false;
             document.getElementById("checkbox3").checked = false;
 			document.getElementById("checkbox4").checked = false;
