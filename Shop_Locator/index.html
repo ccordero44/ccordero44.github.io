@@ -638,7 +638,9 @@ Myappraisers.push(Procision);
 var strokeClr;
 var strokeWght;
 var zInx = 0;
-
+for (var j=0; j < Myappraisers.length; j++) {
+	Myappraisers[j].setMap(map);	
+};
 if (Myappraisers){
 var j = 0;
 		 google.maps.event.addListener(Jerry, 'mouseover', function() {
