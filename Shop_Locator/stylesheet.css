@@ -1,3 +1,7 @@
+#dvTable > table tr td:nth-child(4) {
+    width: 1%;
+    white-space: nowrap;
+}
 .gm-style-iw {
     max-height: fit-content !important;
 }
