@@ -31,12 +31,12 @@ $.ajax({
 						var _phone, _email;
 							if (_phones.length > 1) {
 								_phone = _phones[0];
-								else
+							}else{
 								_phone = "";
 							};
 							if (_emails.length > 1) {
 								_email = _emails[0];
-								else
+							}else{
 								_email = "";
 							};
 							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
