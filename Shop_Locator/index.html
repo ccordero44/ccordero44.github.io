@@ -68,7 +68,7 @@
                             map.setCenter(resetBounds.getCenter());
 							map.fitBounds(resetBounds);
                         });
-		
+		$('#checkbox1').trigger('click');
 });
 		window.onload = Window_onLoad;
 		//var myKey = "AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE";
@@ -638,9 +638,7 @@ Myappraisers.push(Procision);
 var strokeClr;
 var strokeWght;
 var zInx = 0;
-for (var j=0; j < Myappraisers.length; j++) {
-	Myappraisers[j].setMap(map);	
-};
+
 if (Myappraisers){
 var j = 0;
 		 google.maps.event.addListener(Jerry, 'mouseover', function() {
