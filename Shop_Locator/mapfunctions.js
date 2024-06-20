@@ -74,7 +74,7 @@ function AutocompleteDirectionsHandler(map) {
                         
                google.maps.event.addListener(marker, 'click', function () {
                         var terr;
-                       // displayCoordinates(str3);
+                        displayCoordinates(str3);
                         //if (parseInt(dist, 10) < 50) {
 							if (inPoly) {
                         	 terr = "Staff appraiser territory (" + polyName + ")";
