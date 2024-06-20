@@ -653,13 +653,13 @@ function clearDir() {
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
         	hidePoly();
-        	for (var j=0; j < Myappraisers.length; j++) {
-				Myappraisers[j].setMap(null);
-			};
+        	//for (var j=0; j < Myappraisers.length; j++) {
+				//Myappraisers[j].setMap(null);
+			//};
 	            removeMarkers();
-            
+            showAppraisers();
             document.getElementById("checkbox0").checked = true;
-            document.getElementById("checkbox1").checked = false;
+            document.getElementById("checkbox1").checked = true;
             document.getElementById("checkbox2").checked = false;
             document.getElementById("checkbox3").checked = false;
 			document.getElementById("checkbox4").checked = false;
