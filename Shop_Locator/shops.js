@@ -64,7 +64,8 @@ $.ajax({
 						   newShop.push("");
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
-								shops.push(newShop);
+							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+								
 									//console.log(newShop);
 														}
 						});
