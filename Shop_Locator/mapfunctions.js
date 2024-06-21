@@ -1331,16 +1331,16 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
    });
 }
 function syncShops() {
-	$("#sync i").addClass("fa-spin");
+	
 shops = [];
 			
 
 $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
-		   async: false,
+		   async: true,
 		   success: function(response) { 
-				
+				$("#sync i").addClass("fa-spin");
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
 		                var _name = $(this).find('name').html();
@@ -1370,7 +1370,7 @@ $.ajax({
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
-						   async: false,
+						   async: true,
 						   success: function(result) { 
 						   var fullAddress = result.results[0].formatted_address.split(',');
 						  var cityState = fullAddress[1] + "," + fullAddress[2]
@@ -1386,13 +1386,13 @@ $.ajax({
 						   newShop.push(_towing);
 							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 								
-									
+									$("#sync i").removeClass("fa-spin");
 														}
 						});
 					};
 					}); 
 										}
 		});
-	$("#sync i").removeClass("fa-spin");
+	
 }
 		
