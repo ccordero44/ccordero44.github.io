@@ -1331,6 +1331,8 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
    });
 }
 function syncShops() {
+	$("#sync i").addClass("fa-spin");
+	$('#sync').attr("disabled",true);
 	location.reload();
 	return;
 shops = [];
