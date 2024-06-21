@@ -854,7 +854,7 @@ white-space: nowrap;
 		height: auto;
 	
       }
-#legend, #origin-input, #clickMe, #clear, #listShops, #legend, #testDiv {
+#legend, #origin-input, #clickMe, #clear, #listShops, #legend, #testDiv, #sync {
 	display: none;
 }
       #legend h3 {
