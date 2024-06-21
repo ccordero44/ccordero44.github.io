@@ -1331,7 +1331,8 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
    });
 }
 function syncShops() {
-	
+	location.reload();
+	return;
 shops = [];
 	var call2		
 
