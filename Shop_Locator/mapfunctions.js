@@ -1348,7 +1348,7 @@ var call1 = $.ajax({
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
-						var _towing;
+						var _towing = "";
 						if (_towingIcon === "#icon-503-4186F0") {
 						_towing = "yesTow";
 						}
