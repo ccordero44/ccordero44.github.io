@@ -1330,3 +1330,67 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
 	
    });
 }
+function syncShops() {
+shops = [];
+			
+
+$.ajax({
+		   type: "GET",
+		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
+		   async: false,
+		   success: function(response) { 
+				
+					$(response).find("Folder").eq(0).find("Placemark").each(function () {
+						var newShop = [];
+		                var _name = $(this).find('name').html();
+						var _desc = $(this).find('description').html();
+						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
+						var _towingIcon = $(this).find('styleUrl').text();
+						var _towing;
+						if (_towingIcon === "#icon-503-4186F0") {
+						_towing = "yesTow";
+						}
+						if (_coords.length > 1) {
+						var _phones = _desc.toString().match(/((?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?)/img);
+						var _emails = _desc.toString().match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+						var _phone, _email;
+							if (_phones) {
+								_phone = _phones[0];
+							}else{
+								_phone = "";
+							};
+							if (_emails) {
+								_email = _emails[0];
+							}else{
+								_email = "";
+							};
+							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
+					 
+					 $.ajax({
+						   type: "GET",
+						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
+						   async: false,
+						   success: function(result) { 
+						   var fullAddress = result.results[0].formatted_address.split(',');
+						  var cityState = fullAddress[1] + "," + fullAddress[2]
+						  newShop.push(fullAddress[0]);
+						  newShop.push(cityState);
+						   newShop.push(_phone);
+						   newShop.push("");
+						   newShop.push(_email);
+						   newShop.push(_coords[1]);
+						   newShop.push(_coords[0]);
+						   newShop.push("");
+						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
+						   newShop.push(_towing);
+							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+								
+									
+														}
+						});
+					};
+					}); 
+										}
+		});
+}
+		
