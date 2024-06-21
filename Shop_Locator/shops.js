@@ -17,7 +17,9 @@ $.ajax({
 						var _towingIcon = $(this).find('styleUrl').text();
 						var _towing = "";
 						if (_towingIcon === "#icon-503-4186F0") {
-						_towing = "yesTow";
+							_towing = "yesTow";
+						}else{
+							_towing = "noTow";	
 						}
 						//console.log(_email);
 						//console.log(_name.toString().replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", ""));
