@@ -395,16 +395,12 @@ displayCoordinates(SMLatLng);
 						if (inputAddress == null){
 							map.setZoom(10);
 							map.setCenter(marker.getPosition());
-							setTimeout(function (){
-  								 google.maps.event.trigger( activeMarker, 'click' );
-								}, 100);
+							
 						}else{
 							document.getElementById("clientAddress").value = document.getElementById("origin-input").value;
 							map.setZoom(10);
 							map.setCenter(marker.getPosition());
-							setTimeout(function (){
-  								 google.maps.event.trigger( activeMarker, 'click' );
-								}, 100);
+							
 						}
 					
 						});
