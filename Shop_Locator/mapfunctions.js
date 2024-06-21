@@ -585,7 +585,7 @@ function AutocompleteDirectionsHandler(map) {
                             if (status == google.maps.DirectionsStatus.OK) {
                                 directionsDisplay.setDirections(response);
 								$('#printButton').remove();
-								setTimeout(function() {$('#directionsPanel').find('.adp-text').eq(0).append('<button title="Print Directions" onclick="printDirections()" id="printButton" style="float:right;"><i class="material-icons">print</i></button></button>');},1000);
+								setTimeout(function() {$('#directionsPanel').find('.adp-text').eq(0).closest('tr').append('<td><button title="Print Directions" onclick="printDirections()" id="printButton" style="float:right;"><i class="material-icons">print</i></button></button></td>');},1000);
 								
                             }
                         });
