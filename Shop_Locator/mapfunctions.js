@@ -1331,6 +1331,7 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
    });
 }
 function syncShops() {
+	$("#sync i").addClass("fa-spin");
 shops = [];
 			
 
@@ -1392,5 +1393,6 @@ $.ajax({
 					}); 
 										}
 		});
+	$("#sync i").removeClass("fa-spin");
 }
 		
