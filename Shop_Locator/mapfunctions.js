@@ -1341,6 +1341,7 @@ $.ajax({
 		   async: true,
 		   success: function(response) { 
 				$("#sync i").addClass("fa-spin");
+			   	$('#sync').attr("disabled",true);
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
 		                var _name = $(this).find('name').html();
@@ -1387,6 +1388,7 @@ $.ajax({
 							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 								
 									$("#sync i").removeClass("fa-spin");
+							   		$('#sync').attr("disabled",false);
 														}
 						});
 					};
