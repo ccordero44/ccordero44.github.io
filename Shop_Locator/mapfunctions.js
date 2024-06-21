@@ -1333,9 +1333,9 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
 function syncShops() {
 	
 shops = [];
-			
+	var call2		
 
-$.ajax({
+var call1 = $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
 		   async: true,
@@ -1368,7 +1368,7 @@ $.ajax({
 							};
 							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
 					 
-					 $.ajax({
+			 call2 =		 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
 						   async: true,
@@ -1387,13 +1387,16 @@ $.ajax({
 						   newShop.push(_towing);
 							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 								
-									$("#sync i").removeClass("fa-spin");
-							   		$('#sync').attr("disabled",false);
-							   		$('#clear').trigger('click');
+									
 														}
 						});
 					};
 					}); 
+				               call2.done(function(){
+						$("#sync i").removeClass("fa-spin");
+							$('#sync').attr("disabled",false);
+							$('#clear').trigger('click');
+						});
 										}
 		});
 	
