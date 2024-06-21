@@ -203,6 +203,7 @@
             var originInput = document.getElementById('origin-input');
             var btnClickme = document.getElementById('clickMe');
             var clearMap = document.getElementById('clear');
+	    var syncMap = document.getElementById('sync');
             var shopList = document.getElementById('listShops');
 	    var legend = document.getElementById('legend');
 	    var mapButton = document.getElementById('testDiv');
@@ -210,6 +211,7 @@
 			
 	    map.controls[google.maps.ControlPosition.TOP_LEFT].push(mapButton);
 	    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+	    map.controls[google.maps.ControlPosition.TOP_CENTER].push(syncMap);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(originInput);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(btnClickme);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(clearMap);
@@ -759,7 +761,7 @@ jQuery(document).bind("keyup keydown", function(e){
                         
                     </div>
                 </div>
-                
+     <button id="sync" onClick="syncShops();" / class="button1"><i class="fas fa-sync"></i></button>           
     <input id="origin-input" class="controls" type="text"
            placeholder="Enter an origin location">
 
