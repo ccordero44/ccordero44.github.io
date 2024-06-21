@@ -1389,6 +1389,7 @@ $.ajax({
 								
 									$("#sync i").removeClass("fa-spin");
 							   		$('#sync').attr("disabled",false);
+							   		$('#clear').trigger('click');
 														}
 						});
 					};
