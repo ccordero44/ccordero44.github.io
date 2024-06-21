@@ -6,7 +6,7 @@ var statusCode = 0;
 $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
-		   async: true,
+		   async: false,
 		   success: function(response) { 
 				
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
@@ -46,7 +46,7 @@ $.ajax({
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
-						   async: true,
+						   async: false,
 						   success: function(result) { 
 						   var fullAddress = result.results[0].formatted_address.split(',');
 						  //console.log(fullAddress);
