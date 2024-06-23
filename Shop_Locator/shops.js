@@ -1,6 +1,6 @@
 		 var shops = [];
 		 var myKey = "AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE";	
-		  
+		 var appraisers = [];
 
 var statusCode = 0;
 $.ajax({
