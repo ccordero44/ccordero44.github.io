@@ -11,16 +11,23 @@ $.ajax({
 				
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
-		                var _name = $(this).find('name').html();
+		    var _name = $(this).find('name').html();
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 						if (polyCoords.length > 1) {
-						for (let i = 0; i < polyCoords.length; i++) {
-								var coords = polyCoords[i].split(',');
-							
-								};
+							for (let i = 0; i < polyCoords.length; i++) {
+									var coords = polyCoords[i].split(',');
+									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+									var blankAppraiser = { name: "", coord: "", desc: ""}
+										for (let prop of blankAppraiser) {
+												prop.name = name;
+												prop.coord = coords;
+												prop.desc = name; 
+											};
+												appraisers.push(blankAppraiser);
+									};
 							};
 						var _towing = "";
 						if (_towingIcon === "#icon-503-4186F0") {
