@@ -52,6 +52,7 @@
    
 
 	$(document).ready( function () {
+      alert(appraisers[0]);
 	$('#origin-input').focus(function () {
 	resetTables();
 	});  
@@ -564,7 +565,7 @@ var script = document.createElement('script');
 			attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'), eval('countyCoords[i].state'), eval('countyCoords[i].img'));
 
        }
-		alert(appraisers[i]);
+		
 	var convertMiles = 1609.344;
 for (i = 0; i < appraisers.length; i++) {       
 <!-- Myappraisers = new google.maps.Circle({ -->
