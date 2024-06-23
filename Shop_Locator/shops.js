@@ -16,8 +16,8 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-						console.log(polyCoords.html());
-						if (polyCoords.length > 1) {
+						console.log(polyCoords.length);
+						if (polyCoords.length > 0) {
 							for (let i = 0; i < polyCoords.length; i++) {
 									var tempCoord = polyCoords[i].find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
 								console.log(tempCoord);	
