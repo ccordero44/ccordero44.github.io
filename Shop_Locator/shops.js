@@ -26,7 +26,7 @@ $.ajax({
 								for (let i = 0; i < tempCoords.length; i++) {
 									var tempCoord = tempCoords[i].trim().split(',');
 									tempCoord.pop();
-									if (tempCoord !=== null) { coords.push({ lat: tempCoord[1], lng: tempCoord[0] }) };
+									if (tempCoord.length > 0) { coords.push({ lat: tempCoord[1], lng: tempCoord[0] }) };
 								}
 								
 								
