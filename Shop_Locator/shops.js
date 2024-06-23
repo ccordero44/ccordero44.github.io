@@ -11,14 +11,14 @@ $.ajax({
 				
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
-		    var _name = $(this).find('name').html();
+		    				var _name = $(this).find('name').html();
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
-						var polyCoords = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 						if (polyCoords.length > 1) {
 							for (let i = 0; i < polyCoords.length; i++) {
-									var tempCoord = polyCoords[i].split(',');
+									var tempCoord = polyCoords[i].find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();.split(',');
 									tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
