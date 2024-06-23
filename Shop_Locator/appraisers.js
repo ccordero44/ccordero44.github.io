@@ -83,7 +83,7 @@ var ProcisionCoords = [
 	{ lat: 40.48748, lng: -89.24516 },
 	{ lat: 40.48017, lng: -89.96412 },
 ];*/
-var appraisers = [];
+//var appraisers = [];
 /* {name: "Jerry", coord: JerryCoords, desc: "Jerry's Appraisal Area"},
   {name: "Steve", coord: SteveCoords, desc: "Steve's Appraisal Area"},
   {name: "Abbie", coord: AbbyCoords, desc: "Abbie's Appraisal Area"},
