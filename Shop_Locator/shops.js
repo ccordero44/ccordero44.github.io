@@ -16,7 +16,7 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-						console.log(polyCoords.html());
+						
 						if (polyCoords.length > 1) {
 							for (let i = 0; i < polyCoords.length; i++) {
 									var tempCoord = polyCoords[i].html().find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
@@ -24,19 +24,29 @@ $.ajax({
 								tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-									
-								var blankAppraiser = { 
-										name: "",
-										coord: "",
-										desc: ""
-									};
-								blankAppraiser.name = name;
-								blankAppraiser.coord = coords;
+									var altDesc
 								if (_desc) {
-									blankAppraiser.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+									altDesc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 								}else{
-									blankAppraiser.dec  = name; 
+									altDesc  = name; 
 								};
+								var blankAppraiser = { 
+										name: name,
+										coord: coords,
+										desc: altDesc
+									};
+								//var blankAppraiser = { 
+									//	name: "",
+									//	coord: "",
+									//	desc: ""
+									//};
+								//blankAppraiser.name = name;
+								//blankAppraiser.coord = coords;
+								//if (_desc) {
+								//	blankAppraiser.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+								//}else{
+								//	blankAppraiser.dec  = name; 
+								//};
 										//for (let prop of blankAppraiser) {
 												//prop.name = name;
 												//prop.coord = coords;
