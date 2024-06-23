@@ -22,20 +22,28 @@ $.ajax({
 									tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-									var blankAppraiser = { 
+									
+								var blankAppraiser = { 
 										name: "",
 										coord: "",
 										desc: ""
 									};
-										for (let prop of blankAppraiser) {
-												prop.name = name;
-												prop.coord = coords;
-												if (_desc) {
-														prop.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-													}else{
-														prop.desc = name; 
-													};
-											};
+								blankAppraiser.name = name;
+								blankAppraiser.coord = coords;
+								if (_desc) {
+									blankAppraiser.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+								}else{
+									blankAppraiser.dec  = name; 
+								};
+										//for (let prop of blankAppraiser) {
+												//prop.name = name;
+												//prop.coord = coords;
+												//if (_desc) {
+													//	prop.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+													//}else{
+													//	prop.desc = name; 
+													//};
+											//};
 												appraisers.push(blankAppraiser);
 									};
 							};
