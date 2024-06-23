@@ -20,10 +20,15 @@ $.ajax({
 						if (polyCoords.length > 0) {
 							//for (let i = 0; i < polyCoords.length; i++) {
 							$(polyCoords).each(function () {
-									var tempCoord = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
+									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text(); //.trim().split(',');
+								console.log(tempCoords);
+								var coords = [];
+								for (let i = 0, i < tempCoords.length, i++) {
+									tempCoords[i].trim().split(',')
+								}
 								console.log(tempCoord);	
 								tempCoord.pop();
-									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
+									//var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
 								console.log(coords);
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									var altDesc
