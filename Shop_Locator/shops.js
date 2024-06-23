@@ -44,6 +44,7 @@ $.ajax({
 													//	prop.desc = name; 
 													//};
 											//};
+								console.log(blankAppraiser);
 												appraisers.push(blankAppraiser);
 									};
 							};
