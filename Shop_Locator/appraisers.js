@@ -2,7 +2,7 @@ var all = {
 center: {lat: 42.0346082, lng: -87.9426643},
 radius: 35
 };
-
+/*
 var JerryCoords = [
 	{ lat: 41.77089, lng: -88.05883 },
 	{ lat: 41.77619, lng: -87.57344 },
@@ -82,12 +82,12 @@ var ProcisionCoords = [
 	{ lat: 40.87076, lng: -89.25134 },
 	{ lat: 40.48748, lng: -89.24516 },
 	{ lat: 40.48017, lng: -89.96412 },
-];
+];*/
 var appraisers = [];
-<!-- {name: "Jerry", coord: JerryCoords, desc: "Jerry's Appraisal Area"},
+/* {name: "Jerry", coord: JerryCoords, desc: "Jerry's Appraisal Area"},
   {name: "Steve", coord: SteveCoords, desc: "Steve's Appraisal Area"},
   {name: "Abbie", coord: AbbyCoords, desc: "Abbie's Appraisal Area"},
   {name: "Bill", coord: BillCoords, desc: "Bill's Appraisal Area"},
   {name: "Jim", coord: JimCoords, desc: "Jim's Appraisal Area"},
   {name: "Procision", coord: ProcisionCoords, desc: "Procision Auto Appraisal Area \n\nContact Jim at Procision Auto Body \nfor any appraisals in the area. \nPhone #: (309) 637-1946\nprocision@sbcglobal.net"},
-  ]; -->
+  ]; */
