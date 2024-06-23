@@ -18,8 +18,9 @@ $.ajax({
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 						console.log(polyCoords.length);
 						if (polyCoords.length > 0) {
-							for (let i = 0; i < polyCoords.length; i++) {
-									var tempCoord = polyCoords[i].find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
+							//for (let i = 0; i < polyCoords.length; i++) {
+							$(polyCoords).each(function () {
+									var tempCoord = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
 								console.log(tempCoord);	
 								tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
@@ -59,7 +60,7 @@ $.ajax({
 											//};
 								console.log(blankAppraiser);
 												appraisers.push(blankAppraiser);
-									};
+									});
 							};
 						var _towing = "";
 						if (_towingIcon === "#icon-503-4186F0") {
