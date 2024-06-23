@@ -16,19 +16,19 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-						console.log(polyCoords.length);
+						console.log(polyCoords.html());
 						if (polyCoords.length > 0) {
 							//for (let i = 0; i < polyCoords.length; i++) {
 							$(polyCoords).each(function () {
 									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text(); //.trim().split(',');
-								console.log(tempCoords);
+								console.log(tempCoords.trim());
 								var coords = [];
 								for (let i = 0; i < tempCoords.length; i++) {
 									tempCoords[i].trim().split(',')
 								}
 								
-								tempCoord.pop();
-									//var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
+								tempCoords.pop();
+									//var coords = [{ lat: tempCoords[1], lng: tempCoords[0] }];
 								console.log(coords);
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									var altDesc
