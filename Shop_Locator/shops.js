@@ -15,6 +15,13 @@ $.ajax({
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
+						var polyCoords = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						if (polyCoords.length > 1) {
+						for (let i = 0; i < polyCoords.length; i++) {
+								var coords = polyCoords[i].split(',');
+							
+								};
+							};
 						var _towing = "";
 						if (_towingIcon === "#icon-503-4186F0") {
 							_towing = "yesTow";
