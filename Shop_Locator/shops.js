@@ -26,7 +26,7 @@ $.ajax({
 								for (let i = 0, i < tempCoords.length, i++) {
 									tempCoords[i].trim().split(',')
 								}
-								console.log(tempCoord);	
+								
 								tempCoord.pop();
 									//var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
 								console.log(coords);
