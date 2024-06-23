@@ -19,10 +19,11 @@ $.ajax({
 						
 						if (polyCoords.length > 1) {
 							for (let i = 0; i < polyCoords.length; i++) {
-									var tempCoord = polyCoords[i].html().find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
+									var tempCoord = polyCoords[i].find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
 								console.log(tempCoord);	
 								tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
+								console.log(coords);
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									var altDesc
 								if (_desc) {
