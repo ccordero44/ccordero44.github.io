@@ -663,7 +663,8 @@ var j = 0;
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
 								});	
 
-		<!-- google.maps.event.addListener(Steve, 'mouseover', function() {
+		/* 
+      google.maps.event.addListener(Steve, 'mouseover', function() {
 					 this.getMap().getDiv().setAttribute('title', appraisers[1].desc);
 					 strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
@@ -692,7 +693,8 @@ var j = 0;
 					 strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
-			}); -->
+			}); 
+*/
 			for (var j=0; j < Myappraisers.length; j++) {
 			google.maps.event.addListener(Myappraisers[j],'mouseout',function(){
              this.getMap().getDiv().removeAttribute('title');
