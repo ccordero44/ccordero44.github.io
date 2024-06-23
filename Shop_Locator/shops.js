@@ -24,10 +24,12 @@ $.ajax({
 								
 								var coords = [];
 								for (let i = 0; i < tempCoords.length; i++) {
-									console.log(tempCoords[i].trim().split(','));
+									var tempCoord = tempCoords[i].trim().split(',');
+									tempCoord.pop();
+									coords.push(tempCoord)
 								}
 								
-								tempCoords.pop();
+								
 									//var coords = [{ lat: tempCoords[1], lng: tempCoords[0] }];
 								console.log(coords);
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
