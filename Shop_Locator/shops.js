@@ -23,7 +23,7 @@ $.ajax({
 									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text(); //.trim().split(',');
 								console.log(tempCoords);
 								var coords = [];
-								for (let i = 0, i < tempCoords.length, i++) {
+								for (let i = 0; i < tempCoords.length; i++) {
 									tempCoords[i].trim().split(',')
 								}
 								
