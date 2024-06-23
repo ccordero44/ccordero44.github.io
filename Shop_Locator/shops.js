@@ -22,7 +22,11 @@ $.ajax({
 									tempCoord.pop();
 									var coords = { lat: tempCoord[1], lng: tempCoord[0] };
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-									var blankAppraiser = { name: "", coord: "", desc: ""}
+									var blankAppraiser = { 
+										name: "",
+										coord: "",
+										desc: ""
+									};
 										for (let prop of blankAppraiser) {
 												prop.name = name;
 												prop.coord = coords;
