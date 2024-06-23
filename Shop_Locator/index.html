@@ -564,7 +564,7 @@ var script = document.createElement('script');
 			attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'), eval('countyCoords[i].state'), eval('countyCoords[i].img'));
 
        }
-		
+		alert(appraisers[i]);
 	var convertMiles = 1609.344;
 for (i = 0; i < appraisers.length; i++) {       
 <!-- Myappraisers = new google.maps.Circle({ -->
@@ -630,7 +630,7 @@ Procision = new google.maps.Polygon({
 	fillColor: "#90bbde",
 	fillOpacity: 0.35,
 }); */
-alert(appraisers[i]);
+
 var appraiserPoly = new google.maps.Polygon({
 	paths: appraisers[i].coord,
 	strokeColor: "#c38dd9",
