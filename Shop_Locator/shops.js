@@ -15,11 +15,11 @@ $.ajax({
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
-						var polyCoords = $(this).find('Polygon').html(); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-						console.log(polyCoords);
+						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						console.log(polyCoords.html());
 						if (polyCoords.length > 1) {
 							for (let i = 0; i < polyCoords.length; i++) {
-									var tempCoord = polyCoords[i].find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
+									var tempCoord = polyCoords[i].html().find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim().split(',');
 								console.log(tempCoord);	
 								tempCoord.pop();
 									var coords = [{ lat: tempCoord[1], lng: tempCoord[0] }];
