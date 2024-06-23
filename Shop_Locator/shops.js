@@ -24,7 +24,11 @@ $.ajax({
 										for (let prop of blankAppraiser) {
 												prop.name = name;
 												prop.coord = coords;
-												prop.desc = name; 
+												if (_desc) {
+														prop.desc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+													}else{
+														prop.desc = name; 
+													};
 											};
 												appraisers.push(blankAppraiser);
 									};
