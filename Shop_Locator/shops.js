@@ -18,7 +18,9 @@ $.ajax({
 						var polyCoords = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 						if (polyCoords.length > 1) {
 							for (let i = 0; i < polyCoords.length; i++) {
-									var coords = polyCoords[i].split(',');
+									var tempCoord = polyCoords[i].split(',');
+									tempCoord.pop();
+									var coords = tempCoord;
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									var blankAppraiser = { name: "", coord: "", desc: ""}
 										for (let prop of blankAppraiser) {
