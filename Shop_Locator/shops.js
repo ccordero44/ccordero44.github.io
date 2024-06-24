@@ -11,6 +11,7 @@ $.ajax({
 				
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
+						
 		    				var _name = $(this).find('name').html();
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
@@ -18,6 +19,10 @@ $.ajax({
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 					
 						if (polyCoords.length > 0) {
+							console.log($(this).find('Style').html());
+						var _style = $(this).find('styleUrl').text();
+						var _normal = '';
+						var _highlight = '';
 							//for (let i = 0; i < polyCoords.length; i++) {
 							$(polyCoords).each(function () {
 									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split('\n'); //.trim().split(',');
@@ -42,7 +47,9 @@ $.ajax({
 								var blankAppraiser = { 
 										name: name,
 										coord: coords,
-										desc: altDesc
+										desc: altDesc,
+										normal: ,
+										highlight: 
 									};
 								//var blankAppraiser = { 
 									//	name: "",
