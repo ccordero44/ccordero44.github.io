@@ -708,7 +708,8 @@ var j = 0;
 			}); 
 */
 			for (var j=0; j < Myappraisers.length; j++) {
-			google.maps.event.addListener(Myappraisers[j],'mouseout',function(){
+			google.maps.event.addListener(Myappraisers[j],'mouseout',function(e){
+				e.preventDefault();
              this.getMap().getDiv().removeAttribute('title');
 			  this.setOptions({fillOpacity: .35, strokeColor: strokeClr, strokeWeight: strokeWght, zIndex: zInx,});
 			 });
