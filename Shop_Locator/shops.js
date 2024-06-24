@@ -3,7 +3,7 @@
 		 var appraisers = [];
 
 var statusCode = 0;
-fetch("https://www.google.com/maps/d/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6").then(response => {
+await fetch("https://www.google.com/maps/d/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6").then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
