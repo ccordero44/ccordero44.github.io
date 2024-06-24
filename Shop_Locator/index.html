@@ -651,7 +651,7 @@ var appraiserPoly = new google.maps.Polygon({
 	 content: appraisers[i].desc
 });
 
-appraiserPoly.addListener('click', showArrays);
+appraiserPoly.addListener('mouseover', showArrays);
 
 Myappraisers.push(appraiserPoly);
 //Myappraisers.push(Steve);
@@ -714,21 +714,19 @@ Myappraisers.push(appraiserPoly);
 	//				 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
 	//		}); 
 //*/
-			/*
-  // for (var j=0; j < Myappraisers.length; j++) {
-//			google.maps.event.addListener(Myappraisers[j],'mouseout',function(e){
-//				e.stop();
-  //           this.getMap().getDiv().removeAttribute('title');
+			
+   for (var j=0; j < Myappraisers.length; j++) {
+			google.maps.event.addListener(Myappraisers[j],'mouseout',function(e){
+				e.stop();
+             this.getMap().getDiv().removeAttribute('title');
 //			  this.setOptions({fillOpacity: .35, strokeColor: strokeClr, strokeWeight: strokeWght, zIndex: zInx,});
-//			 });
+			 });
 			// Myappraisers[j].setMap(map);
-//			 };
-//			*/
+			 };
+//			
 	//}
 		
 }
-
-
 
 showAppraisers();		
 }
