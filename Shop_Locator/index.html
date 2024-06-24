@@ -641,10 +641,10 @@ Procision = new google.maps.Polygon({
 
 var appraiserPoly = new google.maps.Polygon({
 	paths: appraisers[i].coord,
-	strokeColor: appraisers[i].color,
+	strokeColor: getRandomColor(),
 	strokeOpacity: .8,
 	strokeWeight: 2,
-	fillColor: appraisers[i].color,
+	fillColor: getRandomColor(),
 	fillOpacity: 1,
 	 content: appraisers[i].desc
 });
@@ -763,6 +763,14 @@ jQuery(document).bind("keyup keydown", function(e){
 	return false;
     }
 });
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
     </script>
 <div id="legend"><h3>MAP LEGEND</h3></div>
                 <div id="testDiv" class="customMapControldropdown" onmouseover="changeCSS();" onmouseout="changeCSSback();">
