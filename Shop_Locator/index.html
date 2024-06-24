@@ -665,13 +665,14 @@ var j = 0;
 	for (var x = 0; x < Myappraisers.length; x++) {
 	
 	
-		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function() {
+		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function(e) {
+			 e.preventDefault();
 			  var appDesc = appraisers[i].desc;
 					 this.getMap().getDiv().setAttribute('title', appDesc);
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
-								}, Modernizr.passiveeventlisteners ? {passive: true} : false);	
+								});	
 	};
 
 		/* 
