@@ -671,7 +671,7 @@ var j = 0;
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
-								});	
+								}, Modernizr.passiveeventlisteners ? {passive: true} : false);	
 	};
 
 		/* 
