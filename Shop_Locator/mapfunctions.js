@@ -1410,6 +1410,7 @@ var call1 = $.ajax({
 }
 		
 function showArrays(event) {
+	event.stop();
      this.getMap().getDiv().setAttribute('title', this.content);	
     var vertices = this.getPath();
     //polyInfowindow.setContent(this.content);
