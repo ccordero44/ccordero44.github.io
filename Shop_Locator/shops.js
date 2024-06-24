@@ -10,7 +10,7 @@ $.ajax({
 		   success: function(response) { 
 			  
 				$(response).find('Style').each(function(el) {
-								console.log($(el).attr('id'));
+								console.log($(this).attr('id'));
 							});
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
