@@ -133,7 +133,7 @@
 	        var i;
 	        var j;
 	        var infowindow;
-	   	var polyInfowindow = new google.maps.InfoWindow();
+	   	var polyInfowindow;
 	        var activeInfoWindow;
 	        var resetBounds;
 	        var map;
@@ -191,7 +191,7 @@
 			  ],
 			};
         function initMap() {
-         
+         	polyInfowindow = new google.maps.InfoWindow();
             redcamInfoWindow = new google.maps.InfoWindow();
             var mapOptions = {
                 mapTypeControl: false,
