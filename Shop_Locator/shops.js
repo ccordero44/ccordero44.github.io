@@ -8,9 +8,15 @@ $.ajax({
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
 		   async: false,
 		   success: function(response) { 
+			
 			  
-				$(response).find('Style').each(function(el) {
-								console.log($(this).attr('id'));
+			   var styles = [];
+				$(response).find('Style').each(function() {
+					var style = {
+						id: $(this).attr('id'),
+						color: $(this).find('PolyStyle').find('color').text()
+					};
+					styles.push(style);	
 							});
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
@@ -23,9 +29,15 @@ $.ajax({
 							
 						if (polyCoords.length > 0) {
 							
-						var _style = $(this).find('styleUrl').text();
-						var _normal = '';
-						var _highlight = '';
+						var _style = $(this).find('styleUrl').text().replace("#","");
+						var _normal = _style + "-normal";
+						var _highlight = _style + "-highlight";
+						var _color;
+							for (var a = 0; a < styles.length; a++) {
+								if (styles[a].id === _normal) {
+									_color = styles[a].color;
+								};
+							     };
 							//for (let i = 0; i < polyCoords.length; i++) {
 							$(polyCoords).each(function () {
 									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split('\n'); //.trim().split(',');
@@ -51,8 +63,7 @@ $.ajax({
 										name: name,
 										coord: coords,
 										desc: altDesc,
-										normal: _normal,
-										highlight: _highlight
+										color: _color
 									};
 								//var blankAppraiser = { 
 									//	name: "",
