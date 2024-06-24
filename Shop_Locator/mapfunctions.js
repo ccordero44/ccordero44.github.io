@@ -1412,4 +1412,5 @@ function showArrays(event) {
     infowindow.setContent(this.content);
     infowindow.setPosition(event.latLng);
     infowindow.open(map);
+    map.setCenter(event.latLng);
 }
