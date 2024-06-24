@@ -661,13 +661,16 @@ var zInx = 0;
 
 if (Myappraisers){
 var j = 0;
+	for (var x = 0; x < Myappraisers.length; x++) {
 	var appDesc = appraisers[i].desc;
-		 google.maps.event.addListener(appraiserPoly, 'mouseover', function() {
+	
+		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function() {
 					 this.getMap().getDiv().setAttribute('title', appDesc);
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
 								});	
+	};
 
 		/* 
       google.maps.event.addListener(Steve, 'mouseover', function() {
