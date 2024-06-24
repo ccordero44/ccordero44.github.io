@@ -17,11 +17,11 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-					
-						if (polyCoords.length > 0) {
 							$(this).find('Style').each(function(el) {
 								console.log($(el).attr('id'));
 							});
+						if (polyCoords.length > 0) {
+							
 						var _style = $(this).find('styleUrl').text();
 						var _normal = '';
 						var _highlight = '';
