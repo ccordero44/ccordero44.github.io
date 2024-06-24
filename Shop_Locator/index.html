@@ -665,7 +665,7 @@ var j = 0;
 	var appDesc = appraisers[i].desc;
 	
 		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function() {
-					 this.getMap().getDiv().setAttribute('title', appDesc);
+					 this.getMap().getDiv().setAttribute('title', appraisers[i].desc);
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
