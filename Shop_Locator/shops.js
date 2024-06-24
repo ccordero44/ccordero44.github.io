@@ -31,13 +31,13 @@ $.ajax({
 								
 								
 									//var coords = [{ lat: tempCoords[1], lng: tempCoords[0] }];
-								console.log(coords);
+								
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-									var altDesc
+									var altDesc;
 								if (_desc) {
 									altDesc = _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 								}else{
-									altDesc  = name; 
+									altDesc = name; 
 								};
 								var blankAppraiser = { 
 										name: name,
@@ -65,7 +65,7 @@ $.ajax({
 													//	prop.desc = name; 
 													//};
 											//};
-								console.log(blankAppraiser);
+								
 												appraisers.push(blankAppraiser);
 									});
 							};
