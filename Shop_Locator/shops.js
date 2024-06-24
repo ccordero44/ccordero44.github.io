@@ -35,7 +35,7 @@ $.ajax({
 						var _color;
 							for (var a = 0; a < styles.length; a++) {
 								if (styles[a].id === _normal) {
-									_color = styles[a].color;
+									_color = "#" + styles[a].color;
 								};
 							     };
 							//for (let i = 0; i < polyCoords.length; i++) {
