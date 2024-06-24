@@ -50,9 +50,7 @@
 	
    <script type="text/javascript">
    
-async function starter() {
- await myRequest();
-};
+
 	
 	$(document).ready( function () {
       
@@ -194,7 +192,7 @@ async function starter() {
 			  ],
 			};
         function initMap() {
-	      starter();
+	       //await myRequest();
          	polyInfowindow = new google.maps.InfoWindow();
             redcamInfoWindow = new google.maps.InfoWindow();
             var mapOptions = {
