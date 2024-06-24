@@ -142,7 +142,7 @@
 	        var shopmarkers = [];
 			var Mycounties = [];
 			var tempcounties = [];
-	   		var appraiserPoly = [];
+	   		//var appraiserPoly = [];
 			var tempDiv;
 			var clickCo;
 			var myWindow;
@@ -639,7 +639,7 @@ Procision = new google.maps.Polygon({
 	fillOpacity: 0.35,
 }); */
 
- appraiserPoly = new google.maps.Polygon({
+var appraiserPoly = new google.maps.Polygon({
 	paths: appraisers[i].coord,
 	strokeColor: appraisers[i].color,
 	strokeOpacity: .8,
