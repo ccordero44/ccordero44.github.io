@@ -571,7 +571,7 @@ var script = document.createElement('script');
        }
 		
 	var convertMiles = 1609.344;
-for (i = 0; i < appraisers.length; i++) {   
+for (var i = 0; i < appraisers.length; i++) {   
   //  Myappraisers = [];
    /*    
 <!-- Myappraisers = new google.maps.Circle({ -->
@@ -648,6 +648,7 @@ var appraiserPoly = new google.maps.Polygon({
 	fillOpacity: 1,
 	 content: appraisers[i].desc
 });
+	console.log(appraisers[i].color);
 appraiserPoly.addListener('click', showArrays);
 
 Myappraisers.push(appraiserPoly);
@@ -658,9 +659,9 @@ Myappraisers.push(appraiserPoly);
 //Myappraisers.push(Procision);
  
  tempappraisers.push(Myappraisers);
-var strokeClr;
-var strokeWght;
-var zInx = 0;
+//var strokeClr;
+//var strokeWght;
+//var zInx = 0;
 
 //if (Myappraisers){
 //var j = 0;
