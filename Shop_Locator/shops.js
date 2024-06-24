@@ -9,7 +9,7 @@ $.ajax({
 		   async: false,
 		   success: function(response) { 
 			  
-				$(response)..find('Style').each(function(el) {
+				$(response).find('Style').each(function(el) {
 								console.log($(el).attr('id'));
 							});
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
