@@ -8,7 +8,9 @@ $.ajax({
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
 		   async: false,
 		   success: function(response) { 
-				
+				$(response).find('Style').each(function(el) {
+								console.log($(el).attr('id'));
+							});
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
 						
@@ -17,9 +19,7 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-							$(this).find('Style').each(function(el) {
-								console.log($(el).attr('id'));
-							});
+							
 						if (polyCoords.length > 0) {
 							
 						var _style = $(this).find('styleUrl').text();
