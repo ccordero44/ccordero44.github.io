@@ -1412,10 +1412,10 @@ var call1 = $.ajax({
 function showArrays(event) {
 	event.stop();
      this.getMap().getDiv().setAttribute('title', this.content);	
-    var vertices = this.getPath();
+  // var vertices = this.getPath();
     //polyInfowindow.setContent(this.content);
    // polyInfowindow.setPosition(event.latLng);
    // polyInfowindow.open(map);
-    map.setCenter(event.latLng);
+   // map.setCenter(event.latLng);
 	
 }
