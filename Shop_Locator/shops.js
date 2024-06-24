@@ -19,7 +19,9 @@ $.ajax({
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 					
 						if (polyCoords.length > 0) {
-							console.log($(this).find('Style').html());
+							$(this).find('Style').each(function(el) {
+								console.log($(el).attr('id'));
+							});
 						var _style = $(this).find('styleUrl').text();
 						var _normal = '';
 						var _highlight = '';
