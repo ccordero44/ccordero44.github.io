@@ -1409,7 +1409,7 @@ var call1 = $.ajax({
 		
 function showArrays(event) {
     var vertices = this.getPath();
-    infoWindow.setContent(this.content);
-    infoWindow.setPosition(event.latLng);
-    infoWindow.open(map);
+    infowindow.setContent(this.content);
+    infowindow.setPosition(event.latLng);
+    infowindow.open(map);
 }
