@@ -200,6 +200,7 @@ function AutocompleteDirectionsHandler(map) {
        	document.getElementById("testDiv").style.display = "none";
         document.getElementById("dvTable").style.display = "none";
             infowindow.close();
+	  polyInfowindow.close();
             map.setOptions({
                 mapTypeControl: false,
             });
@@ -648,6 +649,7 @@ function clearDir() {
 			document.getElementById("myTable").innerHTML = "";
 			redcamInfoWindow.close();
   			infowindow.close();
+			polyInfowindow.close();
   			infoPODwindow.close();
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
@@ -1409,8 +1411,8 @@ var call1 = $.ajax({
 		
 function showArrays(event) {
     var vertices = this.getPath();
-    infowindow.setContent(this.content);
-    infowindow.setPosition(event.latLng);
-    infowindow.open(map);
+    polyInfowindow.setContent(this.content);
+    polyInfowindow.setPosition(event.latLng);
+    polyInfowindow.open(map);
     map.setCenter(event.latLng);
 }
