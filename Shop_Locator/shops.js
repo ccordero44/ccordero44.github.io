@@ -48,8 +48,8 @@ $.ajax({
 										name: name,
 										coord: coords,
 										desc: altDesc,
-										normal: ,
-										highlight: 
+										normal: _normal,
+										highlight: _highlight
 									};
 								//var blankAppraiser = { 
 									//	name: "",
