@@ -645,8 +645,9 @@ Procision = new google.maps.Polygon({
 	strokeWeight: 2,
 	fillColor: "#c38dd9",
 	fillOpacity: 0.35,
+	 content: appraisers[i].desc
 });
-
+appraiserPoly.addListener('click', showArrays);
 Myappraisers.push(appraiserPoly);
 //Myappraisers.push(Steve);
 //Myappraisers.push(Abbie);
@@ -663,16 +664,17 @@ var zInx = 0;
 var j = 0;
 	
 	for (var x = 0; x < Myappraisers.length; x++) {
-	
+
 	  var appDesc = appraisers[i].desc;
-		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function(e) {
+		
+		/* google.maps.event.addListener(Myappraisers[x], 'mouseover', function(e) {
 			 e.stop();
 			
 					 this.getMap().getDiv().setAttribute('title', appraisers[i].desc);
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
-								});	
+								});*/	
 	};
 
 		/* 
