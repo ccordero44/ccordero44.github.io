@@ -1410,11 +1410,12 @@ var call1 = $.ajax({
 }
 		
 function showArrays(event) {
-	event.preventDefault();
+	
      this.getMap().getDiv().setAttribute('title', this.content);	
     var vertices = this.getPath();
     //polyInfowindow.setContent(this.content);
    // polyInfowindow.setPosition(event.latLng);
    // polyInfowindow.open(map);
     map.setCenter(event.latLng);
+	return false;
 }
