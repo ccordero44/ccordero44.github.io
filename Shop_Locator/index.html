@@ -641,10 +641,10 @@ Procision = new google.maps.Polygon({
 
  appraiserPoly = new google.maps.Polygon({
 	paths: appraisers[i].coord,
-	strokeColor: appraisers[i].color,
+	strokeColor: eval(appraisers[i].color),
 	strokeOpacity: .8,
 	strokeWeight: 2,
-	fillColor: appraisers[i].color,
+	fillColor: eval(appraisers[i].color),
 	fillOpacity: 0.35,
 	 content: appraisers[i].desc
 });
