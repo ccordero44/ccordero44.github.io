@@ -647,7 +647,10 @@ Procision = new google.maps.Polygon({
 	fillOpacity: 0.35,
 	 content: appraisers[i].desc
 });
-appraiserPoly.addListener('click', showArrays);
+//appraiserPoly.addListener('click', showArrays);
+	appraiserPoly.addListener('click', function(e) {
+		this.getMap().getDiv().title = appraisers[i].desc;
+	});
 Myappraisers.push(appraiserPoly);
 //Myappraisers.push(Steve);
 //Myappraisers.push(Abbie);
@@ -661,11 +664,11 @@ var strokeWght;
 var zInx = 0;
 
 //if (Myappraisers){
-var j = 0;
+//var j = 0;
 	
-	for (var x = 0; x < Myappraisers.length; x++) {
+	//for (var x = 0; x < Myappraisers.length; x++) {
 
-	  var appDesc = appraisers[i].desc;
+	//  var appDesc = appraisers[i].desc;
 		
 		/* google.maps.event.addListener(Myappraisers[x], 'mouseover', function(e) {
 			 e.stop();
@@ -675,7 +678,7 @@ var j = 0;
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
 								});*/	
-	};
+	//};
 
 		/* 
       google.maps.event.addListener(Steve, 'mouseover', function() {
