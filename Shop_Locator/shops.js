@@ -8,6 +8,7 @@ $.ajax({
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
 		   async: false,
 		   success: function(response) { 
+			   console.log(response);
 				$(response).find("Folder").eq(0).find('Style').each(function(el) {
 								console.log($(el).attr('id'));
 							});
