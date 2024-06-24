@@ -1,4 +1,5 @@
-    function Window_onLoad() {
+    async function Window_onLoad() {
+         await myRequest();
         window.resizeTo(screen.availWidth / 1.5, screen.availHeight / 1.5);
         window.moveTo(screen.availWidth / 6, screen.availHeight / 5);
         document.getElementById("myForm").style.visibility = "hidden";
