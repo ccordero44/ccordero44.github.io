@@ -666,7 +666,7 @@ var j = 0;
 	
 	
 		 google.maps.event.addListener(Myappraisers[x], 'mouseover', function(e) {
-			 e.preventDefault();
+			 e.stop();
 			  var appDesc = appraisers[i].desc;
 					 this.getMap().getDiv().setAttribute('title', appDesc);
 					strokeClr = this.get('strokeColor');
@@ -709,7 +709,7 @@ var j = 0;
 */
 			for (var j=0; j < Myappraisers.length; j++) {
 			google.maps.event.addListener(Myappraisers[j],'mouseout',function(e){
-				e.preventDefault();
+				e.stop();
              this.getMap().getDiv().removeAttribute('title');
 			  this.setOptions({fillOpacity: .35, strokeColor: strokeClr, strokeWeight: strokeWght, zIndex: zInx,});
 			 });
