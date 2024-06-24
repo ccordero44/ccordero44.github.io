@@ -648,7 +648,7 @@ var appraiserPoly = new google.maps.Polygon({
 	fillOpacity: .35,
 	 content: appraisers[i].desc
 });
-	console.log(appraisers[i].color);
+
 appraiserPoly.addListener('click', showArrays);
 
 Myappraisers.push(appraiserPoly);
@@ -763,16 +763,8 @@ jQuery(document).bind("keyup keydown", function(e){
 	return false;
     }
 });
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
 
-	   /**
+ /**
  * @param numOfSteps: Total number steps to get color, means total colors
  * @param step: The step number, means the order of the color
  */
