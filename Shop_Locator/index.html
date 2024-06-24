@@ -647,10 +647,8 @@ Procision = new google.maps.Polygon({
 	fillOpacity: 0.35,
 	 content: appraisers[i].desc
 });
-//appraiserPoly.addListener('click', showArrays);
-	appraiserPoly.addListener('mouseover', function(e) {
-		this.getMap().getDiv().title = eval(appraisers[i].desc);
-	});
+appraiserPoly.addListener('click', showArrays);
+
 Myappraisers.push(appraiserPoly);
 //Myappraisers.push(Steve);
 //Myappraisers.push(Abbie);
