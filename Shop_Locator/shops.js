@@ -14,7 +14,7 @@ $.ajax({
 				$(response).find('Style').each(function() {
 					var style = {
 						id: $(this).attr('id'),
-						color: $(this).find('PolyStyle').find('color').text().trim()
+						color: $(this).find('PolyStyle').find('color').text().replace(/(\r\n|\n|\r)/gm, "")
 					};
 					styles.push(style);	
 							});
