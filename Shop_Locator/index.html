@@ -660,9 +660,9 @@ var zInx = 0;
 
 if (Myappraisers){
 var j = 0;
-	console.log(appraisers[i].desc);
+	var appDesc = appraisers[i].desc;
 		 google.maps.event.addListener(appraiserPoly, 'mouseover', function() {
-					 this.getMap().getDiv().setAttribute('title', appraisers[i].desc);
+					 this.getMap().getDiv().setAttribute('title', appDesc);
 					strokeClr = this.get('strokeColor');
 					strokeWght = this.get('strokeWeight');
 					 this.setOptions({fillOpacity: .5, strokeColor: 'white', strokeWeight: 4, zIndex: 1000,});
