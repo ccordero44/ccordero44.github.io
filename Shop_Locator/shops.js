@@ -3,6 +3,7 @@
 		 var appraisers = [];
 
 var statusCode = 0;
+/*
 const myRequest = async () => 
      fetch("https://www.google.com/maps/d/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6").then(response => {
         if (!response.ok) {
@@ -158,8 +159,8 @@ var styles = [];
         console.error(`There was a problem with
                        the fetch operation:`, error);
     });
+*/
 
-/*
 $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
@@ -308,7 +309,7 @@ $.ajax({
 										}
 		});
 		
-*/
+
 
 /*$.ajax({
    type: "GET",
