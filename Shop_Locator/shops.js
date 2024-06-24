@@ -13,7 +13,7 @@ fetch("https://www.google.com/maps/d/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0w
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText,
                                             'text/xml');
-
+var styles = [];
         // Now you can work with the parsed XML document
         $(xmlDoc).find('Style').each(function() {
 					var style = {
