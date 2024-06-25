@@ -448,9 +448,11 @@ displayCoordinates(SMLatLng);
                     <!-- infowindow.close(); -->
 
                 <!-- }); -->
-var script = document.createElement('script');
+if ($('script[src="geojson.js"]').length === 0){
+	var script = document.createElement('script');
         script.src = 'geojson.js';
         document.getElementsByTagName('head')[0].appendChild(script);
+}
          window.eqfeed_callback = function(results) {
  	var latlngPODbounds = new google.maps.LatLngBounds();
  	var PODmarker;
