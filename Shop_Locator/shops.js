@@ -287,9 +287,9 @@ $.ajax({
 								_email = "";
 							};
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-							newNameSplit = newName.slice(0,newName.indexOf("(")).split('-');
-							newNameSplit.pop();
-							newName = newNameSplit.join('-');
+							//newNameSplit = newName.slice(0,newName.indexOf("(")).split('-');
+							//newNameSplit.pop();
+							//newName = newNameSplit.join('-');
 							//newName = newName.slice(0,newName.indexOf("(")).split('-')
 									//newName.pop();
 									//newName = newName.join('-');
