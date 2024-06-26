@@ -385,18 +385,20 @@ displayCoordinates(SMLatLng);
 						google.maps.event.addListener(infowindow, "domready", () => {
 						
 								if (inPoly) {
-									if (typeof appraiserSpan === 'undefined') {
-										$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">(Appraiser: ' + polyName + ')</pre>')
-									}else{
-										$('#appraiserSpan').text('(Appraiser: ' + polyName + ')');
-									};
-								}else{
+									if (polyName !== 'ALL STAR TOWS') {
+										if (typeof appraiserSpan === 'undefined') {
+											$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">(Appraiser: ' + polyName + ')</pre>')
+										}else{
+											$('#appraiserSpan').text('(Appraiser: ' + polyName + ')');
+										};
+									}
+								}//else{
 									<!-- if (typeof appraiserSpan === 'undefined') { -->
 										<!-- $('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">(Appraiser: DOAN)</pre>') -->
 									<!-- }else{ -->
 										<!-- $('#appraiserSpan').text('(Appraiser: DOAN)'); -->
 									<!-- }; -->
-								};
+								//};
 								var inputAddress = document.getElementById("clientAddress");
 				
 						if (inputAddress == null){
