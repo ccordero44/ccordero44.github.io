@@ -290,13 +290,14 @@ $.ajax({
 							
 									//newName.pop();
 									//newName = newName.join('-');
-							if (newName.indexOf("(") > 0) {
+							if ((newName.match(/(/g) || []).length > 0) {
+								
 								if ((newName.match(/-/g) || []).length < 2 ) {
 									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 								}else{
 									var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-')
 									newNameSplit.pop();
-									newNameSplit = newName.join('-');
+									newNameSplit = newNameSplit.join('-');
 									//newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 									newShop.push([newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join(''));
 								};
