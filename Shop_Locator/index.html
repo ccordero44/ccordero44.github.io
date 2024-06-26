@@ -402,19 +402,26 @@ displayCoordinates(SMLatLng);
 												$('#rateTable').text('Rate Table: ' + shops[i][11]);
 											};
 											};
-									}
-								}/*else{
-									 if (typeof appraiserSpan === 'undefined') { 
-										 $('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: DOAN</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
-									 }else{ 
-										 $('#appraiserSpan').text('Appraiser: DOAN'); 
-										 if (typeof rateTable === 'undefined') {
-										$('#appraiserSpan').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
+									}else{
+										if (typeof rateTable === 'undefined') {
+											$('.titleTxt').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
 										}else{
-												$('#rateTable').text('Rate Table: ' + shops[i][11]);
+											$('#rateTable').text('Rate Table: ' + shops[i][11]);
+										};
+									};
+								}else{
+									 if (typeof appraiserSpan === 'undefined') { 
+										 //$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: DOAN</pre>');
+										 $('.titleTxt').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
+									 }else{ 
+										 //$('#appraiserSpan').text('Appraiser: DOAN'); 
+										 if (typeof rateTable === 'undefined') {
+											$('.titleTxt').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
+										}else{
+											$('#rateTable').text('Rate Table: ' + shops[i][11]);
 										 };
 										 }; 
-								};*/
+								};
 								var inputAddress = document.getElementById("clientAddress");
 				
 						if (inputAddress == null){
