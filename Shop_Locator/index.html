@@ -200,7 +200,7 @@
                 zoomControl: true,
                 zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
                 fullscreenControl: false,
-
+		gestureHandling: "cooperative",
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById('map'),
@@ -744,7 +744,7 @@ Myappraisers.push(appraiserPoly);
 			
    for (var j=0; j < Myappraisers.length; j++) {
 			google.maps.event.addListener(Myappraisers[j],'mouseout',function(e){
-				e.stop();
+				//e.stop();
              this.getMap().getDiv().removeAttribute('title');
 //			  this.setOptions({fillOpacity: .35, strokeColor: strokeClr, strokeWeight: strokeWght, zIndex: zInx,});
 			 });
