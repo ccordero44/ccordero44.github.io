@@ -184,7 +184,7 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
-						var _rateTable = _desc.toString().split("<br>")[2];
+						
 						if (polyCoords.length > 0) {
 							
 						var _style = $(this).find('styleUrl').text().replace("#","");
@@ -213,7 +213,9 @@ $.ajax({
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									name = [name.slice(0,name.indexOf("(")), "<br>",name.slice(name.indexOf("("))].join('');
 								var altDesc;
+								var _rateTable;
 								if (_desc) {
+									_rateTable = _desc.toString().split("<br>")[2];
 									if (name !== _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim()) {
 										altDesc = name + "\n" + _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									}else{
