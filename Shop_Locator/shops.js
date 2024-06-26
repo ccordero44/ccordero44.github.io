@@ -268,6 +268,7 @@ $.ajax({
 						//console.log(_desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", ""));
 						if (_coords.length > 1) {
 						var _ratetables = _desc.toString().split("<br>")[2];
+							console.log(_desc.toString());
 						//var _phone = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[0].replace("Ph# ", "");
 						var _phones = _desc.toString().match(/((?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?)/img);
 						//var _email = _desc.toString().replace("<![CDATA[", "").replaceAll("<br>", ",").replace("]]>", "").split(",")[1].replace("Email: ", "");
