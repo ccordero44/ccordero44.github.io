@@ -294,14 +294,11 @@ $.ajax({
 								if ((newName.match(/-/g) || []).length < 2 ) {
 									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 								}else{
-									//var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-');
-									//newNameSplit.pop();
-									//newName = newNameSplit.join('-');
-									//newName = newName.slice(0,newName.indexOf("(")).split('-')
-									newName = newName.slice(0,newName.indexOf("(")).split('-')
-									newName.pop();
-									newName = newName.join('-');
-									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
+									var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-')
+									newNameSplit.pop();
+									newNameSplit = newName.join('-');
+									//newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
+									newShop.push([newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join(''));
 								};
 							}else{
 								newShop.push(newName);
