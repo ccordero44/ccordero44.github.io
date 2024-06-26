@@ -288,7 +288,7 @@ $.ajax({
 							};
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 							if (newName.indexOf("(") > 0) {
-								newShop.push([newName.slice(0,newName.indexOf("(")), "<br>",newName.slice(newName.indexOf("("))].join(''));
+								newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 							}else{
 								newShop.push(newName);
 							};
