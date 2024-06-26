@@ -393,6 +393,7 @@ displayCoordinates(SMLatLng);
 									if (polyName !== 'ALL STAR TOWS') {
 										if (typeof appraiserSpan === 'undefined') {
 											$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: ' + polyName + '</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
+											$('#appraiserSpan').html('');
 										}else{
 											$('#appraiserSpan').html('');
 											$('#appraiserSpan').text('Appraiser: ' + polyName);
@@ -402,6 +403,7 @@ displayCoordinates(SMLatLng);
 								}else{
 									 if (typeof appraiserSpan === 'undefined') { 
 										 $('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: DOAN</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
+										$('#appraiserSpan').html('');
 									 }else{ 
 										 $('#appraiserSpan').html('');
 										 $('#appraiserSpan').text('Appraiser: DOAN' + '<br><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>'); 
