@@ -277,7 +277,7 @@
 			
 		var markerTitle = '';
 		    if (shops[i][0].indexOf('<br>') > 0) {
-			markerTitle = shops[i][0].replace("<br>"," ");
+			markerTitle = shops[i][0].replaceAll("<br>"," ");
 		    }else{
 			 markerTitle = shops[i][0];   
 		    }
