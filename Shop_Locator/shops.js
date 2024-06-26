@@ -211,11 +211,11 @@ $.ajax({
 									//var coords = [{ lat: tempCoords[1], lng: tempCoords[0] }];
 								
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-									name = [name.slice(0,name.indexOf("(")), "<br>",name.slice(name.indexOf("("))].join('');
+									
 								var altDesc;
 								
 								if (_desc) {
-									_rateTable = '<br>' + _desc.toString().split("<br>")[2];
+									_rateTable = '\n' + _desc.toString().split("<br>")[2];
 									if (name !== _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim()) {
 										altDesc = name + "\n" + _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									}else{
@@ -224,6 +224,7 @@ $.ajax({
 								}else{
 									altDesc = name; 
 								};
+								name = name + _rateTable; 
 								var blankAppraiser = { 
 										name: name,
 										coord: coords,
@@ -281,7 +282,7 @@ $.ajax({
 							}else{
 								_email = "";
 							};
-							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
+							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim() + [_name.slice(0,_name.indexOf("(")), "<br>",_name.slice(_name.indexOf("("))].join(''));
 					 			
 					 $.ajax({
 						   type: "GET",
