@@ -213,9 +213,9 @@ $.ajax({
 									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									name = [name.slice(0,name.indexOf("(")), "<br>",name.slice(name.indexOf("("))].join('');
 								var altDesc;
-								var _rateTable;
+								var _rateTable = "";
 								if (_desc) {
-									_rateTable = _desc.toString().split("<br>")[2];
+									_rateTable = '<br>' + _desc.toString().split("<br>")[2];
 									if (name !== _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim()) {
 										altDesc = name + "\n" + _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									}else{
@@ -281,8 +281,8 @@ $.ajax({
 							}else{
 								_email = "";
 							};
-							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim())
-					 
+							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim() + _rateTable)
+					 			
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
