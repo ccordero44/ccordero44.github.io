@@ -276,12 +276,17 @@
 				markerIcon = imageX
 			};
 			
-				
+		var markerTitle = '';
+		    if (shops[i][0].indexOf('<br>') > 0) {
+			markerTitle = shops[i][0].replace("<br"," ");
+		    }else{
+			 markerTitle = shops[i][0];   
+		    }
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(shops[i][6], shops[i][7]),
                     map: map,
                     clickable: true,
-                    title: shops[i][0],
+                    title: markerTitle,
                     icon: markerIcon
 
                 });
