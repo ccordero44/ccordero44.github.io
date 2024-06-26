@@ -282,7 +282,9 @@ $.ajax({
 							}else{
 								_email = "";
 							};
-							newShop.push(_name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim() + [_name.slice(0,_name.indexOf("(")), "<br>",_name.slice(_name.indexOf("("))].join(''));
+							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+								
+							newShop.push([newName.slice(0,newName.indexOf("(")), "<br>",newName.slice(newName.indexOf("("))].join(''));
 					 			
 					 $.ajax({
 						   type: "GET",
