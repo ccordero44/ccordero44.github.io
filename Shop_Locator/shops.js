@@ -290,7 +290,7 @@ $.ajax({
 							
 									//newName.pop();
 									//newName = newName.join('-');
-							if ((newName.match(/(/g) || []).length > 0) {
+							if ((newName.match(/\(/g) || []).length > 0) {
 								
 								if ((newName.match(/-/g) || []).length < 2 ) {
 									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
