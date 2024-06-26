@@ -392,18 +392,18 @@ displayCoordinates(SMLatLng);
 								if (inPoly) {
 									if (polyName !== 'ALL STAR TOWS') {
 										if (typeof appraiserSpan === 'undefined') {
-											$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: ' + polyName + '</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">' + shops[i][11] + '</pre>');
+											$('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: ' + polyName + '</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
 										}else{
 											$('#appraiserSpan').text('Appraiser: ' + polyName);
-											$('#appraiserSpan').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">' + shops[i][11] + '</pre>');
+											$('#appraiserSpan').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
 										};
 									}
 								}else{
 									 if (typeof appraiserSpan === 'undefined') { 
-										 $('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: DOAN</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">' + shops[i][11] + '</pre>');
+										 $('.titleTxt').append('<pre id="appraiserSpan" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Appraiser: DOAN</pre><pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
 									 }else{ 
 										 $('#appraiserSpan').text('Appraiser: DOAN'); 
-										 $('#appraiserSpan').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">' + shops[i][11] + '</pre>');
+										 $('#appraiserSpan').append('<pre id="rateTable" style="font-weight:normal;font-size:13px;margin:0;font-family:Roboto;">Rate Table: ' + shops[i][11] + '</pre>');
 									 }; 
 								};
 								var inputAddress = document.getElementById("clientAddress");
