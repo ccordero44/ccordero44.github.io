@@ -287,14 +287,14 @@ $.ajax({
 								_email = "";
 							};
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-							
+							newName = newName.slice(0,newName.indexOf("(")).split('-')
+									newName.pop();
+									newName = newName.join('-');
 							if (newName.indexOf("(") > 0) {
 								if (newName.indexOf("-") === 1) {
 									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 								}else{
-									newName = newName.slice(0,newName.indexOf("(")).split('-')
-									newName.pop();
-									newName = newName.join('-');
+									
 									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
 								};
 							}else{
