@@ -287,24 +287,27 @@ $.ajax({
 								_email = "";
 							};
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
-							
-									//newName.pop();
-									//newName = newName.join('-');
+							var formattedName;
+						
 							if ((newName.match(/\(/g) || []).length > 0) {
-								
 								if ((newName.match(/-/g) || []).length < 2 ) {
-									newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
+									//newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
+									formattedName = [newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join('')
 								}else{
 									var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-')
 									newNameSplit.pop();
 									newNameSplit = newNameSplit.join('-');
 									//newShop.push([newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join(''));
-									newShop.push([newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join(''));
+									formattedName = [newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join('');
 								};
 							}else{
-								newShop.push(newName);
+								formattedName = newName;
 							};
-					 			
+							if ((formattedName.match(/\*/g) || []).length > 0) {
+								formattedName = [formattedName.slice(0,formattedName.indexOf("*")), "<br>",formattedName.slice(formattedName.indexOf("*"))].join('')
+							}
+
+							newShop.push(formattedName);
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
