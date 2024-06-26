@@ -305,6 +305,7 @@ $.ajax({
 							};
 							if ((formattedName.match(/\*/g) || []).length > 0) {
 								formattedName = [formattedName.slice(0,formattedName.indexOf("*")), "<br>",formattedName.slice(formattedName.indexOf("*"))].join('')
+								formattedName = formattedName.replaceAll("*", '')
 							}
 
 							newShop.push(formattedName);
