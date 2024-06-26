@@ -215,7 +215,7 @@ $.ajax({
 								var altDesc;
 								
 								if (_desc) {
-									_rateTable = '\n' + _desc.toString().split("<br>")[2];
+									_rateTable = _desc.toString().split("<br>")[2];
 									if (name !== _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim()) {
 										altDesc = name + "\n" + _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 									}else{
@@ -309,7 +309,7 @@ $.ajax({
 						   newShop.push("");
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
-						  
+						   newShop.push(_rateTable);
 							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 								
 									//console.log(newShop);
