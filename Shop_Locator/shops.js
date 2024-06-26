@@ -308,7 +308,7 @@ $.ajax({
 								formattedName = formattedName.replaceAll("*", '')
 							}
 
-							newShop.push(formattedName);
+							newShop.push(formattedName.replace('<br> <br>', '<br>'));
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
