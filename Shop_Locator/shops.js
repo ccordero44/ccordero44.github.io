@@ -224,7 +224,7 @@ $.ajax({
 								}else{
 									altDesc = name; 
 								};
-								name = name + _rateTable; 
+								
 								var blankAppraiser = { 
 										name: name,
 										coord: coords,
