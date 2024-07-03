@@ -670,6 +670,7 @@ function clearDir() {
             document.getElementById("checkbox3").checked = false;
 			document.getElementById("checkbox4").checked = false;
 			document.getElementById("checkbox5").checked = true;
+	document.getElementById("checkbox6").checked = false;
 			$('#checkbox5').trigger('change');
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
