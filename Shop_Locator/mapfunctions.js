@@ -1333,7 +1333,7 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
 sorttable.makeSortable(table);
 var myTH = $(table).find("th")[6];
 sorttable.innerSortFunction.apply(myTH, []);
-	$(table).find("td").eq(6).hide();
+	$(table).find("tr").find("td").eq(6).hide();
 	$(table).find("th").eq(6).hide();
 
    $(newWin).find('body').html(table);
