@@ -1320,6 +1320,7 @@ var shoplist = new Array();
         	row.cells[4].innerHTML = DMResults.rows[0].elements[i].distance.text;
 		row.cells[5].innerHTML = DMResults.rows[0].elements[i].duration.text;
 	    	row.cells[6].innerHTML = DMResults.rows[0].elements[i].distance.value
+	    	row.cells[6].setAttribute('style', 'display: none;');
     }
 
 
@@ -1333,7 +1334,7 @@ $(table).find('td:nth-child(4)').css("white-space","nowrap");
 sorttable.makeSortable(table);
 var myTH = $(table).find("th")[6];
 sorttable.innerSortFunction.apply(myTH, []);
-	$(table).find("tr").find("td").eq(6).hide();
+	//$(table).find("tr").find("td").eq(6).hide();
 	$(table).find("th").eq(6).hide();
 
    $(newWin).find('body').html(table);
