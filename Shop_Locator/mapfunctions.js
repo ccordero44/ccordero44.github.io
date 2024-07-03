@@ -133,6 +133,9 @@ function AutocompleteDirectionsHandler(map) {
                 tempmarker[i].setMap(null);
 		
             }
+		for (i = 0; i < hailMarkers.length; i++) {
+                hailMarkers[i].setMap(null);
+            }
         }
          function showPoly() {
 	
