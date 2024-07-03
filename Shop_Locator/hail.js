@@ -1,7 +1,8 @@
 var hailMarkers = [];
-var nowYear = new Date(todayDate().toString()).getFullYear().toString();
-var nowMonth = new Date(todayDate().toString()).getMonth().toString().padStart(2,'0');
-var nowDay = new Date(todayDate().toString()).getDay().toString().padStart(2,'0');
+var today = new Date();
+var nowYear = today.getFullYear();
+var nowMonth = String(today.getMonth() + 1).padStart(2, '0');
+var nowDay = String(today.getDate()).padStart(2, '0');
 callHailMarkers(nowYear+nowMonth+nowDay);
 function callHailMarkers(date) {
 $.ajax({
