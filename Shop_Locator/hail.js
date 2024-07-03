@@ -22,7 +22,7 @@ $.ajax({
                     position: new google.maps.LatLng(lat, long),
                     clickable: true,
                     title: "Hail Reported",
-                    icon: 'https://www.gstatic.com/mapspro/images/stock/1483-weather-snow.png'
+                    icon: 'hail.png'
 
                 });
 				hailMarkers.push(hailMarker);
