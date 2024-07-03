@@ -1308,8 +1308,11 @@ var shoplist = new Array();
         row = table.insertRow(-1);
         for (var j = 0; j < columnCount; j++) {
             var cell = row.insertCell(-1);
-
-            cell.innerHTML = allLocationCoords[i][j]
+		if (j === 0) {
+			cell.innerHTML = allLocationCoords[i][j].split('<br>')[0]
+		}else{
+            		cell.innerHTML = allLocationCoords[i][j]
+		};
           }
        
         row.cells[4].innerHTML = DMResults.rows[0].elements[i].distance.text;
