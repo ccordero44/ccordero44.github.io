@@ -1433,7 +1433,7 @@ function showArrays(event) {
 	
 }
 function setHailMarkers() {
- var checkbox = document.getElementById("checkbox0");
+ var checkbox = document.getElementById("checkbox6");
 	if (checkbox.checked) {
  			for (i = 0; i < hailMarkers.length; i++) {
                 hailMarkers[i].setMap(map);
