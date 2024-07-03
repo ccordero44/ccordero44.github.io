@@ -1,7 +1,12 @@
 var hailMarkers = [];
+var nowYear = new Date(todayDate().toString()).getFullYear().toString();
+var nowMonth = new Date(todayDate().toString()).getMonth().toString().padStart(2,'0');
+var nowDay = new Date(todayDate().toString()).getDay().toString().padStart(2,'0');
+callHailMarkers(nowYear+nowMonth+nowDay);
+function callHailMarkers(date) {
 $.ajax({
    type: "GET",
-   url: "https://www.ncdc.noaa.gov/swdiws/json/nx3hail/20240222",
+   url: "https://www.ncdc.noaa.gov/swdiws/json/nx3hail/" + date,
    async: false,
    success: function(data) { 
 				var regExp = /\(([^)]+)\)/;
@@ -29,3 +34,4 @@ $.ajax({
 	return;
 }
 });
+}
