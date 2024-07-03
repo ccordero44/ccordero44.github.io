@@ -10,6 +10,7 @@ $.ajax({
    url: "https://www.ncdc.noaa.gov/swdiws/json/nx3hail/" + date,
    async: false,
    success: function(data) { 
+	   			hailMarkers = [];
 				var regExp = /\(([^)]+)\)/;
 				var results = data.result;
 				var hailMarker;
