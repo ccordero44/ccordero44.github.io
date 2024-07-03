@@ -1432,3 +1432,16 @@ function showArrays(event) {
    // map.setCenter(event.latLng);
 	
 }
+function setHailMarkers() {
+ var checkbox = document.getElementById("checkbox0");
+	if (checkbox.checked) {
+ 			for (i = 0; i < hailMarkers.length; i++) {
+                hailMarkers[i].setMap(map);
+            }
+            map.fitBounds(resetBounds);
+    }else
+    		for (i = 0; i < hailMarkers.length; i++) {
+                hailMarkers[i].setMap(null);
+            }
+  		
+ }
