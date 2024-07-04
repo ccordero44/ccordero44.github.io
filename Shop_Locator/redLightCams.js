@@ -49,7 +49,7 @@ function addInfoWindow(RCmarker, message) {
                    // redcamInfoWindow.close();
            //     });
             google.maps.event.addListener(RCmarker, 'click', function () {
-		    activeInfoWindow.close();
+		    if (activeInfoWindow) activeInfoWindow.close();
             redcamInfoWindow.setContent(message);
                 redcamInfoWindow.open(map, RCmarker);
 		activeInfoWindow = redcamInfoWindow;
