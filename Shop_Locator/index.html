@@ -305,7 +305,7 @@
                 infowindow = new google.maps.InfoWindow();
 				infowindow.setContent('');
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
-		if (activeInfoWindow) activeInfoWindow.close();		
+			
                     return function () {
 					activeMarker = marker;
                         var regex = /mi/gi;
@@ -387,7 +387,7 @@ displayCoordinates(SMLatLng);
 						};
 						
 					});
-		
+		if (activeInfoWindow) activeInfoWindow.close();	
                         //infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + shopDist + "</div>" + "<div><span class='dir'></span><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' title='Click to get directions from origin address to body shop.' class='button3'></div>" + "<div><span class='tow' title='" + shops[i][8] + "'></span>" + "<span class='towTxt' title='" + shops[i][8] + "'>" + tow + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
 						infowindow.setOptions({maxWidth:'fit-content'});
 						infowindow.open(map, marker);
