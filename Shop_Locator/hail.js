@@ -26,15 +26,17 @@ $.ajax({
 		                    icon: 'hail.png'
 		
 		                });
+					var prob = data.result[i].PROB;
+					var size = data.result[i].MAXSIZE;
 					hailInfoWindow = new google.maps.InfoWindow();
 					hailInfoWindow.setContent('');
-					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
-						hailInfoWindow.setContent('<div>Date: ' + nowDate.toDateString() + '</div><div>Probability: ' + data.result[i].PROB + '%</div><div>Hail Size: ' + data.result[i].MAXSIZE + '"</div>');
+					 google.maps.event.addListener(hailMarker, 'click', (function () {
+						hailInfoWindow.setContent('<div>Hail Size: ' + size + '"</div><div>Probability: ' + prob + '%</div><div>Date: ' + nowDate.toDateString() + '</div>');
 						 hailInfoWindow.setOptions({maxWidth:'fit-content'});
 						hailInfoWindow.open(map, hailMarker);
 						activeInfoWindow = hailInfoWindow;
 						 
-					})(hailMarker, i));
+					}));
 				hailMarkers.push(hailMarker);
 				//console.log(lat + "," + long);
 				};
