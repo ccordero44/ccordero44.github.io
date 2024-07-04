@@ -1454,12 +1454,15 @@ function setDatepicker(_this) {
  
             $('#dialog').dialog({
 	            open: function() {
+			 $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                $("#dialogDate").datepicker({
 		                format: "dd/mm/yyyy",
 		                orientation: "bottom auto",
 		                autoclose: true,
 		                showOnFocus: "false"
-		            }).blur();
+		            }).blur(function() {
+				if (this.value === '') this.value = String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear();
+			});
 			    //$("#dialogDate").datepicker({title:'Test Dialog'}).blur();
 	            },
 	            close: function() {
