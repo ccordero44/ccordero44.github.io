@@ -14,8 +14,9 @@ $.ajax({
 				var regExp = /\(([^)]+)\)/;
 				var results = data.result;
 				var hailMarker;
+	   			console.log(data.summary.count);
 				for (var i = 0;i<data.result.length;i++) {
-				//console.log(data.result[i].SHAPE);
+				
 				var matches = regExp.exec(data.result[i].SHAPE)
 				var lat =  Number(matches[1].split(' ')[1]);
 				var long = Number(matches[1].split(' ')[0]);
