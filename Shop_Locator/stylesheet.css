@@ -1,3 +1,6 @@
+#dialog {
+	display: none;
+}
 button.gm-ui-hover-effect {
     height: 25px !important;
 }
