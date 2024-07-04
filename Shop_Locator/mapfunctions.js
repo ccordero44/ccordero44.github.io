@@ -27,7 +27,7 @@ function AutocompleteDirectionsHandler(map) {
 				
 				testarr = [];
 				allLocationCoords = [];
-				removeMarkers();
+				//removeMarkers();
 				
                 var place = autocomplete.getPlace();
                 if (!place.place_id) {
