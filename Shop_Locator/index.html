@@ -473,8 +473,8 @@ displayCoordinates(SMLatLng);
 
                 google.maps.event.addListener(map, "click", function (event) {
                     infowindow.close();
-			polyInfowindow.close();
-
+		    polyInfowindow.close();
+		    activeInfoWindow.close();
                 });
 
                 var inputtest = document.getElementById("origin-input");
