@@ -45,11 +45,13 @@ function addInfoWindow(RCmarker, message) {
 //            var redcamInfoWindow = new google.maps.InfoWindow({
 //                content: message
 //            });
-       google.maps.event.addListener(map, "click", function (event) {
-                    redcamInfoWindow.close();
-                });
+     //  google.maps.event.addListener(map, "click", function (event) {
+                   // redcamInfoWindow.close();
+           //     });
             google.maps.event.addListener(RCmarker, 'click', function () {
+		    activeInfoWindow.close();
             redcamInfoWindow.setContent(message);
                 redcamInfoWindow.open(map, RCmarker);
+		activeInfoWindow = redcamInfoWindow;
             });
         }
