@@ -24,7 +24,7 @@ $.ajax({
 				hailMarker = new google.maps.Marker({
 		                    position: new google.maps.LatLng(lat, long),
 		                    clickable: true,
-		                    title: "Hail Reported",
+		                    title: "Hail Event",
 		                    icon: 'hail.png',
 				    content: '<div>Hail Size: ' + data.result[i].MAXSIZE + '"</div><div>Probability: ' + data.result[i].PROB + '%</div><div>Date: ' + nowDate.toDateString() + '</div>'
 		
