@@ -278,6 +278,7 @@
 			$('#legend > div:nth-child(4)').append(' <div id="podCount" style="display: contents;color: grey;"></div>');
 			$('#legend > div:nth-child(5)').append(' <div id="redcamCount" style="display: contents;color: grey;"></div>');
 			$('#shopCount').text("(" + shops.length + ")");
+		callHailMarkers(nowYear+nowMonth+nowDay);
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
 			var markerIcon;
