@@ -305,7 +305,7 @@
                 infowindow = new google.maps.InfoWindow();
 				infowindow.setContent('');
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
-				
+		activeInfoWindow.close();		
                     return function () {
 					activeMarker = marker;
                         var regex = /mi/gi;
@@ -508,6 +508,7 @@ if ($('script[src="geojson.js"]').length === 0){
           infoPODwindow = new google.maps.InfoWindow();
   			PODmarkers.push(PODmarker);
   			google.maps.event.addListener(PODmarker, 'click', (function(PODmarker, i) {
+				activeInfoWindow.close();
                     return function() {
                         map.setZoom(18);
                         map.setCenter(PODmarkers[i].getPosition());  
