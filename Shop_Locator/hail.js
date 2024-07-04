@@ -3,7 +3,7 @@ var nowDate = new Date();
 var nowYear = nowDate.getFullYear();
 var nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
 var nowDay = String(nowDate.getDate()).padStart(2, '0');
-callHailMarkers(nowYear+nowMonth+nowDay);
+//callHailMarkers(nowYear+nowMonth+nowDay);
 function callHailMarkers(date) {
 $.ajax({
    type: "GET",
