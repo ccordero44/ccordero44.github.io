@@ -1459,6 +1459,7 @@ function setDatepicker(_this) {
 		                autoclose: true,
 		                showOnFocus: "false"
 		            }).blur();
+			    //$("#dialogDate").datepicker({title:'Test Dialog'}).blur();
 	            },
 	            close: function() {
 	                $('#dialogDate').datepicker('destroy');
