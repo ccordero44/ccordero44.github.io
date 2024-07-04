@@ -14,8 +14,8 @@ $.ajax({
 				var regExp = /\(([^)]+)\)/;
 				var results = data.result;
 				var hailMarker;
-	   			console.log(data.summary.count);
-	   			$('#hailCount').text("(" + data.summary.count + ")");
+	   			
+	   			$('#hailCount').text("(" + data.result.length + ")");
 				for (var i = 0;i<data.result.length;i++) {
 				
 				var matches = regExp.exec(data.result[i].SHAPE)
