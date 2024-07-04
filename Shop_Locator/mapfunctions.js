@@ -1463,6 +1463,12 @@ function setDatepicker(_this) {
 	            },
 	            close: function() {
 	                $('#dialogDate').datepicker('destroy');
+			    	nowDate = new Date($('#dialogDate').val());
+			     	nowYear = nowDate.getFullYear();
+				nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
+				nowDay = String(nowDate.getDate()).padStart(2, '0');
+			    	callHailMarkers(nowYear+nowMonth+nowDay);
+			    	setHailMarkers();
 	            },
 	        });
             
