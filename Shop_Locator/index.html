@@ -480,7 +480,7 @@ displayCoordinates(SMLatLng);
                 google.maps.event.addListener(map, "click", function (event) {
                     infowindow.close();
 		    polyInfowindow.close();
-		    activeInfoWindow.close();
+		    if(activeInfoWindow) activeInfoWindow.close();
                 });
 
                 var inputtest = document.getElementById("origin-input");
