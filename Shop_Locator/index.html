@@ -495,6 +495,7 @@ if ($('script[src="geojson.js"]').length === 0){
          window.eqfeed_callback = function(results) {
  	var latlngPODbounds = new google.maps.LatLngBounds();
  	var PODmarker;
+	$('#podCount').text("(" + results.features.length + ")");
         for (var i = 0; i < results.features.length; i++) {
         let contentstring = '<b>Camera Number:</b> <br />' + results.features[i].properties.camera_number + '<p><b>Address:</b> <br />' + results.features[i].properties.address + '<br />' + results.features[i].properties.city + ', ' + results.features[i].properties.state + ' ' + results.features[i].properties.zip + '</p><a href="https://oemc-chicagops.govqa.us/WEBAPP/_rs/SupportHome.aspx?lp=7" target="_blank" title="12 - 15 day retention period">FOIA Request</a>' ;
 
