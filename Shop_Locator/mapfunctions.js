@@ -1468,6 +1468,9 @@ function setDatepicker(_this) {
 				nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
 				nowDay = String(nowDate.getDate()).padStart(2, '0');
 			    	callHailMarkers(nowYear+nowMonth+nowDay);
+			    	for (i = 0; i < hailMarkers.length; i++) {
+			                hailMarkers[i].setMap(null);
+			            }
 			    	setHailMarkers();
 	            },
 	        });
