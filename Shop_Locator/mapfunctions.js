@@ -73,6 +73,7 @@ function AutocompleteDirectionsHandler(map) {
                         tempmarker.push(marker);
                         
                google.maps.event.addListener(marker, 'click', function () {
+		       activeInfoWindow.close();
                         var terr;
                         displayCoordinates(str3);
                         //if (parseInt(dist, 10) < 50) {
