@@ -20,12 +20,21 @@ $.ajax({
 				var lat =  Number(matches[1].split(' ')[1]);
 				var long = Number(matches[1].split(' ')[0]);
 				hailMarker = new google.maps.Marker({
-                    position: new google.maps.LatLng(lat, long),
-                    clickable: true,
-                    title: "Hail Reported",
-                    icon: 'hail.png'
-
-                });
+		                    position: new google.maps.LatLng(lat, long),
+		                    clickable: true,
+		                    title: "Hail Reported",
+		                    icon: 'hail.png'
+		
+		                });
+					hailInfoWindow = new google.maps.InfoWindow();
+					hailInfoWindow.setContent('');
+					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
+						hailInfoWindow.setContent('<div>Date: ' + nowDate.toDateString() + '</div><div>Probability: ' + data.result[i].PROB + '%</div><div>Hail Size: ' + data.result[i].MAXSIZE + '"</div>');
+						 hailInfoWindow.setOptions({maxWidth:'fit-content'});
+						hailInfoWindow.open(map, hailMarker);
+						activeInfoWindow = hailInfoWindow;
+						 
+					})(hailMarker, i));
 				hailMarkers.push(hailMarker);
 				//console.log(lat + "," + long);
 				};
