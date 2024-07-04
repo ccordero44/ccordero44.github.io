@@ -655,6 +655,7 @@ function clearDir() {
   			infowindow.close();
 			polyInfowindow.close();
   			infoPODwindow.close();
+			hailInfoWindow.close();
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
