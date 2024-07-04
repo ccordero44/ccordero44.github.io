@@ -272,6 +272,7 @@
 		
 			}
 			$('#legend h3').after('<hr/>');
+			$('#legend > div:nth-child(6)').append(' <div id="hailCount" style="display: contents;color: grey;"></div>');
 			$('#legend > div:nth-child(6)').append('<div class="container" title="Click to change date for hail markers" style="max-width: 250px;display: inline-block;padding-left: 0px;"><div class="form-group m-1"><label class="font-weight-bold" for="hailDate"></label><div class="input-group date"><span class="input-group-prepend"><span class="input-group-text"><i style="color: DodgerBlue;font-size: large;" class="fa fa-calendar" onclick="setDatepicker(this)"></i></span></span><input hidden class="form-control" type="text" name="hailDate" id="hailDate" value=""></div></div></div>');
             var marker;
             var latlngbounds = new google.maps.LatLngBounds();
