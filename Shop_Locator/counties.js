@@ -17052,7 +17052,7 @@ var Woodford = [
 ];
 
 /* Alabama */
-
+/*
 var BaldwinAL = [
 {lng:-88.02858, lat:30.226763},
 {lng:-88.027678, lat:30.223645},
@@ -38540,7 +38540,7 @@ var WinstonAL = [
 ];
 
 /* Georgia */
-
+/*
 var ApplingGA = [
 {lng: -82.550691, lat: 31.749112},
 {lng: -82.550714, lat: 31.736334},
