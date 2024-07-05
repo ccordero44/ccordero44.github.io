@@ -44316,8 +44316,8 @@ $.ajax({
 					
 					for (var i = 0; i < coord.length; i++) {
 						var _coord = {
-							lng: coord[i].split(',')[0],
-							lat: coord[i].split(',')[1]
+							lng: Number(coord[i].split(',')[0]),
+							lat: Number(coord[i].split(',')[1])
 						};
 						coords.push(_coord);
 					}
