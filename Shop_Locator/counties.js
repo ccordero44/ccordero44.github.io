@@ -1,3 +1,4 @@
+/*
 var Adams = [    
  {lng:-91.42411, lat:39.93575}, 
  {lng:-91.42464, lat:39.93642}, 
@@ -44281,3 +44282,54 @@ var countyCoords = [
 {name:"Winnebago County", coord: Winnebago, state: "Illinois", img: "IL.png"},
 {name:"Woodford County", coord: Woodford, state: "Illinois", img: "IL.png"}
 ];
+*/
+var countyCoords = [];
+$.ajax({
+		   type: "GET",
+		   url: "counties.kml",
+		   async: false,
+		   success: function(response) { 
+			
+			  
+			   var names = [];
+				$(response).find("Folder").eq(0).find('Placemark').each(function() {
+					$(this).find('SchemaData').find('SimpleData').each(function() {
+						var name = {
+							name: $(this).attr('name'),
+							value: $(this).text()
+						};
+						names.push(name);
+					});
+					var state, county, id;
+					var coords = [];
+							for (var a = 0; a < names.length; a++) {
+									if (names[a].name === 'NAMELSAD') {
+										county = names[a].value;
+									}else if (names[a].name === 'STUSPS') {
+										id = names[a].value; 
+									}else if (names[a].name === 'STATE_NAME') {
+										state = names[a].value; 
+									};
+									
+							     };
+					var coord = $(this).find('Polygon').find('coordinates').text().split(' ');
+					
+					for (var i = 0; i < coord.length; i++) {
+						var _coord = {
+							lng: coord[i].split(',')[0],
+							lat: coord[i].split(',')[1]
+						};
+						coords.push(_coord);
+					}
+
+					var countyData = {
+						name: county,
+						coord: coords,
+						state: state,
+						img: id + '.png'
+					};
+				countyCoords.push(countyData);
+							});
+
+										}
+		});
