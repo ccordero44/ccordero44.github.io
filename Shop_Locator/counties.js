@@ -44287,6 +44287,42 @@ var countyCoords = [];
 
 $.ajax({
 		   type: "GET",
+		   url: "counties.json",
+		   async: false,
+		   success: function(response) { 
+					  
+			   
+			   var coords = [];
+			   var state, county, id;
+			   for (var i = 0; i < response.features.length; i++) {
+				 
+				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
+					  
+						var _coord = {
+							lng: Number(response.features[i].geometry.coordinates[c][0]),
+							lat: Number(response.features[i].geometry.coordinates[c][1])
+						};
+					
+						coords.push(_coord);
+					};
+					county = response.features[i].properties.NAMELSAD;
+					state = response.features[i].properties.STATE_NAME;
+					id = response.features[i].properties.STUSPS;
+				
+				  var countyData = {
+						name: county,
+						coord: coords,
+						state: state,
+						img: id + '.png'
+					};
+				countyCoords.push(countyData);
+			   };
+			  
+			}
+		});
+/*
+$.ajax({
+		   type: "GET",
 		   url: "https://media.githubusercontent.com/media/ccordero44/ccordero44.github.io/master/Shop_Locator/counties.kml",
 		   async: false,
 		   success: function(response) { 
@@ -44335,66 +44371,5 @@ $.ajax({
 										}
 		});
   
-/*
-var states = ['AL','AK','AZ','AR','AS','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'];
-function runCounties(state) {
-$.ajax({
-		   type: "GET",
-		   url: "https://www.hmdb.org/CountyOverlay/UScounty" + state + ".kml",
-		   async: false,
-		   success: function(response) { 
-			
-			  
-			   var names = [];
-				$(response).find('Placemark').each(function() {
-					$(this).find('ExtendedData').find('Data').each(function() {
-						var name = {
-							name: $(this).attr('name'),
-							value: $(this).text()
-						};
-						names.push(name);
-					});
-					var state, county, id;
-					var coords = [];
-							for (var a = 0; a < names.length; a++) {
-									if (names[a].name === 'Geographic Name') {
-										var countyState = names[a].value.split(', ');
-										if (countyState.length < 2) return;
-										county = countyState[0].trim();
-										state = countyState[1].trim();
-									}else if (names[a].name === 'State Abbr') {
-										id = names[a].value.trim(); 
-									};
-									
-							     };
-					if ($(this).find('MultiGeometry').length > 0) {
-						var coord = $(this).find('MultiGeometry').find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
-					}else{
-						var coord = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
-					}
-					
-					
-					for (var i = 0; i < coord.length; i++) {
-						var _coord = {
-							lng: Number(coord[i].split(',')[0]),
-							lat: Number(coord[i].split(',')[1])
-						};
-						coords.push(_coord);
-					}
 
-					var countyData = {
-						name: county,
-						coord: coords,
-						state: state,
-						img: id + '.png'
-					};
-				countyCoords.push(countyData);
-							});
-
-										}
-		});
-}
-for (var i = 0; i < states.length; i++) {
-	runCounties(states[i]);
-}
 */
