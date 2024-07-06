@@ -44286,6 +44286,7 @@ var countyCoords = [
 var countyCoords = [];
 
 
+
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44304,12 +44305,12 @@ $.ajax({
 						lng = _coords[x][0];
 						lat = _coords[x][1];
 					}
-						//var _coord = {
-							//lng: lng,
-							//lat: lat
-						//};
-					var _coord = new google.maps.LatLng(_coords);
-						coords.push(response.features[i].geometry.coordinates[c]);
+						var _coord = {
+							lng: lng,
+							lat: lat
+						};
+					
+						coords.push(_coord);
 					};
 					county = response.features[i].properties.NAMELSAD;
 					state = response.features[i].properties.STATE_NAME;
