@@ -44313,7 +44313,7 @@ $.ajax({
 									lat: lat
 								};
 							
-								coords.push(_coord);
+								//coords.push(_coord);
 							};
 						}else{
 							lng = _coords[x][0];
