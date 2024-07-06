@@ -44357,8 +44357,10 @@ $.ajax({
 					var coords = [];
 							for (var a = 0; a < names.length; a++) {
 									if (names[a].name === 'Geographic Name') {
-										county = names[a].value.split(', ')[0].trim();
-										if (names[a].value.split(', ') > 1) state = names[a].value.split(', ')[1].trim();
+										var countyState = names[a].value.split(', ');
+										if (countyState.length < 2) return;
+										county = countyState[0].trim();
+										state = countyState[1].trim();
 									}else if (names[a].name === 'State Abbr') {
 										id = names[a].value.trim(); 
 									};
