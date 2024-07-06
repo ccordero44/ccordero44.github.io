@@ -44286,7 +44286,7 @@ var countyCoords = [
 var countyCoords = [];
 $.ajax({
 		   type: "GET",
-		   url: "counties.kml",
+		   url: "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/us-county-boundaries/exports/kml?lang=en&timezone=America%2FChicago",
 		   async: false,
 		   success: function(response) { 
 			
