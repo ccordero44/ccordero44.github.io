@@ -44325,7 +44325,7 @@ $.ajax({
 							lat: lat
 						};
 					
-						coords.push(_coord);
+						coords.push(_coords);
 					};
 					county = response.features[i].properties.NAMELSAD;
 					state = response.features[i].properties.STATE_NAME;
