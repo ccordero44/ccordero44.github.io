@@ -44308,6 +44308,12 @@ $.ajax({
 							for (var y = 0; y < _coords[x].length; y++) {
 								lng = _coords[x][y][0];
 								lat = _coords[x][y][1]
+								var _coord = {
+									lng: lng,
+									lat: lat
+								};
+							
+								coords.push(_coord);
 							};
 						}else{
 							lng = _coords[x][0];
