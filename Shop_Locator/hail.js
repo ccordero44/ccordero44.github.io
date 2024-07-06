@@ -1,4 +1,5 @@
 var hailMarkers = [];
+var hailInfoWindow;
 var nowDate = new Date();
 var nowYear = nowDate.getFullYear();
 var nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
