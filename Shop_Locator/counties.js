@@ -44364,7 +44364,12 @@ $.ajax({
 									};
 									
 							     };
-					var coord = $(this).find('MultiGeometry').find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
+					if ($(this).find('MultiGeometry')) {
+						var coord = $(this).find('MultiGeometry').find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
+					}else{
+						var coord = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
+					}
+					
 					
 					for (var i = 0; i < coord.length; i++) {
 						var _coord = {
