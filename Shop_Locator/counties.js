@@ -44364,7 +44364,7 @@ $.ajax({
 									};
 									
 							     };
-					if ($(this).find('MultiGeometry')) {
+					if ($(this).find('MultiGeometry').length > 0) {
 						var coord = $(this).find('MultiGeometry').find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
 					}else{
 						var coord = $(this).find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
