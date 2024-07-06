@@ -215,7 +215,7 @@
             map = new google.maps.Map(document.getElementById('map'),
                 mapOptions);
             map = map;
-
+map.data.loadGeoJson('counties.json');
             var originInput = document.getElementById('origin-input');
             var btnClickme = document.getElementById('clickMe');
             var clearMap = document.getElementById('clear');
