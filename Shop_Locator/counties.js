@@ -44287,6 +44287,7 @@ var countyCoords = [];
 
 
 
+
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44301,9 +44302,17 @@ $.ajax({
 				 
 				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
 					  var _coords = response.features[i].geometry.coordinates[c]
+					
 					for (var x = 0; x <_coords.length; x++) {
-						lng = _coords[x][0];
-						lat = _coords[x][1];
+						if (_coords[x].length > 2) {
+							for (var y = 0; y < _coords[x].length; y++) {
+								lng = _coords[x][y][0];
+								lat = _coords[x][y][1]
+							};
+						}else{
+							lng = _coords[x][0];
+							lat = _coords[x][1];
+						}
 					}
 						var _coord = {
 							lng: lng,
