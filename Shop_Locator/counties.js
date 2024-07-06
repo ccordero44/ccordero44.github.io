@@ -44286,7 +44286,7 @@ var countyCoords = [
 var countyCoords = [];
 $.ajax({
 		   type: "GET",
-		   url: "counties.kml",
+		   url: "https://media.githubusercontent.com/media/ccordero44/ccordero44.github.io/master/Shop_Locator/counties.kml",
 		   async: false,
 		   success: function(response) { 
 			
