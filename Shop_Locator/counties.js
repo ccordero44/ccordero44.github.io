@@ -44284,10 +44284,10 @@ var countyCoords = [
 ];
 */
 var countyCoords = [];
-/*
+
 $.ajax({
 		   type: "GET",
-		   url: "https://media.githubusercontent.com/media/ccordero44/ccordero44.github.io/master/Shop_Locator/counties.kml",
+		   url: "https://shop-locator.net/Shop_Locator/counties.kml",
 		   async: false,
 		   success: function(response) { 
 			
@@ -44334,7 +44334,8 @@ $.ajax({
 
 										}
 		});
-  */
+  
+/*
 var states = ['AL','AK','AZ','AR','AS','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'];
 function runCounties(state) {
 $.ajax({
@@ -44396,3 +44397,4 @@ $.ajax({
 for (var i = 0; i < states.length; i++) {
 	runCounties(states[i]);
 }
+*/
