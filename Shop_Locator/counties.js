@@ -44301,7 +44301,7 @@ $.ajax({
 			   for (var i = 0; i < response.features.length; i++) {
 				 
 				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
-					  var _coords = response.features[i].geometry.coordinates[c]
+					  var _coords = response.features[i].geometry.coordinates[c].flat();
 					
 					for (var x = 0; x <_coords.length; x++) {
 						if (_coords[x].length > 2) {
@@ -44325,7 +44325,7 @@ $.ajax({
 							lat: lat
 						};
 					
-						coords.push(_coords.flat());
+						coords.push(_coord));
 					};
 					county = response.features[i].properties.NAMELSAD;
 					state = response.features[i].properties.STATE_NAME;
