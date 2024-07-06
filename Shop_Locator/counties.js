@@ -44345,8 +44345,8 @@ $.ajax({
 			
 			  
 			   var names = [];
-				$(response).find("Folder").eq(0).find('Placemark').each(function() {
-					$(this).find('SchemaData').find('SimpleData').each(function() {
+				$(response).find('Placemark').each(function() {
+					$(this).find('ExtendedData').find('Data').each(function() {
 						var name = {
 							name: $(this).attr('name'),
 							value: $(this).text()
@@ -44356,16 +44356,15 @@ $.ajax({
 					var state, county, id;
 					var coords = [];
 							for (var a = 0; a < names.length; a++) {
-									if (names[a].name === 'NAMELSAD') {
-										county = names[a].value;
-									}else if (names[a].name === 'STUSPS') {
+									if (names[a].name === 'Geographic Name') {
+										county = names[a].value.split(', ')[0];
+										state = names[a].value.split(', ')[1]
+									}else if (names[a].name === 'State Abbr') {
 										id = names[a].value; 
-									}else if (names[a].name === 'STATE_NAME') {
-										state = names[a].value; 
 									};
 									
 							     };
-					var coord = $(this).find('Polygon').find('coordinates').text().split(' ');
+					var coord = $(this).find('MultiGeometry').find('Polygon').find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split(' ');
 					
 					for (var i = 0; i < coord.length; i++) {
 						var _coord = {
