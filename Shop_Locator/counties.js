@@ -44313,7 +44313,7 @@ $.ajax({
 									};
 									
 							     };
-					var coord = $(this).find('Polygon').find('coordinates').text().split(' ');
+					var coord = $(this).find('Polygon').find('coordinates').text().split(' ').reverse();
 					
 					for (var i = 0; i < coord.length; i++) {
 						var _coord = {
