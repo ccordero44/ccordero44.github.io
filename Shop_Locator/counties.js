@@ -44337,7 +44337,7 @@ $.ajax({
 						state: state,
 						img: id + '.png'
 					};
-				countyCoords.push(countyData);
+				//countyCoords.push(countyData);
 			   };
 			  
 			}
@@ -44387,7 +44387,7 @@ $.ajax({
 						state: state,
 						img: id + '.png'
 					};
-				countyCoords.push(countyData);
+				//countyCoords.push(countyData);
 							});
 
 										}
