@@ -44301,8 +44301,8 @@ $.ajax({
 			   for (var i = 0; i < response.features.length; i++) {
 				 
 				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
-					  var _coords = response.features[i].geometry.coordinates[c].flat();
-					
+					  var _coords = response.features[i].geometry.coordinates[c]);
+					_coords = _coords.flat();
 					for (var x = 0; x <_coords.length; x++) {
 						if (_coords[x].length > 2) {
 							for (var y = 0; y < _coords[x].length; y++) {
