@@ -644,7 +644,7 @@ function clearDir() {
 
   	var marker;
   		
-			document.getElementById("infoDivWrapper").style.display = "none";
+			
 			document.getElementById("myTable").innerHTML = "";
 			redcamInfoWindow.close();
   			infowindow.close();
@@ -1507,6 +1507,7 @@ function toggleCounties() {
 			myWindow.style.display = "inherit";		
 		  });
 		}else{
+			document.getElementById("infoDivWrapper").style.display = "none";
 			for (var i = 0; i < countyData.length; i++) {
 			  map.data.remove(countyData[i]);
 		  }; 
