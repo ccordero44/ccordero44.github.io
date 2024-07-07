@@ -1193,6 +1193,7 @@ markers[i].index = i;
   }
 
   service.getDistanceMatrix(request, function(response, status) {
+	  console.log(response);
     if (status != google.maps.DistanceMatrixStatus.OK) {
       alert('Error was: ' + status);
     } else {
