@@ -48,7 +48,7 @@ function AutocompleteDirectionsHandler(map) {
                     if (status === google.maps.GeocoderStatus.OK) {
 						//quickDist();
 						codeAddress();
-						console.log(results);
+						
                         var str3 = results[0].geometry.location;
                       input = str3;
 						
