@@ -44285,9 +44285,6 @@ var countyCoords = [
 */
 var countyCoords = [];
 
-/*
-
-
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44301,7 +44298,7 @@ $.ajax({
 			   for (var i = 0; i < response.features.length; i++) {
 				 
 				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
-					  var _coords = response.features[i].geometry.coordinates[c]);
+					  var _coords = response.features[i].geometry.coordinates[c];
 					//_coords = _coords.flat();
 					for (var x = 0; x <_coords.length; x++) {
 						if (_coords[x].length > 2) {
@@ -44313,7 +44310,7 @@ $.ajax({
 									lat: lat
 								};
 							
-								//coords.push(_coord);
+								coords.push(_coord);
 							};
 						}else{
 							lng = _coords[x][0];
@@ -44325,7 +44322,7 @@ $.ajax({
 							lat: lat
 						};
 					
-						coords.push(_coord));
+						coords.push(_coord);
 					};
 					county = response.features[i].properties.NAMELSAD;
 					state = response.features[i].properties.STATE_NAME;
@@ -44337,7 +44334,7 @@ $.ajax({
 						state: state,
 						img: id + '.png'
 					};
-				//countyCoords.push(countyData);
+				countyCoords.push(countyData);
 			   };
 			  
 			}
