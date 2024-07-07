@@ -44283,6 +44283,10 @@ var countyCoords = [
 {name:"Woodford County", coord: Woodford, state: "Illinois", img: "IL.png"}
 ];
 */
+function createNestedArray(...arrays) {
+
+    return Array.from(arrays, array => [array]);
+}
 var countyCoords = [];
 
 
@@ -44296,6 +44300,7 @@ $.ajax({
 			   
         		$(response.features).each(function () {
 			var coords = [];
+			var _coord1, _coord2;
 			   var state, county, id;
 			   var lat, lng;
 				 $(this.geometry.coordinates).each(function () {
@@ -44306,27 +44311,28 @@ $.ajax({
 					lng = this[0];
 							lat = this[1];
 					
-					var	_coord = {
+						_coord1 = {
 							lng: lng,
 							lat: lat
 						};
 					
-						coords.push(_coord);
+						//coords.push(_coord);
 				}else{
 						$(this).each(function () {
 							lng = this[0];
 							lat = this[1];
 					
-					var	_coord = {[
+						_coord2 = {[
 							lng: lng,
 							lat: lat
 						]};
 					
-						coords.push(_coord);
+						//coords.push(_coord);
 						})
 					}
 							
-					
+				var _newCoord = createNestedArray(_coord1, _coord2);
+					coords.push(_newCoord);
 					})
 						
 					});
