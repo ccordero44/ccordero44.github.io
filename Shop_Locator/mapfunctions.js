@@ -643,13 +643,8 @@ function clearDir() {
 
 
   	var marker;
-  			if (clickCo == null) {
-				}else
-			if (clickCo.fillOpacity == .1){
-				clickCo.setOptions({fillOpacity:0.2});
-				myWindow.style.display = "none";
-			}
-
+  		
+			document.getElementById("infoDivWrapper").style.display = "none";
 			document.getElementById("myTable").innerHTML = "";
 			redcamInfoWindow.close();
   			infowindow.close();
@@ -660,12 +655,14 @@ function clearDir() {
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
-        	hidePoly();
+        	//hidePoly();
         	//for (var j=0; j < Myappraisers.length; j++) {
 				//Myappraisers[j].setMap(null);
 			//};
 	            removeMarkers();
-         
+         for (var i = 0; i < countyData.length; i++) {
+			  map.data.remove(countyData[i]);
+		  }; 
             document.getElementById("checkbox0").checked = true;
             document.getElementById("checkbox1").checked = true;
 	   showAppraisers();
