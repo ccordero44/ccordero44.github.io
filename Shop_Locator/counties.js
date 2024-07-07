@@ -44309,7 +44309,7 @@ $.ajax({
 				$(this).each(function () {
 				if (this.length === 2) {
 					lng = this[0];
-							lat = this[1];
+					lat = this[1];
 					
 						_coord1 = {
 							lng: lng,
@@ -44330,9 +44330,12 @@ $.ajax({
 						//coords.push(_coord);
 						})
 					}
-							
-				var _newCoord = createNestedArray(_coord1, _coord2);
+				if (_coord2) {			
+					var _newCoord = createNestedArray(_coord2);
 					coords.push(_newCoord);
+				}else{
+					coords.push(_coord1);
+				};
 					})
 						
 					});
