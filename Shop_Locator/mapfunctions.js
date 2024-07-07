@@ -138,20 +138,20 @@ function AutocompleteDirectionsHandler(map) {
                 hailMarkers[i].setMap(null);
             }
         }
-         function showPoly() {
+        /*function showPoly() {
 	
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(map);
             }
-        }
-        function hidePoly() {
+        }*/
+      /*  function hidePoly() {
             for (i = 0; i < tempcounties.length; i++) {
                 tempcounties[i].setMap(null);
             }
             for (i = 0; i < circles.length; i++) {
                 circles[i].setMap(null);
             }
-        }
+        }*/
 		
 	function DistanceMatrixFunction(dest, fn) {
 		var results = [];
@@ -1482,3 +1482,40 @@ function setDatepicker(_this) {
 	        });
             
         }
+
+var countyData, countyOverlay;
+function toggleCounties() {
+	if (document.getElementById('checkbox2').checked) {
+		  countyData = map.data.addGeoJson(countyOverlay);
+		}else{
+			for (var i = 0; i < countyData.length; i++) {
+			  map.data.remove(countyData[i]);
+		  }; 
+		};
+}
+
+$.getJSON('counties.json', function (data) {
+	  countyOverlay = data;
+	
+	  google.maps.event.addDomListener(document.getElementById('checkbox2'), 'click', toggleCounties); 
+})
+
+ map.data.setStyle((feature) => {
+    return  {
+      strokeColor: '#FF0000',
+			          strokeOpacity: 0.5,
+			          strokeWeight: 1,
+			          fillColor: '#FF0000',
+			          fillOpacity: 0.2,
+				   zIndex: 1001,
+    };
+  })
+
+map.data.addListener("click", (event) => {
+ 	map.data.revertStyle();
+    	map.data.overrideStyle(event.feature, { fillOpacity:0.1 });
+  	var myWindow = document.getElementById("infoDivWrapper");
+	document.getElementById("divTD").innerHTML = event.feature.getProperty("NAMELSAD") + "<br>" + event.feature.getProperty("STATE_NAME") + "<br>";
+	document.getElementById("countyIMG").innerHTML = "<img src='" + event.feature.getProperty("STUSPS") + ".png' class='countyimg'>";
+	myWindow.style.display = "inherit";		
+  });
