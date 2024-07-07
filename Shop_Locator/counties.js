@@ -44284,7 +44284,7 @@ var countyCoords = [
 ];
 */
 var countyCoords = [];
-
+/*
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44295,6 +44295,7 @@ $.ajax({
 			   var coords = [];
 			   var state, county, id;
 			   var lat, lng;
+			   var _coord 
 			   for (var i = 0; i < response.features.length; i++) {
 				 
 				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
@@ -44305,7 +44306,7 @@ $.ajax({
 							for (var y = 0; y < _coords[x].length; y++) {
 								lng = _coords[x][y][0];
 								lat = _coords[x][y][1]
-								var _coord = {
+								 _coord = {
 									lng: lng,
 									lat: lat
 								};
@@ -44315,14 +44316,15 @@ $.ajax({
 						}else{
 							lng = _coords[x][0];
 							lat = _coords[x][1];
-						}
-					}
-						var _coord = {
+							 _coord = {
 							lng: lng,
 							lat: lat
 						};
 					
 						coords.push(_coord);
+						}
+					}
+						
 					};
 					county = response.features[i].properties.NAMELSAD;
 					state = response.features[i].properties.STATE_NAME;
