@@ -1485,6 +1485,16 @@ var countyData, countyOverlay;
 function toggleCounties() {
 	if (document.getElementById('checkbox2').checked) {
 		  countyData = map.data.addGeoJson(countyOverlay);
+		 map.data.setStyle((feature) => {
+		    return  {
+		      strokeColor: '#FF0000',
+					          strokeOpacity: 0.5,
+					          strokeWeight: 1,
+					          fillColor: '#FF0000',
+					          fillOpacity: 0.2,
+						   zIndex: 1001,
+		    };
+		  })
 		}else{
 			for (var i = 0; i < countyData.length; i++) {
 			  map.data.remove(countyData[i]);
@@ -1498,16 +1508,7 @@ $.getJSON('counties.json', function (data) {
 	  google.maps.event.addDomListener(document.getElementById('checkbox2'), 'click', toggleCounties); 
 })
 
- map.data.setStyle((feature) => {
-    return  {
-      strokeColor: '#FF0000',
-			          strokeOpacity: 0.5,
-			          strokeWeight: 1,
-			          fillColor: '#FF0000',
-			          fillOpacity: 0.2,
-				   zIndex: 1001,
-    };
-  })
+
 
 map.data.addListener("click", (event) => {
  	map.data.revertStyle();
