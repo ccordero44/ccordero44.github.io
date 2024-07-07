@@ -28,7 +28,7 @@
     <script src="jQuery v3.js"></script>
    <!-- <script src="jQuery Migrate.js"></script> -->
 	<script src="jquery-csv.js"></script>
-	<script type="text/javascript" src="counties.js"></script>
+	<!-- <script type="text/javascript" src="counties.js"></script> -->
     <script src="sorttable.js"></script>
     <script type="text/javascript" src="read-csv.js"></script>
 	<script type="text/javascript" src="getPolygonBounds.js"></script>
@@ -151,8 +151,8 @@
 	        var markers = [];
 	        var tempmarker = [];
 	        var shopmarkers = [];
-			var Mycounties = [];
-			var tempcounties = [];
+			//var Mycounties = [];
+			//var tempcounties = [];
 	   		//var appraiserPoly = [];
 			var tempDiv;
 			var clickCo;
@@ -202,7 +202,7 @@
 			  ],
 			};
         function initMap() {
-	       //await myRequest();
+	      
          	polyInfowindow = new google.maps.InfoWindow();
             redcamInfoWindow = new google.maps.InfoWindow();
             var mapOptions = {
@@ -215,7 +215,7 @@
             map = new google.maps.Map(document.getElementById('map'),
                 mapOptions);
             map = map;
-//map.data.loadGeoJson('counties.json');
+
             var originInput = document.getElementById('origin-input');
             var btnClickme = document.getElementById('clickMe');
             var clearMap = document.getElementById('clear');
@@ -261,6 +261,7 @@
                 window.setTimeout(function () {
             
                 }, 100);
+		    
             });
 			for (var key in icons) {
 			  var type = icons[key];
@@ -558,8 +559,8 @@ if ($('script[src="geojson.js"]').length === 0){
             new AutocompleteDirectionsHandler(map);
            
          
-			 Mycounties.infoWindow = new google.maps.InfoWindow();         
-			 for (i = 0; i < countyCoords.length; i++) {           
+			// Mycounties.infoWindow = new google.maps.InfoWindow();         
+			/* for (i = 0; i < countyCoords.length; i++) {           
 			Mycounties = new google.maps.Polygon({
 			          paths: eval('countyCoords[i].coord'),
 			          strokeColor: '#FF0000',
@@ -615,7 +616,7 @@ if ($('script[src="geojson.js"]').length === 0){
 
 			attachPolygonInfoWindow(Mycounties, eval('countyCoords[i].name'), eval('countyCoords[i].state'), eval('countyCoords[i].img'));
 
-       }
+       } */
 		
 	var convertMiles = 1609.344;
 for (var i = 0; i < appraisers.length; i++) {   
