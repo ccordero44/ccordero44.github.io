@@ -44284,7 +44284,9 @@ var countyCoords = [
 ];
 */
 var countyCoords = [];
-/*
+
+
+countyCoords = [];
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44292,43 +44294,42 @@ $.ajax({
 		   success: function(response) { 
 					  
 			   
-			   var coords = [];
+			   
+        		$(response.features).each(function () {
+			var coords = [];
 			   var state, county, id;
 			   var lat, lng;
-			   var _coord 
-			   for (var i = 0; i < response.features.length; i++) {
-				 
-				  for (var c = 0; c < response.features[i].geometry.coordinates.length; c++) {
-					  var _coords = response.features[i].geometry.coordinates[c];
-					//_coords = _coords.flat();
-					for (var x = 0; x <_coords.length; x++) {
-						if (_coords[x].length > 2) {
-							for (var y = 0; y < _coords[x].length; y++) {
-								lng = _coords[x][y][0];
-								lat = _coords[x][y][1]
-								 _coord = {
+				 $(this.geometry.coordinates).each(function () {
+			
+								
+				$(this).each(function () {
+					if (this.length > 2) {
+						$(this).each(function () {
+							lng = this[0];
+							lat = this[1];
+							var	_coord = {
 									lng: lng,
 									lat: lat
 								};
 							
 								coords.push(_coord);
-							};
-						}else{
-							lng = _coords[x][0];
-							lat = _coords[x][1];
-							 _coord = {
+						});
+					};
+							lng = this[0];
+							lat = this[1];
+					var	_coord = {
 							lng: lng,
 							lat: lat
 						};
 					
 						coords.push(_coord);
-						}
-					}
+					
+					})
 						
-					};
-					county = response.features[i].properties.NAMELSAD;
-					state = response.features[i].properties.STATE_NAME;
-					id = response.features[i].properties.STUSPS;
+					});
+					county = this.properties.NAMELSAD;
+					state = this.properties.STATE_NAME;
+					id = this.properties.STUSPS;
 				
 				  var countyData = {
 						name: county,
@@ -44337,7 +44338,7 @@ $.ajax({
 						img: id + '.png'
 					};
 				countyCoords.push(countyData);
-			   };
+			   });
 			  
 			}
 		});
