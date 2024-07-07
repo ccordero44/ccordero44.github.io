@@ -1,3 +1,6 @@
+//var countyCoords = [];
+
+
 /*
 var Adams = [    
  {lng:-91.42411, lat:39.93575}, 
@@ -44282,12 +44285,12 @@ var countyCoords = [
 {name:"Winnebago County", coord: Winnebago, state: "Illinois", img: "IL.png"},
 {name:"Woodford County", coord: Woodford, state: "Illinois", img: "IL.png"}
 ];
-*/
+
 function createNestedArray(...arrays) {
 
     return Array.from(arrays, array => [array]);
 }
-var countyCoords = [];
+
 
 
 $.ajax({
