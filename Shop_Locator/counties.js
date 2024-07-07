@@ -44286,7 +44286,6 @@ var countyCoords = [
 var countyCoords = [];
 
 
-countyCoords = [];
 $.ajax({
 		   type: "GET",
 		   url: "counties.json",
@@ -44300,29 +44299,33 @@ $.ajax({
 			   var state, county, id;
 			   var lat, lng;
 				 $(this.geometry.coordinates).each(function () {
-			
-								
-				$(this).each(function () {
-					if (this.length > 2) {
-						$(this).each(function () {
-							lng = this[0];
-							lat = this[1];
-							var	_coord = {
-									lng: lng,
-									lat: lat
-								};
+				
 							
-								coords.push(_coord);
-						});
-					};
-							lng = this[0];
+				$(this).each(function () {
+				if (this.length === 2) {
+					lng = this[0];
 							lat = this[1];
+					
 					var	_coord = {
 							lng: lng,
 							lat: lat
 						};
 					
 						coords.push(_coord);
+				}else{
+						$(this).each(function () {
+							lng = this[0];
+							lat = this[1];
+					
+					var	_coord = {
+							lng: lng,
+							lat: lat
+						};
+					
+						coords.push(_coord);
+						})
+					}
+							
 					
 					})
 						
