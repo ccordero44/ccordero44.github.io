@@ -48,7 +48,7 @@ function AutocompleteDirectionsHandler(map) {
                     if (status === google.maps.GeocoderStatus.OK) {
 						//quickDist();
 						codeAddress();
-						
+						console.log(results);
                         var str3 = results[0].geometry.location;
                       input = str3;
 						
@@ -661,9 +661,11 @@ function clearDir() {
 			//};
 	            removeMarkers();
 	map.data.revertStyle();
-         for (var i = 0; i < countyData.length; i++) {
+         if (countyData) {
+		 for (var i = 0; i < countyData.length; i++) {
 			  map.data.remove(countyData[i]);
 		  }; 
+	};
             document.getElementById("checkbox0").checked = true;
             document.getElementById("checkbox1").checked = true;
 	   showAppraisers();
