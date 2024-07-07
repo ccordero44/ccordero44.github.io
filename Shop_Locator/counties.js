@@ -44322,17 +44322,17 @@ $.ajax({
 							lng = this[0];
 							lat = this[1];
 					
-						_coord2 = {
+						_coord2 = [{
 							lng: lng,
 							lat: lat
-						};
+						}];
 					
 						//coords.push(_coord);
 						})
 					}
 				if (_coord2) {			
 					var _newCoord = createNestedArray(_coord2);
-					coords.push(_newCoord);
+					coords.push(_coord2);
 				}else{
 					coords.push(_coord1);
 				};
