@@ -44322,10 +44322,10 @@ $.ajax({
 							lng = this[0];
 							lat = this[1];
 					
-						_coord2 = {[
+						_coord2 = {
 							lng: lng,
 							lat: lat
-						]};
+						};
 					
 						//coords.push(_coord);
 						})
