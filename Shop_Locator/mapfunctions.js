@@ -660,6 +660,7 @@ function clearDir() {
 				//Myappraisers[j].setMap(null);
 			//};
 	            removeMarkers();
+	map.data.revertStyle();
          for (var i = 0; i < countyData.length; i++) {
 			  map.data.remove(countyData[i]);
 		  }; 
