@@ -1494,7 +1494,15 @@ function toggleCounties() {
 					          fillOpacity: 0.2,
 						   zIndex: 1001,
 		    };
-		  })
+		  });
+		map.data.addListener("click", (event) => {
+		 	map.data.revertStyle();
+		    	map.data.overrideStyle(event.feature, { fillOpacity:0.1 });
+		  	var myWindow = document.getElementById("infoDivWrapper");
+			document.getElementById("divTD").innerHTML = event.feature.getProperty("NAMELSAD") + "<br>" + event.feature.getProperty("STATE_NAME") + "<br>";
+			document.getElementById("countyIMG").innerHTML = "<img src='" + event.feature.getProperty("STUSPS") + ".png' class='countyimg'>";
+			myWindow.style.display = "inherit";		
+		  });
 		}else{
 			for (var i = 0; i < countyData.length; i++) {
 			  map.data.remove(countyData[i]);
@@ -1510,11 +1518,4 @@ $.getJSON('counties.json', function (data) {
 
 
 
-map.data.addListener("click", (event) => {
- 	map.data.revertStyle();
-    	map.data.overrideStyle(event.feature, { fillOpacity:0.1 });
-  	var myWindow = document.getElementById("infoDivWrapper");
-	document.getElementById("divTD").innerHTML = event.feature.getProperty("NAMELSAD") + "<br>" + event.feature.getProperty("STATE_NAME") + "<br>";
-	document.getElementById("countyIMG").innerHTML = "<img src='" + event.feature.getProperty("STUSPS") + ".png' class='countyimg'>";
-	myWindow.style.display = "inherit";		
-  });
+
