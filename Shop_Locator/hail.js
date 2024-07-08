@@ -38,7 +38,7 @@ $.ajax({
 					hailInfoWindow.setContent('');
 					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
 					return function() {
-						 map.setZoom(18);
+						 map.setZoom(13);
                         			map.setCenter(hailMarkers[i].getPosition());
 						hailInfoWindow.setContent(this.content);
 						 hailInfoWindow.setOptions({maxWidth:'fit-content'});
