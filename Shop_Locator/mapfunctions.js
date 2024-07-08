@@ -1,4 +1,4 @@
-function AutocompleteDirectionsHandler(map) {
+ function AutocompleteDirectionsHandler(map) {
 
             this.map = map;
             this.originPlaceId = null;
@@ -1456,6 +1456,7 @@ function setHailMarkers() {
 function setDatepicker(_this) {
  
             $('#dialog').dialog({
+                        resizable: false,
 	            open: function() {
 			 $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                $("#dialogDate").datepicker({
