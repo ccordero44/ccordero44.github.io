@@ -84,13 +84,13 @@ $.ajax({
 						google.maps.event.addListener(hailCircleMax,'mouseout',function(){
 						             this.getMap().getDiv().removeAttribute('title');}); 
 						
-						google.maps.event.addListener(map, "click", function (event) {
-						                   // infoPODwindow.close();
-									if (hailCircleMin){hailCircleMin.setMap(null);}
-									if (hailCircleMax){hailCircleMax.setMap(null);}
-						                });
+						
 					};
 					})(hailMarker, i));
+					google.maps.event.addListener(map, "click", function (event) {
+						if (hailCircleMin){hailCircleMin.setMap(null);}
+						if (hailCircleMax){hailCircleMax.setMap(null);}
+					});
 				hailMarkers.push(hailMarker);
 				//console.log(lat + "," + long);
 				};
