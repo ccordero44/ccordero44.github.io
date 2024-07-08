@@ -39,7 +39,7 @@ $.ajax({
 					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
 					return function() {
 						 map.setZoom(18);
-                        			map.setCenter(hailMarker[i].getPosition());
+                        			map.setCenter(hailMarkers[i].getPosition());
 						hailInfoWindow.setContent(this.content);
 						 hailInfoWindow.setOptions({maxWidth:'fit-content'});
 						hailInfoWindow.open(map, this);
