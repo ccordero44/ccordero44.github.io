@@ -59,6 +59,7 @@ $.ajax({
 						        strokeColor: "#000000",
 						        strokeOpacity: 0.1,
 						        title: 'Maximum radius of hail event is 4km',
+							zIndex: 1001,
 						        strokeWeight: 2
 						      });
 						 hailCircleMin = new google.maps.Circle({
@@ -70,6 +71,7 @@ $.ajax({
 						        strokeColor: "#000000",
 						        strokeOpacity: 0.1,
 						        title: 'Minimum radius of hail event is 1km',
+							 zIndex: 1001,
 						        strokeWeight: 2
 						      });
 						google.maps.event.addListener(hailCircleMin,'mouseover',function(){
