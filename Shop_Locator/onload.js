@@ -6,12 +6,12 @@
         document.getElementById("wholetable").style.display = "none";
         document.getElementById("dvTable").style.display = "none";
 
-        var newTableObject = document.getElementById("myTable")
+        var newTableObject = document.getElementById("myTable");
     
-        if (!window.location.hash) {
-            window.location = window.location + '#loaded';
-            window.location.reload();
-        }
+       // if (!window.location.hash) {
+       //     window.location = window.location + '#loaded';
+      //      window.location.reload();
+       // }
     }
 
 
