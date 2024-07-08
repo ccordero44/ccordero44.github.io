@@ -381,6 +381,7 @@ displayCoordinates(SMLatLng);
 				var location = new google.maps.LatLng(shops[i][6], shops[i][7]);
 													
 					sv.getPanoramaByLocation(location, 50, function(data, status) {
+						
 						if (shopDist.length !== 0) {
 							dirDivEle = "<div class='dirDiv'><i class='bi bi-geo-alt'> </i><input id='iwButton' type='button' onClick='getDir()' value='Get Directions' title='Click to get directions from origin address to body shop.' class='button3'></div>"
 						}else{
@@ -390,6 +391,10 @@ displayCoordinates(SMLatLng);
 						if (status !== 'OK') {	
 							infowindow.setContent("<div class='scrollFix'>" + locations[i][0].map(function(x){return x.replace(/<img(.*?)\><\/img>/, '');}) + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + distIcon + shopDist + "</div>" + dirDivEle + "<div style='text-align:center;padding:5px'>" /*<span class='" + towClass + "' title='" + shops[i][8] + "'></span>"*/ + "<span class='towTxt " + towClass + "' title='" + shops[i][8] + "'>" + tow + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")	
 						}else {
+							var oldPoint = location;
+							point = data.location.latLng;
+							var heading = google.maps.geometry.spherical.computeHeading(point,oldPoint);
+							console.log(heading);
 							infowindow.setContent("<div class='scrollFix'>" + locations[i][0] + "</b>" + "</b>" + "<div id='windowDiv' class='windowTxt'>" + distIcon + shopDist + "</div>" + dirDivEle + "<div style='text-align:center;padding:5px'>" /*<span class='" + towClass + "' title='" + shops[i][8] + "'></span>" */ + "<span class='towTxt " + towClass + "' title='" + shops[i][8] + "'>" + tow + "</span></div>" + "<input id='clientAddress' type='text' style='display: none;'></div>")
 						};
 						
