@@ -36,7 +36,10 @@ $.ajax({
 				
 					hailInfoWindow = new google.maps.InfoWindow();
 					hailInfoWindow.setContent('');
-					 google.maps.event.addListener(hailMarker, 'click', (function () {
+					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
+					return function() {
+						 map.setZoom(18);
+                        			map.setCenter(hailMarker[i].getPosition());
 						hailInfoWindow.setContent(this.content);
 						 hailInfoWindow.setOptions({maxWidth:'fit-content'});
 						hailInfoWindow.open(map, this);
@@ -86,7 +89,8 @@ $.ajax({
 									if (hailCircleMin){hailCircleMin.setMap(null);}
 									if (hailCircleMax){hailCircleMax.setMap(null);}
 						                });
-					}));
+					};
+					})(hailMarker, i));
 				hailMarkers.push(hailMarker);
 				//console.log(lat + "," + long);
 				};
