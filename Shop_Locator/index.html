@@ -786,7 +786,8 @@ $(window).resize(function() {
 map.fitBounds(resetBounds);
   if ($(this).width() < 800) {
 
-    $('#testDiv').hide();
+    //$('#testDiv').hide();
+	  $('#testDiv').css('visibility','hidden');
    $('#testDiv').attr('resized', 'true');
     $('#legend').hide();
 	  map.setOptions({
@@ -795,27 +796,18 @@ map.fitBounds(resetBounds);
 	});
 
   } else {
-//if ($('#myForm').is(':hidden')) {
  if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) {  
-	if ($('#testDiv').attr('resized') === 'false') {
-		$('#testDiv').show();
-	}else{
-		$('#testDiv').hide();
-	 	$('#testDiv').attr('resized', 'true');
-	};
-	
+		$('#testDiv').css('visibility','visible');
  }else{
-	$('#testDiv').hide();
-	 $('#testDiv').attr('resized', 'true');
+	$('#testDiv').css('visibility','hidden');
  };
-// }
 	$('#legend').show();
 	  map.setOptions({
 		zoomControl: true,
 		streetViewControl: true
 	  });
     }
- $('#testDiv').attr('resized', 'false');
+
 });
 
 
