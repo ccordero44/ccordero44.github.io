@@ -250,8 +250,14 @@
 			scaledsize = new google.maps.Size(22, 22);
 			if ($(window).width() > 800) {
 				$(legend).show();
-				$(mapButton).show();
-				$(mapButton).css('visibility','visible');
+				if ($('#map').width() < 893) {
+				     	$(mapButton).hide();
+				}else{
+					$(mapButton).show();
+					$(mapButton).css('visibility','visible');
+				}
+				//$(mapButton).show();
+				//$(mapButton).css('visibility','visible');
 			};
 			$(btnClickme).show();
 			$(clearMap).show();
