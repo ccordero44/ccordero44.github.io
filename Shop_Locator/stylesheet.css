@@ -899,7 +899,18 @@ white-space: nowrap;
   }
 
 }
+@media screen and (max-width: 1200px) {
+#legend {
+	scale: 100%;
+	width: fit-content;
 
+  }
+ #legend img {
+ 
+	 width: 33.5px;
+	height: 33.5px;
+  }
+}
 #shopImage {
 	margin-top: 12px;
     margin-bottom: 6px;
