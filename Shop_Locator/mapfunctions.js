@@ -358,7 +358,9 @@
                 //});
 
 
-if ($('#map').width() < 893) $('#testDiv').css('visibility','hidden');
+setTimeout(function() { 
+	if ($('#map').width() < 893) $('#testDiv').css('visibility','hidden');
+}, 100);
         }
 		
 	/* function testtable() {
