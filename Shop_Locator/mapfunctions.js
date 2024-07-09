@@ -28,7 +28,9 @@
 				testarr = [];
 				allLocationCoords = [];
 				//removeMarkers();
-				
+		for (var i = 0; i < tempmarker.length; i++) {
+                tempmarker[i].setMap(null);
+		 }						
                 var place = autocomplete.getPlace();
                 if (!place.place_id) {
                     window.alert("Please select an option from the dropdown list.");
@@ -651,6 +653,8 @@ function clearDir() {
 			polyInfowindow.close();
   			infoPODwindow.close();
 			if (hailInfoWindow) hailInfoWindow.close();
+			if (hailCircleMax) hailCircleMax.setMap(null);
+			if (hailCircleMin) hailCircleMin.setMap(null);
 	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
@@ -1451,6 +1455,8 @@ function setHailMarkers() {
     		for (i = 0; i < hailMarkers.length; i++) {
                 hailMarkers[i].setMap(null);
             }
+		if (hailCircleMax) hailCircleMax.setMap(null);
+		if (hailCircleMin) hailCircleMin.setMap(null);
   		
  }
 function setDatepicker(_this) {
