@@ -251,7 +251,6 @@
 			if ($(window).width() > 800) {
 				$(legend).show();
 				$(mapButton).show();
-				};
 			};
 			$(btnClickme).show();
 			$(clearMap).show();
@@ -783,11 +782,12 @@ showAppraisers();
 }
    
 $(window).resize(function() {
-$('#testDiv').attr('resized', 'true')	
+	
 map.fitBounds(resetBounds);
   if ($(this).width() < 800) {
 
     $('#testDiv').hide();
+   $('#testDiv').attr('resized', 'true');
     $('#legend').hide();
 	  map.setOptions({
 		zoomControl: false,
@@ -798,8 +798,10 @@ map.fitBounds(resetBounds);
 //if ($('#myForm').is(':hidden')) {
  if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) {  
 	if ($('#testDiv').attr('resized') === 'false') $('#testDiv').show();
+	 $('#testDiv').attr('resized', 'false');
  }else{
 	$('#testDiv').hide();
+	 $('#testDiv').attr('resized', 'true');
  };
 // }
 	$('#legend').show();
@@ -808,7 +810,7 @@ map.fitBounds(resetBounds);
 		streetViewControl: true
 	  });
     }
-$('#testDiv').attr('resized', 'false')
+
 });
 
 
