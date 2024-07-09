@@ -793,7 +793,7 @@ map.fitBounds(resetBounds);
 
   } else {
 if ($('#myForm').is(':hidden')) {
-    $('#testDiv').show();
+  if ($('#myTable').html() === '')  $('#testDiv').show();
     }
 	$('#legend').show();
 	  map.setOptions({
