@@ -795,7 +795,11 @@ map.fitBounds(resetBounds);
 
   } else {
 //if ($('#myForm').is(':hidden')) {
- if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').show();
+ if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) {  
+	 $('#testDiv').show();
+ }else{
+	$('#testDiv').hide();
+ };
 // }
 	$('#legend').show();
 	  map.setOptions({
