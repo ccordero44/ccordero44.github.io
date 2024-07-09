@@ -1260,7 +1260,9 @@ function resetTables () {
             directionsDisplay.set('directions', null);
             map.setCenter(resetBounds.getCenter());
             map.fitBounds(resetBounds);
-			
+	    for (var i=0; i < tempmarker.length; i++) {
+		tempmarker[i].setMap(null);
+	     };
 };
 
 
