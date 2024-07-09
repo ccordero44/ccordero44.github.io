@@ -202,7 +202,7 @@
   function clicky() {
 
 
-	if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').css('visibility','hidden');
+	if (checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').css('visibility','hidden');
        	//document.getElementById("testDiv").style.display = "none";
         document.getElementById("dvTable").style.display = "none";
             infowindow.close();
