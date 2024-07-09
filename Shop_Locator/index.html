@@ -798,7 +798,7 @@ map.fitBounds(resetBounds);
 //if ($('#myForm').is(':hidden')) {
  if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) {  
 	if ($('#testDiv').attr('resized') === 'false') $('#testDiv').show();
-	 $('#testDiv').attr('resized', 'false');
+	
  }else{
 	$('#testDiv').hide();
 	 $('#testDiv').attr('resized', 'true');
@@ -810,7 +810,7 @@ map.fitBounds(resetBounds);
 		streetViewControl: true
 	  });
     }
-
+ $('#testDiv').attr('resized', 'false');
 });
 
 
