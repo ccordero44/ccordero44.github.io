@@ -112,7 +112,9 @@
                         
 
 
-                        document.getElementById("clickMe").disabled = false;
+                       setTimeout(function() {
+ 				document.getElementById("clickMe").disabled = false;
+			}, 1000);
 
                     }
                 });
@@ -1250,6 +1252,7 @@ function sortByDistDM(a, b) {
 }
 function resetTables () {
 	var sizeMap = document.getElementById("map");
+	    document.getElementById("clickMe").disabled = true;
             document.getElementById("myForm").style.visibility = "hidden";
             document.getElementById("wholetable").style.display = "none";
             document.getElementById("dvTable").style.display = "none";
