@@ -202,8 +202,8 @@
   function clicky() {
 
 
-	
-       	document.getElementById("testDiv").style.display = "none";
+	if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').css('visibility','hidden');
+       	//document.getElementById("testDiv").style.display = "none";
         document.getElementById("dvTable").style.display = "none";
             infowindow.close();
 	  polyInfowindow.close();
@@ -682,7 +682,8 @@ function clearDir() {
 			$('#checkbox5').trigger('change');
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
-            document.getElementById("testDiv").style.display = "inherit";
+           // document.getElementById("testDiv").style.display = "inherit";
+	$('#testDiv').css('visibility','visible');
             if (!!activeInfoWindow) {
                 activeInfoWindow.close();
             }
