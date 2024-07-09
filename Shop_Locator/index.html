@@ -787,8 +787,7 @@ map.fitBounds(resetBounds);
   if ($(this).width() < 800) {
 
     //$('#testDiv').hide();
-	  $('#testDiv').css('visibility','hidden');
-   $('#testDiv').attr('resized', 'true');
+	//  $('#testDiv').css('visibility','hidden');
     $('#legend').hide();
 	  map.setOptions({
 		zoomControl: false,
@@ -799,7 +798,7 @@ map.fitBounds(resetBounds);
  if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) {  
 		$('#testDiv').css('visibility','visible');
  }else{
-	//$('#testDiv').css('visibility','hidden');
+	$('#testDiv').css('visibility','hidden');
  };
 	$('#legend').show();
 	  map.setOptions({
