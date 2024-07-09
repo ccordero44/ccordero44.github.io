@@ -287,12 +287,12 @@ $.ajax({
 							if (_phones) {
 								_phone = _phones[0];
 							}else{
-								_phone = "";
+								_phone = 'DATA_ERROR';
 							};
 							if (_emails) {
 								_email = _emails[0];
 							}else{
-								_email = "";
+								_email = 'DATA_ERROR';
 							};
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 							var formattedName;
