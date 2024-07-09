@@ -358,7 +358,7 @@
                 //});
 
 
-if (checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').css('visibility','hidden');
+if ($('#map').width() < 893) $('#testDiv').css('visibility','hidden');
         }
 		
 	/* function testtable() {
