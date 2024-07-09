@@ -250,9 +250,9 @@
 			scaledsize = new google.maps.Size(22, 22);
 			if ($(window).width() > 800) {
 				$(legend).show();
-				if ($('#myForm').is(':hidden')) {
-				 	$(mapButton).show();;
-				}	
+				
+				 if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0])) $(mapButton).show();
+				
 			};
 			$(btnClickme).show();
 			$(clearMap).show();
@@ -794,9 +794,9 @@ map.fitBounds(resetBounds);
 	});
 
   } else {
-if ($('#myForm').is(':hidden')) {
-   $('#testDiv').show();
- }
+//if ($('#myForm').is(':hidden')) {
+ if (!checkEleCollision.collide($('#testDiv')[0], $('#sync')[0]))  $('#testDiv').show();
+// }
 	$('#legend').show();
 	  map.setOptions({
 		zoomControl: true,
