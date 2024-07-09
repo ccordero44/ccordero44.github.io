@@ -1457,7 +1457,7 @@ function setHailMarkers() {
             }
 		if (hailCircleMax) hailCircleMax.setMap(null);
 		if (hailCircleMin) hailCircleMin.setMap(null);
-  		
+  		if (hailInfoWindow) hailInfoWindow.setMap(null);
  }
 function setDatepicker(_this) {
  
