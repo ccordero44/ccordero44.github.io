@@ -58,7 +58,7 @@ $.ajax({
 						        map: map,
 						        strokeColor: "#000000",
 						        strokeOpacity: 0.1,
-						        title: 'Maximum radius of hail event is 4km',
+						        title: 'Within maximum radius of hail event (4km)',
 							zIndex: 1001,
 						        strokeWeight: 2
 						      });
@@ -70,7 +70,7 @@ $.ajax({
 						        map: map,
 						        strokeColor: "#000000",
 						        strokeOpacity: 0.1,
-						        title: 'Minimum radius of hail event is 1km',
+						        title: 'Within minimum radius of hail event (1km)',
 							 zIndex: 1001,
 						        strokeWeight: 2
 						      });
