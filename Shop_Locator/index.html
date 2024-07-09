@@ -250,7 +250,9 @@
 			scaledsize = new google.maps.Size(22, 22);
 			if ($(window).width() > 800) {
 				$(legend).show();
-				$(mapButton).show();
+				if ($('#myForm').is(':hidden')) {
+				 	$(mapButton).show();;
+				}	
 			};
 			$(btnClickme).show();
 			$(clearMap).show();
@@ -793,8 +795,8 @@ map.fitBounds(resetBounds);
 
   } else {
 if ($('#myForm').is(':hidden')) {
-  if ($('#myTable').html() === '')  $('#testDiv').show();
-    }
+   $('#testDiv').show();
+ }
 	$('#legend').show();
 	  map.setOptions({
 		zoomControl: true,
