@@ -1263,6 +1263,8 @@ function resetTables () {
 	    for (var i=0; i < tempmarker.length; i++) {
 		tempmarker[i].setMap(null);
 	     };
+	   if (hailCircleMin) hailCircleMin.setMap(null);
+	   if (hailCircleMax) hailCircleMax.setMap(null);
 };
 
 
