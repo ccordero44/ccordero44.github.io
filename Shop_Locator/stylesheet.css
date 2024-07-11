@@ -858,7 +858,9 @@ white-space: nowrap;
 		font-size: 1.25vw;
 		width: 15vw;
 		height: auto;
-	
+	scale: .8;
+	bottom: 2px;
+	left: -20px;
       }
 #legend, #origin-input, #clickMe, #clear, #listShops, #legend, #testDiv, #sync {
 	display: none;
