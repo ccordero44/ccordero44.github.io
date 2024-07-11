@@ -1,5 +1,5 @@
 		 var shops = [];
-		 var myKey = "AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc";	
+		 var myKey = "AIzaSyDtsYyOTLOGkx6bNzMSkQVz1UfUyZAe3ME";	
 		 var appraisers = [];
 		var rateTableArray = ["NORTHERN IL #1","NORTHERN IL #2","NORTHERN IL #3","NORTHERN IL #4","NORTHERN IL #5","NORTHERN IL #6","NORTHERN IL #7","SOUTH & CTR IL #1","SOUTH & CTR IL #2","SOUTH & CTR IL #3","SOUTH & CTR IL #4","SOUTH & CTR IL #7","SOUTH & CTR IL #8","SOUTH & CTR IL #9","INDIANA #1","INDIANA #2","INDIANA #3","INDIANA #4","INDIANA #5","INDIANA #6","INDIANA #7","INDIANA #8","INDIANA #9","MISSISSIPPI #1","GEORGIA #1","NEW MEXICO #1","TEXAS #1","TEXAS #2","TEXAS #3","TEXAS #4","ARIZONA #1","ARIZONA #2","UTAH #1","OHIO #1","TENNESSEE #2","TENNESSEE #1"]
 var statusCode = 0;
