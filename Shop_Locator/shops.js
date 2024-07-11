@@ -32,7 +32,7 @@ var shops = [];
 		var rateTableArray = ["NORTHERN IL #1","NORTHERN IL #2","NORTHERN IL #3","NORTHERN IL #4","NORTHERN IL #5","NORTHERN IL #6","NORTHERN IL #7","SOUTH & CTR IL #1","SOUTH & CTR IL #2","SOUTH & CTR IL #3","SOUTH & CTR IL #4","SOUTH & CTR IL #7","SOUTH & CTR IL #8","SOUTH & CTR IL #9","INDIANA #1","INDIANA #2","INDIANA #3","INDIANA #4","INDIANA #5","INDIANA #6","INDIANA #7","INDIANA #8","INDIANA #9","MISSISSIPPI #1","GEORGIA #1","NEW MEXICO #1","TEXAS #1","TEXAS #2","TEXAS #3","TEXAS #4","ARIZONA #1","ARIZONA #2","UTAH #1","OHIO #1","TENNESSEE #2","TENNESSEE #1"]
 		var statusCode = 0;
 
-
+if (!shops.equals(JSON.parse(localStorage.getItem('shops')))) {
 $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
@@ -161,7 +161,7 @@ $.ajax({
 							}
 
 							newShop.push(formattedName.replace('<br> <br>', '<br>'));
-					if (!shops.equals(JSON.parse(localStorage.getItem('shops')))) {
+					
 						//for (var i = 0; i < shops.length; i++) {
 					    		if (ele[index][6] !== storedShops[index][6] || ele[index][7] !== storedShops[index][7]) {
 					 $.ajax({
@@ -185,18 +185,34 @@ $.ajax({
 						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 							}
 						});
-							    		}
-								//}
-							}else{
-								shops = storedShops;
+						   
+				 	 		}else{
+						   fullAddress = storedShops[index][1]
+						   cityState = storedShops[index][2]
+						    newShop.push(fullAddress);
+						   newShop.push(cityState);
+						   newShop.push(_phone);
+						   newShop.push("");
+						   newShop.push(_email);
+						   newShop.push(_coords[1]);
+						   newShop.push(_coords[0]);
+						   newShop.push("");
+						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
+						   newShop.push(_towing);
+						   newShop.push(_rateTable);
+						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};	
 							};
+								//}
+						
 					      };
 						   
 						
 					   }); 
 					}
 		});
-		
+}else{
+	shops = storedShops;
+};		
 
 
 /*$.ajax({
