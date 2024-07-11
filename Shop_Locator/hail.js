@@ -7,6 +7,7 @@ var nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
 var nowDay = String(nowDate.getDate()).padStart(2, '0');
 //callHailMarkers(nowYear+nowMonth+nowDay);
 function callHailMarkers(date) {
+try {
 $.ajax({
    type: "GET",
    url: "https://www.ncdc.noaa.gov/swdiws/json/nx3hail/" + date,
@@ -104,4 +105,8 @@ $.ajax({
 	return;
 }
 });
+}catch (error){
+	console.log(error);
+	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
+}
 }
