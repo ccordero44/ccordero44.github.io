@@ -163,7 +163,7 @@ $.ajax({
 							newShop.push(formattedName.replace('<br> <br>', '<br>'));
 					if (!shops.equals(JSON.parse(localStorage.getItem('shops')))) {
 						//for (var i = 0; i < shops.length; i++) {
-					    		if (shops[index][6] !== storedShops[index][6] || shops[index][7] !== storedShops[index][7]) {
+					    		if (ele[index][6] !== storedShops[index][6] || ele[index][7] !== storedShops[index][7]) {
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
