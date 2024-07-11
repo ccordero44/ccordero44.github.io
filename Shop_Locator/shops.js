@@ -1,5 +1,5 @@
 		 var shops = [];
-		 var myKey = "AIzaSyActTShUbrnDKcB4P94Qh4cj3JpsvdAjyE";	
+		 var myKey = "AIzaSyDyM-dtWxq7Dy66n1xTir8rPMjcwIcOFCc";	
 		 var appraisers = [];
 		var rateTableArray = ["NORTHERN IL #1","NORTHERN IL #2","NORTHERN IL #3","NORTHERN IL #4","NORTHERN IL #5","NORTHERN IL #6","NORTHERN IL #7","SOUTH & CTR IL #1","SOUTH & CTR IL #2","SOUTH & CTR IL #3","SOUTH & CTR IL #4","SOUTH & CTR IL #7","SOUTH & CTR IL #8","SOUTH & CTR IL #9","INDIANA #1","INDIANA #2","INDIANA #3","INDIANA #4","INDIANA #5","INDIANA #6","INDIANA #7","INDIANA #8","INDIANA #9","MISSISSIPPI #1","GEORGIA #1","NEW MEXICO #1","TEXAS #1","TEXAS #2","TEXAS #3","TEXAS #4","ARIZONA #1","ARIZONA #2","UTAH #1","OHIO #1","TENNESSEE #2","TENNESSEE #1"]
 var statusCode = 0;
@@ -178,7 +178,8 @@ $.ajax({
 							});
 					$(response).find("Folder").eq(0).find("Placemark").each(function () {
 						var newShop = [];
-						
+						var storedShops = JSON.parse(localStorage.getItem('shops'));
+						var fullAddress, cityState;
 		    				var _name = $(this).find('name').html();
 						var _desc = $(this).find('description').html();
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
@@ -322,16 +323,14 @@ $.ajax({
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
 						   async: false,
 						   success: function(result) { 
-						   var fullAddress = result.results[0].formatted_address.split(',');
-						  //console.log(fullAddress);
-						  //for (i=0; i < fullAddress.length; i++) {
-							//newShop.push(fullAddress[i].trim());
-						  // }
-						  var cityState = fullAddress[1] + "," + fullAddress[2]
-						 // console.log(cityState);
-						  newShop.push(fullAddress[0]);
-						  newShop.push(cityState);
-						   //newShop.pop();
+						   fullAddress = result.results[0].formatted_address.split(',');
+						   cityState = fullAddress[1] + "," + fullAddress[2]
+						  
+							}
+						});
+					      };
+						   newShop.push(fullAddress[0]);
+						   newShop.push(cityState);
 						   newShop.push(_phone);
 						   newShop.push("");
 						   newShop.push(_email);
@@ -341,14 +340,10 @@ $.ajax({
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
-							   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
-								
-									//console.log(newShop);
-														}
-						});
-					};
-					}); 
-										}
+						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+						
+					   }); 
+					}
 		});
 		
 
