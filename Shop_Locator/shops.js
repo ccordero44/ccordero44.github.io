@@ -32,7 +32,8 @@ var shops = [];
 		var rateTableArray = ["NORTHERN IL #1","NORTHERN IL #2","NORTHERN IL #3","NORTHERN IL #4","NORTHERN IL #5","NORTHERN IL #6","NORTHERN IL #7","SOUTH & CTR IL #1","SOUTH & CTR IL #2","SOUTH & CTR IL #3","SOUTH & CTR IL #4","SOUTH & CTR IL #7","SOUTH & CTR IL #8","SOUTH & CTR IL #9","INDIANA #1","INDIANA #2","INDIANA #3","INDIANA #4","INDIANA #5","INDIANA #6","INDIANA #7","INDIANA #8","INDIANA #9","MISSISSIPPI #1","GEORGIA #1","NEW MEXICO #1","TEXAS #1","TEXAS #2","TEXAS #3","TEXAS #4","ARIZONA #1","ARIZONA #2","UTAH #1","OHIO #1","TENNESSEE #2","TENNESSEE #1"]
 		var statusCode = 0;
 var storedShops = JSON.parse(localStorage.getItem('shops'));
-if (!shops.equals(JSON.parse(localStorage.getItem('shops')))) {
+if (shops.length !== 0) {
+if (!shops.equals(storedShops)) {
 $.ajax({
 		   type: "GET",
 		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
@@ -161,9 +162,12 @@ $.ajax({
 							}
 
 							newShop.push(formattedName.replace('<br> <br>', '<br>'));
-					
+							
+							return;
 						//for (var i = 0; i < shops.length; i++) {
-					    		if (ele[index][6] !== storedShops[index][6] || ele[index][7] !== storedShops[index][7]) {
+					    if (storedShops[index][6] && (_coords[1] !== storedShops[index][6] || _coords[0] !== storedShops[index][7])) {
+						   console.log(index);
+							console.log(storedShops[index][6]);
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
@@ -213,7 +217,168 @@ $.ajax({
 }else{
 	shops = storedShops;
 };		
+}else{
+	$.ajax({
+		   type: "GET",
+		   url: "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1UMuKB3q_Al9y0Oe-THMar0wa55-wsar6",
+		   async: false,
+		   success: function(response) { 
+			
+			  
+			   var styles = [];
+				$(response).find('Style').each(function() {
+					var style = {
+						id: $(this).attr('id'),
+						color: $(this).find('PolyStyle').find('color').text().replace(/(\r\n|\n|\r)/gm, "")
+					};
+					styles.push(style);	
+							});
+					$(response).find("Folder").eq(0).find("Placemark").each(function(index, ele) {
+						var newShop = [];
+						var fullAddress, cityState;
+		    				var _name = $(this).find('name').html();
+						var _desc = $(this).find('description').html();
+						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
+						var _towingIcon = $(this).find('styleUrl').text();
+						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						var _rateTable = "";
+						if (polyCoords.length > 0) {
+							
+						var _style = $(this).find('styleUrl').text().replace("#","");
+						var _normal = _style + "-normal";
+						var _highlight = _style + "-highlight";
+						var _color;
+							for (var a = 0; a < styles.length; a++) {
+								if (styles[a].id === _normal) {
+									_color = "#" + styles[a].color;
+								};
+							     };
+							//for (let i = 0; i < polyCoords.length; i++) {
+							$(polyCoords).each(function () {
+									var tempCoords = $(this).find('outerBoundaryIs').find('LinearRing').find('coordinates').text().split('\n'); //.trim().split(',');
+								
+								var coords = [];
+								for (let i = 0; i < tempCoords.length; i++) {
+									var tempCoord = tempCoords[i].trim().split(',');
+									tempCoord.pop();
+									if (tempCoord.length > 0) { coords.push({ lat: Number(tempCoord[1]), lng: Number(tempCoord[0]) }) };
+								}
+								
+								
+									//var coords = [{ lat: tempCoords[1], lng: tempCoords[0] }];
+								
+									var name = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+									
+								var altDesc;
+								
+								if (_desc) {
+									
+									if (name !== _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim()) {
+										altDesc = name + "\n" + _desc.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+									}else{
+										altDesc = name; 
+								};
+								}else{
+									altDesc = name; 
+								};
+								
+								var blankAppraiser = { 
+										name: name,
+										coord: coords,
+										desc: altDesc,
+										color: _color
+									};
 
+								
+										appraisers.push(blankAppraiser);
+									});
+							};
+						var _towing = "";
+						if (_towingIcon === "#icon-503-4186F0") {
+							_towing = "yesTow";
+						}else{
+							_towing = "noTow";	
+						}
+
+						if (_coords.length > 1) {
+						var _rateTablesArray = _desc.toString().split("<br>")
+						var newArrayRT = [];
+							for (var rt = 0; rt < _rateTablesArray.length; rt++) {
+								newArrayRT.push(_rateTablesArray[rt].trim());
+							}
+						var _ratetables = rateTableArray.filter(element => newArrayRT.includes(element))[0]; //_desc.toString().split("<br>")[2];
+						var _phones = _desc.toString().match(/((?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?)/img);
+						var _emails = _desc.toString().match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+						var _phone, _email;
+							if (_ratetables) {
+								_rateTable = _ratetables;
+							}else{
+								_rateTable = 'DATA_ERROR';
+								};
+							if (_phones) {
+								_phone = _phones[0];
+							}else{
+								_phone = 'DATA_ERROR';
+							};
+							if (_emails) {
+								_email = _emails[0];
+							}else{
+								_email = 'DATA_ERROR';
+							};
+							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
+							var formattedName;
+						
+							if ((newName.match(/\(/g) || []).length > 0) {
+								if ((newName.match(/-/g) || []).length < 2 ) {
+									formattedName = [newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join('')
+								}else{
+									var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-')
+									newNameSplit.pop();
+									newNameSplit = newNameSplit.join('-');
+									formattedName = [newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join('');
+								};
+							}else{
+								formattedName = newName;
+							};
+							if ((formattedName.match(/\*/g) || []).length > 0) {
+								formattedName = [formattedName.slice(0,formattedName.indexOf("*")), "<br>",formattedName.slice(formattedName.indexOf("*"))].join('')
+								formattedName = formattedName.replaceAll("*", '')
+							}
+
+							newShop.push(formattedName.replace('<br> <br>', '<br>'));
+					
+					
+
+					 $.ajax({
+						   type: "GET",
+						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
+						   async: false,
+						   success: function(result) { 
+						   fullAddress = result.results[0].formatted_address.split(',');
+						   cityState = fullAddress[1] + "," + fullAddress[2]
+						    newShop.push(fullAddress[0]);
+						   newShop.push(cityState);
+						   newShop.push(_phone);
+						   newShop.push("");
+						   newShop.push(_email);
+						   newShop.push(_coords[1]);
+						   newShop.push(_coords[0]);
+						   newShop.push("");
+						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
+						   newShop.push(_towing);
+						   newShop.push(_rateTable);
+						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+							}
+						});
+					
+						
+					      };
+						   
+						
+					   }); 
+					}
+		});
+};
 
 /*$.ajax({
    type: "GET",
