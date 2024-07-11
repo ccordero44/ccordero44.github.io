@@ -325,11 +325,7 @@ $.ajax({
 						   success: function(result) { 
 						   fullAddress = result.results[0].formatted_address.split(',');
 						   cityState = fullAddress[1] + "," + fullAddress[2]
-						  
-							}
-						});
-					      };
-						   newShop.push(fullAddress[0]);
+						    newShop.push(fullAddress[0]);
 						   newShop.push(cityState);
 						   newShop.push(_phone);
 						   newShop.push("");
@@ -341,6 +337,10 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+							}
+						});
+					      };
+						 
 						
 					   }); 
 					}
