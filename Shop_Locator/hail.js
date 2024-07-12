@@ -115,8 +115,8 @@ $(alertdiv).dialog({
 			modal: true,
    			closeOnEscape: false,
     			title: "Hail Events Error",
-			show: "clip",
-			hide: "clip",
+			show: "scale",
+			hide: "scale",
 			buttons: [{ 
 			text: "Ok", 
 	                	click: function () {  
@@ -135,6 +135,6 @@ $(alertdiv).dialog({
 	            },
 		  
 	        });
-		$('div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button').css('scale', '.8');
+		
 }
 }
