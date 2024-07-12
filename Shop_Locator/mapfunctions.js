@@ -649,7 +649,8 @@ function clearDir() {
 
 
   	var marker;
-  		
+  			if ($("#dialogDate").datepicker('widget').is(':visible')) $("#dialogDate").datepicker('hide');
+			if ($('#dialog').dialog().is(':visible')) $('#dialog').dialog('close');
 			window.resizeTo(screen.availWidth / 1.5, screen.availHeight / 1.5);
        			 window.moveTo(screen.availWidth / 6, screen.availHeight / 5);
 			document.getElementById("myTable").innerHTML = "";
