@@ -1475,6 +1475,7 @@ function setDatepicker(_this) {
             $('#dialog').dialog({
                         resizable: false,
 	            open: function() {
+			    $(".ui-dialog-titlebar-close").hover(function () {$(this).css("background", "DodgerBlue").css("border", "1px solid DodgerBlue")});
 			 $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                $("#dialogDate").datepicker({
 		                format: "dd/mm/yyyy",
@@ -1501,7 +1502,7 @@ function setDatepicker(_this) {
 			        
 			    	setHailMarkers();
 	            },
-	        });
+	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
             
         }
 
