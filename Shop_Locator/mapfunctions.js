@@ -1531,7 +1531,26 @@ function toggleCounties() {
 		 	map.data.revertStyle();
 		    	map.data.overrideStyle(event.feature, { fillOpacity:0.1 });
 		  	var myWindow = document.getElementById("infoDivWrapper");
-			document.getElementById("divTD").innerHTML = event.feature.getProperty("NAMELSAD") + "<br>" + event.feature.getProperty("STATE_NAME") + "<br>";
+			var judProfile = "";
+			
+			$.ajax({
+			   type: "GET",
+			   url: "/Shop_Locator/Judicial_Profiles/" + event.feature.getProperty("STUSPS") + ".csv",
+			    async: false,
+			   success: function(CSVdata) { 
+						var data = $.csv.toArrays(CSVdata);
+						
+						 for (var i = 0; i < data.length; i++) {
+							if (event.feature.getProperty("NAME") === data[i][0]) {
+								judProfile = data[i][1];
+							}else if (event.feature.getProperty("NAME") === data[i][0].replace(" ", "")) {
+								judProfile = data[i][1];
+							};
+						};
+					}
+			});
+			document.getElementById("divTD").title = 'Orientation data obtained from The Harmonie Group'
+			document.getElementById("divTD").innerHTML = event.feature.getProperty("NAMELSAD") + "<br>" + event.feature.getProperty("STATE_NAME") + "<br>Orientation: " + judProfile;
 			document.getElementById("countyIMG").innerHTML = "<img src='" + event.feature.getProperty("STUSPS") + ".png' class='countyimg'>";
 			myWindow.style.display = "inherit";		
 		  });
