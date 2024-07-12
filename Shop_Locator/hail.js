@@ -107,6 +107,34 @@ $.ajax({
 });
 }catch (error){
 	console.log(error);
-	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
+var alertdiv= document.createElement('div');
+alertdiv.innerHTML = "There was an error connecting to the National Oceanic and Atmospheric Administration's hail events server. Please try again later."
+
+$(alertdiv).dialog({
+                        resizable: false,
+			modal: true,
+   			closeOnEscape: false,
+    			title: "Hail Events Error",
+			show: "clip",
+			hide: "clip",
+			buttons: [{ 
+			text: "Ok", 
+	                	click: function () {  
+					$('.ui-dialog-content').dialog('close');
+				} 
+			}],
+	            open: function() {
+                    	$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-dialog-buttons').css('scale', '.8');
+			$('.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix').css('padding','0');
+	            	$('div.ui-dialog-buttonset button.ui-button span.ui-button-text').each(function() {
+    				$(this).html($(this).parent().attr('text'));
+			});
+			 },
+	            close: function() {
+	                $(alertdiv).dialog('destroy');
+	            },
+		  
+	        });
+		$('div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button').css('scale', '.8');
 }
 }
