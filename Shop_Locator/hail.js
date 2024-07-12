@@ -114,7 +114,7 @@ $(alertdiv).dialog({
                         resizable: false,
 			modal: true,
    			closeOnEscape: false,
-    			title: "Hail Events Error",
+    			title: "NOAA Hail Events Error",
 			show: "scale",
 			hide: "scale",
 			buttons: [{ 
@@ -124,17 +124,19 @@ $(alertdiv).dialog({
 				} 
 			}],
 	            open: function() {
+			$(".ui-dialog-titlebar-close").hide();
                     	$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-dialog-buttons').css('scale', '.8');
 			$('.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix').css('padding','0');
 	            	$('div.ui-dialog-buttonset button.ui-button span.ui-button-text').each(function() {
     				$(this).html($(this).parent().attr('text'));
+				$(this).parent().css('scale', '.8').css("background","DodgerBlue").css("color", "white").css("margin", "0");
 			});
 			 },
 	            close: function() {
 	                $(alertdiv).dialog('destroy');
 	            },
 		  
-	        });
+	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
 		
 }
 }
