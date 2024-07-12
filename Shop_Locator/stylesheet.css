@@ -889,7 +889,7 @@ white-space: nowrap;
 
 @media screen and (min-width: 1200px) {
   #legend {
-     font-size: 15px;
+     font-size: 17px;
      width: fit-content;
   }
   #legend h3 {
