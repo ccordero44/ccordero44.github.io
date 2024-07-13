@@ -3,7 +3,7 @@ $.ajax({
     url: "https://data.cityofchicago.org/resource/spqx-js37.json",
     type: "GET",
     data: {
-      "$limit" : 5000,
+      "$limit" : 100000,
       "$$app_token" : "C0x9RtLoTQDig0aJJt24jGtfS"
     }
 }).done(function(data) {
