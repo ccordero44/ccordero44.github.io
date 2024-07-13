@@ -44,5 +44,5 @@ $.ajax({
 						 }
 						 
 						})
-					 
+					 $('#redcamCount').text("(" + numberWithCommas(count) + ")");
 			});
