@@ -9,7 +9,7 @@ $.ajax({
 					//scaledSize: scaledsize
 				}
 				//var count = Number($('#redcamCount').text().replace("(", "").replace(")", ""));
-				var count = redCamMarkers.length;
+				var count = Number(redCamMarkers.length);
 				var lng,lat,id,camStatus,detDirection;
 				for (var i = 0; i < data.features.length; i++) {
 					count += 1;
