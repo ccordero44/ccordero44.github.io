@@ -1,11 +1,7 @@
 
 $.ajax({
-    url: "https://data.cityofchicago.org/resource/spqx-js37.json",
+    url: "https://data.cityofchicago.org/resource/thvf-6diy.json",
     type: "GET",
-    data: {
-      "$limit" : 200000,
-      "$$app_token" : "C0x9RtLoTQDig0aJJt24jGtfS"
-    }
 }).done(function(data) {
 //  alert("Retrieved " + data.length + " records from the dataset!");
 //  console.log(data);
@@ -26,13 +22,13 @@ for (i = 0; i < data.length; i++) {
                     position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
                     //map: map,
                     clickable: true,
-                    title: 'Red Light Camera ID #' + data[i].camera_id,
+                    title: 'Red Light Camera',
                     icon: redCam
 
                 });
 			redCamMarkers.push(redCamMarker);
 			var link = "GeneralFOIAFormforDepts.pdf"; 
-			addInfoWindow(redCamMarkers[i], '<b>Red Light Camera ID #' + data[i].camera_id + '</b><br />Intersection: ' + data[i].intersection + '<br />Violations: ' + data[i].violations + '<br /><a href="https://pay.chicago.gov/workflows/tickets" target="_blank">Search for Tickets</a><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>');
+			addInfoWindow(redCamMarkers[i], '<b>Red Light Camera</b><br />Intersection: ' + data[i].intersection + '<br />First Approach: ' + data[i].first_approach + '<br /><a href="https://pay.chicago.gov/workflows/tickets" target="_blank">Search for Tickets</a><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>');
        }
              google.maps.event.addListener(map, 'zoom_changed', function() {
     
