@@ -12,7 +12,7 @@ $.ajax({
 				var lng,lat,id,camStatus,detDirection;
 				for (var i = 0; i < data.features.length; i++) {
 					count += 1;
-                        if (data.features[i].geometry !== null && data.features[i].properties.detector_status === 'OK') {
+                        if (data.features[i].geometry !== null && (data.features[i].properties.detector_status === 'OK' || data.features[i].properties.detector_status === 'OK - MINOR ISSUE')) {
 							var lng,lat,id,camStatus,detDirection;
 							lng = data.features[i].geometry.coordinates[0];
 							lat = data.features[i].geometry.coordinates[1];
