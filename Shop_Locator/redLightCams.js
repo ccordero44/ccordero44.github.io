@@ -13,7 +13,12 @@ var redCam = {
 			url: 'redCamSmall.png'
 			//scaledSize: scaledsize
 		}
-	$('#redcamCount').text("(" + data.length + ")");
+	//$('#redcamCount').text("(" + data.length + ")");
+	var count = Number($('#redcamCount').text().replace("(", "").replace(")", ""));
+	var redCamcount = Number(data.length);
+	var totalCount = count + redCamcount;
+$('#redcamCount').text("(" + numberWithCommas(totalCount) + ")");
+	
 for (i = 0; i < data.length; i++) {
 
                 redCamMarker = new google.maps.Marker({
