@@ -15,7 +15,7 @@ var redCam = {
 		}
 	//$('#redcamCount').text("(" + data.length + ")");
 	var count = Number($('#redcamCount').text().replace("(", "").replace(")", ""));
-	var redCamcount = Number(data.length);
+	var redCamcount = Number(austinRedCamMarker.length);
 	var totalCount = count + redCamcount;
 $('#redcamCount').text("(" + numberWithCommas(totalCount) + ")");
 	
