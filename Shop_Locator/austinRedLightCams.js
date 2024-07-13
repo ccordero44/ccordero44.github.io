@@ -1,7 +1,7 @@
 var austinRedCamMarker, austinRedCamMarkers = [];
 $.ajax({
 			   type: "GET",
-			   url: "https://data.austintexas.gov/resource/qpuw-8eeb.geojson",
+			   url: "https://data.austintexas.gov/resource/qpuw-8eeb.geojson?$limit=10000",
 			   
 			}).done(function(data) {
 				var redCam = {
@@ -19,7 +19,6 @@ $.ajax({
 							id = data.features[i].properties.detector_id;
 							camStatus = data.features[i].properties.detector_status;
 							detDirection = data.features[i].properties.detector_direction;
-							console.log(data.features[i]);
 							austinRedCamMarker = new google.maps.Marker({
 								position: new google.maps.LatLng(lat, lng),
 								clickable: true,
