@@ -24,7 +24,7 @@ $.ajax({
 							austinRedCamMarker = new google.maps.Marker({
 								position: new google.maps.LatLng(lat, lng),
 								clickable: true,
-								title: 'Red Light Camera ID #' + id,
+								title: 'Traffic Camera ID #' + id,
 								icon: redCam
 
 							});
