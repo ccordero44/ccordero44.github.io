@@ -23,7 +23,9 @@ $.ajax({
 	   			
 	   			$('#hailCount').text("(" + data.result.length + ")");
 				for (var i = 0;i<data.result.length;i++) {
-				
+				var hailDate = new Date(data.result[i].ZTIME);
+				var options = { timeStyle: 'short', hour12: true };
+				var hailTime = hailDate.toLocaleTimeString('en-US', options);
 				var matches = regExp.exec(data.result[i].SHAPE)
 				var lat =  Number(matches[1].split(' ')[1]);
 				var long = Number(matches[1].split(' ')[0]);
@@ -32,7 +34,7 @@ $.ajax({
 		                    clickable: true,
 		                    title: "Hail Event",
 		                    icon: 'hail.png',
-				    content: '<div>Hail Size: ' + data.result[i].MAXSIZE + '"</div><div>Probability: ' + data.result[i].PROB + '%</div><div>Date: ' + nowDate.toDateString() + '</div>'
+				    content: '<div>Hail Size: ' + data.result[i].MAXSIZE + '"</div><div>Probability: ' + data.result[i].PROB + '%</div><div>Date: ' + nowDate.toDateString() + '</div><div>Time: ' + hailTime + '</div>'
 		                });
 				
 					hailInfoWindow = new google.maps.InfoWindow();
