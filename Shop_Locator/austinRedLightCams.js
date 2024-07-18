@@ -1,4 +1,4 @@
-var austinRedCamMarker, austinRedCamMarkers = [];
+
 $.ajax({
 			   type: "GET",
 			   url: "https://data.austintexas.gov/resource/b4k4-adkb.geojson?$limit=10000",
