@@ -749,7 +749,7 @@ function clearDir() {
 							
 							var list = document.createElement("ol");
 							list.innerHTML = "<label>Hours</label>";
-							$(list).attr('id','hoursList');
+							$(list).attr('class','hoursList');
 							if (typeof place.opening_hours !== 'undefined') {
 								$('.hours').show();
 								for (var i = 0; i < place.opening_hours.weekday_text.length; i++) {
