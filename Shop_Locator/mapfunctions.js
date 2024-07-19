@@ -141,6 +141,9 @@
 		for (i = 0; i < hailMarkers.length; i++) {
                 hailMarkers[i].setMap(null);
             }
+		for (var i = 0; i < copartMarkers.length; i++) {
+			  copartMarkers[i].setMap(null);
+		  }; 
         }
         /*function showPoly() {
 	
@@ -684,6 +687,7 @@ function clearDir() {
 			document.getElementById("checkbox4").checked = false;
 			document.getElementById("checkbox5").checked = true;
 	document.getElementById("checkbox6").checked = false;
+	document.getElementById("checkbox7").checked = false;
 			$('#checkbox5').trigger('change');
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
