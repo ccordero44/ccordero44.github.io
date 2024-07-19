@@ -85,7 +85,7 @@
 		activeInfoWindow.open(map, activeMarker);
 		map.setCenter(activeMarker.getPosition());
 	});
-		
+	google.maps.event.addDomListener(window, 'load', copartLocations(map.getCenter().lat(), map.getCenter().lng(), 10000));	
 });
 		window.onload = Window_onLoad;
 		//var myKey = "AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8";
@@ -303,7 +303,7 @@
 			$('#legend > div:nth-child(5)').append(' <div id="redcamCount" style="display: contents;color: grey;"></div>');
 			$('#shopCount').text("(" + shops.length + ")");
 		callHailMarkers(nowYear+nowMonth+nowDay);
-		google.maps.event.addDomListener(window, 'load', copartLocations(map.getCenter().lat(), map.getCenter().lng(), 10000));
+		
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
 			var markerIcon;
