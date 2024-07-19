@@ -32,16 +32,16 @@ i.bi.bi-geo-alt {
 	text-decoration: none;
 	cursor: default;
 }
-#hoursList {
+.hoursList {
 	list-style-type: none;
 	padding-left: 5px;
 	margin-bottom: 0;
 }
-#hoursList label {
+.hoursList label {
 	font-weight: bold;
 }
 
-#hoursList li {
+.hoursList li {
 	padding-left: 5px;
 }
 
