@@ -36,6 +36,7 @@
   <script type="text/javascript" src="shops.js"></script>
 	<script type="text/javascript" src="hail.js"></script>
     <script type="text/javascript" src="appraisers.js"></script>
+    <script type="text/javascript" src="copartMarkers.js"></script>
     <!-- <script type="text/javascript" src="redLightCams.js"></script> -->
     <script type="text/javascript" src="displatyTime.js"></script>    
     <script type="text/javascript" src="getDate.js"></script>  
@@ -297,6 +298,7 @@
 			$('#legend > div:nth-child(5)').append(' <div id="redcamCount" style="display: contents;color: grey;"></div>');
 			$('#shopCount').text("(" + shops.length + ")");
 		callHailMarkers(nowYear+nowMonth+nowDay);
+		copartLocations(map.getCenter().lat(), map.getCenter().lng(), 10000);
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
 			var markerIcon;
