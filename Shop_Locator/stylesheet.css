@@ -428,7 +428,7 @@ i.bi.bi-geo-alt {
 		.phone:before {
 			content: "\260F";
 		}
-		.hours {
+		.hours, .copartHours {
 			line-height: 1.6;
            /* background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAEASURBVDhPpZOxDcIwEEUdhIRExwI0KUMFEkOwAWIIxCCwBRSsQMcMUFLAEumA/y625CROhMSTHrF9d8axncylYbyQufWce8i7/Fivh6HcyqckOZYxYuQkmcirLOVezuXIS5sxYuSQW4NZCbzkjAHP2hsgRg65tZWwNGaPi+HsjSGHXGoMNoz3Y4lNUhMAudRkA/2w21N5lL9yktQUTBCOimNKMfbPmJt/5kzQx0Wu5M56HbApnDNHlYLit9xYr2IhqbFN79vEAMXLqmkcpG2i9UTXMaZoHSN0XaQmxJIXCZpXmfcMV5k2yyZGTusqB5iVpfF+8YeEjBGr/fOfn7NzXyW+PqUdrXkEAAAAAElFTkSuQmCC) no-repeat 0px center;*/
             padding: 12px;
