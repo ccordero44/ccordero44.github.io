@@ -80,7 +80,11 @@
                             map.setCenter(resetBounds.getCenter());
 							map.fitBounds(resetBounds);
                         });
-		
+	$(document.body).delegate(".copartHours", 'click', function() {
+		$(".copartHoursList").toggle();
+		activeInfoWindow.open(map, activeMarker);
+		map.setCenter(activeMarker.getPosition());
+	});	
 });
 		window.onload = Window_onLoad;
 		//var myKey = "AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8";
