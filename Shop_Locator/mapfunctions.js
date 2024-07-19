@@ -672,7 +672,7 @@ function clearDir() {
         	//for (var j=0; j < Myappraisers.length; j++) {
 				//Myappraisers[j].setMap(null);
 			//};
-	            removeMarkers();
+	           
 	map.data.revertStyle();
          if (countyData) {
 		 for (var i = 0; i < countyData.length; i++) {
@@ -705,7 +705,7 @@ function clearDir() {
             directionsDisplay.set('directions', null);
             map.setCenter(resetBounds.getCenter());
             map.fitBounds(resetBounds);
- 
+ 	 removeMarkers();
 
         }
 
