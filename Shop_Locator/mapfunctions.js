@@ -1644,6 +1644,7 @@ function getDoanMarkers() {
 							var doanInfoWindow = new google.maps.InfoWindow();
 							doanInfoWindow.setContent('');
 							google.maps.event.addListener(doanMarker, 'click', (function () {
+									activeInfoWindow.close();
 									 map.setZoom(8);
 									 map.setCenter(this.getPosition());
 									 doanInfoWindow.setContent(this.content);
