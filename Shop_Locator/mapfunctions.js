@@ -968,6 +968,18 @@ function setMarkers() {
             }
   		
  }
+ function setDoanMarkers() {
+ var checkbox = document.getElementById("checkbox8");
+	if (checkbox.checked) {
+ 			for (i = 0; i < doanMarkers.length; i++) {
+                doanMarkers[i].setMap(map);
+            }
+    }else
+    		for (i = 0; i < doanMarkers.length; i++) {
+                doanMarkers[i].setMap(null);
+            }
+  		
+ }
 function OpenPDF() {
 	window.open("Inspection Assignment & Payment Authorization.pdf");
 }
