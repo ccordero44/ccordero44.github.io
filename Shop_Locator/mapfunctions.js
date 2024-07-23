@@ -1662,3 +1662,13 @@ function getDoanMarkers() {
 String.prototype.toProperCase = function () {
     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
+	const svgMarker = {
+	    path: "M0 96C0 60.7 28.7 32 64 32l96 0c123.7 0 224 100.3 224 224s-100.3 224-224 224l-96 0c-35.3 0-64-28.7-64-64L0 96zm160 0L64 96l0 320 96 0c88.4 0 160-71.6 160-160s-71.6-160-160-160z",
+	    fillColor: "blue",
+	    fillOpacity: 0.6,
+	    strokeWeight: 1,
+	    strokeColor: "blue",
+	    rotation: 0,
+	    scale: .03,
+	    anchor: new google.maps.Point(0, 0),
+	  };
