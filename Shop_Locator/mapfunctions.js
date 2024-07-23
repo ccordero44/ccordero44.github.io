@@ -1612,6 +1612,37 @@ var checkEleCollision = {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+function doanMarkers() {
+	$.ajax({
+		   type: "GET",
+		   url: "https://doan.com/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMo5R0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABaMWvA",
+		   success: function(data) { 
+			var doanMarker;
+					 for (var i = 0; i < data.markers.length; i++) {
+						doanMarker = new google.maps.Marker({
+								position: new google.maps.LatLng(data.markers[i].lat, data.markers[i].lng),
+								clickable: true,
+								title: "Doan " + data.markers[i].title.toProperCase(),
+								icon: 'copart.png',
+								content: '<div class="" style="">Doan ' + data.markers[i].title.toProperCase() + '</div>'
+							});
+							var doanInfoWindow = new google.maps.InfoWindow();
+							doanInfoWindow.setContent('');
+							google.maps.event.addListener(doanMarker, 'click', (function () {
+									 map.setZoom(8);
+									 map.setCenter(this.getPosition());
+									 doanInfoWindow.setContent(this.content);
+									 doanInfoWindow.setOptions({maxWidth:'fit-content'});
+									 doanInfoWindow.open(map, this);
+									 activeInfoWindow = doanInfoWindow; 
+									 activeMarker = doanMarker;
+							}));
+						doanMarkers.push(doanMarker);
+					 };
+				}
+		});
+		
+}	
 String.prototype.toProperCase = function () {
     return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 };
