@@ -3,6 +3,10 @@
 }
 button.gm-ui-hover-effect {
     height: 25px !important;
+    width: 25px !important;
+}
+button.gm-ui-hover-effect>span {
+    margin: 0px !important;
 }
 #dvTable > table tr td:nth-child(4) {
     width: 1%;
