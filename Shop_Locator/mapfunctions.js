@@ -691,6 +691,7 @@ function clearDir() {
 			document.getElementById("checkbox5").checked = true;
 	document.getElementById("checkbox6").checked = false;
 	document.getElementById("checkbox7").checked = false;
+	document.getElementById("checkbox8").checked = false;
 			$('#checkbox5').trigger('change');
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
