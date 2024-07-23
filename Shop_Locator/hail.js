@@ -40,8 +40,9 @@ $.ajax({
 					hailInfoWindow = new google.maps.InfoWindow();
 					hailInfoWindow.setContent('');
 					 google.maps.event.addListener(hailMarker, 'click', (function (hailMarker, i) {
-					 if (activeInfoWindow) activeInfoWindow.close();
+					 
 					return function() {
+						if (activeInfoWindow) activeInfoWindow.close();
 						 map.setZoom(13);
                         			map.setCenter(hailMarkers[i].getPosition());
 						hailInfoWindow.setContent(this.content);
