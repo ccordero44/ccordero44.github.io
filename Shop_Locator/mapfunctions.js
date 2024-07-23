@@ -1624,7 +1624,7 @@ var checkEleCollision = {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
-function doanMarkers() {
+function getDoanMarkers() {
 	$.ajax({
 		   type: "GET",
 		   url: "https://doan.com/wp-json/wpgmza/v1/features/base64eJyrVkrLzClJLVKyUqqOUcpNLIjPTIlRsopRMo5R0gEJFGeUFni6FAPFomOBAsmlxSX5uW6ZqTkpELFapVoABaMWvA",
