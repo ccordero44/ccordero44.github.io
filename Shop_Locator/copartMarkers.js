@@ -52,7 +52,7 @@ function copartLocations(lat,lng,dist) {
 							copartInfoWindow = new google.maps.InfoWindow();
 							copartInfoWindow.setContent('');
 							google.maps.event.addListener(copartMarker, 'click', (function (copartMarker, i) {
-									
+								activeInfoWindow.close();
 								return function() {
 									 map.setZoom(13);
 									 map.setCenter(copartMarker.getPosition());
