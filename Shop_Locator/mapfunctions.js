@@ -1635,7 +1635,7 @@ function getDoanMarkers() {
 								position: new google.maps.LatLng(data.markers[i].lat, data.markers[i].lng),
 								clickable: true,
 								title: "Doan " + data.markers[i].title.toProperCase(),
-								icon: 'doan.png',
+								icon: svgMarker, //'doan.png',
 								content: '<div class="" style="">Doan ' + data.markers[i].title.toProperCase() + '</div>'
 							});
 							var doanInfoWindow = new google.maps.InfoWindow();
