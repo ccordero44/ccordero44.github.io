@@ -64,12 +64,7 @@
 	$('#origin-input').focus(function () {
 	resetTables();
 	});  
-	$.getScript("redLightCams.js", function(){
-		console.log("Running redLightCams.js");
-	});
-	$.getScript("austinRedLightCams.js", function(){
-		console.log("Running austinRedLightCams.js");
-	});
+	
 	var inputtest = document.getElementById("origin-input");
                         inputtest.addEventListener('click', function () {
                             //removeMarkers();
@@ -805,7 +800,12 @@ Myappraisers.push(appraiserPoly);
 getDoanMarkers();
 showAppraisers();	
 copartLocations(resetBounds.getCenter().lat(), resetBounds.getCenter().lng(), 10000);	
-
+	$.getScript("redLightCams.js", function(){
+		console.log("Running redLightCams.js");
+	});
+	$.getScript("austinRedLightCams.js", function(){
+		console.log("Running austinRedLightCams.js");
+	});
 }
    
 $(window).resize(function() {
