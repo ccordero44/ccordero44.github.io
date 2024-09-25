@@ -22,11 +22,11 @@ for (i = 0; i < data.length; i++) {
 
 			addTheftInfoWindow(theftMarkers[i], '<b>Motor Vehicle Theft</b><br />Date: ' + data[i].date + '<br />Case Number: ' + data[i].case_number + '<br /><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>');
        }
-             google.maps.event.addListener(map, 'zoom_changed', function() {
+          
     
  
- }
-});
+ 
+
 });
 function addTheftInfoWindow(tmarker, message) {
 
