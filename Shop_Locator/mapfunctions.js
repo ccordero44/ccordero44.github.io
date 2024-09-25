@@ -1508,7 +1508,7 @@ function setDatepicker(_this) {
 	$('#dialog > p').text('Select a date to check for hail events:');
 	$('#dialog').prop('title', 'Hail Event Date');
  }else{
-	$('#dialog > p').text('Select a year to check for theft events:');
+	$('#dialog > p').hide();
 	$('#dialog').prop('title', 'Theft Event Date');
  };
             $('#dialog').dialog({
