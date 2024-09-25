@@ -180,6 +180,9 @@
 	   		var infoPODwindow;
 			var circle;
 			var circles = [];
+	   		var theftMarker;
+	   		var theftMarkers = [];
+	   		var theftInfoWindow;
 	   		var redCamMarker;
 			var redCamMarkers = [];
 	   		var austinRedCamMarker;
@@ -214,7 +217,8 @@
         function initMap() {
 	      
          	polyInfowindow = new google.maps.InfoWindow();
-            redcamInfoWindow = new google.maps.InfoWindow();
+            	redcamInfoWindow = new google.maps.InfoWindow();
+		theftInfoWindow = new.google.maps.InfoWindow();
             var mapOptions = {
                 mapTypeControl: false,
                 zoomControl: true,
