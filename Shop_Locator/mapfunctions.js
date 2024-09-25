@@ -1508,7 +1508,7 @@ function setDatepicker(_this) {
 	$('#dialog > p').text('Select a date to check for hail events:');
 	$('#dialog').prop('title', 'Hail Event Date');
  }else{
-	$('#dialog > p').text('Select a date to check for theft events:');
+	$('#dialog > p').text('Select a year to check for theft events:');
 	$('#dialog').prop('title', 'Theft Event Date');
  };
             $('#dialog').dialog({
@@ -1520,14 +1520,24 @@ function setDatepicker(_this) {
 			    $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable').css('scale', '.8');
 			    $('#dialogDate').css('scale','.95')
 			    $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
-	                $("#dialogDate").datepicker({
+	                if ($(_this).hasClass('hailClass')) {
+			$("#dialogYear").hide();
+			$("#dialogDate").show();
+			    $("#dialogDate").datepicker({
 		                format: "dd/mm/yyyy",
+				changeMonth: true,
+        			changeYear: true,
 		                orientation: "bottom auto",
 		                autoclose: true,
 		                showOnFocus: "false"
 		            }).blur(function() {
 				if (this.value === '') this.value = String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear();
 			});
+			}else{
+			   $("#dialogDate").hide();
+			   $("#dialogYear").show();
+			   $("#dialogYear").selectmenu();
+			}
 			   $('#ui-datepicker-div').css('font-size','12px');
 			    $("#dialogDate").datepicker("show");
 	            },
