@@ -1502,8 +1502,15 @@ function setHailMarkers() {
 		if (hailCircleMin) hailCircleMin.setMap(null);
   		if (hailInfoWindow) hailInfoWindow.setMap(null);
  }
+
 function setDatepicker(_this) {
- 
+ if ($(_this).hasClass('hailClass')) {
+	$('#dialog > p').text('Select a date to check for hail events:');
+	$('#dialog').prop('title', 'Hail Event Date');
+ }else{
+	$('#dialog > p').text('Select a date to check for theft events:');
+	$('#dialog').prop('title', 'Theft Event Date');
+ };
             $('#dialog').dialog({
                         resizable: false,
 	            open: function() {
@@ -1531,6 +1538,7 @@ function setDatepicker(_this) {
 			     	nowYear = nowDate.getFullYear();
 				nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
 				nowDay = String(nowDate.getDate()).padStart(2, '0');
+				if ($(_this).hasClass('hailClass')) {
 			    	callHailMarkers(nowYear+nowMonth+nowDay);
 			    	if (hailCircleMax) hailCircleMax.setMap(null);
 			        if (hailCircleMin) hailCircleMin.setMap(null);
@@ -1539,10 +1547,30 @@ function setDatepicker(_this) {
 			            }
 			        
 			    	setHailMarkers();
+				}else{
+					callTheftMarkers(nowYear);
+					for (i = 0; i < theftMarkers.length; i++) {
+			                theftMarkers[i].setMap(null);
+			            }
+				};
 	            },
 	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
             
         }
+		
+function setTheftMarkers() {
+ var checkbox = document.getElementById("checkbox9");
+	if (checkbox.checked) {
+ 			for (i = 0; i < theftMarkers.length; i++) {
+                theftMarkers[i].setMap(map);
+            }
+            map.fitBounds(resetBounds);
+    }else
+    		for (i = 0; i < theftMarkers.length; i++) {
+                theftMarkers[i].setMap(null);
+            }
+
+ }
 
 var countyData, countyOverlay;
 function toggleCounties() {
