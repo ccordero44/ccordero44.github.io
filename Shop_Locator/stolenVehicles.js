@@ -35,7 +35,7 @@ $.ajax({
 					 
 					return function() {
 						if (activeInfoWindow) activeInfoWindow.close();
-						 map.setZoom(13);
+						 map.setZoom(17);
                         			map.setCenter(theftMarkers[i].getPosition());
 						theftInfoWindow.setContent(this.content);
 						 theftInfoWindow.setOptions({maxWidth:'fit-content'});
