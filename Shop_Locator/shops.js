@@ -61,7 +61,7 @@ $.ajax({
 						var newShop = [];
 						var fullAddress, cityState;
 		    				var _name = $(this).find('name').html();
-						var _desc = $(this).find('description').html();
+						var _desc = $(this).find('description').html() || "";
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
