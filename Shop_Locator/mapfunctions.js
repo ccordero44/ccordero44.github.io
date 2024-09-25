@@ -1546,7 +1546,7 @@ function setDatepicker(_this) {
 			   
 	            },
 	            close: function() {
-	                $('#dialogDate')datepicker().datepicker('destroy');
+	                $('#dialogDate').datepicker().datepicker('destroy');
 			    $("#dialogYear").selectmenu().selectmenu( "destroy" );
 			    $('#dialog').dialog('destroy');
 			    	nowDate = new Date($('#dialogDate').val());
