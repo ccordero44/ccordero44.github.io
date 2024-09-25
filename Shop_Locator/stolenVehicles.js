@@ -4,7 +4,7 @@ $.ajax({
 }).done(function(data) {
 
 var theft = {
-			url: 'theft.png'
+			url: 'alertSmall.png'
 
 		}
 
