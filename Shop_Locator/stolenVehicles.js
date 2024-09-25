@@ -24,9 +24,9 @@ $.ajax({
 				theftMarker = new google.maps.Marker({
 		                    position: new google.maps.LatLng(lat, long),
 		                    clickable: true,
-		                    title: "Motor Vehicle Theft",
+		                    title: data[i].primary_type,
 		                    icon: 'alertSmall.png',
-				    content: '<b>Motor Vehicle Theft</b><br />Date: ' + theftDate.toDateString() + '<br />Case Number: ' + data[i].case_number + '<br /><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>'
+				    content: '<b>' + data[i].primary_type + '</b><br />Date: ' + theftDate.toDateString() + '<br />Case Number: ' + data[i].case_number + '<br /><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>'
 		                });
 				
 					theftInfoWindow = new google.maps.InfoWindow();
