@@ -1561,7 +1561,7 @@ function setDatepicker(_this) {
 			        
 			    	setHailMarkers();
 				}else{
-					callTheftMarkers(nowYear);
+					callTheftMarkers($("#dialogYear").val());
 					for (i = 0; i < theftMarkers.length; i++) {
 			                theftMarkers[i].setMap(null);
 			            }
