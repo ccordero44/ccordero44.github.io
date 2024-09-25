@@ -1524,8 +1524,8 @@ function setDatepicker(_this) {
 			    $('#dialogDate').css('scale','.95')
 			    $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                if ($(_this).hasClass('hailClass')) {
-			$("#dialogYear").hide();
-			$("#dialogDate").show();
+			//$("#dialogYear").selectmenu( "destroy" );
+			//$("#dialogDate").show();
 			    $("#dialogDate").datepicker({
 		                format: "dd/mm/yyyy",
 				changeMonth: true,
@@ -1536,16 +1536,18 @@ function setDatepicker(_this) {
 		            }).blur(function() {
 				if (this.value === '') this.value = String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear();
 			});
+			    $('#ui-datepicker-div').css('font-size','12px');
+			    $("#dialogDate").datepicker("show");
 			}else{
-			   $("#dialogDate").hide();
-			   $("#dialogYear").show();
+			  // $("#dialogDate").datepicker('destroy');
+			  // $("#dialogYear").show();
 			   $("#dialogYear").selectmenu();
 			}
-			   $('#ui-datepicker-div').css('font-size','12px');
-			    $("#dialogDate").datepicker("show");
+			   
 	            },
 	            close: function() {
 	                $('#dialogDate').datepicker('destroy');
+			    $("#dialogYear").selectmenu( "destroy" );
 			    $('#dialog').dialog('destroy');
 			    	nowDate = new Date($('#dialogDate').val());
 			     	nowYear = nowDate.getFullYear();
