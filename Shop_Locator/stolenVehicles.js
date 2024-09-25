@@ -1,5 +1,5 @@
 $.ajax({
-    url: "https://data.cityofchicago.org/resource/crimes.json?$limit=10000000&IUCR=0930",
+    url: "https://data.cityofchicago.org/resource/crimes.json?iucr=0810&IUCR=0930&$limit=100000",
     type: "GET",
 }).done(function(data) {
 
