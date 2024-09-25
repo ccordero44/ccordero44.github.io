@@ -20,7 +20,7 @@ for (i = 0; i < data.length; i++) {
                 });
 			theftMarkers.push(theftMarker);
 
-			addInfoWindow(theftMarkers[i], '<b>Motor Vehicle Theft</b><br />Date: ' + data[i].date + '<br />Case Number: ' + data[i].case_number + '<br /><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>');
+			addTheftInfoWindow(theftMarkers[i], '<b>Motor Vehicle Theft</b><br />Date: ' + data[i].date + '<br />Case Number: ' + data[i].case_number + '<br /><br /><a href="GeneralFOIAFormforDepts.pdf" target="_blank" download="FOIA Request.pdf">FOIA Request</a>');
        }
              google.maps.event.addListener(map, 'zoom_changed', function() {
     
@@ -28,7 +28,7 @@ for (i = 0; i < data.length; i++) {
  }
 });
 });
-function addInfoWindow(tmarker, message) {
+function addTheftInfoWindow(tmarker, message) {
 
 
             google.maps.event.addListener(tmarker, 'click', function () {
