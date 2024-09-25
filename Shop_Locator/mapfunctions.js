@@ -1505,9 +1505,12 @@ function setHailMarkers() {
 
 function setDatepicker(_this) {
  if ($(_this).hasClass('hailClass')) {
+	 $('#dialog > label').hide();
+	 $('#dialog > p').show();
 	$('#dialog > p').text('Select a date to check for hail events:');
 	$('#dialog').prop('title', 'Hail Event Date');
  }else{
+	  $('#dialog > label').show();
 	$('#dialog > p').hide();
 	$('#dialog').prop('title', 'Theft Event Date');
  };
