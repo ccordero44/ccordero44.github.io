@@ -2,7 +2,8 @@ $.ajax({
     url: "https://data.cityofchicago.org/resource/crimes.json?iucr=0810&IUCR=0930&$limit=100000",
     type: "GET",
 }).done(function(data) {
-
+var count = Number(data.length);
+$('#theftCount').text("(" + numberWithCommas(count) + ")");
 var theft = {
 			url: 'alertSmall.png'
 
