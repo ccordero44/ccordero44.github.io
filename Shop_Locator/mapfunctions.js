@@ -1504,17 +1504,13 @@ function setHailMarkers() {
  }
 
 function setDatepicker(_this) {
+	var ele;
  if ($(_this).hasClass('hailClass')) {
-	 $('#dialog > label').hide();
-	 $('#dialog > p').show();
-	$('#dialog > p').text('Select a date to check for hail events:');
-	$('#dialog').prop('title', 'Hail Event Date');
+	ele = $('#dialog')
  }else{
-	  $('#dialog > label').show();
-	$('#dialog > p').hide();
-	$('#dialog').prop('title', 'Theft Event Date');
+	 ele = $('#dialog2')
  };
-            $('#dialog').dialog({
+           ele.dialog({
                         resizable: false,
 	            open: function() {
 			    $(".ui-dialog-titlebar-close").hover(function () {$(this).css("background", "DodgerBlue").css("border", "1px solid DodgerBlue")});
@@ -1548,7 +1544,7 @@ function setDatepicker(_this) {
 	            close: function() {
 	                $('#dialogDate').datepicker().datepicker('destroy');
 			    $("#dialogYear").selectmenu().selectmenu( "destroy" );
-			    $('#dialog').dialog('destroy');
+			   ele.dialog('destroy');
 			    	nowDate = new Date($('#dialogDate').val());
 			     	nowYear = nowDate.getFullYear();
 				nowMonth = String(nowDate.getMonth() + 1).padStart(2, '0');
