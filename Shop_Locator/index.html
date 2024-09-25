@@ -307,7 +307,7 @@
 			$('#shopCount').text("(" + shops.length + ")");
 			$('#legend > div:nth-child(4)').attr('hidden','hidden');
 		callHailMarkers(nowYear+nowMonth+nowDay);
-		
+		callTheftMarkers(nowYear);
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
 			var markerIcon;
@@ -908,6 +908,10 @@ function rainbow(numOfSteps, step) {
 						</label>
 			<label class="container" id="container6" title="Toggle hail markers">Hail Events
  						 <input type="checkbox" id="checkbox6" onclick="setHailMarkers();">
+  							<span class="checkmark"></span>
+						</label> 
+			<label class="container" id="container9" title="Toggle theft markers">Theft Events
+ 						 <input type="checkbox" id="checkbox9" onclick="setTheftMarkers();">
   							<span class="checkmark"></span>
 						</label> 
 			<label class="container" id="container7" title="Toggle Copart locations">Copart
