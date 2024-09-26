@@ -179,7 +179,7 @@ $.ajax({
 					//if (newIndex === -1) newIndex = storedShops.findFirstSubstring(Number(_coords[0]));	
 					
 					//if (typeof storedShops[newIndex] !== 'undefined' || newIndex === -1) {	
-					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][6])) || newIndex === -1) {
+					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][7])) || newIndex === -1) {
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
 					 $.ajax({
@@ -207,8 +207,8 @@ $.ajax({
 						});
 					}  
 }else{
-						//if (typeof storedShops[newIndex] !== 'undefined') {
-						if (!isNaN(Number(storedShops[newIndex][6])) && typeof storedShops[newIndex] !== 'undefined') {		
+						if (typeof storedShops[newIndex] !== 'undefined') {
+						//if (!isNaN(Number(storedShops[newIndex][6])) && typeof storedShops[newIndex] !== 'undefined') {		
 						   fullAddress = storedShops[newIndex][1]
 						   cityState = storedShops[newIndex][2]
 						    newShop.push(fullAddress);
