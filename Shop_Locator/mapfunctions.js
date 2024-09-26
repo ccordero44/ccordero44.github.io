@@ -147,6 +147,9 @@
 		for (var i = 1; i < doanMarkers.length; i++) {
 			doanMarkers[i].setMap(null);
 		}
+		for (var i = 1; i < theftMarkers.length; i++) {
+			theftMarkers[i].setMap(null);
+		}
         }
         /*function showPoly() {
 	
@@ -692,6 +695,7 @@ function clearDir() {
 	document.getElementById("checkbox6").checked = false;
 	document.getElementById("checkbox7").checked = false;
 	document.getElementById("checkbox8").checked = false;
+	document.getElementById("checkbox9").checked = false;
 			$('#checkbox5').trigger('change');
             map.setMapTypeId('roadmap');
             document.getElementById("clickMe").disabled = true;
