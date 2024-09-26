@@ -144,10 +144,10 @@
 		for (var i = 0; i < copartMarkers.length; i++) {
 			  copartMarkers[i].setMap(null);
 		  }; 
-		for (var i = 1; i < doanMarkers.length; i++) {
+		for (var i = 0; i < doanMarkers.length; i++) {
 			doanMarkers[i].setMap(null);
 		}
-		for (var i = 1; i < theftMarkers.length; i++) {
+		for (var i = 0; i < theftMarkers.length; i++) {
 			theftMarkers[i].setMap(null);
 		}
         }
