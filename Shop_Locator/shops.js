@@ -179,7 +179,7 @@ $.ajax({
 					//if (newIndex === -1) newIndex = storedShops.findFirstSubstring(Number(_coords[0]));	
 					
 					//if (typeof storedShops[newIndex] !== 'undefined' || newIndex === -1) {	
-					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][7])) || newIndex === -1) {
+					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][6])) || newIndex === -1) {
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
 					 $.ajax({
