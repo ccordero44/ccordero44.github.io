@@ -125,7 +125,11 @@
 	        };
 		
 	   
-	  	 
+	  	 var shops = shops.reduce(function (out, item) {
+			  return out.concat(out.filter(function (comp) {
+			    return item.toString() == comp.toString();
+			  }).length ? [] : [item])
+			}, []);
 		localStorage.setItem('shops', JSON.stringify(shops));
 	        var locations = [];
 				for (i = 0; i < shops.length; i++) {   
