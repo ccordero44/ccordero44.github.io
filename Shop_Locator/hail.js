@@ -21,7 +21,7 @@ $.ajax({
 				var results = data.result;
 				var hailMarker;
 	   			
-	   			$('#hailCount').text("(" + data.result.length + ")");
+	   			$('#hailCount').text("(" + numberWithCommas(data.result.length) + ")");
 				for (var i = 0;i<data.result.length;i++) {
 				var hailDate = new Date(data.result[i].ZTIME);
 				var options = { timeStyle: 'short', hour12: true };
