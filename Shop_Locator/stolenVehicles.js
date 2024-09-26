@@ -1,6 +1,7 @@
 function callTheftMarkers(year) {
 try {
 var totalCount = 0;
+var myKey = iucrLookup();
 $.ajax({
    type: "GET",
   url: "https://data.cityofchicago.org/resource/crimes.json",
@@ -24,7 +25,8 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				//var secDesc = iucrLookup(data[i].iucr);
+				const key = Object.keys(myKey).find(key => key === data[i].iucr); 
+				const secDesc = myKey[key];
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
 				theftMarker = new google.maps.Marker({
@@ -80,7 +82,8 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				//var secDesc = iucrLookup(data[i].iucr);
+				const key = Object.keys(myKey).find(key => key === data[i].iucr); 
+				const secDesc = myKey[key];
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
 				theftMarker = new google.maps.Marker({
@@ -162,20 +165,34 @@ $(alertdiv).dialog({
 		
 }
 }
-function iucrLookup(iucr) {
+function iucrLookup() {
+	var myKey = {};
 	$.ajax({
 	   type: "GET",
 	  url: "https://data.cityofchicago.org/resource/c7ck-438e.json",
 	   async: false,
-	   data: {
-		  "iucr" : iucr,
-		},
 	   
 	   success: function(data) { 
-		   return data.secondary_description;
+	   
+	   for (i = 0; i < data.length; i++) {
+		   myKey[data[i].iucr] = data[i].secondary_description
+	   }
+	
+	
 				}, 
 	   error: function(data) {
 		   console.log(data.responseJSON.error);
+
+		return;
 	}
 	});
+	return myKey;
+}
+function findKeyByValue(obj, value) {
+  for (const key in obj) {
+    if (obj[key] === value) {
+      return key;
+    }
+  }
+  return null; // Return null if the value isn't found
 }
