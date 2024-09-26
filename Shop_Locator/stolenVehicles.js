@@ -24,7 +24,7 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				var secDesc = iucrLookup(data[i].iucr);
+				//var secDesc = iucrLookup(data[i].iucr);
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
 				theftMarker = new google.maps.Marker({
@@ -80,7 +80,7 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				var secDesc = iucrLookup(data[i].iucr);
+				//var secDesc = iucrLookup(data[i].iucr);
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
 				theftMarker = new google.maps.Marker({
