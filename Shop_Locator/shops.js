@@ -175,7 +175,7 @@ $.ajax({
 					   // if (typeof storedShops[index] !== 'undefined' && (Number(_coords[1]) !== Number(storedShops[index][6]) || Number(_coords[0]) !== Number(storedShops[index][7]))) {
 					var newIndex = storedShops.findFirstSubstring(Number(_coords[1]));
 						//var newIndex = storedShops.findFirstSubstring(newShop[1]);
-						console.log(Number(storedShops[newIndex][7]))
+						
 					//if (newIndex === -1) newIndex = storedShops.findFirstSubstring(Number(_coords[0]));	
 					
 					//if (typeof storedShops[newIndex] !== 'undefined' || newIndex === -1) {	
