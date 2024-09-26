@@ -25,7 +25,7 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				const key = Object.keys(myKey).find(key => key === data[i].iucr); 
+				const key = Object.keys(myKey).find(key => key === parseInt(data[i].iucr, 10).toString()); 
 				const secDesc = myKey[key];
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
@@ -82,7 +82,7 @@ $.ajax({
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
 				var theftTime = theftDate.toLocaleTimeString('en-US', options);
-				const key = Object.keys(myKey).find(key => key === data[i].iucr); 
+				const key = Object.keys(myKey).find(key => key === parseInt(data[i].iucr, 10).toString()); 
 				const secDesc = myKey[key];
 				var lat =  data[i].latitude;
 				var long = data[i].longitude;
