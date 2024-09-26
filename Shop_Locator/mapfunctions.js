@@ -1576,7 +1576,7 @@ function setTheftMarkers() {
  			for (i = 0; i < theftMarkers.length; i++) {
                 theftMarkers[i].setMap(map);
             }
-            map.fitBounds(resetBounds);
+            //map.fitBounds(resetBounds);
     }else
     		for (i = 0; i < theftMarkers.length; i++) {
                 theftMarkers[i].setMap(null);
