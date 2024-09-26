@@ -205,8 +205,8 @@ $.ajax({
 						});
 					}  
 				 	 		}else{
-						if (typeof storedShops[newIndex] !== 'undefined') {
-								
+						//if (typeof storedShops[newIndex] !== 'undefined') {
+						if (newIndex === -1) {		
 						   fullAddress = storedShops[newIndex][1]
 						   cityState = storedShops[newIndex][2]
 						    newShop.push(fullAddress);
