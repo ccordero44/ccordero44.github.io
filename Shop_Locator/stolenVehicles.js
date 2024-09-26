@@ -13,7 +13,7 @@ $.ajax({
 				var results = data;
 
 	   			
-	   			$('#theftCount').text("(" + data.length + ")");
+	   			$('#theftCount').text("(" + numberWithCommas(data.length) + ")");
 				for (var i = 0;i<data.length;i++) {
 				var theftDate = new Date(data[i].date);
 				var options = { timeStyle: 'short', hour12: true };
