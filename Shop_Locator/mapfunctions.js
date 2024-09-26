@@ -1514,9 +1514,10 @@ function setDatepicker(_this) {
                         resizable: false,
 	            open: function() {
 			    $(".ui-dialog-titlebar-close").hover(function () {$(this).css("background", "DodgerBlue").css("border", "1px solid DodgerBlue")});
+			    $(".ui-dialog-titlebar-close").css("background", "DodgerBlue").css("border", "1px solid DodgerBlue");
 			    $(".ui-icon.ui-icon-closethick").css('background-image', 'url(whiteX.png)').css('background-position', '0').css('background-size', '16px').css('position','absolute').css('padding', '0').css('margin', '0').css('top', '0').css('left', '0').css('scale', '1.2');
 			    $(".ui-icon.ui-icon-closethick").css('background-image', 'url(whiteX.png)').parent().css('scale', '1.2');
-			    $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable').css('scale', '.8');
+			   // $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable').css('scale', '.8');
 			    $('#dialogDate').css('scale','.95')
 			    $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                if ($(_this).hasClass('hailClass')) {
