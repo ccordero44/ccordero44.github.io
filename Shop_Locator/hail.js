@@ -105,12 +105,14 @@ $.ajax({
 			}, 
    error: function(data) {
 	   console.log(data.responseJSON.error);
+	   $('#hailCount').text("(0)");
 	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
 	return;
 }
 });
 }catch (error){
 	console.log(error);
+	$('#hailCount').text("(0)");
 var alertdiv= document.createElement('div');
 alertdiv.innerHTML = "There was an error connecting to the National Oceanic and Atmospheric Administration's hail events server. Please try again later."
 
