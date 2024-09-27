@@ -188,9 +188,11 @@ $.ajax({
 						   async: false,
 						   success: function(result) { 
 						//if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
-						   fullAddress = result.results[0].formatted_address.split(',');
-						   cityState = fullAddress[1] + "," + fullAddress[2]
-						    newShop.push(fullAddress[0]);
+						  // fullAddress = result.results[0].formatted_address.split(',');
+						   fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
+						   //cityState = fullAddress[1] + "," + fullAddress[2]
+						    cityState = fullAddress.split(',')[1] + "," + fullAddress.split(',')[2]
+						    newShop.push(fullAddress.split(',')[0]);
 						   newShop.push(cityState);
 						   newShop.push(_phone);
 						   newShop.push("");
@@ -373,9 +375,11 @@ $.ajax({
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
 						   async: false,
 						   success: function(result) { 
-						   fullAddress = result.results[0].formatted_address.split(',');
-						   cityState = fullAddress[1] + "," + fullAddress[2]
-						    newShop.push(fullAddress[0]);
+						   // fullAddress = result.results[0].formatted_address.split(',');
+						   fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
+						   //cityState = fullAddress[1] + "," + fullAddress[2]
+						    cityState = fullAddress.split(',')[1] + "," + fullAddress.split(',')[2]
+						    newShop.push(fullAddress.split(',')[0]);
 						   newShop.push(cityState);
 						   newShop.push(_phone);
 						   newShop.push("");
