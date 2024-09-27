@@ -1567,9 +1567,15 @@ function setDatepicker(_this) {
 			    	setHailMarkers();
 				}else{
 					callTheftMarkers($("#dialogYear").val());
-					for (i = 0; i < theftMarkers.length; i++) {
-			                theftMarkers[i].setMap(null);
-			            }
+					if ($('#checkbox9').is(':checked')) {
+						for (var i = 0; i < theftMarkers.length; i++) {
+							theftMarkers[i].setMap(map);
+						}
+					}else{
+						for (var i = 0; i < theftMarkers.length; i++) {
+							theftMarkers[i].setMap(null);
+						}
+					};
 				};
 	            },
 	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
