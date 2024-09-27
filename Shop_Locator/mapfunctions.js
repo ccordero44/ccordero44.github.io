@@ -670,7 +670,9 @@ function clearDir() {
 			if (hailInfoWindow) hailInfoWindow.close();
 			if (hailCircleMax) hailCircleMax.setMap(null);
 			if (hailCircleMin) hailCircleMin.setMap(null);
-	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
+	//callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
+	$('#hailCount').text("(0)");
+	//$("#dialogDate").datepicker('destroy');
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
         	document.getElementById("infoDivWrapper").style.display = "none";
@@ -1239,7 +1241,7 @@ markers[i].index = i;
   }
 
   service.getDistanceMatrix(request, function(response, status) {
-	  console.log(response);
+	  
     if (status != google.maps.DistanceMatrixStatus.OK) {
       alert('Error was: ' + status);
     } else {
@@ -1522,7 +1524,7 @@ function setDatepicker(_this) {
 			    $(".ui-icon.ui-icon-closethick").css('background-image', 'url(whiteX.png)').css('background-position', '0').css('background-size', '16px').css('position','absolute').css('padding', '0').css('margin', '0').css('top', '0').css('left', '0').css('scale', '1.2');
 			    $(".ui-icon.ui-icon-closethick").css('background-image', 'url(whiteX.png)').parent().css('scale', '1.2');
 			   // $('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable').css('scale', '.8');
-			    $('#dialogDate').css('scale','.95')
+			    //$('#dialogDate').css('scale','.95')
 			    $("#dialogDate").val(String(new Date().getMonth() + 1).padStart(2, '0') + "/" + String(new Date().getDate()).padStart(2, '0') + "/" + new Date().getFullYear()); 
 	                if ($(_this).hasClass('hailClass')) {
 			//$("#dialogYear").selectmenu( "destroy" );
