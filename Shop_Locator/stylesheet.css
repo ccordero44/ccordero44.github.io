@@ -1,3 +1,7 @@
+.ui-selectmenu-menu .ui-menu {
+       max-height: 200px; 
+       overflow-y: auto; 
+   }
 #dialog, #dialog2 {
 	display: none;
 }
