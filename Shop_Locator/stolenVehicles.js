@@ -9,7 +9,7 @@ $.ajax({
    data: {
       "$limit" : 100000,
       "primary_type" : "THEFT",
-      "year" : 2024,
+      "year" : year,
     },
    success: function(data) { 
 	   for (i = 0; i < theftMarkers.length; i++) {
