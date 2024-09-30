@@ -11,7 +11,7 @@ try {
 $.ajax({
    type: "GET",
    url: "https://www.ncdc.noaa.gov/swdiws/json/nx3hail/" + date,
-   async: false,
+   async: true,
    success: function(data) { 
 	   for (i = 0; i < hailMarkers.length; i++) {
                 hailMarkers[i].setMap(null);
