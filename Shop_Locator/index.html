@@ -331,7 +331,7 @@ $(document).ready( function () {
 			$('#legend > div:nth-child(5)').append(' <div id="redcamCount" style="display: contents;color: grey;"></div>');
 			$('#shopCount').text("(" + shops.length + ")");
 			$('#legend > div:nth-child(4)').attr('hidden','hidden');
-		callHailMarkers(nowYear+nowMonth+nowDay);
+		
 		callTheftMarkers(nowYear);
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
@@ -838,6 +838,7 @@ copartLocations(resetBounds.getCenter().lat(), resetBounds.getCenter().lng(), 10
 	$.getScript("austinRedLightCams.js", function(){
 		console.log("Running austinRedLightCams.js");
 	});
+callHailMarkers(nowYear+nowMonth+nowDay);
 }
    
 $(window).resize(function() {
