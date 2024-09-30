@@ -98,7 +98,7 @@ $(document).ready( function () {
 		activeInfoWindow.open(map, activeMarker);
 		map.setCenter(activeMarker.getPosition());
 	});
-	
+	callHailMarkers(nowYear+nowMonth+nowDay);
 });
 		window.onload = Window_onLoad;
 		//var myKey = "AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8";
@@ -838,7 +838,7 @@ copartLocations(resetBounds.getCenter().lat(), resetBounds.getCenter().lng(), 10
 	$.getScript("austinRedLightCams.js", function(){
 		console.log("Running austinRedLightCams.js");
 	});
-callHailMarkers(nowYear+nowMonth+nowDay);
+
 }
    
 $(window).resize(function() {
