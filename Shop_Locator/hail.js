@@ -103,10 +103,44 @@ $.ajax({
 				};
 				
 			}, 
-   error: function(data) {
-	  // console.log(data.responseJSON.error);
+   error: function(xhr, ajaxOptions, thrownError) {
+	 
 	   $('#hailCount').text("(0)");
+	   if(xhr.status==404) {
+		var alertdiv= document.createElement('div');
+			alertdiv.innerHTML = "There was an error connecting to the National Oceanic and Atmospheric Administration's hail events server. Please try again later."
+		
+		$(alertdiv).dialog({
+                        resizable: false,
+			modal: true,
+   			closeOnEscape: false,
+    			title: "NOAA Hail Events Error",
+			show: "scale",
+			hide: "scale",
+			buttons: [{ 
+			text: "Ok", 
+	                	click: function () {  
+					$('.ui-dialog-content').dialog('close');
+				} 
+			}],
+	            open: function() {
+			$(".ui-dialog-titlebar-close").hide();
+                    	$('.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-dialog-buttons').css('scale', '.8');
+			$('.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix').css('padding','0');
+	            	$('div.ui-dialog-buttonset button.ui-button span.ui-button-text').each(function() {
+    				$(this).html($(this).parent().attr('text'));
+				$(this).parent().css('scale', '.8').css("background","DodgerBlue").css("color", "white").css("margin", "0");
+			});
+			 },
+	            close: function() {
+	                $(alertdiv).dialog('destroy');
+	            },
+		  
+	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
+           console.error("Request failed: " + textStatus, errorThrown);
+	   }else{
 	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
+	   };
 	return;
 }
 }).fail(function(jqXHR, textStatus, errorThrown) {
