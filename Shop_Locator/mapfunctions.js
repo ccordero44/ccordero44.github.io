@@ -852,7 +852,7 @@ function GenerateTable() {
 	 $('#dvTable table tr>td:nth-child(5)').hide();
 	 $('#dvTable table th:nth-child(5)').hide();
 	 //setTimeout(function() {$('#dvTable table th:nth-child(6)').append('<a title="Print Shop List" onclick="printShopList()" id="printButton2" style="color:black;float:right;cursor:pointer;"><i class="material-icons">print</i></button></a>');},1000);
-    $('#dvTable table th:nth-child(6)').append('<a title="Print Shop List" onclick="printShopList()" id="printButton2" style="color:black;float:right;cursor:pointer;"><i class="material-icons">print</i></button></a>');
+    $('#dvTable table th:nth-child(6)').append('<a title="Print Shop List" onclick="printShopList()" id="printButton2" style="color:black;float:right;cursor:pointer;margin-bottom:-10px;"><i class="material-icons">print</i></button></a>');
 	
 	for (i = 0; i < shops.length; i++) {
     if (shops[i][8] == ' Tow_Service') {
