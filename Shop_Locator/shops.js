@@ -162,7 +162,7 @@ $.ajax({
 									newNameSplit = newNameSplit.join('-');
 									formattedName = [newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join('');
 								};
-							}else if (newName !== 'UNIQUE/LIGHTHOUSE'){
+							}else{
 								formattedName = [newName.slice(0,newName.indexOf("(")), "<br>", newName.slice(newName.indexOf("("))].join('');								
 							};
 							if ((formattedName.match(/\*/g) || []).length > 0) {
@@ -170,7 +170,7 @@ $.ajax({
 								formattedName = formattedName.replaceAll("*", '')
 							}
 
-							newShop.push(formattedName.replace('<br> <br>', '<br>'));
+							if (newName !== 'UNIQUE/LIGHTHOUSE') newShop.push(formattedName.replace('<br> <br>', '<br>'));
 							
 						
 					   // if (typeof storedShops[index] !== 'undefined' && (Number(_coords[1]) !== Number(storedShops[index][6]) || Number(_coords[0]) !== Number(storedShops[index][7]))) {
