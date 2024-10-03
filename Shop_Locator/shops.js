@@ -191,7 +191,26 @@ $.ajax({
 							   console.log(result);
 						//if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
 						  // fullAddress = result.results[0].formatted_address.split(',');
-						   fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
+						var _street, _address, _city, _state, _zip;
+						 for (var i = 0; i < result.results[0].address_components.length; i++) {
+							 if (result.results[0].address_components[i].types[0] === 'street_number') {
+								 _street = result.results[0].address_components[i].long_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'route') {
+								 _address = result.results[0].address_components[i].short_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'locality') {
+								 _city = result.results[0].address_components[i].long_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+								 _state = result.results[0].address_components[i].short_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'postal_code') {
+								 _zip = result.results[0].address_components[i].long_name
+							 }
+						 }
+						var fullAddress = _street + " " + _address + ", " + _city + ", " + _state + " " + _zip;
+						   //fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
 						   //cityState = fullAddress[1] + "," + fullAddress[2]
 						    cityState = fullAddress.split(',')[1] + "," + fullAddress.split(',')[2]
 						    newShop.push(fullAddress.split(',')[0]);
@@ -382,8 +401,28 @@ $.ajax({
 						   async: false,
 						   success: function(result) { 
 						   // fullAddress = result.results[0].formatted_address.split(',');
-						   fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
-						   //cityState = fullAddress[1] + "," + fullAddress[2]
+						   //fullAddress = result.results[0].address_components[1].short_name + " " + result.results[0].address_components[2].short_name + ", " + result.results[0].address_components[3].short_name + ", " + result.results[0].address_components[5].short_name + " " + result.results[0].address_components[7].short_name;
+						   var _street, _address, _city, _state, _zip;
+						 for (var i = 0; i < result.results[0].address_components.length; i++) {
+							 if (result.results[0].address_components[i].types[0] === 'street_number') {
+								 _street = result.results[0].address_components[i].long_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'route') {
+								 _address = result.results[0].address_components[i].short_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'locality') {
+								 _city = result.results[0].address_components[i].long_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+								 _state = result.results[0].address_components[i].short_name
+							 }
+							 if (result.results[0].address_components[i].types[0] === 'postal_code') {
+								 _zip = result.results[0].address_components[i].long_name
+							 }
+						 }
+						 fullAddress = _street + " " + _address + ", " + _city + ", " + _state + " " + _zip;
+						   
+							   //cityState = fullAddress[1] + "," + fullAddress[2]
 						    cityState = fullAddress.split(',')[1] + "," + fullAddress.split(',')[2]
 						    newShop.push(fullAddress.split(',')[0]);
 						   newShop.push(cityState);
