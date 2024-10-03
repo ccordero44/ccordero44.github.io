@@ -170,7 +170,7 @@ $.ajax({
 								formattedName = formattedName.replaceAll("*", '')
 							}
 
-							if (newName !== 'UNIQUE/LIGHTHOUSE') newShop.push(formattedName.replace('<br> <br>', '<br>'));
+							 newShop.push(formattedName.replace('<br> <br>', '<br>'));
 							
 						
 					   // if (typeof storedShops[index] !== 'undefined' && (Number(_coords[1]) !== Number(storedShops[index][6]) || Number(_coords[0]) !== Number(storedShops[index][7]))) {
@@ -182,7 +182,7 @@ $.ajax({
 					//if (typeof storedShops[newIndex] !== 'undefined' || newIndex === -1) {	
 					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][6])) || newIndex === -1) {
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
-					if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
+					if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
@@ -227,7 +227,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};	
+						   if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};	
 					    };
 							};
 								//}
@@ -396,7 +396,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
+						   if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};
 							}
 						});
 					
