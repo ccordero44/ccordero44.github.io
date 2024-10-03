@@ -267,7 +267,7 @@ $.ajax({
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
 						var _iconColor = $(this).find('styleUrl').html();
 						var _rateTable = "";
-						var _iconColor =;
+						
 						if (polyCoords.length > 0) {
 							
 						var _style = $(this).find('styleUrl').text().replace("#","");
