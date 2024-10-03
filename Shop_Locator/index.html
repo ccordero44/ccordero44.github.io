@@ -341,14 +341,20 @@ $(document).ready( function () {
 			var sv = new google.maps.StreetViewService();
 			
             for (i = 0; i < shops.length; i++) {
-			if (shops[i][10] === 'yesTow') {
+			/*if (shops[i][10] === 'yesTow') {
 				markerIcon = image;
 			}else if (shops[i][0].toUpperCase().indexOf('TESLA') !== -1) {
 				markerIcon = imageY;
 			}else{
 				markerIcon = imageX;
+			};*/
+			if (shops[i][13] === '#icon-503-4186F0') {
+				markerIcon = image;
+			}else if (shops[i][13] === '#icon-503-DB4436') {
+				markerIcon = imageY;
+			}else{
+				markerIcon = imageX;
 			};
-			
 		var markerTitle = '';
 		    if (shops[i][0].indexOf('<br>') > 0) {
 			markerTitle = shops[i][0].replaceAll("<br>"," ");
