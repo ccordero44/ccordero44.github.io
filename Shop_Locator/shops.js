@@ -163,7 +163,7 @@ $.ajax({
 									formattedName = [newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join('');
 								};
 							}else{
-								formattedName = newName;
+								formattedName = [newName.slice(0,newName.indexOf("(")), "<br>", newName.slice(newName.indexOf("("))].join('');								
 							};
 							if ((formattedName.match(/\*/g) || []).length > 0) {
 								formattedName = [formattedName.slice(0,formattedName.indexOf("*")), "<br>",formattedName.slice(formattedName.indexOf("*"))].join('')
