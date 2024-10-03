@@ -152,8 +152,8 @@ $.ajax({
 							var newName = _name.toString().replace(/[\r\n]/g, '').replace(/\s+/g, ' ').replace(/ >/g, '>').replace(/> </g, '><').replace("<![CDATA[", "").replaceAll("<br>", " ").replace("]]>", "").trim();
 							var formattedName;
 						
-							if ((newName.match(/\(/g) || []).length > 0) {
-								if ((newName.match(/-/g) || []).length < 2 ) {
+							if ((newName.match(/\(/g) || []).length > 0 && (newName.match(/TESLA/g) || []).length === 0) {
+								if ((newName.match(/-/g) || []).length < 2) {
 									formattedName = [newName.slice(0,newName.indexOf("(")).split('-')[0], "<br>",newName.slice(newName.indexOf("("))].join('')
 								}else{
 									var newNameSplit = newName.slice(0,newName.indexOf("(")).split('-')
