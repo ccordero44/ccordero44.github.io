@@ -162,7 +162,7 @@ $.ajax({
 									newNameSplit = newNameSplit.join('-');
 									formattedName = [newNameSplit, "<br>",newName.slice(newName.indexOf("("))].join('');
 								};
-							}else{
+							}else if (newName !== 'UNIQUE/LIGHTHOUSE'){
 								formattedName = [newName.slice(0,newName.indexOf("(")), "<br>", newName.slice(newName.indexOf("("))].join('');								
 							};
 							if ((formattedName.match(/\*/g) || []).length > 0) {
