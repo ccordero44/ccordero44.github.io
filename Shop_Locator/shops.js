@@ -188,7 +188,7 @@ $.ajax({
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
 						   async: false,
 						   success: function(result) { 
-							   console.log(result);
+							  
 						//if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {
 						  // fullAddress = result.results[0].formatted_address.split(',');
 						var _street, _address, _city, _state, _zip;
