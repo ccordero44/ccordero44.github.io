@@ -65,6 +65,7 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						var _iconColor = $(this).find('styleUrl').html();
 						var _rateTable = "";
 						if (polyCoords.length > 0) {
 							
@@ -203,6 +204,7 @@ $.ajax({
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
+						   newShop.push(_iconColor);
 						   shops.push(newShop);
 						//};
 							}
@@ -224,6 +226,7 @@ $.ajax({
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
+						   newShop.push(_iconColor);
 						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};	
 					    };
 							};
@@ -262,7 +265,9 @@ $.ajax({
 						var _coords = $(this).find('Point').find('coordinates').text().trim().split(',');
 						var _towingIcon = $(this).find('styleUrl').text();
 						var polyCoords = $(this).find('Polygon'); //.find('outerBoundaryIs').find('LinearRing').find('coordinates').text().trim();
+						var _iconColor = $(this).find('styleUrl').html();
 						var _rateTable = "";
+						var _iconColor =;
 						if (polyCoords.length > 0) {
 							
 						var _style = $(this).find('styleUrl').text().replace("#","");
@@ -390,6 +395,7 @@ $.ajax({
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
+						   newShop.push(_iconColor);
 						   if (newShop[0] !== 'UNIQUE/LIGHTHOUSE') {shops.push(newShop);};
 							}
 						});
