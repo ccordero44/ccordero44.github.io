@@ -19,7 +19,7 @@ $.ajax({
 				var regExp = /\(([^)]+)\)/;
 				var results = data;
 
-	   			totalCount += data.length;
+	   			
 	   			//$('#theftCount').text("(" + numberWithCommas(data.length) + ")");
 				for (var i = 0;i<data.length;i++) {
 				var theftDate = new Date(data[i].date);
@@ -55,7 +55,10 @@ $.ajax({
 					};
 					})(theftMarker, i));
 					
-				if ($('#generalThefts').is(':checked')) theftMarkers.push(theftMarker);
+				if ($('#generalThefts').is(':checked')) {
+					totalCount += data.length;
+					theftMarkers.push(theftMarker);
+				};
 			
 				};
 				//SECOND CALL 
@@ -75,7 +78,7 @@ $.ajax({
 				var regExp = /\(([^)]+)\)/;
 				var results = data;
 
-	   			totalCount += data.length;
+	   			
 				$('#theftCount').text("(" + numberWithCommas(totalCount) + ")");
 	   			//$('#theftCount').text("(" + numberWithCommas(data.length) + ")");
 				for (var i = 0;i<data.length;i++) {
@@ -112,7 +115,10 @@ $.ajax({
 					};
 					})(theftMarker, i));
 					
-				if ($('#vehicleThefts').is(':checked')) theftMarkers.push(theftMarker);
+				if ($('#vehicleThefts').is(':checked')) {
+					totalCount += data.length;
+					theftMarkers.push(theftMarker);
+				};
 			
 				};
 				
