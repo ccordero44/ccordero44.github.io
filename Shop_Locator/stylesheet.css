@@ -1,6 +1,6 @@
 
 #dialogYear, #generalThefts, #vehicleThefts {
-   display: block;
+   display: inline;
 } 
 .ui-selectmenu-menu .ui-menu {
        max-height: 200px; 
