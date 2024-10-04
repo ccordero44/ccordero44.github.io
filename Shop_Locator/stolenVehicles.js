@@ -112,7 +112,7 @@ $.ajax({
 					};
 					})(theftMarker, i));
 					
-				if ($('##vehicleThefts').is(':checked')) theftMarkers.push(theftMarker);
+				if ($('#vehicleThefts').is(':checked')) theftMarkers.push(theftMarker);
 			
 				};
 				
