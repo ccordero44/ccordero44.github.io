@@ -55,7 +55,7 @@ $.ajax({
 					};
 					})(theftMarker, i));
 					
-				theftMarkers.push(theftMarker);
+				if ($('#generalThefts').is(':checked')) theftMarkers.push(theftMarker);
 			
 				};
 				//SECOND CALL 
@@ -112,7 +112,7 @@ $.ajax({
 					};
 					})(theftMarker, i));
 					
-				theftMarkers.push(theftMarker);
+				if ($('##vehicleThefts').is(':checked')) theftMarkers.push(theftMarker);
 			
 				};
 				
