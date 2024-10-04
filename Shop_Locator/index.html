@@ -99,7 +99,7 @@ $(document).ready( function () {
 		map.setCenter(activeMarker.getPosition());
 	});
 	callHailMarkers(nowYear+nowMonth+nowDay);
-	$('#legend > div:nth-child(3)').tooltip({ content: '<img src="shop.png" height="20" width="20" /> <font size="2" style="vertical-align:super;">Not Accepting Tows</font><br/><img src="shopBlue.png" height="20" width="20" /> <font size="2" style="vertical-align:super;">Accepting Tows</font><br/><img src="shopRed.png"  height="20" width="20"/> <font size="2" style="vertical-align:super;">Tesla Certified</fond>' }); 
+	
 });
 		window.onload = Window_onLoad;
 		//var myKey = "AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8";
@@ -338,7 +338,7 @@ $(document).ready( function () {
 			$('#legend > div:nth-child(5)').append(' <div id="redcamCount" style="display: contents;color: grey;"></div>');
 			$('#shopCount').text("(" + shops.length + ")");
 			$('#legend > div:nth-child(4)').attr('hidden','hidden');
-		
+			$('#legend > div:nth-child(3)').tooltip({ content: '<img src="shop.png" height="20" width="20" /> <font size="2" style="vertical-align:super;">Not Accepting Tows</font><br/><img src="shopBlue.png" height="20" width="20" /> <font size="2" style="vertical-align:super;">Accepting Tows</font><br/><img src="shopRed.png"  height="20" width="20"/> <font size="2" style="vertical-align:super;">Tesla Certified</fond>' }); 
 		callTheftMarkers(nowYear);
 		var marker;
             var latlngbounds = new google.maps.LatLngBounds();
