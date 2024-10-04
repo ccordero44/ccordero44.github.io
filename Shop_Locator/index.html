@@ -146,11 +146,14 @@ $(document).ready( function () {
 			    return item.toString() == comp.toString();
 			  }).length ? [] : [item])
 			}, []);
+      
 		localStorage.setItem('shops', JSON.stringify(shops));
 	       
 	        var locations = [];
 				for (i = 0; i < shops.length; i++) {   
-
+            if (shops[i][12] === 'DATA_ERROR') {
+                shops.splice(i, 1);
+               };
 								
 			var shopImage = '<img id="shopImage" title="Click to open Street View" onclick="openStreetView(' + shops[i][6] + ',' + shops[i][7] + ')" src="' + shops[i][9] + '"></img>';
 	       
