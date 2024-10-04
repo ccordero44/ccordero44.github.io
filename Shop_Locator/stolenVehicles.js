@@ -12,7 +12,7 @@ $.ajax({
       "year" : year,
     },
    success: function(data) { 
-	   if ($('#vehicleThefts').is(':checked')) totalCount += data.length;
+	   if ($('#generalThefts').is(':checked')) totalCount += data.length;
 	   for (i = 0; i < theftMarkers.length; i++) {
                 theftMarkers[i].setMap(null);
             }
