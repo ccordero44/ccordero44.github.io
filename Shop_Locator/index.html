@@ -150,8 +150,8 @@ $(document).ready( function () {
 		localStorage.setItem('shops', JSON.stringify(shops));
 	       
 	        var locations = [];
-				for (i = 0; i < shops.length; i++) {   
-            if (shops[i][12] === 'DATA_ERROR') {
+	for (i = 0; i < shops.length; i++) {   
+            if (shops[i][3] === 'DATA_ERROR') {
                 shops.splice(i, 1);
                };
 								
