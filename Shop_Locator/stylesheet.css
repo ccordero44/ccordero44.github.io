@@ -1,3 +1,7 @@
+
+#dialogYear, #generalThefts, #vehicleThefts {
+   display: block;
+} 
 .ui-selectmenu-menu .ui-menu {
        max-height: 200px; 
        overflow-y: auto; 
