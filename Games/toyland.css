@@ -518,7 +518,7 @@ snowman .body .shadow {
 div.hands > div.left-hand {
   position: absolute;
   top: -170px;
-  left: -14px;
+  left: 0px;
   -webkit-transform: rotate(15deg);
   -moz-transform: rotate(15deg);
   transform: rotate(15deg);
@@ -566,7 +566,7 @@ div.hands > div.left-hand:after {
 div.hands > div.right-hand {
   position: absolute;
   top: -170px;
-  right: -35px;
+  right: -42px;
   -webkit-transform: rotate(-12deg);
   -moz-transform: rotate(-12deg);
   transform: rotate(-12deg);
