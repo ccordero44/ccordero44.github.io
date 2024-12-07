@@ -517,7 +517,7 @@ snowman .body .shadow {
 }
 div.hands > div.left-hand {
   position: absolute;
-  top: -150px;
+  top: -170px;
   left: -7px;
   -webkit-transform: rotate(15deg);
   -moz-transform: rotate(15deg);
@@ -527,6 +527,7 @@ div.hands > div.left-hand {
   border-right: 0 solid transparent;
   height: 0;
   width: 36px;
+  animation: wave-lower 2s ease-in-out forwards alternate infinite;
 }
 div.hands > div.left-hand:before {
   width: 81px;
@@ -563,7 +564,7 @@ div.hands > div.left-hand:after {
 
 div.hands > div.right-hand {
   position: absolute;
-  top: -150px;
+  top: -170px;
   right: -37px;
   -webkit-transform: rotate(-12deg);
   -moz-transform: rotate(-12deg);
@@ -573,6 +574,7 @@ div.hands > div.right-hand {
   border-left: 0 solid transparent;
   height: 0;
   width: 66px;
+  animation: wave-lower 2s ease-in-out forwards alternate infinite;
 }
 div.hands > div.right-hand:before {
   width: 80px;
@@ -658,7 +660,15 @@ snowman .buttons:after {
   top: 30px;
   left: 5px;
 }
+@keyframes wave-lower {
+    from {
+      transform: rotate(0deg);
+    }
 
+    to {
+      transform: rotate(30deg);
+    }
+  }
 .snowflake {
   color: #fff;
   font-size: 1em;
