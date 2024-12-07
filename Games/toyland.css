@@ -566,7 +566,7 @@ div.hands > div.left-hand:after {
 div.hands > div.right-hand {
   position: absolute;
   top: -170px;
-  right: -42px;
+  right: -35px;
   -webkit-transform: rotate(-12deg);
   -moz-transform: rotate(-12deg);
   transform: rotate(-12deg);
