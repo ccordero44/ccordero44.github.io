@@ -528,6 +528,7 @@ div.hands > div.left-hand {
   height: 0;
   width: 36px;
   animation: wave-lower 2s ease-in-out forwards alternate infinite;
+  transform-origin: right;
 }
 div.hands > div.left-hand:before {
   width: 81px;
@@ -575,6 +576,7 @@ div.hands > div.right-hand {
   height: 0;
   width: 66px;
   animation: wave-lower2 2s ease-in-out forwards alternate infinite;
+  transform-origin: left;
 }
 div.hands > div.right-hand:before {
   width: 80px;
