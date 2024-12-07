@@ -565,7 +565,7 @@ div.hands > div.left-hand:after {
 div.hands > div.right-hand {
   position: absolute;
   top: -170px;
-  right: -37px;
+  right: -35px;
   -webkit-transform: rotate(-12deg);
   -moz-transform: rotate(-12deg);
   transform: rotate(-12deg);
@@ -574,7 +574,7 @@ div.hands > div.right-hand {
   border-left: 0 solid transparent;
   height: 0;
   width: 66px;
-  animation: wave-lower 2s ease-in-out forwards alternate infinite;
+  animation: wave-lower2 2s ease-in-out forwards alternate infinite;
 }
 div.hands > div.right-hand:before {
   width: 80px;
@@ -667,6 +667,15 @@ snowman .buttons:after {
 
     to {
       transform: rotate(30deg);
+    }
+  }
+  @keyframes wave-lower2 {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(-30deg);
     }
   }
 .snowflake {
