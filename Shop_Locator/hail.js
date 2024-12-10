@@ -139,6 +139,7 @@ $.ajax({
 	        }).prev(".ui-dialog-titlebar").css("background","DodgerBlue").css("color", "white");
            console.error("Request failed: " + ajaxOptions, thrownError);
 	   }else{
+		   console.error(xhr.status);
 	callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
 	   };
 	return;
