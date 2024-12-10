@@ -45,7 +45,7 @@
 		width: 100%;
 		display: flex;
 		flex-wrap: wrap;
-		margin-bottom: 50px;
+		margin-bottom: 10px;
 		z-index: 1;
 	}
 	.wrapper2 {
@@ -134,7 +134,7 @@
   background-position: center;
   justify-content: space-between;
   animation: moveLeft 13s infinite linear;
-  padding-top: 50px;
+ /* padding-top: 50px;*/
 }
 
 @keyframes moveLeft {
@@ -1037,7 +1037,8 @@ body{
 	margin-left: -50px;
 	padding: 0;
 	pointer-events: none;
-
+        margin-top: -25px;
+	margin-bottom: 0px;
 }
 .strand li{
 	position: relative;
