@@ -35,6 +35,8 @@ let elapsedTime;
           ev.target.appendChild(document.getElementById(data));
 		  var img = document.getElementById(data)
 		  img.setAttribute("draggable", false);
+			img.parentElement.removeEventListener("drop", dragDrop);
+			img.parentElement.removeEventListener("dragover", allowDrop);
 			img.classList.add("clearText");
 		  if (img.getAttribute('link-item') === ev.target.getAttribute('link-item')) {
 			tally += 1;
