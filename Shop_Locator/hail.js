@@ -106,7 +106,7 @@ $.ajax({
    error: function(xhr, ajaxOptions, thrownError) {
 	 
 	   $('#hailCount').text("(0)");
-	   if(xhr.status==404) {
+	   if(xhr.status==404 || xhr.status==500) {
 		var alertdiv= document.createElement('div');
 			alertdiv.innerHTML = "There was an error connecting to the National Oceanic and Atmospheric Administration's hail events server. Please try again later."
 		
