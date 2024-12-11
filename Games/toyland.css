@@ -23,7 +23,8 @@
 		  margin-bottom: 10px;
 	  }
 	  .div2 span{
-		
+		font-family: monospace;
+    		font-size: large;
 	  }
       p {
           font-size: 20px;
