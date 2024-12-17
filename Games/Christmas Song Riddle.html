@@ -69,6 +69,7 @@ let elapsedTime;
 	 });
  function tallyTotal() {
 	 if (!localStorage.getItem('tally2')) {
+		 	localStorage.clear();
 			localStorage.setItem('tally2', tally);
 			localStorage.setItem('time2', getElapsedTime(startTime));
 			localStorage.setItem('html2', document.body.innerHTML);
