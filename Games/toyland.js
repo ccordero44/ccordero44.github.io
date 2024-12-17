@@ -52,17 +52,17 @@ let elapsedTime;
 
 	 });
  function tallyTotal() {
-	 if (!localStorage.getItem('tally')) {
-			localStorage.setItem('tally', tally);
-			localStorage.setItem('time', getElapsedTime(startTime));
-			localStorage.setItem('html', document.body.innerHTML);
+	 if (!localStorage.getItem('tally1')) {
+			localStorage.setItem('tally1', tally);
+			localStorage.setItem('time1', getElapsedTime(startTime));
+			localStorage.setItem('html1', document.body.innerHTML);
 			document.querySelector("#score").innerHTML = "(Score = " + tally + ")";
 			elapsedTime = getElapsedTime(startTime);
 			document.querySelector("#time").innerHTML = "(Time = " + elapsedTime + ")";
 	}else{
-			document.body.innerHTML = localStorage.getItem('html');
-			document.querySelector("#score").innerHTML = "(Score = " + localStorage.getItem('tally') + ")";
-			document.querySelector("#time").innerHTML = "(Time = " + localStorage.getItem('time') + ")";
+			document.body.innerHTML = localStorage.getItem('html1');
+			document.querySelector("#score").innerHTML = "(Score = " + localStorage.getItem('tally1') + ")";
+			document.querySelector("#time").innerHTML = "(Time = " + localStorage.getItem('time1') + ")";
 			
 	};
 	
