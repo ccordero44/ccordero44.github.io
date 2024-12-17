@@ -55,6 +55,8 @@ let elapsedTime;
 	 if (!localStorage.getItem('tally1')) {
 			localStorage.setItem('tally1', tally);
 			localStorage.setItem('time1', getElapsedTime(startTime));
+		 	localStorage.setItem('html', '');
+		 	localStorage.setItem('html2', '');
 			localStorage.setItem('html1', document.body.innerHTML);
 			document.querySelector("#score").innerHTML = "(Score = " + tally + ")";
 			elapsedTime = getElapsedTime(startTime);
