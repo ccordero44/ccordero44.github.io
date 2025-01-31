@@ -672,6 +672,7 @@ function clearDir() {
 			if (hailCircleMin) hailCircleMin.setMap(null);
 	//callHailMarkers(new Date().getFullYear()+String(new Date().getMonth() + 1).padStart(2, '0')+String(new Date().getDate()).padStart(2, '0'));
 	$('#hailCount').text("(0)");
+	hailMarkers = [];
 	//$("#dialogDate").datepicker('destroy');
   			//document.getElementById("origin-input").focus();
         	resetSelectElement(document.getElementById("testDiv"));
