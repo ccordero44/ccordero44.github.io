@@ -101,9 +101,7 @@ $.ajax({
 				hailMarkers.push(hailMarker);
 				//console.log(lat + "," + long);
 				};
-				for (i = 0; i < hailMarkers.length; i++) {
-			                hailMarkers[i].setMap(map);
-			            };
+				setHailMarkers();
 			}, 
    error: function(xhr, ajaxOptions, thrownError) {
 	 
