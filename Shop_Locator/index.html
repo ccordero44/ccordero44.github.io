@@ -64,6 +64,13 @@
 
 	
 $(document).ready( function () {
+	$('#lrHero').bind('load', function() {
+  
+		$('#laborratehero_form').find('#zip').val(60013);
+		$('#laborratehero_form').find('#range').val(25);
+		$('#laborratehero_form').find('button').click();
+		console.log('loaded');
+	});
 	const iframe = $('<iframe>', {
 	  id: 'lrHero',
 	  name: 'lrHero',
@@ -72,9 +79,7 @@ $(document).ready( function () {
 	  height: '0',
 	  frameborder: '0', // Optional: removes the border
 	  onload: function() {
-			$('#laborratehero_form').find('#zip').val(60013);
-			$('#laborratehero_form').find('#range').val(25);
-			$('#laborratehero_form').find('button').click();
+			
 			console.log('loaded');
 	  }
 	});
