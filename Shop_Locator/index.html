@@ -64,6 +64,22 @@
 
 	
 $(document).ready( function () {
+	const iframe = $('<iframe>', {
+	  id: 'lrHero',
+	  name: 'lrHero',
+	  src: 'https://www.laborratehero.com',
+	  width: '0',
+	  height: '0',
+	  frameborder: '0', // Optional: removes the border
+	  onload: function() {
+			$('#laborratehero_form').find('#zip').val(60013);
+			$('#laborratehero_form').find('#range').val(25);
+			$('#laborratehero_form').find('button').click();
+			console.log('loaded');
+	  }
+	});
+	 
+	$('body').append(iframe);
       	var year = new Date().getFullYear() + 1;
 	for (let i = 2001; i < year; i++) {
 		if (new Date().getFullYear() === i) {
