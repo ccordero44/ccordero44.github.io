@@ -248,8 +248,9 @@ $(document).ready( function () {
 				},
 			  ],
 			};
-        function initMap() {
-	      
+        async function initMap() {
+	        await google.maps.importLibrary("maps");
+  		await google.maps.importLibrary("marker");
          	polyInfowindow = new google.maps.InfoWindow();
             	redcamInfoWindow = new google.maps.InfoWindow();
 		theftInfoWindow = new google.maps.InfoWindow();
@@ -367,7 +368,7 @@ $(document).ready( function () {
 		    }else{
 			 markerTitle = shops[i][0];   
 		    }
-                marker = new google.maps.Marker({
+                marker = new google.maps.marker.AdvancedMarkerElement({
                     position: new google.maps.LatLng(shops[i][6], shops[i][7]),
                     map: map,
                     clickable: true,
@@ -578,7 +579,7 @@ if ($('script[src="geojson.js"]').length === 0){
 		    url: 'podBig.png',
 			scaledSize: new google.maps.Size(22, 22)
 		};
-          PODmarker = new google.maps.Marker({
+          PODmarker = new google.maps.marker.AdvancedMarkerElement({
           	position: latLng,
           	clickable: true,
             title: 'POD Camera # ' + results.features[i].properties.camera_number,
