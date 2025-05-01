@@ -582,11 +582,9 @@ if ($('script[src="geojson.js"]').length === 0){
 
           var coords = results.features[i].geometry.coordinates;
           var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var podCam = document.createElement("img");
-		podCam.src = 'podBig.png'; 
-		{
+          var podCam = 	{
 		    url: 'podBig.png',
-			scaledSize: new google.maps.Size(22, 22)
+		    scaledSize: new google.maps.Size(22, 22)
 		};
           PODmarker = new google.maps.Marker({
           	position: latLng,
