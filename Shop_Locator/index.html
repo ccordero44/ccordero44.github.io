@@ -185,7 +185,7 @@ $(document).ready( function () {
 	   	var polyInfowindow;
 	        var activeInfoWindow;
 	        var resetBounds;
-	        var map;
+	        let map;
 	        var markers = [];
 	        var tempmarker = [];
 	        var shopmarkers = [];
@@ -1011,7 +1011,7 @@ function rainbow(numOfSteps, step) {
 	<div id="output"></div>
 
     <p id="markerPos" style="display: none;"</p>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8&libraries=places&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZNNUOZf14n7usyKe9lhiXhODiOtPJcj8&loading=async&libraries=places&callback=initMap"></script>
     
 <div id="infoDivWrapper" style="display: none; width: auto; position: fixed; bottom: 50%; right: 0; border: 1px solid red; background: rgb(255, 255, 255); padding: 2px; font: 12px arial;">
 <div style="padding:2px;font: normal 10px verdana; background: #990000;">
