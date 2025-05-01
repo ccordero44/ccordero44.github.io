@@ -371,7 +371,7 @@ $(document).ready( function () {
                 marker = new google.maps.marker.AdvancedMarkerElement({
                     position: new google.maps.LatLng(shops[i][6], shops[i][7]),
                     map: map,
-                    clickable: true,
+                    gmpClickable: true,
                     title: markerTitle,
                     icon: markerIcon
 
@@ -581,7 +581,7 @@ if ($('script[src="geojson.js"]').length === 0){
 		};
           PODmarker = new google.maps.marker.AdvancedMarkerElement({
           	position: latLng,
-          	clickable: true,
+          	gmpClickable: true,
             title: 'POD Camera # ' + results.features[i].properties.camera_number,
             icon: podCam
           });
