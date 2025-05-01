@@ -373,7 +373,7 @@ $(document).ready( function () {
                     map: map,
                     gmpClickable: true,
                     title: markerTitle,
-                    icon: markerIcon
+                    content: markerIcon
 
                 });
 		
@@ -583,7 +583,7 @@ if ($('script[src="geojson.js"]').length === 0){
           	position: latLng,
           	gmpClickable: true,
             title: 'POD Camera # ' + results.features[i].properties.camera_number,
-            icon: podCam
+            content: podCam
           });
           infoPODwindow = new google.maps.InfoWindow();
   			PODmarkers.push(PODmarker);
