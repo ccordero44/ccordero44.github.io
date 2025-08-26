@@ -186,8 +186,8 @@ $.ajax({
 					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][6])) || newIndex === -1) {
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					//if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
-						if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
-					if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {
+					
+					if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
@@ -230,8 +230,8 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-							   if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
-						 if (_towingIcon !== "#icon-960-000000-nodesc") {  shops.push(newShop)};
+						
+						 if !(_towingIcon === "#icon-960-000000-nodesc") {  shops.push(newShop)};
 						//};
 							}
 						});
@@ -253,8 +253,8 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-							if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
-						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};	
+						
+						   if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};	
 					    };
 							};
 								//}
@@ -443,8 +443,8 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-							   if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
-						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};
+						
+						   if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};
 							}
 						});
 					
@@ -653,5 +653,6 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
 
