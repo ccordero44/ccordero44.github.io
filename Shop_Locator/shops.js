@@ -186,6 +186,7 @@ $.ajax({
 					if ((typeof storedShops[newIndex] !== 'undefined' && Number(_coords[1]) !== Number(storedShops[newIndex][6])) || newIndex === -1) {
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					//if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
+						if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
 					if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {
 					 $.ajax({
 						   type: "GET",
@@ -229,6 +230,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
+							   if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
 						 if (_towingIcon !== "#icon-960-000000-nodesc") {  shops.push(newShop)};
 						//};
 							}
@@ -251,6 +253,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
+							if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
 						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};	
 					    };
 							};
@@ -440,6 +443,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
+							   if (_towingIcon === "#icon-960-000000-nodesc") {alert('error')};
 						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};
 							}
 						});
@@ -649,4 +653,5 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
