@@ -229,7 +229,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-						   shops.push(newShop);
+						 if (_towingIcon !== "#icon-960-000000-nodesc") {  shops.push(newShop)};
 						//};
 							}
 						});
@@ -251,7 +251,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};	
+						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};	
 					    };
 							};
 								//}
@@ -440,7 +440,7 @@ $.ajax({
 						   newShop.push(_towing);
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
-						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {shops.push(newShop);};
+						   if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};
 							}
 						});
 					
@@ -636,7 +636,7 @@ var styles = [];
 						   newShop.push("");
 						   newShop.push("https://maps.googleapis.com/maps/api/streetview?size=276x129&location=" + _coords[1] + "," + _coords[0] + "&key=" + myKey)
 						   newShop.push(_towing);
-							   if (newShop[3] !== 'DATA_ERROR') {shops.push(newShop);};
+							   if (newShop[3] !== 'DATA_ERROR' || _towingIcon !== "#icon-960-000000-nodesc") {shops.push(newShop);};
 								
 									//console.log(newShop);
 														}
