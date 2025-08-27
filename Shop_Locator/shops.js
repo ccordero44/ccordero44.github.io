@@ -189,6 +189,7 @@ $.ajax({
 					//if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					
 					if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
+						console.log(_towingIcon);
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
@@ -656,6 +657,7 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
 
 
