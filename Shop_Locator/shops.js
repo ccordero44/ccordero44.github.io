@@ -188,7 +188,7 @@ $.ajax({
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					//if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					
-					if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
+					if (_towingIcon !== "#icon-960-000000-nodesc" && (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E')) {
 						console.log(_towingIcon);
 					 $.ajax({
 						   type: "GET",
@@ -657,6 +657,7 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
 
 
