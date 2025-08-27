@@ -231,7 +231,7 @@ $.ajax({
 						   newShop.push(_rateTable);
 						   newShop.push(_iconColor);
 						
-						 if !(_towingIcon === "#icon-960-000000-nodesc") {  shops.push(newShop)};
+						 if (_towingIcon !== "#icon-960-000000-nodesc") {  shops.push(newShop)};
 						//};
 							}
 						});
@@ -653,6 +653,7 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
 
 
