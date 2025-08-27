@@ -188,7 +188,7 @@ $.ajax({
 						//&& (Number(_coords[1]) !== Number(storedShops[newIndex][6])) || Number(_coords[0]) !== Number(storedShops[newIndex][7])
 					//if (newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					
-					if (_towingIcon !== "#icon-960-000000-nodesc" || newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
+					if (newShop[3] !== 'DATA_ERROR' || newShop[0] !== 'UNIQUE/LIGHTHOUS<br>E') {
 					 $.ajax({
 						   type: "GET",
 						   url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + _coords[1] + "," + _coords[0] + "&key=" + myKey,
@@ -656,6 +656,7 @@ var styles = [];
                        the fetch operation:`, error);
     });
 */
+
 
 
 
